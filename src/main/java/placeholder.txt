@@ -1,0 +1,2 @@
+Put java code in this directory
+it is best to group files together example see https://github.com/CSC207-UofT/Java-Shell
