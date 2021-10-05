@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class User {
     private final String id;
     private String name;
+    // TODO: Name the package class Pack
     private ArrayList<Pack> packages;
 
     public User(String id, String name) {
@@ -39,6 +40,7 @@ public class User {
      */
     public boolean deletePackage(Pack pack) {
         for (int i = 0; i < this.packages.size(); i++) {
+            // TODO: implement a getId method for Pack
             if (this.packages.get(i).getId().equals(pack.getId())) {
                 this.packages.remove(i);
                 return true;

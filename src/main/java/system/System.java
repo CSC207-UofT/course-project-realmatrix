@@ -48,4 +48,6 @@ public class System {
         User user = new User(id, name);
         this.users.add(user);
     }
+
+    // TODO: add a createNewPack method
 }
