@@ -1,4 +1,4 @@
-package main.java.Recaller;
+package main;
 
 public class Main {
 

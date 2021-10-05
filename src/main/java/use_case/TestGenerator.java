@@ -1,6 +1,6 @@
-package main.java.UseCase;
+package use_case;
 
-import main.java.Entities.*;
+import entity.*;
 
 /**
  * This class is a test generator that raise a collection of
