@@ -7,6 +7,10 @@ import entity.User;
  */
 public class UserManager extends Manager<User>{
 
+    public UserManager() {
+        super();
+    }
+
     public void createNewUser(String name) {
         User user = new User(super.generateId(), name);
         this.items.add(user);

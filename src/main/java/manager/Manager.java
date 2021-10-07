@@ -11,11 +11,10 @@ import java.util.Random;
  */
 public abstract class Manager<T> {
     protected ArrayList<T> items;
-    private static HashSet<String> ids;
+    private static HashSet<String> ids = new HashSet<>();
 
     public Manager() {
         this.items = new ArrayList<>();
-        Manager.ids = new HashSet<>();
     }
 
     /**
@@ -33,6 +32,7 @@ public abstract class Manager<T> {
         if (Manager.ids.contains(id.toString())) {
             return this.generateId();
         } else {
+            Manager.ids.add(id.toString());
             return id.toString();
         }
     }
