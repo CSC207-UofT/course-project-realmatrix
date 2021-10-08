@@ -8,12 +8,14 @@ import java.util.ArrayList;
 public class User {
     private final String id;
     private String name;
+    private String password;
     // TODO: Name the package class Pack
     private ArrayList<Pack> packages;
 
-    public User(String id, String name) {
+    public User(String id, String name, String password) {
         this.id = id;
         this.name = name;
+        this.password = password;
         this.packages = new ArrayList<Pack>();
     }
 
@@ -27,6 +29,10 @@ public class User {
 
     public void changeName(String newName) {
         this.name = newName;
+    }
+
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
     }
 
     public void createPackage(Pack pack) {
