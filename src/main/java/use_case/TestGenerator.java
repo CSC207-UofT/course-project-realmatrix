@@ -1,4 +1,4 @@
-package useCase;
+package use_case;
 
 import entity.*;
 
