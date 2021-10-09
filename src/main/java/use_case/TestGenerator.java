@@ -14,7 +14,7 @@ public class TestGenerator {
      * @return boolean
      * TODO: implement needed
      */
-    private boolean learnable(Snip term) {
+    private boolean learnable(Card term) {
         return true;
     }
 
@@ -24,7 +24,7 @@ public class TestGenerator {
      * @return boolean
      * TODO: implement needed
      */
-    private boolean reviewable(Snip term) {
+    private boolean reviewable(Card term) {
         return true;
     }
 
