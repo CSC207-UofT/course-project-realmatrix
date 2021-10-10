@@ -24,10 +24,10 @@ public class Card {
         this.id = id;
         this.term = term;
         this.definition = definition;
-        this.definitionHidden = false;
+        this.definitionHidden = false; // If true, hide definition so that users cannot see
         // TODO: Note proficiency may initialize to a different value
-        // proficiency represents to what extent the user has mastered this card
-        this.proficiency = 0;
+        this.proficiency = 0;   // proficiency represents to what extent the user has mastered this card
+
     }
 
     /**
