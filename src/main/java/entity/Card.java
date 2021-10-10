@@ -6,44 +6,44 @@ package entity;
  */
 public class Card {
     private final String id;
-    private String question;
-    private String answer;
-    private boolean answerHidden;
-    private float proficiency;
+    private String term;
+    private String definition;
+    private boolean definitionHidden;
+    private int proficiency;
 
     /**
-     * Construct a Card with given id, question, and answer.
+     * Construct a Card with given id, term, and definition.
      * Initialize the proficiency of the card to 0.
      *
      * @param id    The unique id of this card
-     * @param question  The question that the user wants to answer
-     * @param answer     The answer to the question,
+     * @param term  The term on the card
+     * @param definition The definition to the term,
      *                   which is something the user wants to memorize
      */
-    public Card(String id, String question, String answer) {
+    public Card(String id, String term, String definition) {
         this.id = id;
-        this.question = question;
-        this.answer = answer;
-        this.answerHidden = false;
+        this.term = term;
+        this.definition = definition;
+        this.definitionHidden = false;
         // TODO: Note proficiency may initialize to a different value
         // proficiency represents to what extent the user has mastered this card
         this.proficiency = 0;
     }
 
     /**
-     * Change the question on this card to a new question.
-     * @param newQuestion
+     * Change the term on this card to a new term.
+     * @param newTerm
      */
-    public void changeQuestion(String newQuestion) {
-        this.question = newQuestion;
+    public void changeTerm(String newTerm) {
+        this.term = newTerm;
     }
 
     /**
-     * Change the answer on this card to a new answer.
-     * @param newAnswer
+     * Change the definition on this card.
+     * @param newDefinition
      */
-    public void changeAnswer(String newAnswer) {
-        this.answer = newAnswer;
+    public void changeDefinition(String newDefinition) {
+        this.definition = newDefinition;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Card {
      */
     public void increaseProficiency() {
         // TODO: 20 is a placeholder value currently, waiting for change...
-        this.proficiency += 20;
+        this.proficiency = Math.min(this.proficiency + 20, 100);
     }
 
     /**
@@ -59,47 +59,51 @@ public class Card {
      */
     public void decreaseProficiency() {
         // TODO: 20 is a placeholder value currently, waiting for change...
-        this.proficiency -= 20;
+        this.proficiency = Math.max(this.proficiency - 20, 0);
     }
 
-    public void changeAnswerHidden() {
-        this.answerHidden = !this.answerHidden;
+    public void hideDefinition() {
+        this.definitionHidden = true;
+    }
+
+    public void unhideDefinition() {
+        this.definitionHidden = false;
     }
 
     public String getId() {
         return this.id;
     }
 
-    public String getQuestion() {
-        return this.question;
+    public String getTerm() {
+        return this.term;
     }
 
-    public String getAnswer() {
-        return this.answer;
+    public String getDefinition() {
+        return this.definition;
     }
 
-    public boolean getAnswerHidden() {
-        return this.answerHidden;
+    public boolean getDefinitionHidden() {
+        return this.definitionHidden;
     }
 
-    public float getProficiency() {
+    public int getProficiency() {
         return this.proficiency;
     }
 
     @Override
     public String toString() {
-        if (this.answerHidden) {
-            return String.format("Question: %s", this.question);
+        if (this.definitionHidden) {
+            return String.format("Term: %s", this.term);
         } else {
-            return String.format("Question: %1$s\nAnswer: %2$s",
-                    this.question, this.answer);
+            return String.format("Term: %1$s\nDefinition: %2$s",
+                    this.term, this.definition);
         }
     }
 
 //    Simple test
 //    public static void main(String[] args) {
 //        Card c = new Card("1231", "card", "卡");
-//        c.changeHideAnswer();
+//        c.changeHideDefinition();
 //        System.out.println(c);
 //    }
 
