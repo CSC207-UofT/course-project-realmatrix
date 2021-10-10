@@ -106,5 +106,4 @@ public class Card {
 //        c.changeHideDefinition();
 //        System.out.println(c);
 //    }
-
 }
