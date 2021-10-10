@@ -34,7 +34,7 @@ public class Card {
      * Change the term on this card to a new term.
      * @param newTerm
      */
-    public void changeTerm(String newTerm) {
+    public void editTerm(String newTerm) {
         this.term = newTerm;
     }
 
@@ -42,7 +42,7 @@ public class Card {
      * Change the definition on this card.
      * @param newDefinition
      */
-    public void changeDefinition(String newDefinition) {
+    public void editDefinition(String newDefinition) {
         this.definition = newDefinition;
     }
 
