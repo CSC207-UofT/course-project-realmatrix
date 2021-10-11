@@ -14,7 +14,7 @@ public class PackManager {
      * @return void
      * TODO: implement needed
      */
-    private void add(Card term) {
+    private void add(Pack term) {
     }
 
     /**
@@ -23,7 +23,7 @@ public class PackManager {
      * @return void
      * TODO: implement needed
      */
-    private void delete(Card term) {
+    private void delete(Pack term) {
     }
 
     /**
@@ -32,7 +32,7 @@ public class PackManager {
      * @return String
      * TODO: implement needed
      */
-    private String search(Card term) {
+    private String search(Pack term) {
         return "";
     }
 }
