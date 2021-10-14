@@ -1,12 +1,6 @@
 # Senario
 
-- User can login
-- User can see a list of packages
-- User creates/delete a package
-- User view the overall contents of the chosen package
-- There are two options for a 
+Mary is suppposed to register an account or login if she has one. And then she will have access to the list of packages that she has created. She could create new package called 'vocabulary'. Clicking on it, she can load from file or add a new card filling in the term 'Schematic' and definition 'a representation of the elements of a system using abstract, graphic symbolsrather than realistic pictures'. After she adds a number of cards, she could learn as many new cards as she wants each time. All the cards she has learned will be initialized according to her performance. The frequency that each card she has learned appears while reviewing later is based on the proficiency of this card. Certainly, the proficiency will be updated time and again. To some extents, the system will decrease the proficiency and automatically urge her to learn again to strengthen the memory if she fails to remember the cards. After the proficiency is high enough, the card won't appear again with an acquiescence of the fact that she has totally remembered it.
 
-
-
-Mary is suppposed to register an account or login if she has one. And then she will have access to the list of packages that she has created. She could create new package called vocabulary. Clicking on it, she can load from file or add a new card filling in the term 'Schematic' and definition 'a representation of the elements of a system using abstract, graphic symbolsrather than realistic pictures'. After she adds a number of cards, she could learn as many new cards as she wants. All the cards she has learned will be initialized according to her performance. The frequency that each card she has learned appears while reviewing later is based on the proficiency of this card. Certainly, the proficiency will be updated time and again. To some extents, the system will decrease the proficiency and automatically urge her to learn again to strengthen the memory if she fails to remember the cards. After the proficiency is high enough, the card won't appear again with an acquiescence of the fact that she has totally remembered it.
+Also, If she have a history test recently, she could create a new package called 'history'. She can add history concept like name of battle, name of a history event, and she can put the explanation on the other side. She can open this software each morning and go through those terms. Our system will keep updating her proficiency for each concept. She also will know which concept she need to keep working on to strengthen memory. In this way, she will review in a more scientific and effective way.
 
