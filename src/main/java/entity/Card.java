@@ -8,8 +8,8 @@ public class Card {
     private final String id;
     private String term;
     private String definition;
-    private boolean definitionHidden;
-    private int proficiency;
+    private boolean definitionHidden; // If true, hide definition so that users cannot see
+    private int proficiency; // proficiency represents to what extent the user has mastered this card, ranges from 1-5
 
     /**
      * Construct a Card with given id, term, and definition.
@@ -24,9 +24,8 @@ public class Card {
         this.id = id;
         this.term = term;
         this.definition = definition;
-        this.definitionHidden = false; // If true, hide definition so that users cannot see
-        // TODO: Note proficiency may initialize to a different value
-        this.proficiency = 0;   // proficiency represents to what extent the user has mastered this card
+        this.definitionHidden = false;
+        this.proficiency = 1;
 
     }
 
@@ -47,19 +46,17 @@ public class Card {
     }
 
     /**
-     * Increase the proficiency of the card by [some value].
+     * Increase the proficiency of the card by 1.
      */
     public void increaseProficiency() {
-        // TODO: 20 is a placeholder value currently, waiting for change...
-        this.proficiency = Math.min(this.proficiency + 20, 100);
+        this.proficiency = Math.min(this.proficiency + 1, 5);
     }
 
     /**
-     * Decrease the proficiency of the card by [some value].
+     * Decrease the proficiency of the card by 1.
      */
     public void decreaseProficiency() {
-        // TODO: 20 is a placeholder value currently, waiting for change...
-        this.proficiency = Math.max(this.proficiency - 20, 0);
+        this.proficiency = Math.max(this.proficiency - 1, 1);
     }
 
     public void hideDefinition() {
