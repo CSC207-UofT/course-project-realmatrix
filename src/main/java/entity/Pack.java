@@ -9,9 +9,11 @@ public class Pack {
 
     private User owner;
     private ArrayList<Card> cardList;
+    private final String id;
 
-    public Pack(User owner) {
+    public Pack(User owner, String id, String id1) {
         this.owner = owner;
+        this.id = id;
         this.cardList = new ArrayList<Card>();
     }
 
@@ -25,4 +27,7 @@ public class Pack {
         return true;
     }
 
+    public String getId() {
+        return id;
+    }
 }
