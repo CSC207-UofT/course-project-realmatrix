@@ -4,12 +4,12 @@ import entity.*;
 
 /**
  * This class is a test generator that raise a collection of
- * snippet for user to learn and review
+ * cards for user to learn and review
  */
 public class TestGenerator {
 
     /**
-     * learnable method return whether a Snippet need to be learned
+     * learnable method return whether a Card need to be learned
      *
      * @return boolean
      * TODO: implement needed
@@ -19,7 +19,7 @@ public class TestGenerator {
     }
 
     /**
-     * reviewable method return whether a Snippet need to be reviewed
+     * reviewable method return whether a Card need to be reviewed
      *
      * @return boolean
      * TODO: implement needed
