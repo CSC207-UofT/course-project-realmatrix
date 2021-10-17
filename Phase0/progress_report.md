@@ -48,6 +48,8 @@ Xing Ling implemented class `Manager`, `UserManager`, `User`; reviewed `Card`
 
 Yifan worked on `TestGenerator`, and wrote drafts for specification/CRC model/scenario walk-through.
 
+Ziqi worked on 'Card' and 'CardManager' and wrote the last version of senario.
+
 ## Our strengths so far
 
 In general, we followed the clean architecture design principle by having clear layers of entity, usecase and controller classes,
