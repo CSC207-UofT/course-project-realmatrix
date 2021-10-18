@@ -22,6 +22,7 @@ public class CommandLineInterface {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
 
     /**
      * Simple prompt for user login or register
@@ -59,7 +60,7 @@ public class CommandLineInterface {
             um.createNewUser(userName, password1);
             um.logInUser(userName, password1);
             System.out.println("Logging in...done! You are logged in through your new account!");
-            System.out.println("Create a package by entering a package name:");
+            System.out.println(ANSI_CYAN+ "Create a package by entering a package name:");
             String packName = in.nextLine();
             Pack newPack = new Pack(um.getCurrUser(), packName, packName);
 
@@ -67,19 +68,20 @@ public class CommandLineInterface {
             String packOpt = in.nextLine();
             while(!packOpt.equals("q")) {
                 if (packOpt.equals("a")) {
-                    System.out.println("press any key to add new card, 99 for quit");
+                    System.out.println("press any key to add new card, 99 for quit...");
                     String cardOpt = in.nextLine();
                     CardManager cm = new CardManager();
                     int j = 0;
                     while(!cardOpt.equals("99")){
-                        System.out.printf("Please type your Term: ");
+                        System.out.print(ANSI_YELLOW+"Please type your Term: ");
                         String term = in.nextLine();
-                        System.out.printf("Please type your Definition: ");
+                        System.out.print("Please type your Definition: ");
                         String def = in.nextLine();
-                        cm.createNewCard(term,def);
+                        Card card = cm.createNewCard(term,def);
+                        newPack.add(card);
                         j++;
-                        System.out.println("\n");
-                        System.out.println("press any key to add new card, 99 for quit");
+                        System.out.println();
+                        System.out.println(ANSI_CYAN+"press any key to add new card, 99 for quit...");
                         cardOpt = in.nextLine();
                     }
 //                    Card newCard = new Card("whatever", "computer", "a smart and cool machine");
@@ -88,7 +90,7 @@ public class CommandLineInterface {
 //                    newPack.add(anotherCard);
                     System.out.printf("%d card added", j);
                     System.out.println("\n");
-                    System.out.println("enter y to checkout your cards, a to add new card, q to quit");
+                    System.out.println(ANSI_CYAN+ "enter y to checkout your cards, a to add new card, q to quit");
                     packOpt = in.nextLine();
                     }
 
@@ -96,15 +98,16 @@ public class CommandLineInterface {
                     int i = 0;
                     for (Card c : newPack.cardList) {
                         System.out.println();
-                        System.out.println(ANSI_GREEN + c.toString());
+                        System.out.println(GREEN_BOLD_BRIGHT + c.toString());
                         i ++;
                     }
-                    System.out.printf(ANSI_GREEN+"%d cards displayed", i);
+                    System.out.printf(GREEN_BOLD_BRIGHT+"%d cards displayed", i);
                     System.out.println("\n");
-                    System.out.println(ANSI_BLUE+"enter y to checkout your cards, a to add new card, q to quit");
+                    System.out.println(ANSI_CYAN+"enter y to checkout your cards, a to add new card, q to quit");
                     packOpt = in.nextLine();
                 }
                 if (packOpt.equals("q")) {
+                    System.out.println(ANSI_RED);
                     return false;
                 }
 
