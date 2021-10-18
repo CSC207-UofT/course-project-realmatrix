@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Pack {
 
     private User owner;
-    private ArrayList<Card> cardList;
+    public ArrayList<Card> cardList;
     private final String id;
 
     public Pack(User owner, String id, String id1) {
@@ -23,7 +23,8 @@ public class Pack {
      * @return boolean
      * TODO: implement needed
      */
-    private boolean add(Card card) {
+    public boolean add(Card card) {
+        this.cardList.add(card);
         return true;
     }
 

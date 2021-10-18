@@ -1,8 +1,11 @@
 package main;
 
+import entity.Card;
+import entity.Pack;
 import entity.User;
 import manager.UserManager;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CommandLineInterface {
@@ -24,7 +27,7 @@ public class CommandLineInterface {
             System.out.println("1 for login, 2 for register, 99 for exit");
             opt = in.nextLine();
         }
-        if (opt.equals("1")) {
+        if (opt.equals("2")) {
 
             System.out.print("Please input your username: ");
             Scanner userInput = new Scanner(System.in);
@@ -35,9 +38,24 @@ public class CommandLineInterface {
             String password2 = in.nextLine();
             if (password2.equals(password1)) {
                 um.createNewUser(userName, password1);
+                um.logInUser(userName, password1);
+            }
+            System.out.println("Logging in...done! You are logged in through your new account!");
+            System.out.println("Create a package by entering a package name:");
+            String packName = in.nextLine();
+            Pack newPack = new Pack(um.getCurrUser(), packName, packName);
+            Card newCard = new Card("whatever", "computer", "a smart and cool machine");
+            newPack.add(newCard);
+            Card anotherCard = new Card("sowhat", "iphone", "an overpriced phone");
+            newPack.add(anotherCard);
+            System.out.println("enter y to checkout your cards");
+            if (Objects.equals(in.nextLine(), "y")) {
+                for (Card c : newPack.cardList) {
+                    System.out.println(c.toString());
+                }
             }
         }
-        if (opt.equals("2")) {
+        if (opt.equals("1")) {
             System.out.print("Please input your username: ");
             Scanner userInput = new Scanner(System.in);
             String userName = userInput.nextLine();

@@ -18,6 +18,14 @@ public class UserManager extends Manager<User>{
         this.map = new HashMap<>();
     }
 
+    public User getCurrUser() throws Exception {
+        if (this.currUser instanceof User) {
+            return (User) this.currUser;
+        } else {
+            throw new Exception("There's no logged-in user.");
+        }
+    }
+
     public void createNewUser(String name, String password) {
         String id = super.generateId();
         User user = new User(id, name, password);
