@@ -3,6 +3,7 @@ package main;
 import entity.Card;
 import entity.Pack;
 import entity.User;
+import manager.CardManager;
 import manager.UserManager;
 
 import java.util.Locale;
@@ -66,12 +67,27 @@ public class CommandLineInterface {
             String packOpt = in.nextLine();
             while(!packOpt.equals("q")) {
                 if (packOpt.equals("a")) {
-                    Card newCard = new Card("whatever", "computer", "a smart and cool machine");
-                    newPack.add(newCard);
-                    Card anotherCard = new Card("sowhat", "iphone", "an overpriced phone");
-                    newPack.add(anotherCard);
-                    System.out.println("two card added");
-                    System.out.println();
+                    System.out.println("press any key to add new card, 99 for quit");
+                    String cardOpt = in.nextLine();
+                    CardManager cm = new CardManager();
+                    int j = 0;
+                    while(!cardOpt.equals("99")){
+                        System.out.printf("Please type your Term: ");
+                        String term = in.nextLine();
+                        System.out.printf("Please type your Definition: ");
+                        String def = in.nextLine();
+                        cm.createNewCard(term,def);
+                        j++;
+                        System.out.println("\n");
+                        System.out.println("press any key to add new card, 99 for quit");
+                        cardOpt = in.nextLine();
+                    }
+//                    Card newCard = new Card("whatever", "computer", "a smart and cool machine");
+//                    newPack.add(newCard);
+//                    Card anotherCard = new Card("sowhat", "iphone", "an overpriced phone");
+//                    newPack.add(anotherCard);
+                    System.out.printf("%d card added", j);
+                    System.out.println("\n");
                     System.out.println("enter y to checkout your cards, a to add new card, q to quit");
                     packOpt = in.nextLine();
                     }
