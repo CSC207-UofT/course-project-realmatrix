@@ -46,9 +46,11 @@ Jerrina worked on `PackList` and`PackManager`, wrote the second version of walk-
 
 Xing Ling implemented class `Manager`, `UserManager`, `User`; reviewed `Card`
 
-Yifan worked on `TestGenerator`, and wrote drafts for specification/CRC model/scenario walk-through.
+Yifan worked on `TestGenerator`, and wrote drafts for specification/CRC model/scenario walk-through, and a simple command line interface.
 
-Ziqi worked on 'Card' and 'CardManager' and wrote the last version of senario.
+Ziqi worked on `Card` and `CardManager` and wrote the last version of senario.
+
+Runshi Yang Worked on `Pack` and reviewed `PackManager` and `PackList`.
 
 ## Our strengths so far
 
