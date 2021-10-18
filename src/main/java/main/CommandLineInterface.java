@@ -5,16 +5,28 @@ import entity.Pack;
 import entity.User;
 import manager.UserManager;
 
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class CommandLineInterface {
 
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     /**
      * Simple prompt for user login or register
      */
     public static boolean prompt() throws Exception {
-        System.out.println("Log in or register?");
+        System.out.println(ANSI_BLUE+"Log in or register?");
         System.out.println("1 for login, 2 for register, 99 for exit");
         Scanner in = new Scanner(System.in);
         String opt = in.nextLine();
@@ -36,23 +48,50 @@ public class CommandLineInterface {
             String password1 = in.nextLine();
             System.out.print("Please input your password again: ");
             String password2 = in.nextLine();
-            if (password2.equals(password1)) {
-                um.createNewUser(userName, password1);
-                um.logInUser(userName, password1);
+            while (!password2.equals(password1)) {
+                System.out.println("Password doesn't match, please re-input");
+                System.out.print("Please input your password: ");
+                password1 = in.nextLine();
+                System.out.print("Please input your password again: ");
+                password2 = in.nextLine();
             }
+            um.createNewUser(userName, password1);
+            um.logInUser(userName, password1);
             System.out.println("Logging in...done! You are logged in through your new account!");
             System.out.println("Create a package by entering a package name:");
             String packName = in.nextLine();
             Pack newPack = new Pack(um.getCurrUser(), packName, packName);
-            Card newCard = new Card("whatever", "computer", "a smart and cool machine");
-            newPack.add(newCard);
-            Card anotherCard = new Card("sowhat", "iphone", "an overpriced phone");
-            newPack.add(anotherCard);
-            System.out.println("enter y to checkout your cards");
-            if (Objects.equals(in.nextLine(), "y")) {
-                for (Card c : newPack.cardList) {
-                    System.out.println(c.toString());
+
+            System.out.println("enter y to checkout your cards, a to add new card, q to quit");
+            String packOpt = in.nextLine();
+            while(!packOpt.equals("q")) {
+                if (packOpt.equals("a")) {
+                    Card newCard = new Card("whatever", "computer", "a smart and cool machine");
+                    newPack.add(newCard);
+                    Card anotherCard = new Card("sowhat", "iphone", "an overpriced phone");
+                    newPack.add(anotherCard);
+                    System.out.println("two card added");
+                    System.out.println();
+                    System.out.println("enter y to checkout your cards, a to add new card, q to quit");
+                    packOpt = in.nextLine();
+                    }
+
+                if (packOpt.equals("y")) {
+                    int i = 0;
+                    for (Card c : newPack.cardList) {
+                        System.out.println();
+                        System.out.println(ANSI_GREEN + c.toString());
+                        i ++;
+                    }
+                    System.out.printf(ANSI_GREEN+"%d cards displayed", i);
+                    System.out.println("\n");
+                    System.out.println(ANSI_BLUE+"enter y to checkout your cards, a to add new card, q to quit");
+                    packOpt = in.nextLine();
                 }
+                if (packOpt.equals("q")) {
+                    return false;
+                }
+
             }
         }
         if (opt.equals("1")) {
