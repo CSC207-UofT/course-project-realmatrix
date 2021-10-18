@@ -12,7 +12,7 @@ and their learning/reviewing performance this time will in turn updates the prof
 - 3 entity classes: `Card`, `Pack`, and `User`.
 - 4 usecase classes: `CardManager`, `PackManager`, `UserManager`, and `TestGenerator` (generates learning/reviewing mode).
 - 1 controller: `System` that gets input from user command and instructs the usecase classes.
-- 1 command line interface: `InOut`
+- 1 command line interface: `CommandLineInterface`
 
 ## Scenario walk-through summary
 
@@ -26,13 +26,13 @@ We describe the scenario where a user can
 
 ## Skeleton program summary
 
-The skeleton program includes all classes except the `InOut` interface listed in CRC model.
+The skeleton program includes all classes listed in CRC model except `System`.
 
 - Under `src/main/java`:
   - Package `entity` includes `Card`, `Pack`, and `User`.
   - Package `manager` includes `CardManager`, `PackManager` and `UserManager`.
   - Package `use_case` includes `TestGenerator`.
-  - Package `main` includes `System`.
+  - Package `main` includes `CommandLineInterface`.
 
 
 - Under `src/test/java`
