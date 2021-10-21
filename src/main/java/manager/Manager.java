@@ -1,18 +1,17 @@
 package manager;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
  * An abstract manager.
  */
 public abstract class Manager<T> {
-    protected ArrayList<T> items;
-    private static HashSet<String> ids = new HashSet<>();
+    protected HashMap<String, T> idToItem = new HashMap<>();
 
     public Manager() {
-        this.items = new ArrayList<>();
+        this.idToItem = new HashMap<>();
     }
 
     /**
@@ -27,10 +26,9 @@ public abstract class Manager<T> {
             char c = chars.charAt(rand.nextInt(48));
             id.append(c);
         }
-        if (Manager.ids.contains(id.toString())) {
+        if (this.idToItem.containsKey(id.toString())) {
             return this.generateId();
         } else {
-            Manager.ids.add(id.toString());
             return id.toString();
         }
     }

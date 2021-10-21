@@ -7,8 +7,7 @@ import java.util.HashMap;
 /**
  * A CardManager contains all cards in the system.
  */
-public class CardManager extends Manager {
-    private static final HashMap<String, Card> idToCard = new HashMap<>(); // Map id of a card to its term and definition
+public class CardManager extends Manager<Card> {
 
     public CardManager() {
         super();
@@ -27,7 +26,7 @@ public class CardManager extends Manager {
     public Card createNewCard(String term, String definition) {
         String id = generateId();
         Card c = new Card(id, term, definition);
-        idToCard.put(id, c);
+        idToItem.put(id, c);
         return c;
     }
 
@@ -38,8 +37,8 @@ public class CardManager extends Manager {
      * @return true if successfully changed, false otherwise
      */
     public boolean editCardTerm(String id, String newTerm) {
-        if (idToCard.containsKey(id)) {
-            idToCard.get(id).editTerm(newTerm);
+        if (idToItem.containsKey(id)) {
+            ((Card) idToItem.get(id)).editTerm(newTerm);
             return true;
         }
         return false;
@@ -52,8 +51,8 @@ public class CardManager extends Manager {
      * @return true if successfully changed, false otherwise
      */
     public boolean editCardDefinition(String id, String newDefinition) {
-        if (idToCard.containsKey(id)) {
-            idToCard.get(id).editTerm(newDefinition);
+        if (idToItem.containsKey(id)) {
+            ((Card) idToItem.get(id)).editTerm(newDefinition);
             return true;
         }
         return false;

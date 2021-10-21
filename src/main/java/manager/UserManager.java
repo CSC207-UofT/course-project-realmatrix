@@ -4,18 +4,17 @@ import entity.User;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * A manager that manages all Users.
  */
 public class UserManager extends Manager<User>{
-    private HashMap<String, String[]> map; // mapping between User id and User's name and password
     private boolean loggedIn = false; // by default, no user logged in
     private Object currUser = null; // by default, no current user who is logged in
 
     public UserManager() {
         super();
-        this.map = new HashMap<>();
     }
 
     public User getCurrUser() throws Exception {
@@ -29,8 +28,7 @@ public class UserManager extends Manager<User>{
     public void createNewUser(String name, String password) {
         String id = super.generateId();
         User user = new User(id, name, password);
-        this.items.add(user);
-        this.map.put(id, new String[]{name, password});
+        this.idToItem.put(id, user);
     }
 
     /**
@@ -40,8 +38,8 @@ public class UserManager extends Manager<User>{
      * @return User or if not found (which can't be the case; included for completeness reason) return null
      */
     private Object findUser(String name, String password) {
-        for (User user : this.items) {
-            if (Arrays.equals(this.map.get(user.getId()), new String[]{name, password})) {
+        for (User user : this.idToItem.values()) {
+            if (Objects.equals(user.getName(), name) && Objects.equals(user.getPassword(), password)) {
                 return user;
             }
         }
@@ -86,13 +84,11 @@ public class UserManager extends Manager<User>{
      * @param args
      */
     public static void main(String[] args) {
-        // TODO: test this when Pack is implemented
         UserManager um = new UserManager();
         um.createNewUser("Xing", "password");
-        System.out.println(um.items);
         um.createNewUser("SuperDog", "super");
         um.createNewUser("FunkyCat", "funky");
-        for (User user : um.items) {
+        for (User user : um.idToItem.values()) {
             System.out.println(user.getId());
         }
     }
