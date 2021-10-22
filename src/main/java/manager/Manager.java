@@ -1,6 +1,5 @@
 package manager;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -8,7 +7,7 @@ import java.util.Random;
  * An abstract manager.
  */
 public abstract class Manager<T> {
-    protected HashMap<String, T> idToItem = new HashMap<>();
+    protected HashMap<String, T> idToItem;
 
     public Manager() {
         this.idToItem = new HashMap<>();

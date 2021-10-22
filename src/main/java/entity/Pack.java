@@ -22,11 +22,9 @@ public class Pack {
      * Add method add a card in cardList according to proficiency and return
      * whether a card is added into cardList successfully.
      * @return boolean
-     * TODO: implement needed
      */
-    public boolean add(Card card) {
+    public void add(Card card) {
         this.cardList.add(card);
-        return true;
     }
 
     public String getId() {
