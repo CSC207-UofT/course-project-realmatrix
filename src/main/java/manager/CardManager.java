@@ -16,7 +16,7 @@ public class CardManager extends Manager<Card> {
 
     /**
      * Create and return a new card with defined term and definition.
-     * Stores id and the corresponding card in idToCard.
+     * Stores id and the corresponding card in idToItem.
      *
      * @param term       The term of the card
      * @param definition The definition of the term
