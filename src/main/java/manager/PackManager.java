@@ -11,7 +11,7 @@ import java.util.Comparator;
  * cards for user to add, delete and search.
  */
 public class PackManager extends Manager<Pack> implements Sort<Card> {
-    private Pack currPack = null; // The initial state where the user has not entered any pack
+    private Pack currPack = null; // The initial state where the user is not in any pack
 
 
     public PackManager() {
