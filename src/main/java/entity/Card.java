@@ -29,36 +29,6 @@ public class Card {
 
     }
 
-    /**
-     * Change the term on this card to a new term.
-     * @param newTerm
-     */
-    public void editTerm(String newTerm) {
-        this.term = newTerm;
-    }
-
-    /**
-     * Change the definition on this card.
-     * @param newDefinition
-     */
-    public void editDefinition(String newDefinition) {
-        this.definition = newDefinition;
-    }
-
-    /**
-     * Increase the proficiency of the card by 1.
-     */
-    public void increaseProficiency() {
-        this.proficiency = Math.min(this.proficiency + 1, 5);
-    }
-
-    /**
-     * Decrease the proficiency of the card by 1.
-     */
-    public void decreaseProficiency() {
-        this.proficiency = Math.max(this.proficiency - 1, 1);
-    }
-
     public void hideDefinition() {
         this.definitionHidden = true;
     }
@@ -86,6 +56,27 @@ public class Card {
     public int getProficiency() {
         return this.proficiency;
     }
+
+    public void setProficiency(int pro) {
+        this.proficiency = pro;
+    }
+
+    /**
+     * Change the term on this card to a new term.
+     * @param newTerm
+     */
+    public void setTerm(String newTerm) {
+        this.term = newTerm;
+    }
+
+    /**
+     * Change the definition on this card.
+     * @param newDefinition
+     */
+    public void setDefinition(String newDefinition) {
+        this.definition = newDefinition;
+    }
+
 
     @Override
     public String toString() {
