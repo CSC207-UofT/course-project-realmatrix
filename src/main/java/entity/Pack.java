@@ -1,4 +1,5 @@
 package entity;
+
 import java.util.ArrayList;
 
 /**
@@ -7,14 +8,14 @@ import java.util.ArrayList;
 
 public class Pack {
 
-    private User owner;
-    public ArrayList<Card> cardList;
+    private ArrayList<Card> cardList;
     private final String id;
+    private String name;
 
-    public Pack(User owner, String id, String id1) {
-        this.owner = owner;
+    public Pack(String id, String name) {
         this.id = id;
-        this.cardList = new ArrayList<Card>();
+        this.name = name;
+        this.cardList = new ArrayList<>();
     }
 
     /**
@@ -30,5 +31,17 @@ public class Pack {
 
     public String getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Card> getCards() {
+        return this.cardList;
+    }
+
+    public void changeName(String newName) {
+        this.name = newName;
     }
 }

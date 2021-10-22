@@ -62,7 +62,7 @@ public class CommandLineInterface {
             System.out.println("Logging in...done! You are logged in through your new account!");
             System.out.println(ANSI_CYAN+ "Create a package by entering a package name:");
             String packName = in.nextLine();
-            Pack newPack = new Pack(um.getCurrUser(), packName, packName);
+            Pack newPack = new Pack(packName, packName);
 
             System.out.println("enter y to checkout your cards, a to add new card, q to quit");
             String packOpt = in.nextLine();
@@ -96,7 +96,7 @@ public class CommandLineInterface {
 
                 if (packOpt.equals("y")) {
                     int i = 0;
-                    for (Card c : newPack.cardList) {
+                    for (Card c : newPack.getCards()) {
                         System.out.println();
                         System.out.println(GREEN_BOLD_BRIGHT + c.toString());
                         i ++;
