@@ -6,7 +6,7 @@ import entity.*;
  * This class is a pack manager that manages a collection of
  * cards for user to add, delete and search.
  */
-public class PackManager {
+public class PackManager extends Manager<Pack> {
 
     /**
      * add method to add a new card that user wants to learn.
