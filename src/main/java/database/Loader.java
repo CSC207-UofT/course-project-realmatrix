@@ -54,9 +54,19 @@ public class Loader {
         return manager;
     }
 
+    // Tests
     public static void main(String... args) throws IOException {
         Loader loader = new Loader();
         UserManager manager = loader.load();
         System.out.println(manager.items().keySet());
+        for (User user : manager.items().values()) {
+            System.out.println(user.getName());
+            for (Pack pack : user.getPackages()) {
+                System.out.println(pack.getName());
+                for (Card card : pack.getCards()) {
+                    System.out.println(card.getTerm());
+                }
+            }
+        }
     }
 }
