@@ -78,7 +78,7 @@ public class CommandLineInterface {
                         System.out.print("Please type your Definition: ");
                         String def = in.nextLine();
                         Card card = cm.createNewCard(term,def);
-                        newPack.add(card);
+                        newPack.addCard(card);
                         j++;
                         System.out.println();
                         System.out.println(ANSI_CYAN+"press any key to add new card, 99 for quit...");
