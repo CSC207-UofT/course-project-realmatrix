@@ -7,11 +7,11 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * This class is a pack manager that manages a collection of
- * cards for user to add, delete and search.
+ * A pack manager manages a collection of cards stored in a pack.
  */
 public class PackManager extends Manager<Pack> implements Sort<Card> {
     private Pack currPack = null; // The initial state where the user is not in any pack
+
     public PackManager() {
         super();
     }
@@ -68,7 +68,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * @param keyWord  the key word in the definition that the user searches
      * @return      an arraylist of cards that contain the key word of definition
      */
-    public ArrayList<Card> searchCardByKeyWord(String keyWord) {
+    public ArrayList<Card> searchCardByDefinition(String keyWord) {
         ArrayList<Card> lst = new ArrayList<>();
         for (Card c: this.currPack.getCards()) {
             if (c.getDefinition().contains(keyWord)) {
@@ -116,8 +116,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      */
     public ArrayList<Card> sortZtoA() {
         ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
-        lst.sort(new AlphabetComparator());
-        Collections.reverse(lst);
+        lst.sort(new AlphabetComparator().reversed());
         return lst;
     }
 
@@ -143,7 +142,6 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
         lst.sort(new ProficiencyComparator().reversed());
         return lst;
     }
-
 
 
     private class AlphabetComparator implements Comparator<Card> {
