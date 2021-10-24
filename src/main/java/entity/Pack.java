@@ -11,7 +11,6 @@ public class Pack {
     private ArrayList<Card> cardList; // oldest cards in the front, newly added ones at the end
     private final String id;
     private String name;
-    private ArrayList<String> cardId;
 
     /**
      * Construct a pack with given id and name.
@@ -22,14 +21,6 @@ public class Pack {
         this.id = id;
         this.name = name;
         this.cardList = new ArrayList<>();
-        this.cardId = new ArrayList<>();
-    }
-
-    public void cardID(){
-        for (Card card : cardList){
-            cardId.add(card.getId());
-        }
-
     }
 
     /**
@@ -73,10 +64,6 @@ public class Pack {
 
     public ArrayList<Card> getCards() {
         return this.cardList;
-    }
-
-    public ArrayList<String> getCardID() {
-        return this.cardId;
     }
 
     public void changeName(String newName) {
