@@ -68,9 +68,9 @@ public class CardManager extends Manager<Card> {
     }
 
     /**
-     * Change to the current pack the user is in.
+     * Change to the current card the user is in.
      */
-    public void setCurrPack(Card card) {
+    public void setCurrCard(Card card) {
         this.currCard = card;
     }
 }
