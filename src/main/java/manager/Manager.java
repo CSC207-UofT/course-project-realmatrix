@@ -13,6 +13,10 @@ public abstract class Manager<T> {
         this.idToItem = new HashMap<>();
     }
 
+    public HashMap<String, T> getItems() {
+        return this.idToItem;
+    }
+
     /**
      * Return a unique identifier of 10 characters long
      * @return an id
