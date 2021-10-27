@@ -22,10 +22,72 @@ public class CardTest {
     }
 
     @Test(timeout = 50)
+    public void TestHideDefinition() {
+
+        c.hideDefinition();
+        assertSame(c.getDefinitionHidden(), true);
+    }
+
+    @Test(timeout = 50)
+    public void TestUnHideDefinition() {
+        c.hideDefinition();
+        c.unhideDefinition();
+        assertSame(c.getDefinitionHidden(), false);
+    }
+
+    @Test(timeout = 50)
+    public void TestGetTerm() {
+        assertSame(c.getTerm(), term);
+    }
+
+    @Test(timeout = 50)
+    public void TestGetDefinition() {
+        assertSame(c.getDefinition(), definition);
+    }
+
+    @Test(timeout = 50)
     public void TestSetTerm() {
         String newTerm = "storage";
         c.setTerm(newTerm);
         assertSame(c.getTerm(), newTerm);
+    }
+
+
+    @Test(timeout = 50)
+    public void TestGetId() {
+        assertSame(c.getId(), id);
+    }
+
+    @Test(timeout = 50)
+    public void TestSetProficiencyInRange() {
+        int newProficiency = 4;
+        c.setProficiency(newProficiency);
+        assertSame(c.getProficiency(), newProficiency);
+    }
+
+    @Test(timeout = 50)
+    public void TestSetProficiencyOutOfRange() {
+        int newProficiency = 6;
+        c.setProficiency(newProficiency);
+        assertSame(c.getProficiency(), newProficiency);
+    }
+
+    @Test(timeout = 50)
+    public void TestGetProficiency() {
+        assertSame(1, c.getProficiency());
+    }
+
+    @Test(timeout = 50)
+    public void TestToStringHiddenDef() {
+        c.hideDefinition();
+        String expected = String.format("Term: %s", this.term);
+        assertEquals(expected, c.toString());
+    }
+
+    @Test(timeout = 50)
+    public void TestToStringUnHiddenDef() {
+        assertEquals(String.format("Term: %1$s\nDefinition: %2$s",
+                this.term, this.definition), c.toString());
     }
 
     // Put them in CardManager Test
