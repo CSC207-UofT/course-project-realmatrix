@@ -16,7 +16,7 @@ public class CardManager extends Manager<Card> {
 
     /**
      * Create and return a new card with defined term and definition.
-     * Stores id and the corresponding card in idToCard.
+     * Stores id and the corresponding card in idToItem.
      *
      * @param term       The term of the card
      * @param definition The definition of the term
@@ -68,9 +68,9 @@ public class CardManager extends Manager<Card> {
     }
 
     /**
-     * Change to the current pack the user is in.
+     * Change to the current card the user is in.
      */
-    public void setCurrPack(Card card) {
+    public void setCurrCard(Card card) {
         this.currCard = card;
     }
 }
