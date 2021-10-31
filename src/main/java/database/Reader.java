@@ -11,7 +11,7 @@ public class Reader {
      */
     ArrayList<String> readUsers() {
         ArrayList<String> users = new ArrayList<>();
-        File dir = new File("user_data/");
+        File dir = new File("user_data/users/");
         File[] files = dir.listFiles();
         if (files == null) {
             return users; // Return an empty list if there is no user directory.
@@ -29,7 +29,7 @@ public class Reader {
      */
     ArrayList<String> readPacks(String userName) {
         ArrayList<String> packs = new ArrayList<>();
-        File dir = new File("user_data/" + userName + "/packages/");
+        File dir = new File("user_data/users/" + userName + "/packages/");
         File[] files = dir.listFiles();
         if (files == null) {
             return packs; // Return an empty list if there is no package.
@@ -48,7 +48,7 @@ public class Reader {
      */
     ArrayList<String> readCards(String userName, String packName) {
         ArrayList<String> cards = new ArrayList<>();
-        File dir = new File("user_data/" + userName + "/packages/" + packName + "/cards/");
+        File dir = new File("user_data/users/" + userName + "/packages/" + packName + "/cards/");
         File[] files = dir.listFiles();
         if (files == null) {
             return cards; // Return an empty list if there is no card.

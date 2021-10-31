@@ -8,20 +8,33 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class UserWriter {
 
+    /**
+     * Write or update a user
+     * @param user the user to write/update
+     * @throws IOException
+     */
     public void writeUser(User user) throws IOException {
-        new File("user_data/" + user.getName()).mkdirs();
+        new File("user_data/users/" + user.getName()).mkdirs();
         BufferedWriter writer =
-                new BufferedWriter(new FileWriter("user_data/" + user.getName() + "/user_info.txt"));
+                new BufferedWriter(new FileWriter("user_data/users/" + user.getName() + "/user_info.txt"));
         writer.write(user.getId() + "," + user.getName() + "," + user.getPassword());
         writer.close();
     }
 
-    public void eraseUser(User user) throws IOException {}
-
-    public void updateUser(User user) throws IOException {}
+    /**
+     * Archive a user. Effectively, this user is deleted because it won't be loaded next time the program runs.
+     * @param user the user to archive
+     * @throws IOException
+     */
+    public void archiveUser(User user) throws IOException {
+        new File("user_data/archived_users/").mkdirs();
+        Files.move(new File("user_data/users/" + user.getName()).toPath(),
+                new File("user_data/archived_users/" + user.getName()).toPath());
+    }
 
     // For testing
     public static void main(String[] args) throws IOException {
@@ -42,6 +55,9 @@ public class UserWriter {
         cardWriter.writeCard(user1, pack1, card2);
         cardWriter.writeCard(user1, pack2, card3);
         cardWriter.writeCard(user1, pack2, card4);
+        // userWriter.archiveUser(user1);
+        // packWriter.archivePack(user1, pack1);
+        // cardWriter.archiveCard(user1, pack1, card1);
 
         User user2 = new User("3owgouapgb", "Pink Panther", "passwordaiogas");
         userWriter.writeUser(user2);
