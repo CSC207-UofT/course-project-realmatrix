@@ -3,6 +3,9 @@ package database;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * This class is a helper to Loader. Other classes shouldn't need it.
+ */
 public class Reader {
 
     /**
