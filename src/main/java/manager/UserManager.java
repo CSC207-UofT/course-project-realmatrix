@@ -1,5 +1,6 @@
 package manager;
 
+import entity.Pack;
 import entity.User;
 
 import java.util.Arrays;
@@ -78,18 +79,27 @@ public class UserManager extends Manager<User>{
             }
         }
     }
-
-    /**
-     * For testing purposes only.
-     * @param args
-     */
-    public static void main(String[] args) {
-        UserManager um = new UserManager();
-        um.createNewUser("Xing", "password");
-        um.createNewUser("SuperDog", "super");
-        um.createNewUser("FunkyCat", "funky");
-        for (User user : um.idToItem.values()) {
-            System.out.println(user.getId());
-        }
-    }
+//
+////    public Pack choosePack(String name) throws Exception{
+////        for(Pack p: ((User)this.currUser).getPackList()){
+////            if(p.getName() == name){
+////                return p;
+////            }
+////        }
+////        throw new Exception("no such pack");
+////    }
+//
+//    /**
+//     * For testing purposes only.
+//     * @param args
+//     */
+//    public static void main(String[] args) {
+//        UserManager um = new UserManager();
+//        um.createNewUser("Xing", "password");
+//        um.createNewUser("SuperDog", "super");
+//        um.createNewUser("FunkyCat", "funky");
+//        for (User user : um.idToItem.values()) {
+//            System.out.println(user.getId());
+//        }
+//    }
 }
