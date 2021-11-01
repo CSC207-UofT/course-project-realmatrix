@@ -66,6 +66,9 @@ public class Pack {
         return this.cardList;
     }
 
+    /**
+    Change the name of the pack.
+     */
     public void changeName(String newName) {
         this.name = newName;
     }
