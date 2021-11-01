@@ -17,7 +17,7 @@ public class CardManagerTest {
         String definition = "Assuming a mental fallacy";
         c = cm.createNewCard(term, definition);
 
-        cm.setCurrPack(c);
+        cm.setCurrCard(c);
     }
 
     @Test(timeout = 50)
@@ -84,7 +84,7 @@ public class CardManagerTest {
 
     @Test(timeout = 50)
     public void TestSetCurrCard(){
-        cm.setCurrPack(d);
+        cm.setCurrCard(d);
         assertEquals(d, cm.getCurrCard());
     }
 }

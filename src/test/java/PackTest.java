@@ -19,11 +19,11 @@ public class PackTest {
     }
 
     @Test
-    public void TestAddCard(){
+    public void TestAddCard() throws Exception {
         Card c = new Card("135", "fragmentation", "don't feel himself as a unit");
         Card d = new Card("136", "equivocation", "explaining things by assuming itself");
-        p.add(c);
-        p.add(d);
+        p.addCard(c);
+        p.addCard(d);
         List<Card> expected = new ArrayList<>();
         expected.add(c);
         expected.add(d);
