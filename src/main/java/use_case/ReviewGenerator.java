@@ -19,13 +19,24 @@ public class ReviewGenerator extends TaskGenerator{
 
     public ArrayList<Card> doable() {
         for (Card c : this.pack.getCards()) {
-            if (c.getProficiency() <= Constants.REVIEW_PROFICIENCY) {
+            if (c.getProficiency() <= Constants.REVIEW_PROFICIENCY_MAX) {
                 this.cardList.add(c);
             }
         }
         return this.cardList;
     }
 
+
+    public ArrayList<Card> withProficiencyBasedCards(){
+        ArrayList<Card> newCards = new ArrayList<>();
+        for (Card c : this.doable()){
+            int prof = c.getProficiency();
+            for (int i = 0; i < (Constants.REVIEW_PROFICIENCY_MAX - prof); i++) {
+                newCards.add(c);
+            }
+        }
+        return newCards;
+    }
 //    @Override
 //    public String display_term(){
 //        Scanner in = new Scanner(System.in);
