@@ -1,7 +1,7 @@
 package constants;
 
 public class Constants {
-    public static final int REVIEW_PROFICIENCY = 5;
+    public static final int REVIEW_PROFICIENCY_MAX = 5;
 
     public static final int CLEAR = 1;
     public static final int BLUR = -1;
