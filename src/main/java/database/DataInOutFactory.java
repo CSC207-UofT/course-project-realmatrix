@@ -29,6 +29,18 @@ public class DataInOutFactory {
         cardWriter.writeCard(user, pack, card);
     }
 
+    public void archive(User user) throws IOException {
+        userWriter.archiveUser(user);
+    }
+
+    public void archive(User user, Pack pack) throws IOException {
+        packWriter.archivePack(user, pack);
+    }
+
+    public void archive(User user, Pack pack, Card card) throws IOException {
+        cardWriter.archiveCard(user, pack, card);
+    }
+
     public UserManager load() throws IOException {
         return loader.load();
     }
