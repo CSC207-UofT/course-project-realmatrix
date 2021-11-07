@@ -4,6 +4,7 @@ import entity.*;
 import manager.CardManager;
 import manager.PackManager;
 import use_case.ReviewGenerator;
+import use_case.LearnGenerator;
 import Controller.ProgramState;
 
 import java.sql.PreparedStatement;
@@ -15,6 +16,7 @@ public class LearningSystem {
     private Pack currPack;
     private PackManager pm;
     private CardManager cm;
+    private LearnGenerator lg;
     private ReviewGenerator rg;
     private ProgramState state;
 
@@ -22,9 +24,11 @@ public class LearningSystem {
         this.currPack = null;
         this.pm = new PackManager();
         this.cm = new CardManager();
+        this.lg = new LearnGenerator(this.currPack);
         this.rg = new ReviewGenerator(this.currPack);
         this.state = new ProgramState();
     }
+
 
 
     public Pack setCurrPack(String name) throws Exception {
@@ -42,6 +46,11 @@ public class LearningSystem {
         else{
             return "";
         }
+    }
+
+    public ArrayList<Card> learnableCardList(){
+        LearnGenerator lg = new LearnGenerator(this.currPack);
+        return lg.doable();
     }
 
     public String reviewDisplay(Card c){

@@ -2,11 +2,13 @@ package main;
 
 import entity.Card;
 import entity.Pack;
+import entity.User;
 import manager.CardManager;
 import manager.UserManager;
 import constants.Constants;
 import Controller.LearningSystem;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CommandLineInterface {
@@ -137,17 +139,72 @@ public class CommandLineInterface {
 
 
     /**
-     * choose Pack
-     *
-     * @return void
-     * TODO: implement needed
+     * Review or learn a package.
      */
     public void choosePackPrompt(){
-        
+        // TODO: Find the user who is using the program.
+        User u = new User("abc", "abc", "abc");
+
+        // TODO: Print the list of packs of the user who is using the program.
+        ArrayList<Pack>  userPackages = u.getPackList();
+        System.out.println("The following are all packages you have created:" + userPackages);
+
+        // Find the chosen package.
+        System.out.println(Constants.ANSI_CYAN + "Choose a package by entering a package name:");
+        Scanner in = new Scanner(System.in);
+        String packName = in.nextLine();
+        Pack chosenPack = null;
+        for (Pack p : userPackages) {
+            if (p.getName().equals(packName)) {
+                chosenPack = p;
+            }
+        }
+        this.pack = chosenPack;
+
+        // Let user choose to learn or review the package.
+        System.out.println("enter l to learn this package, r to review this package, q to quit");
+        String packOpt = in.nextLine();
+        while (!packOpt.equals("q")) {
+            // if user choose to learn, then call the helper method taskPrompt1()
+            if (packOpt.equals("l")) {taskPrompt1();}
+            // if user choose to review, then call the helper method taskPrompt2()
+            if (packOpt.equals("r")) {taskPrompt2();}
+        }
+        System.out.println(Constants.ANSI_RED);
     }
 
+    /**
+     * A helper method to deal with learning process.
+     */
+    public void taskPrompt1() {
+        Scanner in = new Scanner(System.in);
+        LearningSystem con = new LearningSystem();
+        System.out.println(Constants.GREEN_BOLD_BRIGHT + "Press any key to start learning, type 99 to quit...");
+        String option = in.nextLine();
+        if (!option.equals("99")) {
+            for (Card c : con.learnableCardList()) {
+                System.out.println(c.getTerm());
+                System.out.println(c.getDefinition());
+                System.out.println("How hard do you think it is to remember this definition? Type the most suitable option");
+                System.out.println("1. Pretty easy, 2. Not very hard, 3. Super difficult");
+                String memOpt = in.nextLine();
+                con.updateMemProficiency(memOpt, c);
+                if(memOpt.equals("1")){
+                    System.out.println(c.getDefinition());
+                    System.out.println("Are you memorized correctly?, 1. right, 2. wrong");
+                    String TestOpt = in.nextLine();
+                    con.updateTestProficiency(TestOpt, c);
+                }
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        }
+    }
 
-    public void taskPrompt() {
+    /**
+     * A helper method to deal with reviewing process.
+     */
+    public void taskPrompt2() {
         Scanner in = new Scanner(System.in);
         LearningSystem con = new LearningSystem();
         System.out.println(Constants.GREEN_BOLD_BRIGHT + "Press any key to start reviewing, type 99 to quit...");
@@ -170,4 +227,9 @@ public class CommandLineInterface {
             }
         }
     }
-}
+
+    }
+
+
+
+
