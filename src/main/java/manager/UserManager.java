@@ -1,10 +1,11 @@
 package manager;
 
+import database.PackWriter;
+import database.UserWriter;
 import entity.Pack;
 import entity.User;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -26,9 +27,20 @@ public class UserManager extends Manager<User>{
         }
     }
 
-    public void createNewUser(String name, String password) {
+    public void createNewUser(String name, String password) throws IOException {
         String id = super.generateId();
         User user = new User(id, name, password);
+        this.idToItem.put(id, user);
+        UserWriter writer = new UserWriter();
+        writer.writeUser(user);
+    }
+
+    /**
+     * This method is only used in Loader, because user registered before and doesn't need a new id.
+     * @param id id of user
+     * @param user User
+     */
+    public void putUser(String id, User user) {
         this.idToItem.put(id, user);
     }
 
@@ -79,27 +91,18 @@ public class UserManager extends Manager<User>{
             }
         }
     }
-//
-////    public Pack choosePack(String name) throws Exception{
-////        for(Pack p: ((User)this.currUser).getPackList()){
-////            if(p.getName() == name){
-////                return p;
-////            }
-////        }
-////        throw new Exception("no such pack");
-////    }
-//
-//    /**
-//     * For testing purposes only.
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//        UserManager um = new UserManager();
-//        um.createNewUser("Xing", "password");
-//        um.createNewUser("SuperDog", "super");
-//        um.createNewUser("FunkyCat", "funky");
-//        for (User user : um.idToItem.values()) {
-//            System.out.println(user.getId());
-//        }
-//    }
+
+    /**
+     * For testing purposes only.
+     * @param args
+     */
+    public static void main(String[] args) throws IOException {
+        UserManager um = new UserManager();
+        um.createNewUser("Xing", "password");
+        um.createNewUser("SuperDog", "super");
+        um.createNewUser("FunkyCat", "funky");
+        for (User user : um.idToItem.values()) {
+            System.out.println(user.getId());
+        }
+    }
 }
