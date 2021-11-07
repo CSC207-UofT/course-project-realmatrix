@@ -17,9 +17,9 @@ public class ReviewGenerator extends TaskGenerator{
 
 
 
-    public ArrayList<Card> doable() {
+    private ArrayList<Card> doable() {
         for (Card c : this.pack.getCards()) {
-            if (c.getProficiency() <= Constants.REVIEW_PROFICIENCY_MAX) {
+            if (0 < c.getProficiency() && c.getProficiency() <= Constants.REVIEW_PROFICIENCY_MAX) {
                 this.cardList.add(c);
             }
         }

@@ -50,7 +50,7 @@ public class LearningSystem {
 
     public ArrayList<Card> reviewableCardList(){
         ReviewGenerator rg = new ReviewGenerator(this.currPack);
-        return rg.doable();
+        return rg.withProficiencyBasedCards();
     }
 
     public void updateMemProficiency(String opt, Card c) {
@@ -68,6 +68,7 @@ public class LearningSystem {
         CardManager cm = new CardManager();
         cm.setCurrCard(c);
         if(opt.equals("2")){
+            cm.decreaseProficiency();
             cm.decreaseProficiency();
         }
     }

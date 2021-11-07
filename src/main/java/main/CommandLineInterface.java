@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class CommandLineInterface {
 
     private Pack pack;
+    private LearningSystem ls = new LearningSystem();
 
     /**
      * Simple prompt for user login or register
@@ -143,7 +144,7 @@ public class CommandLineInterface {
      * TODO: implement needed
      */
     public void choosePackPrompt(){
-        
+
     }
 
 

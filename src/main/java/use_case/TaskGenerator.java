@@ -35,17 +35,4 @@ public abstract class TaskGenerator {
     private void doable() {
     }
 
-    /**
-     * raise reviewing or learning
-     *
-     * @return void
-     * TODO: implement needed
-     */
-    public String display_term(){
-        return "";
-    }
-
-    public String display_def(){
-        return "";
-    }
 }
