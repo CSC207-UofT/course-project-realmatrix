@@ -9,7 +9,7 @@ import java.util.HashMap;
  * A CardManager contains all cards in the system.
  */
 public class CardManager extends Manager<Card> {
-    private Card currCard = null; // Inialize to the state where the user is not in a card
+    private Card currCard = null; // Initialize to the state where the user is not in a card
     public CardManager() {
         super();
     }
@@ -68,9 +68,9 @@ public class CardManager extends Manager<Card> {
     }
 
     /**
-     * Change to the current pack the user is in.
+     * Change to the current card the user is in.
      */
-    public void setCurrPack(Card card) {
+    public void setCurrCard(Card card) {
         this.currCard = card;
     }
 }

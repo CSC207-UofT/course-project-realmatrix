@@ -7,12 +7,10 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * This class is a pack manager that manages a collection of
- * cards for user to add, delete and search.
+ * A pack manager manages a collection of cards stored in a pack.
  */
 public class PackManager extends Manager<Pack> implements Sort<Card> {
     private Pack currPack = null; // The initial state where the user is not in any pack
-
 
     public PackManager() {
         super();
@@ -36,7 +34,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * Add a new card into current pack.
      *
      */
-    public void addCard(Card card) {
+    public void addCard(Card card) throws Exception {
         this.currPack.addCard(card);
     }
 
@@ -54,10 +52,26 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * @param term  the term that the user searches
      * @return      an arraylist of cards that contain term
      */
-    public ArrayList<Card> searchCard(String term) {
+    public ArrayList<Card> searchCardByTerm(String term) {
         ArrayList<Card> lst = new ArrayList<>();
         for (Card c: this.currPack.getCards()) {
             if (c.getTerm().contains(term)) {
+                lst.add(c);
+            }
+        }
+        return lst;
+    }
+
+    /**
+     * Users can search cards by card's definition.
+     * Return an arraylist of cards that contain (not necessarily equal to) definition.
+     * @param keyWord  the key word in the definition that the user searches
+     * @return      an arraylist of cards that contain the key word of definition
+     */
+    public ArrayList<Card> searchCardByDefinition(String keyWord) {
+        ArrayList<Card> lst = new ArrayList<>();
+        for (Card c: this.currPack.getCards()) {
+            if (c.getDefinition().contains(keyWord)) {
                 lst.add(c);
             }
         }
@@ -102,8 +116,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      */
     public ArrayList<Card> sortZtoA() {
         ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
-        lst.sort(new AlphabetComparator());
-        Collections.reverse(lst);
+        lst.sort(new AlphabetComparator().reversed());
         return lst;
     }
 
@@ -126,7 +139,18 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      */
     public ArrayList<Card> sortProHighToLow() {
         ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
-        lst.sort(new ProficiencyComparator());
+        lst.sort(new ProficiencyComparator().reversed());
+        return lst;
+    }
+
+    /**
+     * Return a card list sorted in random order.
+     *
+     * @return an arraylist of sorted cards
+     */
+    public ArrayList<Card> sortRandom() {
+        ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
+        // TODO: implementation
         return lst;
     }
 

@@ -42,7 +42,7 @@ public class User {
         this.packages.add(pack);
     }
 
-    public ArrayList<Pack> getPackages() {
+    public ArrayList<Pack> getPackList(){
         return this.packages;
     }
 
