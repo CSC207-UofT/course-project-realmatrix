@@ -8,11 +8,8 @@ import java.util.ArrayList;
 
 public class ReviewGenerator extends TaskGenerator{
 
-    private Pack pack;
-    private ArrayList<Card> cardList;
-
     public ReviewGenerator(Pack pack) {
-        super();
+        super(pack);
     }
 
 
