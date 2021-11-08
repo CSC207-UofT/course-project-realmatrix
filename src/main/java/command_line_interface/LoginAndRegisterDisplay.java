@@ -2,6 +2,7 @@ package command_line_interface;
 
 import Controller.ProgramState;
 import constants.Constants;
+import manager.LoginManager;
 import manager.UserManager;
 
 import java.util.Scanner;
@@ -31,6 +32,7 @@ public class LoginAndRegisterDisplay {
         String opt = in.nextLine();
 
         UserManager um = new UserManager();
+        LoginManager lm = new LoginManager(um);
 
         if (opt.equals("99")) {
             System.out.println("Exit...");
@@ -56,9 +58,9 @@ public class LoginAndRegisterDisplay {
                 password2 = in.nextLine();
             }
             um.createNewUser(userName, password1);
-            um.logInUser(userName, password1);
+            lm.logInUser(userName, password1);
 
-            this.state.setCurrUser(um.getCurrUser());
+            this.state.setCurrUser(lm.getCurrUser());
 
             System.out.println("Logging in...done! You are logged in through your new account!");
         }
@@ -69,12 +71,12 @@ public class LoginAndRegisterDisplay {
             System.out.print("Please input your password: ");
             String password1 = in.nextLine();
             try {
-                um.logInUser(userName, password1);
+                lm.logInUser(userName, password1);
             } catch (Exception Exception) {//to be changed more specific
-                um.SignOffUser();
+                lm.SignOffUser();
             }
-            um.logInUser(userName, password1);
-            this.state.setCurrUser(um.getCurrUser());
+            lm.logInUser(userName, password1);
+            this.state.setCurrUser(lm.getCurrUser());
         }
     }
 }

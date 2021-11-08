@@ -146,11 +146,11 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
     /**
      * Return a card list sorted in random order.
      *
-     * @return an arraylist of sorted cards
+     * @return an arraylist of randomly sorted cards
      */
     public ArrayList<Card> sortRandom() {
         ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
-        // TODO: implementation
+        Collections.shuffle(lst);
         return lst;
     }
 
