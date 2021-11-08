@@ -3,6 +3,7 @@ package main;
 import entity.Card;
 import entity.Pack;
 import manager.CardManager;
+import manager.LoginManager;
 import manager.UserManager;
 import constants.Constants;
 import Controller.LearningSystem;
@@ -22,6 +23,7 @@ public class CommandLineInterface {
         Scanner in = new Scanner(System.in);
         String opt = in.nextLine();
         UserManager um = new UserManager();
+        LoginManager lm = new LoginManager(um);
         if (opt.equals("99")) {
             System.out.println("Exit...");
         }
@@ -46,7 +48,7 @@ public class CommandLineInterface {
                 password2 = in.nextLine();
             }
             um.createNewUser(userName, password1);
-            um.logInUser(userName, password1);
+            lm.logInUser(userName, password1);
             System.out.println("Logging in...done! You are logged in through your new account!");
             System.out.println(ANSI_CYAN+ "Create a package by entering a package name:");
             String packName = in.nextLine();
@@ -108,11 +110,11 @@ public class CommandLineInterface {
             System.out.print("Please input your password: ");
             String password1 = in.nextLine();
             try {
-                um.logInUser(userName, password1);
+                lm.logInUser(userName, password1);
             } catch (Exception Exception) {//to be changed more specific
-                um.SignOffUser();
+                lm.SignOffUser();
             }
-            um.logInUser(userName, password1);
+            lm.logInUser(userName, password1);
         }
     }
 
