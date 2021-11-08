@@ -21,8 +21,6 @@ public class UserManager extends Manager<User>{
         String id = super.generateId();
         User user = new User(id, name, password);
         this.idToItem.put(id, user);
-        UserWriter writer = new UserWriter();
-        writer.writeUser(user);
     }
 
     /**
