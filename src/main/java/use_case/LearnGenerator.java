@@ -12,7 +12,8 @@ public class LearnGenerator extends TaskGenerator{
     private ArrayList<Card> cardList;
 
     public LearnGenerator(Pack pack) {
-        super();
+        this.pack = pack;
+        this.cardList = new ArrayList<>();
     }
 
 
@@ -20,7 +21,12 @@ public class LearnGenerator extends TaskGenerator{
      * Return a list of cards to be learned.
      */
     public ArrayList<Card> doable() {
-        this.cardList.addAll(this.pack.getCards());
+//        System.out.println(this.pack.getCards());
+        for(Card c: this.pack.getCards()){
+            if(c.getProficiency()==0){
+                this.cardList.add(c);
+            }
+        }
         return this.cardList;
     }
 

@@ -18,4 +18,6 @@ public class Constants {
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
 
+    public static final String CLEAR_CONSOLE = "\033[H\033[2J";
+
 }

@@ -85,7 +85,11 @@ public class Loader {
         String cardProficiency = cardInfo.split(",")[3];
         Card card = new Card(cardId, cardTerm, cardDefinition);
         card.setProficiency(Integer.parseInt(cardProficiency));
-        pack.addCard(card); // put Card into Pack
+        try {
+            pack.addCard(card); // put Card into Pack
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Tests

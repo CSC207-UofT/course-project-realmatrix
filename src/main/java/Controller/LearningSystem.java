@@ -13,15 +13,18 @@ import java.util.Properties;
 
 public class LearningSystem {
 
+    private User currUser;
     private Pack currPack;
+
     private PackManager pm;
     private CardManager cm;
     private LearnGenerator lg;
     private ReviewGenerator rg;
     private ProgramState state;
 
-    public LearningSystem(){
+    public LearningSystem(User user){
         this.currPack = null;
+        this.currUser = user;
         this.pm = new PackManager();
         this.cm = new CardManager();
         this.lg = new LearnGenerator(this.currPack);
@@ -29,12 +32,6 @@ public class LearningSystem {
         this.state = new ProgramState();
     }
 
-
-
-    public Pack setCurrPack(String name) throws Exception {
-        this.currPack = this.state.choosePack(name);
-        return this.currPack;
-    }
 
     public String learnDisplay(String opt, Card c){
         if(opt.equals("t")){
@@ -48,8 +45,8 @@ public class LearningSystem {
         }
     }
 
-    public ArrayList<Card> learnableCardList(){
-        LearnGenerator lg = new LearnGenerator(this.currPack);
+    public ArrayList<Card> learnableCardList(Pack p){
+        LearnGenerator lg = new LearnGenerator(p);
         return lg.doable();
     }
 
@@ -57,8 +54,8 @@ public class LearningSystem {
         return c.getDefinition();
     }
 
-    public ArrayList<Card> reviewableCardList(){
-        ReviewGenerator rg = new ReviewGenerator(this.currPack);
+    public ArrayList<Card> reviewableCardList(Pack p){
+        ReviewGenerator rg = new ReviewGenerator(p);
         return rg.withProficiencyBasedCards();
     }
 
