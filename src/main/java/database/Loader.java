@@ -94,8 +94,8 @@ public class Loader {
 
     // Tests
     public static void main(String... args) throws IOException {
-        Loader loader = new Loader();
-        UserManager manager = loader.load();
+        DataInOutFactory factory = new DataInOutFactory();
+        UserManager manager = factory.load();
         System.out.println(manager.getItems().keySet());
         for (User user : manager.getItems().values()) {
             System.out.println(user.getName());

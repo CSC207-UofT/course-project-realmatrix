@@ -38,9 +38,7 @@ public class UserWriter {
 
     // For testing
     public static void main(String[] args) throws IOException {
-        UserWriter userWriter = new UserWriter();
-        PackWriter packWriter = new PackWriter();
-        CardWriter cardWriter = new CardWriter();
+        DataInOutFactory factory = new DataInOutFactory();
         User user1 = new User("1234567890", "Snoopy", "password123");
         Pack pack1 = new Pack("1947269283", "greeting101");
         Pack pack2 = new Pack("1398195", "language101");
@@ -48,24 +46,24 @@ public class UserWriter {
         Card card2 = new Card("3hwjdwv", "goodbye", "means farewell");
         Card card3 = new Card("aodangauvou", "english", "a language");
         Card card4 = new Card("aduvoauo", "Chinese", "another language");
-        userWriter.writeUser(user1);
-        packWriter.writePack(user1, pack1);
-        packWriter.writePack(user1, pack2);
-        cardWriter.writeCard(user1, pack1, card1);
-        cardWriter.writeCard(user1, pack1, card2);
-        cardWriter.writeCard(user1, pack2, card3);
-        cardWriter.writeCard(user1, pack2, card4);
-        // userWriter.archiveUser(user1);
-        // packWriter.archivePack(user1, pack1);
-        // cardWriter.archiveCard(user1, pack1, card1);
+        factory.write(user1);
+        factory.write(user1, pack1);
+        factory.write(user1, pack2);
+        factory.write(user1, pack1, card1);
+        factory.write(user1, pack1, card2);
+        factory.write(user1, pack1, card3);
+        factory.write(user1, pack1, card4);
+//        factory.archive(user1);
+//        factory.archive(user1, pack1);
+//        factory.archive(user1, pack1, card1);
 
         User user2 = new User("3owgouapgb", "Pink Panther", "passwordaiogas");
-        userWriter.writeUser(user2);
-        packWriter.writePack(user2, pack1);
-        packWriter.writePack(user2, pack2);
-        cardWriter.writeCard(user2, pack1, card1);
-        cardWriter.writeCard(user2, pack1, card2);
-        cardWriter.writeCard(user2, pack2, card3);
-        cardWriter.writeCard(user2, pack2, card4);
+        factory.write(user2);
+        factory.write(user2, pack1);
+        factory.write(user2, pack2);
+        factory.write(user2, pack1, card1);
+        factory.write(user2, pack1, card2);
+        factory.write(user2, pack1, card3);
+        factory.write(user2, pack1, card4);
     }
 }
