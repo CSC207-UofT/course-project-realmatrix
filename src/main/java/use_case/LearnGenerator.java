@@ -8,15 +8,13 @@ import java.util.ArrayList;
 
 public class LearnGenerator extends TaskGenerator{
 
-    private Pack pack;
-    private ArrayList<Card> cardList;
-
     public LearnGenerator(Pack pack) {
-        this.pack = pack;
-        this.cardList = new ArrayList<>();
+        super(pack);
     }
 
-
+    public Pack getPack() {
+        return this.pack;
+    }
     /**
      * Return a list of cards to be learned.
      */
