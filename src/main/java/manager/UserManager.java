@@ -2,7 +2,7 @@ package manager;
 
 import entity.User;
 
-import java.io.IOException;
+import java.util.Objects;
 
 /**
  * A manager that manages all Users.
@@ -13,10 +13,28 @@ public class UserManager extends Manager<User>{
         super();
     }
 
-    public void createNewUser(String name, String password) {
-        String id = super.generateId();
-        User user = new User(id, name, password);
-        this.idToItem.put(id, user);
+    public void createNewUser(String name, String password) throws Exception {
+        if (uniqueName(name)) {
+            String id = super.generateId();
+            User user = new User(id, name, password);
+            this.idToItem.put(id, user);
+        } else {
+            throw new Exception("This username is taken. Please choose another one.");
+        }
+    }
+
+    /**
+     * Private helper function to createNewUser. Check if a username is unique.
+     * @param name user's choice of username
+     * @return true if it is unique; false otherwise
+     */
+    private boolean uniqueName(String name) {
+        for (User user : this.getItems().values()) {
+            if (Objects.equals(user.getName(), name)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -45,7 +63,7 @@ public class UserManager extends Manager<User>{
      * For testing purposes only.
      * @param args
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         UserManager um = new UserManager();
         um.createNewUser("Xing", "password");
         um.createNewUser("SuperDog", "super");
