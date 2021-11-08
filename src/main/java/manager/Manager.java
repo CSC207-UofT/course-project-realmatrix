@@ -31,4 +31,12 @@ public abstract class Manager<T> {
             return id.toString();
         }
     }
+
+    /**
+     * Important!! This method is for testing purposes only! Don't use it in the code. Remove when testing is done.
+     * @return
+     */
+    public HashMap<String, T> items() {
+        return this.idToItem;
+    }
 }

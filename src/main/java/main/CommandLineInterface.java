@@ -48,6 +48,58 @@ public class CommandLineInterface {
             um.createNewUser(userName, password1);
             um.logInUser(userName, password1);
             System.out.println("Logging in...done! You are logged in through your new account!");
+            System.out.println(ANSI_CYAN+ "Create a package by entering a package name:");
+            String packName = in.nextLine();
+            Pack newPack = new Pack(packName, packName);
+
+            System.out.println("enter y to checkout your cards, a to add new card, q to quit");
+            String packOpt = in.nextLine();
+            while(!packOpt.equals("q")) {
+                if (packOpt.equals("a")) {
+                    System.out.println("press any key to add new card, 99 for quit...");
+                    String cardOpt = in.nextLine();
+                    CardManager cm = new CardManager();
+                    int j = 0;
+                    while(!cardOpt.equals("99")){
+                        System.out.print(ANSI_YELLOW+"Please type your Term: ");
+                        String term = in.nextLine();
+                        System.out.print("Please type your Definition: ");
+                        String def = in.nextLine();
+                        Card card = cm.createNewCard(term,def);
+                        newPack.addCard(card);
+                        j++;
+                        System.out.println();
+                        System.out.println(ANSI_CYAN+"press any key to add new card, 99 for quit...");
+                        cardOpt = in.nextLine();
+                    }
+//                    Card newCard = new Card("whatever", "computer", "a smart and cool machine");
+//                    newPack.add(newCard);
+//                    Card anotherCard = new Card("sowhat", "iphone", "an overpriced phone");
+//                    newPack.add(anotherCard);
+                    System.out.printf("%d card added", j);
+                    System.out.println("\n");
+                    System.out.println(ANSI_CYAN+ "enter y to checkout your cards, a to add new card, q to quit");
+                    packOpt = in.nextLine();
+                    }
+
+                if (packOpt.equals("y")) {
+                    int i = 0;
+                    for (Card c : newPack.getCards()) {
+                        System.out.println();
+                        System.out.println(GREEN_BOLD_BRIGHT + c.toString());
+                        i ++;
+                    }
+                    System.out.printf(GREEN_BOLD_BRIGHT+"%d cards displayed", i);
+                    System.out.println("\n");
+                    System.out.println(ANSI_CYAN+"enter y to checkout your cards, a to add new card, q to quit");
+                    packOpt = in.nextLine();
+                }
+                if (packOpt.equals("q")) {
+                    System.out.println(ANSI_RED);
+                    return false;
+                }
+
+            }
         }
         if (opt.equals("1")) {
             System.out.print("Please input your username: ");
