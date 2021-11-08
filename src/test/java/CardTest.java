@@ -15,40 +15,41 @@ public class CardTest {
     }
 
     @Test(timeout = 50)
-    public void TestEditDefinition() {
+    public void TestSetDefinition() {
         String newDefinition = "wardrobe";
-        c.editDefinition(newDefinition);
+        c.setDefinition(newDefinition);
         assertSame(c.getDefinition(), newDefinition);
     }
 
     @Test(timeout = 50)
-    public void TestEditTerm() {
+    public void TestSetTerm() {
         String newTerm = "storage";
-        c.editTerm(newTerm);
+        c.setTerm(newTerm);
         assertSame(c.getTerm(), newTerm);
     }
 
-    @Test(timeout = 50)
-    public void TestIncreaseProficiencyOutOfRange() {
-        for (int i = 1; i <= 5; i++) {
-            c.increaseProficiency();
-        }
-        assertSame(c.getProficiency(), 5);
-    }
-
-    @Test(timeout = 50)
-    public void TestDecreaseProficiencyOutOfRange() {
-        c.decreaseProficiency();
-        assertSame(c.getProficiency(), 1);
-    }
-
-    @Test(timeout = 50)
-    public void TestIncreaseDecreaseProficiencyInRange() {
-        c.increaseProficiency();
-        assertSame(c.getProficiency(), 2);
-        c.decreaseProficiency();
-        assertSame(c.getProficiency(), 1);
-    }
+    // Put them in CardManager Test
+//    @Test(timeout = 50)
+//    public void TestIncreaseProficiencyOutOfRange() {
+//        for (int i = 1; i <= 5; i++) {
+//            c.increaseProficiency();
+//        }
+//        assertSame(c.getProficiency(), 5);
+//    }
+//
+//    @Test(timeout = 50)
+//    public void TestDecreaseProficiencyOutOfRange() {
+//        c.decreaseProficiency();
+//        assertSame(c.getProficiency(), 1);
+//    }
+//
+//    @Test(timeout = 50)
+//    public void TestIncreaseDecreaseProficiencyInRange() {
+//        c.increaseProficiency();
+//        assertSame(c.getProficiency(), 2);
+//        c.decreaseProficiency();
+//        assertSame(c.getProficiency(), 1);
+//    }
 
     @Test(timeout = 50)
     public void TestToString() {

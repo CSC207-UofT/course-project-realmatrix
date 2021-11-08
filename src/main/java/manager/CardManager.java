@@ -1,6 +1,7 @@
 package manager;
 
 import entity.Card;
+import entity.Pack;
 
 import java.util.HashMap;
 
@@ -8,16 +9,14 @@ import java.util.HashMap;
  * A CardManager contains all cards in the system.
  */
 public class CardManager extends Manager<Card> {
-
+    private Card currCard = null; // Initialize to the state where the user is not in a card
     public CardManager() {
         super();
     }
 
-    //TODO: check number of characters for a card term/def?
-
     /**
      * Create and return a new card with defined term and definition.
-     * Stores id and the corresponding card in idToCard.
+     * Stores id and the corresponding card in idToItem.
      *
      * @param term       The term of the card
      * @param definition The definition of the term
@@ -26,35 +25,52 @@ public class CardManager extends Manager<Card> {
     public Card createNewCard(String term, String definition) {
         String id = generateId();
         Card c = new Card(id, term, definition);
-        idToItem.put(id, c);
+        this.idToItem.put(id, c);
         return c;
     }
 
     /**
-     *
-     * @param id id of the card
+     * Change the card's term to a new term specified by user.
      * @param newTerm the new term the card should change to
-     * @return true if successfully changed, false otherwise
      */
-    public boolean editCardTerm(String id, String newTerm) {
-        if (idToItem.containsKey(id)) {
-            ((Card) idToItem.get(id)).editTerm(newTerm);
-            return true;
-        }
-        return false;
+    public void editCardTerm(String newTerm) {
+        this.currCard.setTerm(newTerm);
     }
 
     /**
-     *
-     * @param id id of the card
+     * Change the card's definition to a new definition specified by user.
      * @param newDefinition the new definition the card should change to
-     * @return true if successfully changed, false otherwise
      */
-    public boolean editCardDefinition(String id, String newDefinition) {
-        if (idToItem.containsKey(id)) {
-            ((Card) idToItem.get(id)).editTerm(newDefinition);
-            return true;
-        }
-        return false;
+    public void editCardDefinition(String newDefinition) {
+        this.currCard.setDefinition(newDefinition);
+    }
+
+    /**
+     * Increase the proficiency of the card by 1.
+     */
+    public void increaseProficiency() {
+        this.currCard.setProficiency(Math.min(this.currCard.getProficiency() + 1, 5));
+    }
+
+    /**
+     * Decrease the proficiency of the card by 1.
+     */
+    public void decreaseProficiency() {
+        this.currCard.setProficiency(Math.max(this.currCard.getProficiency() - 1, 1));
+    }
+
+    /**
+     * Getter for the current pack the user is in.
+     * @return the current pack.
+     */
+    public Card getCurrCard() {
+        return this.currCard;
+    }
+
+    /**
+     * Change to the current card the user is in.
+     */
+    public void setCurrCard(Card card) {
+        this.currCard = card;
     }
 }

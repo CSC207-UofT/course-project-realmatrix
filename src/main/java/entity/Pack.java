@@ -1,17 +1,22 @@
 package entity;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
- * This class is a package that stores the name of the package owner and the snippets in this package.
+ * A pack that stores cards.
  */
 
 public class Pack {
 
-    private ArrayList<Card> cardList;
+    private ArrayList<Card> cardList; // oldest cards in the front, newly added ones at the end
     private final String id;
     private String name;
 
+    /**
+     * Construct a pack with given id and name.
+     * @param id    a unique id of the pack
+     * @param name  name of the pack
+     */
     public Pack(String id, String name) {
         this.id = id;
         this.name = name;
@@ -19,12 +24,34 @@ public class Pack {
     }
 
     /**
-     * Add method add a card in cardList according to proficiency and return
-     * whether a card is added into cardList successfully.
-     * @return boolean
+     * Add a new Card into the pack's cardList.
+     * Throws an exception if the new card's term already exists in the pack.
+     *
+     * @param card  a Card item
      */
-    public void add(Card card) {
+    public void addCard(Card card) throws Exception {
+        for (Card c : this.cardList) {
+            if (c.getTerm().equals(card.getTerm())) {
+                throw new Exception("Had this card already~ Try change a term.");
+            }
+        }
         this.cardList.add(card);
+    }
+
+    /**
+     * Remove a Card in a pack.
+     * @param card the card to be removed
+     * @return return true if successfully removed, otherwise false
+     */
+    public boolean deleteCard(Card card) throws Exception {
+        String id = card.getId();
+        for (int i = 0; i < this.cardList.size(); i++) {
+            if (Objects.equals(this.cardList.get(i).getId(), id)) {
+                this.cardList.remove(i);
+                return true;
+            }
+        }
+        throw new Exception("No such card.");
     }
 
     public String getId() {
@@ -39,6 +66,9 @@ public class Pack {
         return this.cardList;
     }
 
+    /**
+    Change the name of the pack.
+     */
     public void changeName(String newName) {
         this.name = newName;
     }

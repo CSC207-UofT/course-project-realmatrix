@@ -42,6 +42,10 @@ public class User {
         this.packages.add(pack);
     }
 
+    public ArrayList<Pack> getPackList(){
+        return this.packages;
+    }
+
     /**
      *
      * @param pack the package to be deleted
