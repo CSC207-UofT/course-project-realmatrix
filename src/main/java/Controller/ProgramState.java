@@ -36,7 +36,7 @@ public class ProgramState {
     }
 
     public Pack choosePack(String name) throws Exception{
-        for(Pack p: this.currUser.getPackList()){
+        for(Pack p: this.currUser.getPackages()){
             if(p.getName().equals(name)){
                 return p;
             }

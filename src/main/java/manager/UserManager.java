@@ -1,12 +1,8 @@
 package manager;
 
-import database.PackWriter;
-import database.UserWriter;
-import entity.Pack;
 import entity.User;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * A manager that manages all Users.
