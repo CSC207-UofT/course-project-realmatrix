@@ -18,10 +18,10 @@ public abstract class TaskGenerator {
      * @return boolean
      * TODO: implement needed
      */
-    private Pack pack;
-    private ArrayList<Card> cardList;
+    protected Pack pack;
+    protected ArrayList<Card> cardList;
 
-    public void TestGenerator(Pack pack){
+    public TaskGenerator(Pack pack){
         this.pack = pack;
         this.cardList = new ArrayList<>();
     }
@@ -35,17 +35,4 @@ public abstract class TaskGenerator {
     private void doable() {
     }
 
-    /**
-     * raise reviewing or learning
-     *
-     * @return void
-     * TODO: implement needed
-     */
-    public String display_term(){
-        return "";
-    }
-
-    public String display_def(){
-        return "";
-    }
 }

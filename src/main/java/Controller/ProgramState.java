@@ -7,31 +7,58 @@ public class ProgramState {
     private Pack currPack;
     private Card currCard;
 
-    public ProgramState(){
+    public ProgramState() {
         this.currUser = null;
         this.currPack = null;
         this.currCard = null;
     }
 
-    public void setState(User u, Pack p, Card c){
-        this.currUser = u;
+    public void setCurrUser(User currUser) {
+        this.currUser = currUser;
+    }
+
+    public void setCurrCard(Card currCard) {
+        this.currCard = currCard;
+    }
+
+    public void setCurrPack(Pack p) {
         this.currPack = p;
-        this.currCard = c;
     }
 
     public String toString() {
-        return "Current User is" + this.currUser.toString() + "\n" +
-                "Current Pack is" + this.currPack.toString() + "\n" +
-                "Current Card is" + this.currCard.toString() + "\n";
+        String user;
+        String pack;
+        String card;
+        if(this.currUser==null){
+            user = "NULL";
+        }else{
+            user = this.currUser.toString();
+        }
+        if(this.currPack==null){
+            pack = "NULL";
+        }else{
+            pack = this.currPack.toString();
+        }
+        if(this.currCard==null){
+            card = "NULL";
+        }else{
+            card = this.currCard.toString();
+        }
+
+        return "Current User is: " + user + "\n" +
+                    "Current Pack is: " + pack + "\n" +
+                    "Current Card is: " + card + "\n";
     }
 
-    public User getCurrUser(){
+    public User getCurrUser() {
         return this.currUser;
     }
-    public Card getCurrCard(){
+
+    public Card getCurrCard() {
         return this.currCard;
     }
-    public Pack getCurrPack(){
+
+    public Pack getCurrPack() {
         return this.currPack;
     }
 
