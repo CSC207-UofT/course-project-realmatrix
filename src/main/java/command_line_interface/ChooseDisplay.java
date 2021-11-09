@@ -25,7 +25,7 @@ public class ChooseDisplay {
         return state;
     }
 
-    public void prompt(){
+    public void prompt() throws Exception {
 
 
         // Find the chosen package.
@@ -33,11 +33,18 @@ public class ChooseDisplay {
         Scanner in = new Scanner(System.in);
         String packName = in.nextLine();
         Pack chosenPack = null;
+        boolean flag = false;
         for (Pack p : this.state.getCurrUser().getPackages()) {
             if (p.getName().equals(packName)) {
                 chosenPack = p;
+                flag = true;
             }
         }
-        this.state.setCurrPack(chosenPack);
+        if(flag){
+            this.state.setCurrPack(chosenPack);
+        }else{
+            throw new Exception("Package not found");
+        }
+
     }
 }
