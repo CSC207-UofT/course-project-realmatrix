@@ -36,7 +36,7 @@ public class CommandLineInterface {
         System.out.println("Type 99 to quit, else to continue");
         String quit = scanner.nextLine();
         while(!quit.equals("99")){
-            System.out.println(Constants.ANSI_YELLOW + "Current State is: \n" + this.state.toString() + "\n");
+//            System.out.println(Constants.ANSI_YELLOW + "Current State is: \n" + this.state.toString() + "\n");
             this.createOrChooseDisplay.setState(this.state);
             this.createOrChooseDisplay.prompt();
             this.state = this.createOrChooseDisplay.getState();

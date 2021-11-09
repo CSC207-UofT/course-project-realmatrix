@@ -59,6 +59,8 @@ public class CreateDisplay {
                     System.out.println(Constants.ANSI_CYAN + "press any key to add new card, 99 for quit...");
                     cardOpt = in.nextLine();
                 }
+                this.state.getCurrUser().createPackage(newPack);
+
                 System.out.printf("%d card added", j);
                 System.out.println("\n");
                 System.out.println(Constants.ANSI_CYAN + "enter y to checkout your cards, a to add new card, q to quit");

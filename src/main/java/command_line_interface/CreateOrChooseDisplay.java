@@ -36,7 +36,11 @@ public class CreateOrChooseDisplay {
     public void prompt() throws Exception {
         //TODO: cannot display the user's packages, but there
         ArrayList<Pack> userPackages = this.state.getCurrUser().getPackages();
-        System.out.println("The following are all packages you have created:" + userPackages);
+        System.out.println("The following are all packages you have created:");
+        for (Pack p:userPackages){
+            System.out.println(p.getName());
+        }
+        System.out.println();
 
         System.out.println("Create or Choose package? 1. create, 2. choose");
         Scanner in = new Scanner(System.in);
