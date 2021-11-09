@@ -7,7 +7,7 @@ import entity.Card;
 
 import java.util.Scanner;
 
-public class ReviewDisplay {
+public class ReviewDisplay implements displayInterface{
     private ProgramState state;
 
     public ReviewDisplay() {

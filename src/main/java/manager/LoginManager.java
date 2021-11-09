@@ -5,8 +5,8 @@ import entity.User;
 import java.util.Objects;
 
 public class LoginManager {
-    private boolean loggedIn = false; // by default, no user logged in
-    private Object currUser = null; // by default, no current user who is logged in
+    private boolean loggedIn; // by default, no user logged in
+    private Object currUser; // by default, no current user who is logged in
     private UserManager manager;
 
     public LoginManager(UserManager manager) {
@@ -16,6 +16,7 @@ public class LoginManager {
     }
 
     public User getCurrUser() throws Exception {
+        System.out.println(this.currUser);
         if (this.currUser instanceof User) {
             return (User) this.currUser;
         } else {
@@ -25,7 +26,8 @@ public class LoginManager {
 
     /**
      * Return the User with given name and password
-     * @param name name of a User
+     *
+     * @param name     name of a User
      * @param password password of a User (matches the name)
      * @return User or if not found (which can't be the case; included for completeness reason) return null
      */
@@ -37,6 +39,7 @@ public class LoginManager {
         }
         return null;
     }
+
 
     public void logInUser(String name, String password) throws Exception {
         if (this.loggedIn) {

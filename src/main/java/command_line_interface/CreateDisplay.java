@@ -9,7 +9,7 @@ import manager.PackManager;
 
 import java.util.Scanner;
 
-public class CreateDisplay {
+public class CreateDisplay implements displayInterface{
 
     private ProgramState state;
 

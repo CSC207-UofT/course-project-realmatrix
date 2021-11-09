@@ -8,7 +8,7 @@ import entity.User;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ChooseDisplay {
+public class ChooseDisplay implements displayInterface{
     private ProgramState state;
 
     public ChooseDisplay(){

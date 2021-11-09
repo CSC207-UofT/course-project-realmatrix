@@ -11,7 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CreateOrChooseDisplay {
+public class CreateOrChooseDisplay implements displayInterface{
 
     private ProgramState state;
     private CreateDisplay createDisplay;

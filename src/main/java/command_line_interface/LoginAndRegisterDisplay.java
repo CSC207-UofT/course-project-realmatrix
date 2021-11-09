@@ -73,9 +73,9 @@ public class LoginAndRegisterDisplay {
             try {
                 lm.logInUser(userName, password1);
             } catch (Exception Exception) {//to be changed more specific
-                Exception.getMessage();
+                lm.SignOffUser();
+                lm.logInUser(userName, password1);
             }
-            lm.logInUser(userName, password1);
             this.state.setCurrUser(lm.getCurrUser());
         }
     }
