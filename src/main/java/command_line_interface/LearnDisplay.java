@@ -7,7 +7,7 @@ import entity.Card;
 
 import java.util.Scanner;
 
-public class LearnDisplay {
+public class LearnDisplay implements displayInterface{
     private ProgramState state;
 
     public LearnDisplay(){

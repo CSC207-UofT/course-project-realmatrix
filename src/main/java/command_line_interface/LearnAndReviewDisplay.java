@@ -9,7 +9,7 @@ import entity.User;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class LearnAndReviewDisplay {
+public class LearnAndReviewDisplay implements displayInterface{
 
     private ProgramState state;
     private LearnDisplay learnDisplay;
