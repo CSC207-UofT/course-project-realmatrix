@@ -62,7 +62,6 @@ public class ReviewGeneratorTest {
         ArrayList<Card> expectedList = new ArrayList<>();
         expectedList.add(c1);
         expectedList.add(c2);
-        expectedList.add(c3);
         expectedList.add(c4);
         assertEquals(expectedList, rg.doable());
     }
@@ -78,9 +77,6 @@ public class ReviewGeneratorTest {
         }
         for (int i = 0; i < (Constants.REVIEW_PROFICIENCY_MAX - 3); i++) {
             expectedList.add(c2);
-        }
-        for (int i = 0; i < (Constants.REVIEW_PROFICIENCY_MAX); i++) {
-            expectedList.add(c3);
         }
         assertEquals(expectedList, rg.withProficiencyBasedCards());
     }
