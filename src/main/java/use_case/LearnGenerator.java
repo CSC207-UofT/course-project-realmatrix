@@ -6,38 +6,29 @@ import constants.Constants;
 
 import java.util.ArrayList;
 
-public class ReviewGenerator extends TaskGenerator{
+public class LearnGenerator extends TaskGenerator{
 
-    public ReviewGenerator(Pack pack) {
+    public LearnGenerator(Pack pack) {
         super(pack);
     }
 
-
+    public Pack getPack() {
+        return this.pack;
+    }
     /**
-     * Return a list of cards needs to be reviewed.
+     * Return a list of cards to be learned.
      */
     public ArrayList<Card> doable() {
-        for (Card c : this.pack.getCards()) {
-            if (c.getProficiency() <= Constants.REVIEW_PROFICIENCY_MAX) {
+//        System.out.println(this.pack.getCards());
+        for(Card c: this.pack.getCards()){
+            if(c.getProficiency()==0){
                 this.cardList.add(c);
             }
         }
         return this.cardList;
     }
 
-    /**
-     * Return a list of doable cards, each card is repeated for some times according to its proficiency.
-     */
-    public ArrayList<Card> withProficiencyBasedCards(){
-        ArrayList<Card> newCards = new ArrayList<>();
-        for (Card c : this.doable()){
-            int prof = c.getProficiency();
-            for (int i = 0; i < (Constants.REVIEW_PROFICIENCY_MAX - prof); i++) {
-                newCards.add(c);
-            }
-        }
-        return newCards;
-    }
+
 //    @Override
 //    public String display_term(){
 //        Scanner in = new Scanner(System.in);
@@ -53,4 +44,3 @@ public class ReviewGenerator extends TaskGenerator{
 //        }
 //        return;
 }
-

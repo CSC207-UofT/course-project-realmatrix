@@ -25,7 +25,7 @@ public class Card {
         this.term = term;
         this.definition = definition;
         this.definitionHidden = false;
-        this.proficiency = 1;
+        this.proficiency = 0;
 
     }
 
