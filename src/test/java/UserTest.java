@@ -54,17 +54,17 @@ public class UserTest {
     @Test
     public void testCreatePackage(){
         u.createPackage(pack1);
-        assertEquals(1, u.getPackList().size());
-        assertEquals(pack1, u.getPackList().get(0));
+        assertEquals(1, u.getPackages().size());
+        assertEquals(pack1, u.getPackages().get(0));
         u.createPackage(pack2);
-        assertEquals(2, u.getPackList().size());
-        assertEquals(pack1, u.getPackList().get(0));
-        assertEquals(pack2, u.getPackList().get(1));
+        assertEquals(2, u.getPackages().size());
+        assertEquals(pack1, u.getPackages().get(0));
+        assertEquals(pack2, u.getPackages().get(1));
         u.createPackage(pack3);
-        assertEquals(3, u.getPackList().size());
-        assertEquals(pack1, u.getPackList().get(0));
-        assertEquals(pack2, u.getPackList().get(1));
-        assertEquals(pack3, u.getPackList().get(2));
+        assertEquals(3, u.getPackages().size());
+        assertEquals(pack1, u.getPackages().get(0));
+        assertEquals(pack2, u.getPackages().get(1));
+        assertEquals(pack3, u.getPackages().get(2));
     }
 
     @Test
@@ -72,10 +72,10 @@ public class UserTest {
         u.createPackage(pack1);
         u.createPackage(pack2);
         u.createPackage(pack3);
-        assertEquals(3, u.getPackList().size());
-        assertEquals(pack1, u.getPackList().get(0));
-        assertEquals(pack2, u.getPackList().get(1));
-        assertEquals(pack3, u.getPackList().get(2));
+        assertEquals(3, u.getPackages().size());
+        assertEquals(pack1, u.getPackages().get(0));
+        assertEquals(pack2, u.getPackages().get(1));
+        assertEquals(pack3, u.getPackages().get(2));
     }
 
     @Test
@@ -84,11 +84,11 @@ public class UserTest {
         u.createPackage(pack2);
         u.createPackage(pack3);
         assertTrue(u.deletePackage(pack1));
-        assertEquals(2, u.getPackList().size());
-        assertEquals(pack2, u.getPackList().get(0));
-        assertEquals(pack3, u.getPackList().get(1));
+        assertEquals(2, u.getPackages().size());
+        assertEquals(pack2, u.getPackages().get(0));
+        assertEquals(pack3, u.getPackages().get(1));
         assertFalse(u.deletePackage(pack1));
-        assertEquals(2, u.getPackList().size());
+        assertEquals(2, u.getPackages().size());
     }
 
 }
