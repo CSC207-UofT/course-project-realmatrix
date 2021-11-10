@@ -25,7 +25,7 @@ public class CardManagerTest {
         String term = "Homoncular Fallacy";
         String definition = "Assuming a mental fallacy";
         assertEquals(term, c.getTerm());
-        assertEquals(1, c.getProficiency());
+        assertEquals(0, c.getProficiency());
         assertEquals(definition, c.getDefinition());
     }
 
@@ -49,7 +49,7 @@ public class CardManagerTest {
         cm.increaseProficiency();
         cm.increaseProficiency();
 
-        assertEquals(3, c.getProficiency());
+        assertEquals(2, c.getProficiency());
     }
 
     @Test(timeout = 50)
@@ -57,7 +57,7 @@ public class CardManagerTest {
         cm.increaseProficiency();
         cm.increaseProficiency();
         cm.decreaseProficiency();
-        assertEquals(2, c.getProficiency());
+        assertEquals(1, c.getProficiency());
     }
 
 

@@ -74,7 +74,7 @@ public class CardTest {
 
     @Test(timeout = 50)
     public void TestGetProficiency() {
-        assertSame(1, c.getProficiency());
+        assertSame(0, c.getProficiency());
     }
 
     @Test(timeout = 50)
