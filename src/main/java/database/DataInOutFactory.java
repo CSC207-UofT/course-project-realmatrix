@@ -42,6 +42,10 @@ public class DataInOutFactory {
     }
 
     public UserManager load() throws IOException {
-        return loader.load();
+        return loader.initialLoad();
+    }
+
+    public void load(User user) throws IOException {
+        loader.userLoad(user);
     }
 }
