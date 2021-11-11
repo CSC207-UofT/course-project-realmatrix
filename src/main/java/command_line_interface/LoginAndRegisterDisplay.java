@@ -65,18 +65,22 @@ public class LoginAndRegisterDisplay {
             System.out.println("Logging in...done! You are logged in through your new account!");
         }
         if (opt.equals("1")) {
-            System.out.print("Please input your username: ");
-            Scanner userInput = new Scanner(System.in);
-            String userName = userInput.nextLine();
-            System.out.print("Please input your password: ");
-            String password1 = in.nextLine();
-            try {
-                lm.logInUser(userName, password1);
-            } catch (Exception Exception) {//to be changed more specific
-                lm.SignOffUser();
-            }
-            lm.logInUser(userName, password1);
-            this.state.setCurrUser(lm.getCurrUser());
+            String loginErrMsg = null;
+            do {
+                System.out.print("Please input your username: ");
+                Scanner userInput = new Scanner(System.in);
+                String userName = userInput.nextLine();
+                System.out.print("Please input your password: ");
+                String password1 = in.nextLine();
+                try {
+                    lm.logInUser(userName, password1);
+                    lm.logInUser(userName, password1);
+                    this.state.setCurrUser(lm.getCurrUser());
+                } catch (Exception e) {//to be changed more specific
+                    loginErrMsg = e.getMessage();
+                    System.out.println(loginErrMsg);
+                }
+            } while (loginErrMsg != null);
         }
     }
 }
