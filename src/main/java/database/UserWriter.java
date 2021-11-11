@@ -51,8 +51,8 @@ public class UserWriter {
         factory.write(user1, pack2);
         factory.write(user1, pack1, card1);
         factory.write(user1, pack1, card2);
-        factory.write(user1, pack1, card3);
-        factory.write(user1, pack1, card4);
+        factory.write(user1, pack2, card3);
+        factory.write(user1, pack2, card4);
 //        factory.archive(user1);
 //        factory.archive(user1, pack1);
 //        factory.archive(user1, pack1, card1);
@@ -63,7 +63,7 @@ public class UserWriter {
         factory.write(user2, pack2);
         factory.write(user2, pack1, card1);
         factory.write(user2, pack1, card2);
-        factory.write(user2, pack1, card3);
-        factory.write(user2, pack1, card4);
+        factory.write(user2, pack2, card3);
+        factory.write(user2, pack2, card4);
     }
 }
