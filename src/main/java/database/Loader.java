@@ -10,6 +10,27 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Data files are structured in this way:
+ * user_data/
+ *           users/
+ *           archived_users/
+ *                          user1/
+ *                          user2/
+ *                          ...
+ *                                user_info.txt
+ *                                packages/
+ *                                archived_packages/
+ *                                                  package1/
+ *                                                  package2/
+ *                                                  ...
+ *                                                           package_info.txt
+ *                                                           cards/
+ *                                                           archived_cards/
+ *                                                                           card1.txt
+ *                                                                           card2.txt
+ *                                                                           ...
+ */
 public class Loader {
 
     /**
