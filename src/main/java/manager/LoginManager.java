@@ -1,10 +1,11 @@
 package manager;
 
 import entity.User;
+import presenters.LoginPresenter;
 
 import java.util.Objects;
 
-public class LoginManager {
+public class LoginManager implements LoginInputBoundary{
     private boolean loggedIn; // by default, no user logged in
     private Object currUser; // by default, no current user who is logged in
     private UserManager manager;
@@ -41,7 +42,7 @@ public class LoginManager {
     }
 
 
-    public void logInUser(String name, String password) throws Exception {
+    public void logInUser(String name, String password, LoginPresenter lp) throws Exception {
         if (this.loggedIn) {
             throw new Exception("Please sign off before logging in.");
         } else if (this.findUser(name, password) == null) {

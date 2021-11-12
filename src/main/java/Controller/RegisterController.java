@@ -2,6 +2,7 @@ package Controller;
 
 import manager.LoginManager;
 import manager.UserManager;
+import presenters.LoginPresenter;
 
 public class RegisterController {
     UserManager um;
@@ -24,6 +25,7 @@ public class RegisterController {
     public String register(String username, String password){
         boolean flag;
         String s = "";
+        LoginPresenter lp = new LoginPresenter(username);
         try {
             um.createNewUser(username,password);
             flag = true;
@@ -32,7 +34,7 @@ public class RegisterController {
             flag = false;
         }
         try {
-            lm.logInUser(username, password);
+            lm.logInUser(username, password,lp);
         } catch (Exception e) {
             s += "\n" + e.getMessage();
             flag = false;

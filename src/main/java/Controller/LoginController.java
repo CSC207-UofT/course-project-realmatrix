@@ -3,6 +3,7 @@ package Controller;
 import entity.User;
 import manager.LoginManager;
 import manager.UserManager;
+import presenters.LoginPresenter;
 
 public class LoginController {
     public LoginManager lm;
@@ -24,8 +25,9 @@ public class LoginController {
      * @return "Login... Success!" when user login successed.
      */
     public String login(String username, String password) {
+        LoginPresenter lp = new LoginPresenter(username);
         try {
-            lm.logInUser(username, password);
+            lm.logInUser(username, password,lp);
             return "User" + username + "Login... Success!";
         } catch (Exception e) {
             return e.getMessage();
