@@ -3,6 +3,7 @@ package use_case;
 import entity.Card;
 import entity.Pack;
 import constants.Constants;
+import java.util.Random;
 
 import java.util.ArrayList;
 
@@ -38,19 +39,18 @@ public class ReviewGenerator extends TaskGenerator{
         }
         return newCards;
     }
-//    @Override
-//    public String display_term(){
-//        Scanner in = new Scanner(System.in);
-//        System.out.println(constants.GREEN_BOLD_BRIGHT + "Press any key to start reviewing, type 99 to quit...");
-//        String option = in.nextLine();
-//        if (option != "99"){
-//            for (Card c:cardList){
-//                System.out.println(c.getTerm());
-//                System.out.println("Can you recall the definition? Type the most suitable option");
-//                System.out.println("1. Clearly can, 2. Blur memory, 3. I totally forget");
-//
-//            }
-//        }
-//        return;
+
+    public ArrayList<Card> dailyReviewCards(){
+        ArrayList<Card> daily = new ArrayList<>(this.cardList.size() * 2);
+        ArrayList<Card> temp = this.doable();
+        Random random = new Random();
+        for (int i = 0; i < this.cardList.size(); i++) {
+            int index = random.nextInt(temp.size());
+            daily.add(temp.get(index));
+            temp.remove(index);
+        }
+        return daily;
+    }
+
 }
 

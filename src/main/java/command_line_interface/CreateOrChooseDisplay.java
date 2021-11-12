@@ -54,16 +54,16 @@ public class CreateOrChooseDisplay implements displayInterface{
             this.createDisplay.prompt();
             this.state = this.createDisplay.getState();
 
-            System.out.print(Constants.CLEAR_CONSOLE);
-            System.out.flush();
+//            System.out.print(Constants.CLEAR_CONSOLE);
+//            System.out.flush();
         }
         if(opt.equals("2")){
             this.chooseDisplay.setState(this.state);
             this.chooseDisplay.prompt();
             this.state = this.chooseDisplay.getState();
 
-            System.out.print(Constants.CLEAR_CONSOLE);
-            System.out.flush();
+//            System.out.print(Constants.CLEAR_CONSOLE);
+//            System.out.flush();
         }
     }
 }

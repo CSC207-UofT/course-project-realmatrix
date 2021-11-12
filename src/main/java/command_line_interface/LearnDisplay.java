@@ -1,5 +1,6 @@
 package command_line_interface;
 
+import Controller.LearnController;
 import Controller.LearningSystem;
 import Controller.ProgramState;
 import constants.Constants;
@@ -26,8 +27,8 @@ public class LearnDisplay implements displayInterface{
 
     public void prompt() {
         Scanner in = new Scanner(System.in);
-        LearningSystem con = new LearningSystem(state.getCurrUser());
-        System.out.println(Constants.GREEN_BOLD_BRIGHT + "Press any key to start learning, type 99 to quit...");
+        LearnController con = new LearnController();
+        System.out.println("Press any key to start learning, type 99 to quit...");
         String option = in.nextLine();
         if (!option.equals("99")) {
             for (Card c : con.learnableCardList(this.state.getCurrPack())) {

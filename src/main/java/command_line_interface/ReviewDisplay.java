@@ -2,9 +2,12 @@ package command_line_interface;
 
 import Controller.LearningSystem;
 import Controller.ProgramState;
+import Controller.ReviewController;
 import constants.Constants;
 import entity.Card;
 
+import java.nio.channels.ScatteringByteChannel;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReviewDisplay implements displayInterface{
@@ -26,11 +29,20 @@ public class ReviewDisplay implements displayInterface{
 
     public void prompt() {
         Scanner in = new Scanner(System.in);
-        LearningSystem con = new LearningSystem(state.getCurrUser());
-        System.out.println(Constants.GREEN_BOLD_BRIGHT + "Press any key to start reviewing, type 99 to quit...");
+        ReviewController con = new ReviewController();
+        System.out.println("Press any key to start reviewing, type 99 to quit...");
         String option = in.nextLine();
+        ArrayList<Card> temp = new ArrayList<>();
         if (!option.equals("99")) {
-            for (Card c : con.reviewableCardList(this.state.getCurrPack())) {
+            
+            try{
+                temp = con.reviewableCardList(this.state.getCurrPack());
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+            System.out.println("test:"+ temp.toString());
+            System.out.println();
+            for (Card c : temp) {
                 System.out.println(c.getTerm());
                 System.out.println("Can you recall the definition? Type the most suitable option");
                 System.out.println("1. Clearly can, 2. Blur memory, 3. Totally forget");

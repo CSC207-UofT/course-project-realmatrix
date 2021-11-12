@@ -28,7 +28,7 @@ public class CreateDisplay implements displayInterface{
     }
 
     public void prompt() throws Exception {
-        System.out.println(Constants.ANSI_CYAN + "Create a package by entering a package name:");
+        System.out.println("Create a package by entering a package name:");
         Scanner in = new Scanner(System.in);
         String packName = in.nextLine();
         PackManager pm = new PackManager();
@@ -45,7 +45,7 @@ public class CreateDisplay implements displayInterface{
                 CardManager cm = new CardManager();
                 int j = 0;
                 while (!cardOpt.equals("99")) {
-                    System.out.print(Constants.ANSI_YELLOW + "Please type your Term: ");
+                    System.out.print("Please type your Term: ");
                     String term = in.nextLine();
                     System.out.print("Please type your Definition: ");
                     String def = in.nextLine();
@@ -56,14 +56,14 @@ public class CreateDisplay implements displayInterface{
 
                     j++;
                     System.out.println();
-                    System.out.println(Constants.ANSI_CYAN + "press any key to add new card, 99 for quit...");
+                    System.out.println("press any key to add new card, 99 for quit...");
                     cardOpt = in.nextLine();
                 }
                 this.state.getCurrUser().createPackage(newPack);
 
                 System.out.printf("%d card added", j);
                 System.out.println("\n");
-                System.out.println(Constants.ANSI_CYAN + "enter y to checkout your cards, a to add new card, q to quit");
+                System.out.println("enter y to checkout your cards, a to add new card, q to quit");
                 packOpt = in.nextLine();
             }
 
@@ -71,16 +71,16 @@ public class CreateDisplay implements displayInterface{
                 int i = 0;
                 for (Card c : newPack.getCards()) {
                     System.out.println();
-                    System.out.println(Constants.GREEN_BOLD_BRIGHT + c.toString());
+                    System.out.println(c.toString());
                     i++;
                 }
-                System.out.printf(Constants.GREEN_BOLD_BRIGHT + "%d cards displayed", i);
+                System.out.printf("%d cards displayed", i);
                 System.out.println("\n");
-                System.out.println(Constants.ANSI_CYAN + "enter y to checkout your cards, a to add new card, q to quit");
+                System.out.println("enter y to checkout your cards, a to add new card, q to quit");
                 packOpt = in.nextLine();
             }
             if (packOpt.equals("q")) {
-                System.out.println(Constants.ANSI_RED);
+                System.out.println();
                 break;
             }
 

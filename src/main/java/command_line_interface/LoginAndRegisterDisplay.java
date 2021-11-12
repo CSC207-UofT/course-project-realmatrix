@@ -26,7 +26,7 @@ public class LoginAndRegisterDisplay {
     }
 
     public void prompt() throws Exception {
-        System.out.println(Constants.ANSI_BLUE + "Log in or register?");
+        System.out.println("Log in or register?");
         System.out.println("1 for login, 2 for register, 99 for exit");
         Scanner in = new Scanner(System.in);
         String opt = in.nextLine();

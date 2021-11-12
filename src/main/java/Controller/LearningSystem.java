@@ -22,6 +22,10 @@ public class LearningSystem {
     private ReviewGenerator rg;
     private ProgramState state;
 
+    /***
+     * A learning system for a user
+     * @param user current user
+     */
     public LearningSystem(User user){
         this.currPack = null;
         this.currUser = user;
@@ -33,49 +37,7 @@ public class LearningSystem {
     }
 
 
-    public String learnDisplay(String opt, Card c){
-        if(opt.equals("t")){
-            return c.getTerm();
-        }
-        if(opt.equals("d")){
-            return c.getDefinition();
-        }
-        else{
-            return "";
-        }
-    }
 
-    public ArrayList<Card> learnableCardList(Pack p){
-        LearnGenerator lg = new LearnGenerator(p);
-        return lg.doable();
-    }
 
-    public String reviewDisplay(Card c){
-        return c.getDefinition();
-    }
 
-    public ArrayList<Card> reviewableCardList(Pack p){
-        ReviewGenerator rg = new ReviewGenerator(p);
-        return rg.withProficiencyBasedCards();
-    }
-
-    public void updateMemProficiency(String opt, Card c) {
-        CardManager cm = new CardManager();
-        cm.setCurrCard(c);
-        if (opt.equals("1")) {
-            cm.increaseProficiency();
-        }
-
-        if (opt.equals("3")) {
-            cm.decreaseProficiency();
-        }
-    }
-    public void updateTestProficiency(String opt, Card c){
-        CardManager cm = new CardManager();
-        cm.setCurrCard(c);
-        if(opt.equals("2")){
-            cm.decreaseProficiency();
-            cm.decreaseProficiency();
-        }
-    }
 }

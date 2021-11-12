@@ -29,7 +29,7 @@ public class ChooseDisplay implements displayInterface{
 
 
         // Find the chosen package.
-        System.out.println(Constants.ANSI_CYAN + "Choose a package by entering a package name:");
+        System.out.println("Choose a package by entering a package name:");
         Scanner in = new Scanner(System.in);
         String packName = in.nextLine();
         Pack chosenPack = null;
