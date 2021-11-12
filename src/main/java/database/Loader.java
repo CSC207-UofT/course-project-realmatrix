@@ -31,12 +31,13 @@ import java.nio.file.Path;
  *                                                                           card2.txt
  *                                                                           ...
  */
-public class Loader {
+public class Loader implements IDataLoader {
 
     /**
      * Load all registered users' usernames and passwords for login verification.
      * @return Returns a UserManager.
      */
+    @Override
     public UserManager initialLoad() throws IOException {
         UserManager manager = new UserManager();
         Reader reader = new Reader();
@@ -51,6 +52,7 @@ public class Loader {
      * @param user the given user
      * @throws IOException
      */
+    @Override
     public void userLoad(User user) throws IOException {
         Reader reader = new Reader();
         for (String packPath : reader.readPacks(user.getName())) { // load this user's packages
@@ -123,19 +125,19 @@ public class Loader {
     }
 
     // Tests
-    public static void main(String... args) throws IOException {
-        DataInOutFactory factory = new DataInOutFactory();
-        UserManager manager = factory.load();
-        System.out.println(manager.getItems().keySet());
-        for (User user : manager.getItems().values()) {
-            System.out.println(user.getName());
-            factory.load(user);
-            for (Pack pack : user.getPackages()) {
-                System.out.println(pack.getName());
-                for (Card card : pack.getCards()) {
-                    System.out.println(card.getTerm());
-                }
-            }
-        }
-    }
+//    public static void main(String... args) throws IOException {
+//        DataInOutFactory factory = new DataInOutFactory();
+//        UserManager manager = factory.load();
+//        System.out.println(manager.getItems().keySet());
+//        for (User user : manager.getItems().values()) {
+//            System.out.println(user.getName());
+//            factory.load(user);
+//            for (Pack pack : user.getPackages()) {
+//                System.out.println(pack.getName());
+//                for (Card card : pack.getCards()) {
+//                    System.out.println(card.getTerm());
+//                }
+//            }
+//        }
+//    }
 }
