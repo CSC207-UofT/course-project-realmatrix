@@ -79,6 +79,7 @@ public class RegisterFrame extends LogRegFrame {
     protected void check() {
     }
 
+    // Test
     public static void main(String[] args) {
         new RegisterFrame();
     }

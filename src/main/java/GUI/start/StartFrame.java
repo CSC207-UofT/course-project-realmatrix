@@ -63,10 +63,9 @@ public class StartFrame extends BasicFrame implements ActionListener {
         setVisible(false);
     }
 
-    // Show the start frame to user
+    // Test
     public static void main(String[] args) {
         JFrame f = new StartFrame();
-        f.setVisible(true);
     }
 
 }
