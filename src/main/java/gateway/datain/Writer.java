@@ -1,4 +1,4 @@
-package database.datain;
+package gateway.datain;
 
 import Controller.ProgramState;
 

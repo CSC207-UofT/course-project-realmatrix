@@ -1,4 +1,4 @@
-package database.dataout;
+package gateway.dataout;
 
 import entity.Card;
 import entity.Pack;
@@ -31,18 +31,19 @@ import java.nio.file.Path;
  *                                                                           card2.txt
  *                                                                           ...
  */
-public class Loader implements IDataLoader {
+public class Loader {
 
     /**
      * Load all registered users' usernames and passwords for login verification.
      * @return Returns a UserManager.
      */
-    @Override
+    // TODO: Return UserManager from database is not clean.
+    //TODO: Consider return a hashmap <String username, String password>.
     public UserManager initialLoad() throws IOException {
         UserManager manager = new UserManager();
         Reader reader = new Reader();
         for (String userPath : reader.readUsers()) { // load users
-            User user = this.putUser(userPath, manager);
+            this.putUser(userPath, manager);
         }
         return manager;
     }
@@ -52,7 +53,6 @@ public class Loader implements IDataLoader {
      * @param user the given user
      * @throws IOException
      */
-    @Override
     public void userLoad(User user) throws IOException {
         Reader reader = new Reader();
         for (String packPath : reader.readPacks(user.getName())) { // load this user's packages
@@ -77,6 +77,7 @@ public class Loader implements IDataLoader {
         String userId = userInfo.split(",")[0];
         String userName = userInfo.split(",")[1];
         String userPassword = userInfo.split(",")[2];
+        //TODO: This line is bad: directly use constructor of entity class
         User user = new User(userId, userName, userPassword);
         manager.putUser(userId, user); // put User into UserManager
         return user;
@@ -96,6 +97,7 @@ public class Loader implements IDataLoader {
         packInfoFileReader.close();
         String packId = packInfo.split(",")[0];
         String packName = packInfo.split(",")[1];
+        //TODO: This line is bad: directly use constructor of entity class
         Pack pack = new Pack(packId, packName);
         user.createPackage(pack); // put Pack into User
         return pack;
@@ -115,6 +117,7 @@ public class Loader implements IDataLoader {
         String cardTerm = cardInfo.split(",")[1];
         String cardDefinition = cardInfo.split(",")[2];
         String cardProficiency = cardInfo.split(",")[3];
+        //TODO: This line is bad: directly use constructor of entity class
         Card card = new Card(cardId, cardTerm, cardDefinition);
         card.setProficiency(Integer.parseInt(cardProficiency));
         try {

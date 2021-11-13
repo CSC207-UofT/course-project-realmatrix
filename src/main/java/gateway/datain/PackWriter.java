@@ -1,7 +1,6 @@
-package database.datain;
+package gateway.datain;
 
 import Controller.ProgramState;
-import entity.Card;
 import entity.Pack;
 
 import java.io.BufferedWriter;
