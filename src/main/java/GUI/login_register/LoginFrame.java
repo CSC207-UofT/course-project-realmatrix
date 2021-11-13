@@ -70,6 +70,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
 
     }
 
+    // Test
     public static void main(String[] args) {
         new LoginFrame();
     }

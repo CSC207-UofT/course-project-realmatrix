@@ -14,15 +14,13 @@ public abstract class LogRegFrame extends BasicFrame implements ActionListener {
     protected final JLabel usernameLabel;   // The JLabel showing "Username:"
     protected final JTextField username;    // The text field for entering username
     protected final JLabel pwLabel;         // The JLabel showing "Password:"
-    protected final JTextField pw;          // The text field for entering password
+    protected final JPasswordField pw;          // The text field for entering password
     protected final JButton backButton;     // Button that goes back to StartFrame
 
     public LogRegFrame(String title) {
         // Set the frame constraints
         super(title);
-        setSize(400, 200);
-        setLocationRelativeTo(null);
-        setResizable(false);
+        setFrameConstraints();
 
         // Create component: the panel on this frame
         panel = new JPanel(null);
@@ -33,13 +31,22 @@ public abstract class LogRegFrame extends BasicFrame implements ActionListener {
 
         // Create component: password label-text field
         pwLabel = new JLabel("Password: ", JLabel.TRAILING);
-        pw = new JTextField(20);
+        pw = new JPasswordField(20);
 
         // Create component: backButton
         backButton = new JButton("Back");
         backButton.addActionListener(this);
 
         basicLayout();
+    }
+
+    /**
+     * Set constraints of the frame: size, location, whether resizable or not.
+     */
+    private void setFrameConstraints() {
+        setSize(400, 200);
+        setLocationRelativeTo(null);
+        setResizable(false);
     }
 
     /**
