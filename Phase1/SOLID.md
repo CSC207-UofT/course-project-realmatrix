@@ -1,0 +1,10 @@
+* A brief description of how your project is consistent with the SOLID design principles 
+<p>Firstly, for Single Responsibility Principle, we allocate tasks into separate classes since we know the fact that the more responsibilities one class takes, the more risks we have while changing even a subtle part of the code. For example, we divide the entity into three different parts, CARD, PACK and USER which are matched by CARDMANAGER, PACKMANAGER and USERMANAGER respectively in use case. Each part owns their simple responsibility with low dependency on others. If we alternate the code in one of them, others will not be affected under coupling reactions.<p>
+
+<p>Secondly, closed/open principle, emerged in several packages, which promotes the use of interfaces to enable us to adapt the functionality of application without changing the existing code. Take PACKMANAGER as an example, we create an interface called SORT, providing with various ways of sorting item, such as in alphabet order or in date added order. As a result, we could implement SORT in PACKMANAGER to sort pack in what way users prefer to without switching the original code. We use interfaces instead of superclasses, closed for modifications, and providing new implementations to extend the functionality of our software.<p>
+
+<p>Thirdly, in order to achieving Liskov Substitution Principle, we are supposed to confirm that objects of a superclass shall be replaceable with objects of its subclasses without breaking the application. That requires the objects of our subclasses to behave in the same way as the objects of our superclass. We have followed this principle as all of our subclasses, with an "is a" relationship between CARDMANAGER /PACKMANAGER /USERMANAGER and their parent classes MANAGER.<p>
+
+<p>The forth principle, Interface Segregation Principle, will be realized as the second one.<p>
+
+<p>Eventually, based on the definition of Dependency Inversion Principle, there exists a limitation to follow this principle in our project and we aren't sure how to fix it. However, we would like to ask TA for some feasible suggestions.<p>
