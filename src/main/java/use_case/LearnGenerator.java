@@ -3,10 +3,11 @@ package use_case;
 import entity.Card;
 import entity.Pack;
 import constants.Constants;
+import input_boundaries.LearnInputBoundary;
 
 import java.util.ArrayList;
 
-public class LearnGenerator extends TaskGenerator{
+public class LearnGenerator extends TaskGenerator implements LearnInputBoundary {
 
     public LearnGenerator(Pack pack) {
         super(pack);

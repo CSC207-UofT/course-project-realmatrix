@@ -29,14 +29,14 @@ public class ReviewDisplay implements displayInterface{
 
     public void prompt() {
         Scanner in = new Scanner(System.in);
-        ReviewController con = new ReviewController();
+        ReviewController con = new ReviewController(this.state.getCurrPack());
         System.out.println("Press any key to start reviewing, type 99 to quit...");
         String option = in.nextLine();
         ArrayList<Card> temp = new ArrayList<>();
         if (!option.equals("99")) {
             
             try{
-                temp = con.reviewableCardList(this.state.getCurrPack());
+                temp = con.reviewableCardList();
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }

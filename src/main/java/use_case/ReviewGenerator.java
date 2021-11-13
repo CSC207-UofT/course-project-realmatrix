@@ -3,11 +3,13 @@ package use_case;
 import entity.Card;
 import entity.Pack;
 import constants.Constants;
+import input_boundaries.ReviewInputBoundary;
+
 import java.util.Random;
 
 import java.util.ArrayList;
 
-public class ReviewGenerator extends TaskGenerator{
+public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundary {
 
     public ReviewGenerator(Pack pack) {
         super(pack);
@@ -17,7 +19,7 @@ public class ReviewGenerator extends TaskGenerator{
     /**
      * Return a list of cards needs to be reviewed.
      */
-    public ArrayList<Card> doable() {
+    private ArrayList<Card> doable() {
         for (Card c : this.pack.getCards()) {
             if (c.getProficiency() <= Constants.REVIEW_PROFICIENCY_MAX && c.getProficiency() > 0) {
                 this.cardList.add(c);
@@ -41,12 +43,13 @@ public class ReviewGenerator extends TaskGenerator{
     }
 
     public ArrayList<Card> dailyReviewCards(){
-        ArrayList<Card> daily = new ArrayList<>(this.cardList.size() * 2);
+
         ArrayList<Card> temp = this.doable();
+        ArrayList<Card> daily = new ArrayList<>(temp.size() * 2);
         Random random = new Random();
-        for (int i = 0; i < this.cardList.size(); i++) {
+        for (int i = 0; i < temp.size() * 2; i++) {
             int index = random.nextInt(temp.size());
-            daily.add(temp.get(index));
+            daily.add(this.withProficiencyBasedCards().get(index));
             temp.remove(index);
         }
         return daily;

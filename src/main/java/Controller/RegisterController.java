@@ -1,19 +1,21 @@
 package Controller;
 
+import input_boundaries.LoginInputBoundary;
+import input_boundaries.UserInputBoundary;
 import manager.LoginManager;
 import manager.UserManager;
 import presenters.LoginPresenter;
 
 public class RegisterController {
-    UserManager um;
-    LoginManager lm;
+    UserInputBoundary um;
+    LoginInputBoundary lm;
 
     /**
      * A register Controller that allow user to register
      */
     public RegisterController(){
         this.um = new UserManager();
-        this.lm = new LoginManager(um);
+        this.lm = new LoginManager((UserManager) um);
     }
 
     /**

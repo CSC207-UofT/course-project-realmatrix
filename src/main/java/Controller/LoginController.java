@@ -1,20 +1,22 @@
 package Controller;
 
 import entity.User;
+import input_boundaries.LoginInputBoundary;
+import input_boundaries.UserInputBoundary;
 import manager.LoginManager;
 import manager.UserManager;
 import presenters.LoginPresenter;
 
 public class LoginController {
-    public LoginManager lm;
-    public UserManager um;
+    public LoginInputBoundary lm;
+    public UserInputBoundary um;
 
     /**
      * Controller for login
      */
     public LoginController() {
         this.um = new UserManager();
-        this.lm = new LoginManager(this.um);
+        this.lm = new LoginManager((UserManager) this.um);
     }
 
     /**

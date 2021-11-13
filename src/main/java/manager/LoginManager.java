@@ -1,11 +1,12 @@
 package manager;
 
 import entity.User;
+import input_boundaries.LoginInputBoundary;
 import presenters.LoginPresenter;
 
 import java.util.Objects;
 
-public class LoginManager implements LoginInputBoundary{
+public class LoginManager implements LoginInputBoundary {
     private boolean loggedIn; // by default, no user logged in
     private Object currUser; // by default, no current user who is logged in
     private UserManager manager;

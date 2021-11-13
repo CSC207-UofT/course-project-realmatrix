@@ -27,11 +27,11 @@ public class LearnDisplay implements displayInterface{
 
     public void prompt() {
         Scanner in = new Scanner(System.in);
-        LearnController con = new LearnController();
+        LearnController con = new LearnController(this.state.getCurrPack());
         System.out.println("Press any key to start learning, type 99 to quit...");
         String option = in.nextLine();
         if (!option.equals("99")) {
-            for (Card c : con.learnableCardList(this.state.getCurrPack())) {
+            for (Card c : con.learnableCardList()) {
 
                 this.state.setCurrCard(c);
 

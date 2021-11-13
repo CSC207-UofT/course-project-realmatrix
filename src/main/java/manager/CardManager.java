@@ -2,13 +2,14 @@ package manager;
 
 import entity.Card;
 import entity.Pack;
+import input_boundaries.CardInputBoundary;
 
 import java.util.HashMap;
 
 /**
  * A CardManager contains all cards in the system.
  */
-public class CardManager extends Manager<Card> {
+public class CardManager extends Manager<Card> implements CardInputBoundary {
     private Card currCard = null; // Initialize to the state where the user is not in a card
     public CardManager() {
         super();

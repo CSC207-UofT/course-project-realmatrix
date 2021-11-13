@@ -2,12 +2,21 @@ package Controller;
 
 import entity.Card;
 import entity.Pack;
+import input_boundaries.CardInputBoundary;
+import input_boundaries.LearnInputBoundary;
 import manager.CardManager;
 import use_case.LearnGenerator;
 
 import java.util.ArrayList;
 
 public class LearnController {
+    private LearnInputBoundary lg;
+    private CardInputBoundary cm;
+
+    public LearnController(Pack p){
+        this.lg = new LearnGenerator(p);
+        this.cm = new CardManager();
+    }
 
     /**
      * return term or definition based on user's option
@@ -29,13 +38,11 @@ public class LearnController {
 
     /**
      * Return a list of card that needs to be learned
-     * @param p the pack of cards need to be learned
      * @return a list of card
      */
 
-    public ArrayList<Card> learnableCardList(Pack p){
-        LearnGenerator lg = new LearnGenerator(p);
-        return lg.doable();
+    public ArrayList<Card> learnableCardList(){
+        return this.lg.doable();
     }
 
     /**
@@ -44,14 +51,13 @@ public class LearnController {
      * @param c the card that user currently learning
      */
     public void updateMemProficiency(String opt, Card c) {
-        CardManager cm = new CardManager();
-        cm.setCurrCard(c);
+        this.cm.setCurrCard(c);
         if (opt.equals("1")) {
-            cm.increaseProficiency();
-            cm.increaseProficiency();
+            this.cm.increaseProficiency();
+            this.cm.increaseProficiency();
         }
         if(opt.equals("2")){
-            cm.increaseProficiency();
+            this.cm.increaseProficiency();
         }
     }
 }

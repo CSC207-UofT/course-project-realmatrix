@@ -2,9 +2,8 @@ package Controller;
 
 import entity.Card;
 import entity.Pack;
-import manager.LoginManager;
+import input_boundaries.PackInputBoundary;
 import manager.PackManager;
-import manager.UserManager;
 
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ public class PackageController {
     /**
      * A package Controller
      */
-    private PackManager pm;
+    private PackInputBoundary pm;
 
     public PackageController(){
         this.pm = new PackManager();

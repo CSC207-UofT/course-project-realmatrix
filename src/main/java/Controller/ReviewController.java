@@ -2,12 +2,22 @@ package Controller;
 
 import entity.Card;
 import entity.Pack;
+import input_boundaries.CardInputBoundary;
+import input_boundaries.ReviewInputBoundary;
 import manager.CardManager;
 import use_case.ReviewGenerator;
 
 import java.util.ArrayList;
 
 public class ReviewController {
+    private ReviewInputBoundary rg;
+    private CardInputBoundary cm;
+
+    public ReviewController(Pack p) {
+        this.rg = new ReviewGenerator(p);
+        this.cm = new CardManager();
+    }
+
     public String reviewDisplay(Card c) {
         return c.getDefinition();
     }
@@ -15,14 +25,12 @@ public class ReviewController {
     /**
      * get a list of reviewable cards
      *
-     * @param p the pack need to be reviewed
      * @return a list of reviewable cards
      * @throws Exception if no card need to be reviewed
      */
-    public ArrayList<Card> reviewableCardList(Pack p) throws Exception {
-        ReviewGenerator rg = new ReviewGenerator(p);
-        if (rg.dailyReviewCards().size() != 0) {
-            return rg.dailyReviewCards();
+    public ArrayList<Card> reviewableCardList() throws Exception {
+        if (this.rg.dailyReviewCards().size() != 0) {
+            return this.rg.dailyReviewCards();
         } else {
             throw new Exception("no card need to be reviewed");
         }
@@ -36,14 +44,13 @@ public class ReviewController {
      * @param c   the card that user currently learning
      */
     public void updateMemProficiency(String opt, Card c) {
-        CardManager cm = new CardManager();
-        cm.setCurrCard(c);
+        this.cm.setCurrCard(c);
         if (opt.equals("1")) {
-            cm.increaseProficiency();
+            this.cm.increaseProficiency();
         }
 
         if (opt.equals("3")) {
-            cm.decreaseProficiency();
+            this.cm.decreaseProficiency();
         }
     }
 
@@ -54,11 +61,10 @@ public class ReviewController {
      * @param c   the card that user currently learning
      */
     public void updateTestProficiency(String opt, Card c) {
-        CardManager cm = new CardManager();
-        cm.setCurrCard(c);
+        this.cm.setCurrCard(c);
         if (opt.equals("2")) {
-            cm.decreaseProficiency();
-            cm.decreaseProficiency();
+            this.cm.decreaseProficiency();
+            this.cm.decreaseProficiency();
         }
     }
 }

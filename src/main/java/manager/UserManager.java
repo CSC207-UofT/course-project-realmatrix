@@ -1,13 +1,14 @@
 package manager;
 
 import entity.User;
+import input_boundaries.UserInputBoundary;
 
 import java.util.Objects;
 
 /**
  * A manager that manages all Users.
  */
-public class UserManager extends Manager<User>{
+public class UserManager extends Manager<User> implements UserInputBoundary {
 
     public UserManager() {
         super();
@@ -59,17 +60,17 @@ public class UserManager extends Manager<User>{
         }
     }
 
-    /**
-     * For testing purposes only.
-     * @param args
-     */
-    public static void main(String[] args) throws Exception {
-        UserManager um = new UserManager();
-        um.createNewUser("Xing", "password");
-        um.createNewUser("SuperDog", "super");
-        um.createNewUser("FunkyCat", "funky");
-        for (User user : um.idToItem.values()) {
-            System.out.println(user.getId());
-        }
-    }
+//    /**
+//     * For testing purposes only.
+//     * @param args
+//     */
+//    public static void main(String[] args) throws Exception {
+//        UserManager um = new UserManager();
+//        um.createNewUser("Xing", "password");
+//        um.createNewUser("SuperDog", "super");
+//        um.createNewUser("FunkyCat", "funky");
+//        for (User user : um.idToItem.values()) {
+//            System.out.println(user.getId());
+//        }
+//    }
 }

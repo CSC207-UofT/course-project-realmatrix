@@ -1,6 +1,7 @@
 package manager;
 
 import entity.*;
+import input_boundaries.PackInputBoundary;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +10,7 @@ import java.util.Comparator;
 /**
  * A pack manager manages a collection of cards stored in a pack.
  */
-public class PackManager extends Manager<Pack> implements Sort<Card> {
+public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputBoundary {
     private Pack currPack = null; // The initial state where the user is not in any pack
 
     public PackManager() {
@@ -93,7 +94,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * @return an arraylist of sorted cards
      */
     public ArrayList<Card> sortNewToOld() {
-        ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
+        ArrayList<Card> lst = new ArrayList<>(this.currPack.getCards());
         Collections.reverse(lst);
         return lst;
     }
@@ -104,7 +105,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * @return an arraylist of sorted cards
      */
     public ArrayList<Card> sortAtoZ() {
-        ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
+        ArrayList<Card> lst = new ArrayList<>(this.currPack.getCards());
         lst.sort(new AlphabetComparator());
         return lst;
     }
@@ -115,7 +116,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * @return an arraylist of sorted cards
      */
     public ArrayList<Card> sortZtoA() {
-        ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
+        ArrayList<Card> lst = new ArrayList<>(this.currPack.getCards());
         lst.sort(new AlphabetComparator().reversed());
         return lst;
     }
@@ -127,7 +128,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * @return an arraylist of sorted cards
      */
     public ArrayList<Card> sortProLowToHigh() {
-        ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
+        ArrayList<Card> lst = new ArrayList<>(this.currPack.getCards());
         lst.sort(new ProficiencyComparator());
         return lst;
     }
@@ -138,7 +139,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * @return an arraylist of sorted cards
      */
     public ArrayList<Card> sortProHighToLow() {
-        ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
+        ArrayList<Card> lst = new ArrayList<>(this.currPack.getCards());
         lst.sort(new ProficiencyComparator().reversed());
         return lst;
     }
@@ -149,7 +150,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card> {
      * @return an arraylist of randomly sorted cards
      */
     public ArrayList<Card> sortRandom() {
-        ArrayList<Card> lst = (ArrayList<Card>) this.currPack.getCards().clone();
+        ArrayList<Card> lst = new ArrayList<>(this.currPack.getCards());
         Collections.shuffle(lst);
         return lst;
     }
