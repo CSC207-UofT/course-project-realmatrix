@@ -1,8 +1,6 @@
-package database;
+package database.datain;
 
 import Controller.ProgramState;
-import entity.Card;
-import entity.Pack;
 import entity.User;
 
 import java.io.BufferedWriter;
