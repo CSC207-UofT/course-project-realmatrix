@@ -1,4 +1,4 @@
-package database;
+package database.dataout;
 
 import entity.Card;
 import entity.Pack;
