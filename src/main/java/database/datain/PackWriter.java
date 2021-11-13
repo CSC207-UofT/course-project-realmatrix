@@ -1,6 +1,7 @@
 package database.datain;
 
 import Controller.ProgramState;
+import entity.Card;
 import entity.Pack;
 
 import java.io.BufferedWriter;
@@ -10,38 +11,41 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class PackWriter extends Writer {
+    private final Pack pack;
+
+    /**
+     * Construct a CardWriter object.
+     * @param state the state the program is in
+     * @param o the object (pack) to write/update
+     */
+    public PackWriter(ProgramState state, Object o) {
+        super(state, o);
+        this.pack = (Pack) o;
+    }
 
     /**
      * Write or update a package
-     * @param state the state the program is in
-     * @param o the object (pack) to write/update
      * @throws IOException
      */
     @Override
-    public void write(ProgramState state, Object o) throws IOException {
-        getName(state);     // get the path name we should write into
-        Pack pack = (Pack) o;
-        new File("user_data/users/" + this.username + "/packages/" + pack.getName()).mkdirs();
+    public void write() throws IOException {
+        new File("user_data/users/" + this.username + "/packages/" + this.pack.getName()).mkdirs();
         BufferedWriter writer =
                 new BufferedWriter(new FileWriter("user_data/users/" + this.username
-                        + "/packages/" + pack.getName() + "/package_info.txt"));
-        writer.write(pack.getId() + "," + pack.getName());
+                        + "/packages/" + this.pack.getName() + "/package_info.txt"));
+        writer.write(this.pack.getId() + "," + this.pack.getName());
         writer.close();
     }
 
     /**
      * Archive a package. Effectively, this package is deleted because it won't be loaded next time the program runs.
-     * @param state the state the program is in
-     * @param o the object (pack) to archive
      * @throws IOException
      */
     @Override
-    public void archive(ProgramState state, Object o) throws IOException {
-        getName(state);     // get the path name we should write into
-        Pack pack = (Pack) o;
+    public void archive() throws IOException {
         new File("user_data/users/" + this.username + "/archived_packages/").mkdirs();
-        Files.move(new File("user_data/users/" + this.username + "/packages/" + pack.getName()).toPath(),
+        Files.move(new File("user_data/users/" + this.username + "/packages/" + this.pack.getName()).toPath(),
                 new File("user_data/users/" + this.username + "/archived_packages/" +
-                        pack.getName()).toPath());
+                        this.pack.getName()).toPath());
     }
 }

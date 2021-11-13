@@ -1,6 +1,7 @@
 package database.datain;
 
 import Controller.ProgramState;
+import entity.Pack;
 import entity.User;
 
 import java.io.BufferedWriter;
@@ -10,16 +11,24 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class UserWriter extends Writer{
+    private final User user;
+
+    /**
+     * Construct a CardWriter object.
+     * @param state the state the program is in
+     * @param o the object (pack) to write/update
+     */
+    public UserWriter(ProgramState state, Object o) {
+        super(state, o);
+        this.user = (User) o;
+    }
 
     /**
      * Write or update a user
-     * @param o the object (user) to write/update
      * @throws IOException
      */
     @Override
-    public void write(ProgramState state, Object o) throws IOException {
-        getName(state);     // get the path name we should write into
-        User user = (User) o;
+    public void write() throws IOException {
         new File("user_data/users/" + user.getName()).mkdirs();
         BufferedWriter writer =
                 new BufferedWriter(new FileWriter("user_data/users/" + user.getName() + "/user_info.txt"));
@@ -29,13 +38,10 @@ public class UserWriter extends Writer{
 
     /**
      * Archive a user. Effectively, this user is deleted because it won't be loaded next time the program runs.
-     * @param o the object (user) to archive
      * @throws IOException
      */
     @Override
-    public void archive(ProgramState state, Object o) throws IOException {
-        getName(state);     // get the path name we should write into
-        User user = (User) o;
+    public void archive() throws IOException {
         new File("user_data/archived_users/").mkdirs();
         Files.move(new File("user_data/users/" + user.getName()).toPath(),
                 new File("user_data/archived_users/" + user.getName()).toPath());
