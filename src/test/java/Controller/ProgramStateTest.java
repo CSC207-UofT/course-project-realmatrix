@@ -66,8 +66,9 @@ public class ProgramStateTest {
     @Test
     public void testChoosePack(){
         ps.setCurrUser(currUser);
-        currUser.createPackage(currPack);
+
         try{
+            currUser.addPackage(currPack);
             assertEquals(currPack, ps.choosePack("currPackName"));
         } catch (Exception e){
             e.printStackTrace();
