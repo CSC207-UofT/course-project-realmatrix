@@ -1,5 +1,5 @@
-import Controller.CardController;
-import manager.CardManager;
+package Controller;
+
 import entity.Card;
 import org.junit.Before;
 import org.junit.Test;
