@@ -5,6 +5,7 @@ import entity.Pack;
 import constants.Constants;
 import input_boundaries.ReviewInputBoundary;
 
+import java.util.Collections;
 import java.util.Random;
 
 import java.util.ArrayList;
@@ -35,24 +36,35 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
         ArrayList<Card> newCards = new ArrayList<>();
         for (Card c : this.doable()){
             int prof = c.getProficiency();
-            for (int i = 0; i < (Constants.REVIEW_PROFICIENCY_MAX - prof); i++) {
-                newCards.add(c);
+            switch (prof){
+                case 1:
+                case 2: {
+                    newCards.add(c);
+                    newCards.add(c);
+                    break;
+                }
+                case 3:
+                case 4: {
+                    newCards.add(c);
+                    break;
+                }
             }
         }
+        Collections.shuffle(newCards);
         return newCards;
     }
 
     public ArrayList<Card> dailyReviewCards(){
 
-        ArrayList<Card> temp = this.doable();
-        ArrayList<Card> daily = new ArrayList<>(temp.size() * 2);
-        Random random = new Random();
-        for (int i = 0; i < temp.size() * 2; i++) {
-            int index = random.nextInt(temp.size());
-            daily.add(this.withProficiencyBasedCards().get(index));
-            temp.remove(index);
-        }
-        return daily;
+//        ArrayList<Card> temp = this.doable();
+//        ArrayList<Card> daily = new ArrayList<>(temp.size() * 2);
+//        Random random = new Random();
+//        for (int i = 0; i < temp.size() * 2; i++) {
+//            int index = random.nextInt(temp.size());
+//            daily.add(this.withProficiencyBasedCards().get(index));
+//            temp.remove(index);
+//        }
+        return this.withProficiencyBasedCards();
     }
 
 }
