@@ -24,14 +24,14 @@ public class LearningSystemTest {
         c1 = new Card("card1Id", c1Term, c1Definition);
     }
 
-    /**
-     * Test learnDisplay on c1.
-     */
-    @Test
-    public void testLearnDisplay(){
-        assertEquals(c1Term, ls.learnDisplay("t", c1));
-        assertEquals(c1Definition, ls.learnDisplay("d", c1));
-    }
+//    /**
+//     * Test learnDisplay on c1.
+//     */
+//    @Test
+//    public void testLearnDisplay(){
+//        assertEquals(c1Term, ls.learnDisplay("t", c1));
+//        assertEquals(c1Definition, ls.learnDisplay("d", c1));
+//    }
 
 
 

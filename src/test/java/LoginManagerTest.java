@@ -17,12 +17,12 @@ public class LoginManagerTest {
         lm = new LoginManager(um);
     }
 
-    @Test
-    public void testLoggedInUser() throws Exception {
-        lm.logInUser(user1Name, user1Password);
-        assertEquals(lm.getCurrUser().getName(), user1Name);
-    }
-
-    //how to test SignOffUser?
+//    @Test
+//    public void testLoggedInUser() throws Exception {
+//        lm.logInUser(user1Name, user1Password);
+//        assertEquals(lm.getCurrUser().getName(), user1Name);
+//    }
+//
+//    //how to test SignOffUser?
 
 }

@@ -31,6 +31,7 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
 
     /**
      * Return a list of doable cards, each card is repeated for some times according to its proficiency.
+     * A card will be repeated for twice if its proficiency is 1-2, otherwise, it will be repeated once.
      */
     public ArrayList<Card> withProficiencyBasedCards(){
         ArrayList<Card> newCards = new ArrayList<>();
@@ -54,6 +55,10 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
         return newCards;
     }
 
+    /**
+     * Return a list of card based on withProficiencyBasedCard.
+     * @return ArrayList<Card></Card>
+     */
     public ArrayList<Card> dailyReviewCards(){
 
 //        ArrayList<Card> temp = this.doable();

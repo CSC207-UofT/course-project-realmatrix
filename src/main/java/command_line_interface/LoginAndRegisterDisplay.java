@@ -4,6 +4,7 @@ import Controller.ProgramState;
 import constants.Constants;
 import manager.LoginManager;
 import manager.UserManager;
+import presenters.LoginPresenter;
 
 import java.util.Scanner;
 
@@ -58,7 +59,8 @@ public class LoginAndRegisterDisplay {
                 password2 = in.nextLine();
             }
             um.createNewUser(userName, password1);
-            lm.logInUser(userName, password1);
+            LoginPresenter lp = new LoginPresenter(userName);
+            lm.logInUser(userName, password1, lp);
 
             this.state.setCurrUser(lm.getCurrUser());
 
@@ -70,11 +72,13 @@ public class LoginAndRegisterDisplay {
             String userName = userInput.nextLine();
             System.out.print("Please input your password: ");
             String password1 = in.nextLine();
+
+            LoginPresenter lp = new LoginPresenter(userName);
             try {
-                lm.logInUser(userName, password1);
+                lm.logInUser(userName, password1,lp);
             } catch (Exception Exception) {//to be changed more specific
                 lm.SignOffUser();
-                lm.logInUser(userName, password1);
+                lm.logInUser(userName, password1, lp);
             }
             this.state.setCurrUser(lm.getCurrUser());
         }
