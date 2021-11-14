@@ -3,10 +3,12 @@ package Controller;
 import Controller.LearningSystem;
 import entity.Card;
 import entity.User;
+import input_boundaries.UserInputBoundary;
 import manager.UserManager;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import output_boundaries.RegisterOutputBoundary;
+import presenters.RegisterPresenter;
 
 public class LearningSystemTest {
     User user1;
@@ -18,7 +20,8 @@ public class LearningSystemTest {
 
     @Before
     public void createLearningSystem() throws Exception {
-        um.createNewUser("user1Name", "user1Password");
+        RegisterOutputBoundary registerOB = new RegisterPresenter();
+        um.createNewUser("user1Name", "user1Password", registerOB);
         for (User user : um.getItems().values()){
             user1 = user;
         }

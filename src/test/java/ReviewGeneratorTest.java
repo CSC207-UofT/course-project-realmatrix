@@ -5,10 +5,10 @@ import manager.CardManager;
 import manager.PackManager;
 import org.junit.Before;
 import org.junit.Test;
+import output_boundaries.AddOutputBoundary;
 import use_case.ReviewGenerator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -22,12 +22,13 @@ public class ReviewGeneratorTest {
     Card c3;
     Card c4;
     ReviewGenerator rg;
+    AddOutputBoundary AddOutputBoundary;
 
     /**
      * Create rg with card1 of proficiency 2, card2 of proficiency 3, card3 of proficiency 0, card4 of proficiency 5.
      */
     @Before
-    public void createReviewGenerator() throws Exception {
+    public void createReviewGenerator() {
         c1 = cm.createNewCard("card1Term", "card1Definition");
         cm.setCurrCard(c1);
         cm.increaseProficiency();
@@ -47,10 +48,10 @@ public class ReviewGeneratorTest {
         cm.increaseProficiency();
         p1 = pm.createNewPack("packName");
         pm.setCurrPack(p1);
-        pm.addCard(c1);
-        pm.addCard(c2);
-        pm.addCard(c3);
-        pm.addCard(c4);
+        pm.addCard(c1, AddOutputBoundary);
+        pm.addCard(c2, AddOutputBoundary);
+        pm.addCard(c3, AddOutputBoundary);
+        pm.addCard(c4, AddOutputBoundary);
         rg = new ReviewGenerator(p1);
     }
 //

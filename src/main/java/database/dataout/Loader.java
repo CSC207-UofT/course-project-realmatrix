@@ -97,7 +97,11 @@ public class Loader implements IDataLoader {
         String packId = packInfo.split(",")[0];
         String packName = packInfo.split(",")[1];
         Pack pack = new Pack(packId, packName);
-        user.createPackage(pack); // put Pack into User
+        try {
+            user.addPackage(pack); // put Pack into User
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return pack;
     }
 

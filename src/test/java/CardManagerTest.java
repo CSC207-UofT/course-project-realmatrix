@@ -2,6 +2,7 @@ import entity.Card;
 import manager.CardManager;
 import org.junit.Before;
 import org.junit.Test;
+import output_boundaries.ChangeOutputBoundary;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +10,7 @@ public class CardManagerTest {
     CardManager cm;
     Card c;
     Card d;
+    ChangeOutputBoundary changeOutputBoundary;
 
     @Before
     public void createCardManager() {
@@ -32,14 +34,14 @@ public class CardManagerTest {
     @Test(timeout = 50)
     public void TestEditCardTerm() {
         String newTerm = "Equivocation";
-        cm.editCardTerm(newTerm);
+        cm.changeCardTerm(newTerm, changeOutputBoundary);
         assertEquals(newTerm, c.getTerm());
     }
 
     @Test(timeout = 50)
     public void TestEditCardDefinition() {
         String newDefinition = "leading misunderstanding.";
-        cm.editCardDefinition(newDefinition);
+        cm.changeCardDefinition(newDefinition);
         assertEquals(newDefinition, c.getDefinition());
     }
 
