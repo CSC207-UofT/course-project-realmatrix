@@ -18,11 +18,11 @@ public class PackageController {
     }
 
     /**
-     * Create and return a new pack with specified pack name.
+     * Create a new pack with specified pack name and return "Pack {the pack name} created".
      * Stores id and the corresponding pack in idToItem.
      *
      * @param packName   The name of the pack
-     * @return           The newly-created pack
+     * @return           The name of the newly-created pack
      */
     public String create(String packName){
         this.pm.createNewPack(packName);
