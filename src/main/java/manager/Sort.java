@@ -1,30 +1,21 @@
 package manager;
 
+import output_boundaries.SortOutputBoundary;
+
 import java.util.ArrayList;
 
 public interface Sort<T> {
-    /**
-     * Sort in alphabetical order (a-z), ignore case difference.
-     * @return An arraylist of T
-     */
-    ArrayList<T> sortAtoZ();
+    // Sort in alphabetical order (a-z), ignore case difference.
+    ArrayList<T> sortAtoZ(SortOutputBoundary<T> sortOutputBoundary);
 
-    /**
-     * Sort in alphabetical order (z-a), ignore case difference.
-     * @return An arraylist of T
-     */
-    ArrayList<T> sortZtoA();
+    // Sort in alphabetical order (z-a), ignore case difference.
+    ArrayList<T> sortZtoA(SortOutputBoundary<T> sortOutputBoundary);
 
-    /**
-     * Sort according to date added, from newest to oldest.
-     * @return An arraylist of T
-     */
-    ArrayList<T> sortNewToOld();
+    // Sort according to date added, from newest to oldest.
+    ArrayList<T> sortNewToOld(SortOutputBoundary<T> sortOutputBoundary);
 
-    /**
-     * Sort according to date added, from oldest to newest.
-     * @return An arraylist of T
-     */
-    ArrayList<T> sortOldToNew();
+    // Sort according to date added, from oldest to newest.
+    ArrayList<T> sortOldToNew(SortOutputBoundary<T> sortOutputBoundary);
 
+    ArrayList<T> sortRandom(SortOutputBoundary<T> sortOutputBoundary);
 }

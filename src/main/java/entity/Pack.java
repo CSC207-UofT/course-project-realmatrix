@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Pack {
 
-    private ArrayList<Card> cardList; // oldest cards in the front, newly added ones at the end
+    private final ArrayList<Card> cardList; // oldest cards in the front, newly added ones at the end
     private final String id;
     private String name;
 
@@ -41,17 +41,9 @@ public class Pack {
     /**
      * Remove a Card in a pack.
      * @param card the card to be removed
-     * @return return true if successfully removed, otherwise false
      */
-    public boolean deleteCard(Card card) throws Exception {
-        String id = card.getId();
-        for (int i = 0; i < this.cardList.size(); i++) {
-            if (Objects.equals(this.cardList.get(i).getId(), id)) {
-                this.cardList.remove(i);
-                return true;
-            }
-        }
-        throw new Exception("No such card.");
+    public void deleteCard(Card card) {
+        this.cardList.remove(card);
     }
 
     public String getId() {

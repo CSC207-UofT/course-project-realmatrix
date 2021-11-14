@@ -1,7 +1,6 @@
 package command_line_interface;
 
 import Controller.ProgramState;
-import constants.Constants;
 import entity.Card;
 import entity.Pack;
 import manager.CardManager;
@@ -59,7 +58,7 @@ public class CreateDisplay implements displayInterface{
                     System.out.println("press any key to add new card, 99 for quit...");
                     cardOpt = in.nextLine();
                 }
-                this.state.getCurrUser().createPackage(newPack);
+                this.state.getCurrUser().addPackage(newPack);
 
                 System.out.printf("%d card added", j);
                 System.out.println("\n");

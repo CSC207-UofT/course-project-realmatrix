@@ -1,10 +1,8 @@
 package manager;
 
 import entity.Card;
-import entity.Pack;
 import input_boundaries.CardInputBoundary;
-
-import java.util.HashMap;
+import output_boundaries.ChangeOutputBoundary;
 
 /**
  * A CardManager contains all cards in the system.
@@ -14,6 +12,7 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
     public CardManager() {
         super();
     }
+    // TODO: idToItem stores all the cards in this pack.
 
     /**
      * Create and return a new card with defined term and definition.
@@ -33,16 +32,37 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
     /**
      * Change the card's term to a new term specified by user.
      * @param newTerm the new term the card should change to
+     * @param changeOutputBoundary the output boundary for getting whether change is successful or not
      */
-    public void editCardTerm(String newTerm) {
-        this.currCard.setTerm(newTerm);
+    public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) {
+        if (uniqueCardTerm(newTerm)) {
+            this.currCard.setTerm(newTerm);
+            changeOutputBoundary.setChangeResult(true);
+        } else {
+            changeOutputBoundary.setChangeResult(false);
+        }
+    }
+
+    /**
+     * Helper method of changeCardTerm.
+     * Check if this newTerm already exists.
+     * @param newTerm the new term
+     * @return true if the new term does not exist; false otherwise
+     */
+    private boolean uniqueCardTerm(String newTerm) {
+        for (Card c : this.idToItem.values()) {
+            if (newTerm.equals(c.getTerm())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
      * Change the card's definition to a new definition specified by user.
      * @param newDefinition the new definition the card should change to
      */
-    public void editCardDefinition(String newDefinition) {
+    public void changeCardDefinition(String newDefinition) {
         this.currCard.setDefinition(newDefinition);
     }
 
@@ -61,8 +81,8 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
     }
 
     /**
-     * Getter for the current pack the user is in.
-     * @return the current pack.
+     * Getter for the current card the user is in.
+     * @return the current card.
      */
     public Card getCurrCard() {
         return this.currCard;
