@@ -4,10 +4,10 @@ import manager.CardManager;
 import manager.PackManager;
 import org.junit.Before;
 import org.junit.Test;
+import output_boundaries.AddOutputBoundary;
 import use_case.LearnGenerator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -19,6 +19,7 @@ public class LearnGeneratorTest {
     Card c1;
     Card c2;
     Card c3;
+    AddOutputBoundary AddOutputBoundary;
 
     /**
      * Create a LearnGenerator with Pack of one card with proficiency > 0 and two card with proficiency equals 0.
@@ -33,9 +34,9 @@ public class LearnGeneratorTest {
         cm.increaseProficiency();
         p1 = pm.createNewPack("pack1Name");
         pm.setCurrPack(p1);
-        pm.addCard(c1);
-        pm.addCard(c2);
-        pm.addCard(c3);
+        pm.addCard(c1, AddOutputBoundary);
+        pm.addCard(c2, AddOutputBoundary);
+        pm.addCard(c3, AddOutputBoundary);
         lg = new LearnGenerator(p1);
     }
 

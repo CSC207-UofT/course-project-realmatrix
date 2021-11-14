@@ -1,50 +1,25 @@
 package Controller;
 
-import input_boundaries.LoginInputBoundary;
+import input_boundaries.LogInOutInputBoundary;
 import input_boundaries.UserInputBoundary;
-import manager.LoginManager;
-import manager.UserManager;
-import presenters.LoginPresenter;
+import output_boundaries.RegisterOutputBoundary;
 
+/**
+ * A register Controller that allow user to register.
+ */
 public class RegisterController {
-    UserInputBoundary um;
-    LoginInputBoundary lm;
+    UserInputBoundary userIB;
 
-    /**
-     * A register Controller that allow user to register
-     */
-    public RegisterController(){
-        this.um = new UserManager();
-        this.lm = new LoginManager((UserManager) um);
+    public RegisterController(UserInputBoundary userIB){
+        this.userIB = userIB;
     }
 
     /**
      * User register method
      * @param username user's username
      * @param password user's password
-     * @return User's username and tell he/she is already registered and login
      */
-    public String register(String username, String password){
-        boolean flag;
-        String s = "";
-        LoginPresenter lp = new LoginPresenter(username);
-        try {
-            um.createNewUser(username,password);
-            flag = true;
-        } catch (Exception e) {
-            s= e.getMessage();
-            flag = false;
-        }
-        try {
-            lm.logInUser(username, password,lp);
-        } catch (Exception e) {
-            s += "\n" + e.getMessage();
-            flag = false;
-        }
-        if(flag) {
-            return "User" + username + "registered and already login";
-        }else{
-            return s;
-        }
+    public void register(String username, String password, RegisterOutputBoundary registerOB){
+        userIB.createNewUser(username,password, registerOB);
     }
 }

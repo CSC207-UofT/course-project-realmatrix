@@ -53,14 +53,26 @@ public class UserTest {
 
     @Test
     public void testCreatePackage(){
-        u.createPackage(pack1);
+        try {
+            u.addPackage(pack1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertEquals(1, u.getPackages().size());
         assertEquals(pack1, u.getPackages().get(0));
-        u.createPackage(pack2);
+        try {
+            u.addPackage(pack2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertEquals(2, u.getPackages().size());
         assertEquals(pack1, u.getPackages().get(0));
         assertEquals(pack2, u.getPackages().get(1));
-        u.createPackage(pack3);
+        try {
+            u.addPackage(pack3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertEquals(3, u.getPackages().size());
         assertEquals(pack1, u.getPackages().get(0));
         assertEquals(pack2, u.getPackages().get(1));
@@ -69,9 +81,21 @@ public class UserTest {
 
     @Test
     public void testGetPackList(){
-        u.createPackage(pack1);
-        u.createPackage(pack2);
-        u.createPackage(pack3);
+        try {
+            u.addPackage(pack1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            u.addPackage(pack2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            u.addPackage(pack3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertEquals(3, u.getPackages().size());
         assertEquals(pack1, u.getPackages().get(0));
         assertEquals(pack2, u.getPackages().get(1));
@@ -80,9 +104,21 @@ public class UserTest {
 
     @Test
     public void testDeletePackage(){
-        u.createPackage(pack1);
-        u.createPackage(pack2);
-        u.createPackage(pack3);
+        try {
+            u.addPackage(pack1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            u.addPackage(pack2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            u.addPackage(pack3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertTrue(u.deletePackage(pack1));
         assertEquals(2, u.getPackages().size());
         assertEquals(pack2, u.getPackages().get(0));

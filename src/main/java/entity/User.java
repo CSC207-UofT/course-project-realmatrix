@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A single user.
@@ -9,13 +10,13 @@ public class User {
     private final String id;
     private String name;
     private String password;
-    private ArrayList<Pack> packages;
+    private final ArrayList<Pack> packages;
 
     public User(String id, String name, String password) {
         this.id = id;
         this.name = name;
         this.password = password;
-        this.packages = new ArrayList<Pack>();
+        this.packages = new ArrayList<>();
     }
 
     public String getId() {
@@ -38,7 +39,12 @@ public class User {
         this.password = newPassword;
     }
 
-    public void createPackage(Pack pack) {
+    public void addPackage(Pack pack) throws Exception {
+        for (Pack p: this.packages) {
+            if (pack.getName().equals(p.getName())) {
+                throw new Exception("Pack already exists."); //TODO: PackExistError
+            }
+        }
         this.packages.add(pack);
     }
 

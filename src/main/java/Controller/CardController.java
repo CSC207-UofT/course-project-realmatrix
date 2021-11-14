@@ -2,44 +2,43 @@ package Controller;
 
 import entity.Card;
 import input_boundaries.CardInputBoundary;
-import manager.CardManager;
+import output_boundaries.ChangeOutputBoundary;
 
 public class CardController {
-    private CardInputBoundary cm;
+    private final CardInputBoundary cardInputBoundary;
 
-    public CardController() {
-        this.cm = new CardManager();
+    public CardController(CardInputBoundary cardInputBoundary) {
+        this.cardInputBoundary = cardInputBoundary;
     }
 
     /**
      * Methods also in CardManager.java
-     *
      */
-    public Card getCurrCard() {
-        return this.cm.getCurrCard();
-    }
-
     public Card createNewCard(String term, String definition) {
-        return this.cm.createNewCard(term, definition);
+        return this.cardInputBoundary.createNewCard(term, definition);
     }
 
-    public void editCardTerm(String newTerm) {
-        this.cm.editCardTerm(newTerm);
+    public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) {
+        this.cardInputBoundary.changeCardTerm(newTerm, changeOutputBoundary);
     }
 
-    public void editCardDefinition(String newDefinition) {
-        this.cm.editCardDefinition(newDefinition);
+    public void changeCardDefinition(String newDefinition) {
+        this.cardInputBoundary.changeCardDefinition(newDefinition);
     }
 
     public void increaseProficiency() {
-        this.cm.increaseProficiency();
+        this.cardInputBoundary.increaseProficiency();
     }
 
     public void decreaseProficiency() {
-        this.cm.decreaseProficiency();
+        this.cardInputBoundary.decreaseProficiency();
     }
 
+    public Card getCurrCard() {
+        return this.cardInputBoundary.getCurrCard();
+    }
+    
     public void setCurrCard(Card card) {
-        this.cm.setCurrCard(card);
+        this.cardInputBoundary.setCurrCard(card);
     }
 }

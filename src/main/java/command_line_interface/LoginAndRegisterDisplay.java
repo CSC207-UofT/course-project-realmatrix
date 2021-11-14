@@ -2,8 +2,11 @@ package command_line_interface;
 
 import Controller.ProgramState;
 import constants.Constants;
-import manager.LoginManager;
+import manager.LogInOutManager;
 import manager.UserManager;
+import output_boundaries.RegisterOutputBoundary;
+import presenters.LogInOutPresenter;
+import presenters.RegisterPresenter;
 
 import java.util.Scanner;
 
@@ -32,7 +35,9 @@ public class LoginAndRegisterDisplay {
         String opt = in.nextLine();
 
         UserManager um = new UserManager();
-        LoginManager lm = new LoginManager(um);
+        LogInOutManager lm = new LogInOutManager(um);
+        RegisterOutputBoundary registerOB = new RegisterPresenter();
+        LogInOutPresenter logOB = new LogInOutPresenter();
 
         if (opt.equals("99")) {
             System.out.println("Exit...");
@@ -57,8 +62,8 @@ public class LoginAndRegisterDisplay {
                 System.out.print("Please input your password again: ");
                 password2 = in.nextLine();
             }
-            um.createNewUser(userName, password1);
-            lm.logInUser(userName, password1);
+            um.createNewUser(userName, password1, registerOB);
+            lm.logInUser(userName, password1, logOB);
 
             this.state.setCurrUser(lm.getCurrUser());
 
@@ -71,10 +76,10 @@ public class LoginAndRegisterDisplay {
             System.out.print("Please input your password: ");
             String password1 = in.nextLine();
             try {
-                lm.logInUser(userName, password1);
+                lm.logInUser(userName, password1, logOB);
             } catch (Exception Exception) {//to be changed more specific
-                lm.SignOffUser();
-                lm.logInUser(userName, password1);
+                lm.signOffUser(logOB);
+                lm.logInUser(userName, password1, logOB);
             }
             this.state.setCurrUser(lm.getCurrUser());
         }

@@ -2,6 +2,11 @@ import manager.UserManager;
 import entity.User;
 import org.junit.Before;
 import org.junit.Test;
+import output_boundaries.ChangeOutputBoundary;
+import output_boundaries.RegisterOutputBoundary;
+import presenters.ChangePresenter;
+import presenters.RegisterPresenter;
+
 import static org.junit.Assert.*;
 
 public class UserManagerTest {
@@ -12,11 +17,13 @@ public class UserManagerTest {
     String user2Password = "user_password2";
     String user2Id = "user_id2";
     User user2;
+    ChangeOutputBoundary changeOutputBoudary = new ChangePresenter();
+    RegisterOutputBoundary registerOB = new RegisterPresenter();
 
     @Before
-    public void createUserManager() throws Exception {
+    public void createUserManager() {
         um = new UserManager();
-        um.createNewUser(user1Name, user1Password);
+        um.createNewUser(user1Name, user1Password, registerOB);
         user2 = new User(user2Id, user2Name, user2Password);
     }
 
@@ -47,9 +54,9 @@ public class UserManagerTest {
     public void testChangeInfo(){
         String newName = "user2_newName";
         String newPassword = "user2_newPassword";
-        um.changeInfo(user2, 'N', newName);
+        um.changeName(user2, newName, changeOutputBoudary);
         assertEquals(newName, user2.getName());
-        um.changeInfo(user2, 'P', newPassword);
+        um.changePassword(user2, newPassword);
         assertEquals(newPassword, user2.getPassword());
     }
 }

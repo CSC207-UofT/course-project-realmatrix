@@ -5,6 +5,9 @@ import manager.PackManager;
 //import manager.Manager;
 import org.junit.Before;
 import org.junit.Test;
+import output_boundaries.AddOutputBoundary;
+import output_boundaries.SearchOutputBoundary;
+import output_boundaries.SortOutputBoundary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +28,12 @@ public class PackManagerTest {
     CardManager cm2;
     Card c1;
     Card c2;
+    AddOutputBoundary AddOutputBoundary;
+    SortOutputBoundary<Card> sortOutputBoundary;
+    SearchOutputBoundary<Card> searchOutputBoundary;
 
     @Before
-    public void createPackManager() throws Exception {
+    public void createPackManager() {
         pm = new PackManager();
         p = pm.createNewPack(pName);
         pm.setCurrPack(p);
@@ -37,7 +43,7 @@ public class PackManagerTest {
         cm2 = new CardManager();
         c2 = cm2.createNewCard(c2Term, c2Definition);
         cm2.setCurrCard(c2);
-        pm.addCard(c1);
+        pm.addCard(c1, AddOutputBoundary);
     }
 
     @Test
@@ -47,42 +53,42 @@ public class PackManagerTest {
 
     @Test
     public void TestAddCard(){
-        List<Card> cardList = pm.sortZtoA();
+        List<Card> cardList = pm.sortZtoA(sortOutputBoundary);
         assertEquals(c1, cardList.get(0));
     }
 
     @Test
-    public void TestDeleteCard() throws Exception {
+    public void TestDeleteCard() {
         pm.deleteCard(c1);
-        List<Card> cardList = pm.sortZtoA();
+        List<Card> cardList = pm.sortZtoA(sortOutputBoundary);
         assertEquals(0, cardList.size());
     }
 
     @Test
-    public void TestSearchCardByTerm() throws Exception {
-        pm.addCard(c2);
-        List<Card> cardList = pm.searchCardByTerm(c2Term);
+    public void TestSearchCardTerm() {
+        pm.addCard(c2, AddOutputBoundary);
+        List<Card> cardList = pm.searchCard(c2Term, searchOutputBoundary);
         assertEquals(c2, cardList.get(0));
         assertEquals(1, cardList.size());
-        List<Card> cardList2 = pm.searchCardByTerm("tion");
+        List<Card> cardList2 = pm.searchCard("tion", searchOutputBoundary);
         assertEquals(2, cardList2.size());
     }
 
     @Test
-    public void TestSearchCardByDefinition() throws Exception {
-        pm.addCard(c2);
-        List<Card> cardList = pm.searchCardByDefinition(c2Definition);
+    public void TestSearchCardByDefinition() {
+        pm.addCard(c2, AddOutputBoundary);
+        List<Card> cardList = pm.searchCard(c2Definition, searchOutputBoundary);
         assertEquals(c2, cardList.get(0));
         assertEquals(1, cardList.size());
-        List<Card> cardList2 = pm.searchCardByDefinition("self");
+        List<Card> cardList2 = pm.searchCard("self", searchOutputBoundary);
         assertEquals(2, cardList2.size());
 
     }
 
     @Test
-    public void TestSortOldToNew() throws Exception {
-        pm.addCard(c2);
-        List<Card> cardList = pm.sortOldToNew();
+    public void TestSortOldToNew() {
+        pm.addCard(c2, AddOutputBoundary);
+        List<Card> cardList = pm.sortOldToNew(sortOutputBoundary);
         List<Card> actual = new ArrayList<>();
         actual.add(c1);
         actual.add(c2);
@@ -91,9 +97,9 @@ public class PackManagerTest {
     }
 
     @Test
-    public void TestSortAToZ() throws Exception {
-        pm.addCard(c2);
-        List<Card> cardList = pm.sortAtoZ();
+    public void TestSortAToZ() {
+        pm.addCard(c2, AddOutputBoundary);
+        List<Card> cardList = pm.sortAtoZ(sortOutputBoundary);
         List<Card> actual = new ArrayList<>();
         actual.add(c1);
         actual.add(c2);
@@ -101,9 +107,9 @@ public class PackManagerTest {
     }
 
     @Test
-    public void TestSortZToA() throws Exception {
-        pm.addCard(c2);
-        List<Card> cardList = pm.sortZtoA();
+    public void TestSortZToA() {
+        pm.addCard(c2, AddOutputBoundary);
+        List<Card> cardList = pm.sortZtoA(sortOutputBoundary);
         List<Card> actual = new ArrayList<>();
         actual.add(c2);
         actual.add(c1);
@@ -111,9 +117,9 @@ public class PackManagerTest {
     }
 
     @Test
-    public void TestSorProLowToHigh() throws Exception {
+    public void TestSorProLowToHigh() {
         cm2.increaseProficiency();
-        pm.addCard(c2);
+        pm.addCard(c2, AddOutputBoundary);
         List<Card> cardList = pm.sortProLowToHigh();
         List<Card> actual = new ArrayList<>();
         actual.add(c1);
@@ -122,9 +128,9 @@ public class PackManagerTest {
     }
 
     @Test
-    public void TestSortProHighToLow() throws Exception {
+    public void TestSortProHighToLow() {
         cm2.increaseProficiency();
-        pm.addCard(c2);
+        pm.addCard(c2, AddOutputBoundary);
         List<Card> cardList = pm.sortProHighToLow();
         List<Card> actual = new ArrayList<>();
         actual.add(c2);
