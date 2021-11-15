@@ -1,8 +1,8 @@
 package use_case.manager;
 
 import entity.Card;
-import input_boundaries.CardInputBoundary;
-import output_boundaries.ChangeOutputBoundary;
+import use_case.input_boundaries.CardInputBoundary;
+import use_case.output_boundaries.ChangeOutputBoundary;
 
 /**
  * A CardManager contains all cards in the system.

@@ -2,7 +2,7 @@ package use_case;
 
 import entity.Card;
 import entity.Pack;
-import input_boundaries.LearnInputBoundary;
+import use_case.input_boundaries.LearnInputBoundary;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +44,7 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
 //    @Override
 //    public String display_term(){
 //        Scanner in = new Scanner(System.in);
-//        System.out.println(constants.GREEN_BOLD_BRIGHT + "Press any key to start reviewing, type 99 to quit...");
+//        System.out.println(framework.command_line_interface.constants.GREEN_BOLD_BRIGHT + "Press any key to start reviewing, type 99 to quit...");
 //        String option = in.nextLine();
 //        if (option != "99"){
 //            for (Card c:cardList){

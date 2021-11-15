@@ -1,6 +1,6 @@
 package use_case.manager;
 
-import output_boundaries.SortOutputBoundary;
+import use_case.output_boundaries.SortOutputBoundary;
 
 import java.util.ArrayList;
 

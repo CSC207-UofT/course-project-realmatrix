@@ -1,9 +1,9 @@
 package use_case;
 
-import constants.Constants;
+import framework.constants.Constants;
 import entity.Card;
 import entity.Pack;
-import input_boundaries.ReviewInputBoundary;
+import use_case.input_boundaries.ReviewInputBoundary;
 
 import java.util.ArrayList;
 import java.util.Collections;

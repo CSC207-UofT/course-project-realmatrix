@@ -5,19 +5,19 @@ In order to render our project to comply with Clean Architecture, we organize ou
 - 3 entity classes; 
 - 8 use case classes (5 Managers and 3 learn/review generator classes);
 - 8 controllers;
-- 1 `gateway` package that contains loader/writer classes as well as data access interface
+- 1 `interface_adapter.gateway` package that contains loader/writer classes as well as data access interface
 - 6 specific `Presenter` class (more will be added in phase 2)
-- 1 complete command line interface (which will be replaced by GUI in phase 2)
-- 1 currently-implementing GUI
+- 1 complete command line interface (which will be replaced by framework.command_line_interface.GUI in phase 2)
+- 1 currently-implementing framework.command_line_interface.GUI
 
 ### What makes our code clean
 ##### Two main aspects：
 1. Implementation of `InputBoudnary` interface and `OutputBoudnary` interface. 
-   - Having these two boundaries **reduces dependency**: controllers won't directly make use of specific usecase classes; usecase class won't directly make use of specific presenters.
+   - Having these two boundaries **reduces dependency**: controllers won't directly make use of specific usecase classes; usecase class won't directly make use of specific interface_adapter.Controller.presenters.
 
 
 2. Data access interface `IDataInOut` follows dependency inversion. In this way, when usecase classes saves/load data, they won't interact with concrete data writer/loader classes. 
-   - but `gateway` has an unclean design currently: the load method which loads all users (username and password) to check login  returns a `UserManager` object which contains a hashmap of all user id to user. Thus, `gateway` is not only loading data, but also adding all users into a usecase class and return it. This code flows between layers. We will solve it in phase 2
+   - but `interface_adapter.gateway` has an unclean design currently: the load method which loads all users (username and password) to check login  returns a `UserManager` object which contains a hashmap of all user id to user. Thus, `interface_adapter.gateway` is not only loading data, but also adding all users into a usecase class and return it. This code flows between layers. We will solve it in phase 2
 
 #### To talk about different layers in more details:
 3. Entity layer is completely independent. 

@@ -7,7 +7,7 @@ out
 **/build/
 !src/**/build/
 
-# Ignore Gradle GUI config
+# Ignore Gradle framework.command_line_interface.GUI config
 gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)

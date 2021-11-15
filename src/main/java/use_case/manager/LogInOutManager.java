@@ -1,8 +1,8 @@
 package use_case.manager;
 
 import entity.User;
-import input_boundaries.LogInOutInputBoundary;
-import output_boundaries.LogInOutOutputBoundary;
+import use_case.input_boundaries.LogInOutInputBoundary;
+import use_case.output_boundaries.LogInOutOutputBoundary;
 
 import java.util.Objects;
 

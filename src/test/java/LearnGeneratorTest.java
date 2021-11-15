@@ -1,10 +1,11 @@
 import entity.Card;
 import entity.Pack;
+import interface_adapter.presenters.AddPresenter;
 import use_case.manager.CardManager;
 import use_case.manager.PackManager;
 import org.junit.Before;
 import org.junit.Test;
-import output_boundaries.AddOutputBoundary;
+import use_case.output_boundaries.AddOutputBoundary;
 import use_case.LearnGenerator;
 
 import java.util.ArrayList;
@@ -19,15 +20,14 @@ public class LearnGeneratorTest {
     Card c1;
     Card c2;
     Card c3;
-    AddOutputBoundary addOutputBoundary = new presenters.AddPresenter();
+    AddOutputBoundary addOutputBoundary = new AddPresenter();
 
     /**
      * Create a LearnGenerator with Pack of one card with proficiency > 0 and two card with proficiency equals 0.
      *
-     * @throws Exception if two or more cards in c1, c2, c3 have the same term.
      */
     @Before
-    public void createLearnGenerator() throws Exception {
+    public void createLearnGenerator() {
         c1 = cm.createNewCard("c1Term", "c1Definition");
         c2 = cm.createNewCard("c2Term", "c2Definition");
         c3 = cm.createNewCard("c3Term", "c3Definition");

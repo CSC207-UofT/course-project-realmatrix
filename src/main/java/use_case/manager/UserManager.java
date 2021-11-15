@@ -2,10 +2,10 @@ package use_case.manager;
 
 import entity.Pack;
 import entity.User;
-import input_boundaries.UserInputBoundary;
-import output_boundaries.AddOutputBoundary;
-import output_boundaries.ChangeOutputBoundary;
-import output_boundaries.RegisterOutputBoundary;
+import use_case.input_boundaries.UserInputBoundary;
+import use_case.output_boundaries.AddOutputBoundary;
+import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.RegisterOutputBoundary;
 
 import java.util.Objects;
 

@@ -2,11 +2,11 @@ package use_case.manager;
 
 import entity.Card;
 import entity.Pack;
-import input_boundaries.PackInputBoundary;
-import output_boundaries.AddOutputBoundary;
-import output_boundaries.ChangeOutputBoundary;
-import output_boundaries.SearchOutputBoundary;
-import output_boundaries.SortOutputBoundary;
+import use_case.input_boundaries.PackInputBoundary;
+import use_case.output_boundaries.AddOutputBoundary;
+import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.SearchOutputBoundary;
+import use_case.output_boundaries.SortOutputBoundary;
 
 import java.util.ArrayList;
 import java.util.Collections;

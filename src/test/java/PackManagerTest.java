@@ -2,12 +2,12 @@ import entity.Card;
 import entity.Pack;
 import org.junit.Before;
 import org.junit.Test;
-import output_boundaries.AddOutputBoundary;
-import output_boundaries.SearchOutputBoundary;
-import output_boundaries.SortOutputBoundary;
-import presenters.AddPresenter;
-import presenters.SearchPresenter;
-import presenters.SortPresenter;
+import use_case.output_boundaries.AddOutputBoundary;
+import use_case.output_boundaries.SearchOutputBoundary;
+import use_case.output_boundaries.SortOutputBoundary;
+import interface_adapter.presenters.AddPresenter;
+import interface_adapter.presenters.SearchPresenter;
+import interface_adapter.presenters.SortPresenter;
 import use_case.manager.CardManager;
 import use_case.manager.PackManager;
 

@@ -1,7 +1,7 @@
 import entity.Card;
 import org.junit.Before;
 import org.junit.Test;
-import presenters.ChangePresenter;
+import interface_adapter.presenters.ChangePresenter;
 import use_case.manager.CardManager;
 
 import static org.junit.Assert.assertEquals;

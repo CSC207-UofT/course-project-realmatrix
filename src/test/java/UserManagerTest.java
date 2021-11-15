@@ -1,10 +1,10 @@
 import entity.User;
 import org.junit.Before;
 import org.junit.Test;
-import output_boundaries.ChangeOutputBoundary;
-import output_boundaries.RegisterOutputBoundary;
-import presenters.ChangePresenter;
-import presenters.RegisterPresenter;
+import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.RegisterOutputBoundary;
+import interface_adapter.presenters.ChangePresenter;
+import interface_adapter.presenters.RegisterPresenter;
 import use_case.manager.UserManager;
 
 import static org.junit.Assert.assertEquals;

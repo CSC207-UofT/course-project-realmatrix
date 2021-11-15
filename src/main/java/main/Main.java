@@ -1,6 +1,6 @@
 package main;
 
-import command_line_interface.CommandLineInterface;
+import framework.command_line_interface.GUI.CommandLineInterface;
 
 public class Main {
 
@@ -8,7 +8,7 @@ public class Main {
         CommandLineInterface cli = new CommandLineInterface();
         cli.display();
 
-//         Use GUI
+//         Use framework.command_line_interface.GUI
 //        new StartFrame();
     }
 }
