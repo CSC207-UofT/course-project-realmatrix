@@ -1,4 +1,4 @@
-package use_case;
+package use_case.generator;
 
 import framework.constants.Constants;
 import entity.Card;

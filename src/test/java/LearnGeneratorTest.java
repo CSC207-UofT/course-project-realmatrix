@@ -6,7 +6,7 @@ import use_case.manager.PackManager;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.output_boundaries.AddOutputBoundary;
-import use_case.LearnGenerator;
+import use_case.generator.LearnGenerator;
 
 import java.util.ArrayList;
 

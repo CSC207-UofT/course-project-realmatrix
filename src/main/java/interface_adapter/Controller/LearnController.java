@@ -4,7 +4,7 @@ import entity.Card;
 import entity.Pack;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.LearnInputBoundary;
-import use_case.LearnGenerator;
+import use_case.generator.LearnGenerator;
 import use_case.manager.CardManager;
 
 import java.util.ArrayList;

@@ -2,8 +2,8 @@ package interface_adapter.Controller;
 
 import entity.Pack;
 import entity.User;
-import use_case.LearnGenerator;
-import use_case.ReviewGenerator;
+import use_case.generator.LearnGenerator;
+import use_case.generator.ReviewGenerator;
 import use_case.manager.CardManager;
 import use_case.manager.PackManager;
 
