@@ -3,6 +3,7 @@ import manager.CardManager;
 import org.junit.Before;
 import org.junit.Test;
 import output_boundaries.ChangeOutputBoundary;
+import presenters.ChangePresenter;
 
 import static org.junit.Assert.*;
 
@@ -10,10 +11,11 @@ public class CardManagerTest {
     CardManager cm;
     Card c;
     Card d;
-    ChangeOutputBoundary changeOutputBoundary;
+    ChangePresenter cp;
 
     @Before
     public void createCardManager() {
+        cp = new ChangePresenter();
         cm = new CardManager();
         String term = "Homoncular Fallacy";
         String definition = "Assuming a mental fallacy";
@@ -34,7 +36,7 @@ public class CardManagerTest {
     @Test(timeout = 50)
     public void TestEditCardTerm() {
         String newTerm = "Equivocation";
-        cm.changeCardTerm(newTerm, changeOutputBoundary);
+        cm.changeCardTerm(newTerm, cp);
         assertEquals(newTerm, c.getTerm());
     }
 

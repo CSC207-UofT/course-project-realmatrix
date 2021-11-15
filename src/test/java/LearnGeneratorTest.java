@@ -5,6 +5,7 @@ import manager.PackManager;
 import org.junit.Before;
 import org.junit.Test;
 import output_boundaries.AddOutputBoundary;
+import presenters.AddPresenter;
 import use_case.LearnGenerator;
 
 import java.util.ArrayList;
@@ -19,14 +20,14 @@ public class LearnGeneratorTest {
     Card c1;
     Card c2;
     Card c3;
-    AddOutputBoundary AddOutputBoundary;
+    AddPresenter ap;
 
     /**
      * Create a LearnGenerator with Pack of one card with proficiency > 0 and two card with proficiency equals 0.
-     * @throws Exception if two or more cards in c1, c2, c3 have the same term.
      */
     @Before
-    public void createLearnGenerator() throws Exception {
+    public void createLearnGenerator() {
+        ap = new AddPresenter();
         c1 = cm.createNewCard("c1Term", "c1Definition");
         c2 = cm.createNewCard("c2Term", "c2Definition");
         c3 = cm.createNewCard("c3Term", "c3Definition");
@@ -34,9 +35,9 @@ public class LearnGeneratorTest {
         cm.increaseProficiency();
         p1 = pm.createNewPack("pack1Name");
         pm.setCurrPack(p1);
-        pm.addCard(c1, AddOutputBoundary);
-        pm.addCard(c2, AddOutputBoundary);
-        pm.addCard(c3, AddOutputBoundary);
+        pm.addCard(c1, ap);
+        pm.addCard(c2, ap);
+        pm.addCard(c3, ap);
         lg = new LearnGenerator(p1);
     }
 

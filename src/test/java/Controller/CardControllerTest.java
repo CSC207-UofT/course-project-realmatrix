@@ -1,23 +1,50 @@
 package Controller;
 
 import entity.Card;
+import manager.CardManager;
 import org.junit.Before;
 import org.junit.Test;
+import presenters.ChangePresenter;
+
 import static org.junit.Assert.*;
 
 public class CardControllerTest {
     CardController cc;
+    CardManager cm;
     Card c1 = new Card("011", "closet", "a tall cupboard or wardrobe with a door, used for storage.");
+    ChangePresenter cp;
 
     @Before
     public void createCardController(){
-        cc = new CardController();
+        cm = new CardManager();
+        cc = new CardController(cm);
+        cp = new ChangePresenter();
     }
 
+    @Test
+    public void testCreateNewCard(){
+        Card newCard = cc.createNewCard("newTerm", "newDef");
+        assertEquals("newTerm", newCard.getTerm());
+        assertEquals("newDef", newCard.getDefinition());
+    }
     @Test
     public void testSetCurrCard(){
         cc.setCurrCard(c1);
         assertEquals(c1, cc.getCurrCard());
+    }
+
+    @Test
+    public void testChangeCardTerm(){
+        cc.setCurrCard(c1);
+        cc.changeCardTerm("c1NewTerm", cp);
+        assertEquals("c1NewTerm", cc.getCurrCard().getTerm());
+    }
+
+    @Test
+    public void testChangeCardDefinition(){
+        cc.setCurrCard(c1);
+        cc.changeCardDefinition("c1NewDef");
+        assertEquals("c1NewDef", cc.getCurrCard().getDefinition());
     }
 
     @Test
@@ -26,19 +53,19 @@ public class CardControllerTest {
         assertEquals(c1, cc.getCurrCard());
     }
 
-    @Test
-    public void testEditCardTerm(){
-        cc.setCurrCard(c1);
-        cc.editCardTerm("mental analysis");
-        assertEquals(c1.getTerm(), "mental analysis");
-    }
-
-    @Test
-    public void testEditCardDefinition(){
-        cc.setCurrCard(c1);
-        cc.editCardDefinition("analysis with mental presumption");
-        assertEquals(c1.getDefinition(), "analysis with mental presumption");
-    }
+//    @Test
+//    public void testEditCardTerm(){
+//        cc.setCurrCard(c1);
+//        cc.editCardTerm("mental analysis");
+//        assertEquals(c1.getTerm(), "mental analysis");
+//    }
+//
+//    @Test
+//    public void testEditCardDefinition(){
+//        cc.setCurrCard(c1);
+//        cc.editCardDefinition("analysis with mental presumption");
+//        assertEquals(c1.getDefinition(), "analysis with mental presumption");
+//    }
 
     @Test
     public void testIncreaseProficiency(){

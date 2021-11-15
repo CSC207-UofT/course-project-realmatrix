@@ -99,7 +99,12 @@ public class Loader {
         String packName = packInfo.split(",")[1];
         //TODO: This line is bad: directly use constructor of entity class
         Pack pack = new Pack(packId, packName);
-        user.createPackage(pack); // put Pack into User
+        try{
+            user.addPackage(pack); // put Pack into User
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         return pack;
     }
 
