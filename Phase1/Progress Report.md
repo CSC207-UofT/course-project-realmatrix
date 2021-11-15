@@ -2,8 +2,12 @@
 
 ## Major Decision and Worked Well
 Our major design decision in Phase 1 is that we use a program state to keep track of current `user`/`pack`/`card`.
-In this way, while we are implementing our user interface, we can use setter and getter to display the correct element to user
-Later, we might turn this into an observer pattern to make our design cleaner.
+In this way, while we are implementing our user interface, we can use setter and getter to display the correct element to user.
+
+Based on skleten codes in Phase 0, we finished the database, tests and part of GUI - also optimized our design and broadened original specification to extend easily our project with additional functionality in the phase 1, following feedbacks from TA. 
+In general, we obeyed Clean Architecture design principle and SOLID principle by having clear layers of entity, usecase and controller classes.
+
+Later, we will consummate our project, implementing GUI. Furthurmore, we might turn user interface into an observer pattern to make our design cleaner.
 
 
 ## Division of work summary
