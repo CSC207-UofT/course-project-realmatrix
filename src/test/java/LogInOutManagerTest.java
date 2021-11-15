@@ -1,3 +1,4 @@
+import entity.User;
 import manager.LogInOutManager;
 import manager.UserManager;
 import org.junit.Before;
@@ -30,15 +31,6 @@ public class LogInOutManagerTest {
         assertEquals(lm.getCurrUser().getName(), user1Name);
     }
 
-    @Test
-    public void testSignOffUser(){
-        try{
-            lm.signOffUser(lp);
-            lm.getCurrUser();
-            fail("Expected an Exception to be thrown");
-        }catch (Exception e){
-            assertEquals ("There's no logged-in user.", e.getMessage());
-        }
-    }
+    //how to test SignOffUser?
 
 }

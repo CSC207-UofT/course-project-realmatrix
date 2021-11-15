@@ -5,7 +5,6 @@ import manager.PackManager;
 import org.junit.Before;
 import org.junit.Test;
 import output_boundaries.AddOutputBoundary;
-import presenters.AddPresenter;
 import use_case.LearnGenerator;
 
 import java.util.ArrayList;
@@ -20,14 +19,14 @@ public class LearnGeneratorTest {
     Card c1;
     Card c2;
     Card c3;
-    AddPresenter ap;
+    AddOutputBoundary addOutputBoundary = new presenters.AddPresenter();
 
     /**
      * Create a LearnGenerator with Pack of one card with proficiency > 0 and two card with proficiency equals 0.
+     * @throws Exception if two or more cards in c1, c2, c3 have the same term.
      */
     @Before
-    public void createLearnGenerator() {
-        ap = new AddPresenter();
+    public void createLearnGenerator() throws Exception {
         c1 = cm.createNewCard("c1Term", "c1Definition");
         c2 = cm.createNewCard("c2Term", "c2Definition");
         c3 = cm.createNewCard("c3Term", "c3Definition");
@@ -35,20 +34,26 @@ public class LearnGeneratorTest {
         cm.increaseProficiency();
         p1 = pm.createNewPack("pack1Name");
         pm.setCurrPack(p1);
-        pm.addCard(c1, ap);
-        pm.addCard(c2, ap);
-        pm.addCard(c3, ap);
+        pm.addCard(c1, addOutputBoundary);
+        pm.addCard(c2, addOutputBoundary);
+        pm.addCard(c3, addOutputBoundary);
         lg = new LearnGenerator(p1);
     }
 
     /**
-     * Test the LearnGenerator created to return the list of card with c1 and c2.
+     * Test the LearnGenerator created to return the list of card with c1 and c3, each with 2 occurrences.
      */
     @Test
-    public void testDoable(){
-        ArrayList<Card> expectedList = new ArrayList<>();
-        expectedList.add(c1);
-        expectedList.add(c3);
-        assertEquals(expectedList, lg.doable());
+    public void testGetDoCardList(){
+        ArrayList<Card> cardLearnList = new ArrayList<>();
+        cardLearnList.add(c1);
+        cardLearnList.add(c3);
+        ArrayList<Card> actual = lg.getDoCardList();
+        for (Card c : cardLearnList) {
+            if (java.util.Collections.frequency(actual, c) != 2) {
+                fail("Wrong learning lists.");
+            }
+        }
+        assertTrue("Proper learning lists.", true);
     }
 }

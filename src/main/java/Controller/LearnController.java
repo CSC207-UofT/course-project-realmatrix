@@ -10,8 +10,8 @@ import use_case.LearnGenerator;
 import java.util.ArrayList;
 
 public class LearnController {
-    private LearnInputBoundary lg;
-    private CardInputBoundary cm;
+    private final LearnInputBoundary lg;
+    private final CardInputBoundary cm;
 
     public LearnController(Pack p){
         this.lg = new LearnGenerator(p);
@@ -42,12 +42,11 @@ public class LearnController {
      */
 
     public ArrayList<Card> learnableCardList(){
-        return this.lg.doable();
+        return this.lg.getDoCardList();
     }
 
     /**
      * update the proficiency of the card that user currently learning
-     * opt = 1 or 2; if opt = 1, the card will be increased proficiency by 2, or it will be increased proficiency by 1.
      * @param opt user's option of the quality of learning
      * @param c the card that user currently learning
      */

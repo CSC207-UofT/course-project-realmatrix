@@ -10,8 +10,8 @@ import use_case.ReviewGenerator;
 import java.util.ArrayList;
 
 public class ReviewController {
-    private ReviewInputBoundary rg;
-    private CardInputBoundary cm;
+    private final ReviewInputBoundary rg;
+    private final CardInputBoundary cm;
 
     public ReviewController(Pack p) {
         this.rg = new ReviewGenerator(p);
@@ -29,8 +29,8 @@ public class ReviewController {
      * @throws Exception if no card need to be reviewed
      */
     public ArrayList<Card> reviewableCardList() throws Exception {
-        if (this.rg.dailyReviewCards().size() != 0) {
-            return this.rg.dailyReviewCards();
+        if (this.rg.getDoCardList().size() != 0) {
+            return this.rg.getDoCardList();
         } else {
             throw new Exception("no card need to be reviewed");
         }

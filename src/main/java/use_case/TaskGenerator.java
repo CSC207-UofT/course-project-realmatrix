@@ -3,21 +3,12 @@ package use_case;
 import entity.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * This class is a test generator that raise a collection of
  * cards for user to learn and review
  */
 public abstract class TaskGenerator {
-
-    /**
-     * learnable method return whether a Card need to be learned
-     *
-     * @return boolean
-     * TODO: implement needed
-     */
     protected Pack pack;
     protected ArrayList<Card> cardList;
 
@@ -27,12 +18,17 @@ public abstract class TaskGenerator {
     }
 
     /**
-     * modify cardList that can be learnt or reviewed.
-     *
-     * @return void
-     * TODO: implement needed
+     * Generate a card list containing all cards eligible for learning/reviewing
+     * with random order and multiple occurrences of each card.
+     * @return an arraylist of card
      */
-    private void doable() {
-    }
+    public abstract ArrayList<Card> getDoCardList();
+
+    /**
+     * Helper method for getDoCardList()
+     * Get a card list containing all cards that are eligible to be learnt or reviewed.
+     *
+     */
+    protected abstract void doable();
 
 }

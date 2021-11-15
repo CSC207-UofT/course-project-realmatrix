@@ -27,7 +27,7 @@ public class LogInOutPresenter implements LogInOutOutputBoundary {
                 break;
 
             case NO_SUCH_USER:
-                System.out.println("Login fails..." +
+                System.out.println(
                         "Invalid name or password. If you are new, please create an account first.");
                 break;
 

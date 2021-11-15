@@ -23,81 +23,71 @@ public class ReviewGeneratorTest {
     Card c3;
     Card c4;
     ReviewGenerator rg;
-    AddPresenter ap;
+    AddOutputBoundary AddOutputBoundary = new AddPresenter();
 
     /**
      * Create rg with card1 of proficiency 2, card2 of proficiency 3, card3 of proficiency 0, card4 of proficiency 5.
      */
     @Before
     public void createReviewGenerator() {
-        ap = new AddPresenter();
         c1 = cm.createNewCard("card1Term", "card1Definition");
         cm.setCurrCard(c1);
         cm.increaseProficiency();
-        cm.increaseProficiency();
+        cm.increaseProficiency();   // c1 prof = 2
         c2 = cm.createNewCard("card2Term", "card2Definition");
         cm.setCurrCard(c2);
         cm.increaseProficiency();
         cm.increaseProficiency();
-        cm.increaseProficiency();
-        c3 = cm.createNewCard("card3Term", "card3Definition");
+        cm.increaseProficiency();   // c2 prof = 3
+        c3 = cm.createNewCard("card3Term", "card3Definition");  // c3 prof = 0
         c4 = cm.createNewCard("card4Term", "card4Definition");
         cm.setCurrCard(c4);
         cm.increaseProficiency();
         cm.increaseProficiency();
         cm.increaseProficiency();
         cm.increaseProficiency();
-        cm.increaseProficiency();
+        cm.increaseProficiency();   // c4 prof = 5
         p1 = pm.createNewPack("packName");
         pm.setCurrPack(p1);
-        pm.addCard(c1, ap);
-        pm.addCard(c2, ap);
-        pm.addCard(c3, ap);
-        pm.addCard(c4, ap);
+        pm.addCard(c1, AddOutputBoundary);
+        pm.addCard(c2, AddOutputBoundary);
+        pm.addCard(c3, AddOutputBoundary);
+        pm.addCard(c4, AddOutputBoundary);
         rg = new ReviewGenerator(p1);
     }
-//
+
+    /**
+     * Test getDoCardList based on the created ReviewGenerator, which should return a list of c1, c2, c3 and c4.
+     */
+    @Test
+    public void testGetDoCardList(){
+        // c1: prof = 2, need 3 occurrences
+        // c2: prof = 3, need 2 occurrences
+        // c4: prof = 5, need 1 occurrence
+        ArrayList<Card> actual = rg.getDoCardList();
+
+        if (java.util.Collections.frequency(actual, c1) != 3) {
+            fail("Wrong reviewing lists.");
+        } else if (java.util.Collections.frequency(actual, c2) != 2) {
+            fail("Wrong reviewing lists.");
+        }else if (java.util.Collections.frequency(actual, c4) != 1) {
+            fail("Wrong reviewing lists.");
+        }
+        assertTrue("Proper reviewing lists.", true);
+    }
+
 //    /**
-//     * Test doable based on the created ReviewGenerator, which should return a list of c1, c2, c3 and c4.
+//     * Test withProficiencyBasedCards based on the created ReveiwGenerator.
 //     */
 //    @Test
-//    public void testDoable(){
+//    public void testWithProficiencyBasedCards(){
 //        ArrayList<Card> expectedList = new ArrayList<>();
-//        expectedList.add(c1);
-//        expectedList.add(c2);
-//        expectedList.add(c4);
-//        assertEquals(expectedList, rg.doable());
+//        for (int i = 0; i < (Constants.REVIEW_PROFICIENCY_MAX - 2); i++) {
+//            expectedList.add(c1);
+//        }
+//        for (int i = 0; i < (Constants.REVIEW_PROFICIENCY_MAX - 3); i++) {
+//            expectedList.add(c2);
+//        }
+//        assertEquals(expectedList, rg.withProficiencyBasedCards());
 //    }
-
-    /**
-     * Test withProficiencyBasedCards based on the created ReveiwGenerator.
-     */
-    @Test
-    public void testWithProficiencyBasedCards() {
-        ArrayList<Card> expectedList = new ArrayList<>();
-        expectedList.add(c1);
-        expectedList.add(c1);
-        expectedList.add(c2);
-        for (Card c : rg.withProficiencyBasedCards()) {
-            assertTrue(expectedList.contains(c));
-            expectedList.remove(c);
-        }
-    }
-
-
-    /**
-     * Test dailyReviewCards based on the created ReviewGenerator.
-     */
-    @Test
-    public void testDailyReviewCards(){
-        ArrayList<Card> expectedList = new ArrayList<>();
-        expectedList.add(c1);
-        expectedList.add(c1);
-        expectedList.add(c2);
-        for (Card c : rg.dailyReviewCards()) {
-            assertTrue(expectedList.contains(c));
-            expectedList.remove(c);
-        }
-    }
 }
-

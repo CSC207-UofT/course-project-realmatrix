@@ -2,10 +2,10 @@ package use_case;
 
 import entity.Card;
 import entity.Pack;
-import constants.Constants;
 import input_boundaries.LearnInputBoundary;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LearnGenerator extends TaskGenerator implements LearnInputBoundary {
 
@@ -13,20 +13,31 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
         super(pack);
     }
 
-    public Pack getPack() {
-        return this.pack;
+    /**
+     * Generate a card list containing all cards eligible for learning
+     * with random order and 2 occurrences of each card.
+     *
+     * @return an arraylist of card for learning
+     */
+    @Override
+    public ArrayList<Card> getDoCardList() {
+        doable();
+        this.cardList.addAll(this.cardList); // So that every card has 2 occurrences
+        Collections.shuffle(this.cardList);
+        return this.cardList;
     }
+
     /**
      * Return a list of cards to be learned.
      */
-    public ArrayList<Card> doable() {
+    @Override
+    protected void doable() {
 //        System.out.println(this.pack.getCards());
         for(Card c: this.pack.getCards()){
             if(c.getProficiency()==0){
                 this.cardList.add(c);
             }
         }
-        return this.cardList;
     }
 
 

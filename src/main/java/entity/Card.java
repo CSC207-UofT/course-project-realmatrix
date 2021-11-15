@@ -9,7 +9,7 @@ public class Card {
     private String term;
     private String definition;
     private boolean definitionHidden; // If true, hide definition so that users cannot see
-    private int proficiency; // proficiency represents to what extent the user has mastered this card, ranges from 1-5
+    private int proficiency; // proficiency represents to what extent the user has mastered this card, ranges from 0-5
 
     /**
      * Construct a Card with given id, term, and definition.

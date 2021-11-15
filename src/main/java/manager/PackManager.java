@@ -6,6 +6,7 @@ import output_boundaries.AddOutputBoundary;
 import output_boundaries.ChangeOutputBoundary;
 import output_boundaries.SearchOutputBoundary;
 import output_boundaries.SortOutputBoundary;
+import use_case.LearnGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -76,7 +77,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
             this.currPack.addCard(card);
             AddOutputBoundary.presentAddSuccessView();
         } catch (Exception e) {
-            AddOutputBoundary.presentAddSuccessView();
+            AddOutputBoundary.presentAddFailView();
         }
     }
 
