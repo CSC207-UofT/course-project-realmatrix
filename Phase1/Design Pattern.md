@@ -1,12 +1,11 @@
 # A summary of design patterns our group has implemented (or plans to implement).
 
-In general, we use Strategy design pattern in our project, specifically in PACKMANAGER. 
-As we all know, Strategy pattern could encapsulate interface details in a base class and bury implementation details in derived classes. 
-Clients can couple themselves into an interface and not have to experience the upheaval associated with change. 
-With more pertinence, if we have multiple classes that differ only in their behaviors and these various algorithms should not be implemented within the class, 
-under this circumstance, we are supposed to use the strategy pattern.
-In our PACKMANAGER, we would like to sort the cards storing in the PACK in different kinds of ways, 
-such as sorting by alphabet with AtoZ and ZtoA, by date with OldtoNew and NewtoOld.
-Therefore, We create an interface called SORTER, as a strategy class, implemented by natural order and reverse order. 
-And in the PACKMANAGER, what we will do is just to set the strategy and ask the strategy to sort cards. 
-Users could select their preferred algorithm to sort cards through strategy pattern.
+### Already implemented: _Factory Design Pattern_
+This design pattern is implemented in `gateway`. Some background about our `Writer` class which write data into database:  we have different `Writer` class for writing different entity (e.g. `CardWriter` to write a `Card` object into database). 
+
+Thus, if we do not implement Factory Design Pattern, then every time we want to write an entity into the database, we have to decide which writer class should be instantiated. This causes high-coupling problems.
+
+To solve the problem, we implement Factory Design Pattern. This pattern takes in the entity we want to write into database, and decides which specific `Writer` class should be instantiated. In this way, we put all creation of `Writer` class in one place. Other classes don't need to decide instantiating which specific `Writer` class. Also, if we want to add more entities (thus more writer classes) in the future, it can be easily extended.  
+
+### Plan to implement: _Observer Design Pattern_
+We plan to use this design pattern to update status in `ProgramState`. For example, if `LogInOutManager` successfully signs in a user, it will trigger `ProgramState` to update its `user` attribute from `null` to the user that signs in.

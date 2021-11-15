@@ -17,8 +17,9 @@ In order to render our project to comply with Clean Architecture, we organize ou
 
 
 2. Data access interface `IDataInOut` follows dependency inversion. In this way, when usecase classes saves/load data, they won't interact with concrete data writer/loader classes. 
+   - but `gateway` has an unclean design currently: the load method which loads all users (username and password) to check login  returns a `UserManager` object which contains a hashmap of all user id to user. Thus, `gateway` is not only loading data, but also adding all users into a usecase class and return it. This code flows between layers. We will solve it in phase 2
 
-####To talk about different layers in more details:
+#### To talk about different layers in more details:
 3. Entity layer is completely independent. 
 
    - As the center of the architecture, the domain layer known as entity, consist of three package, which each are `Card`, `Pack` and `User`. `User` stores an ID, a username, a password, and a list of packages the user created. `Pack` stores an ID, a name of pack, and a list of Cards in the pack. `Card` stores an ID, a term, a definition, and a proficiency index (how well the user masters the card) of the card. Each of these three classes neither have any knowledge of the other layers nor dependent on other components residing in the outer layers.
