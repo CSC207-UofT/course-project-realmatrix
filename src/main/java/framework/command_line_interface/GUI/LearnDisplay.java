@@ -1,6 +1,6 @@
 package framework.command_line_interface.GUI;
 
-import framework.constants.Constants;
+import use_case.constants.Constants;
 import interface_adapter.Controller.LearnController;
 import interface_adapter.Controller.ProgramState;
 import entity.Card;

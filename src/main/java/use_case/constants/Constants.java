@@ -1,4 +1,4 @@
-package framework.constants;
+package use_case.constants;
 
 public class Constants {
     public static final int REVIEW_PROFICIENCY_MAX = 5;

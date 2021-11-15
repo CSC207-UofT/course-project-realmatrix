@@ -2,7 +2,7 @@ package framework.command_line_interface.GUI;
 
 import interface_adapter.Controller.ProgramState;
 import interface_adapter.Controller.ReviewController;
-import framework.constants.Constants;
+import use_case.constants.Constants;
 import entity.Card;
 
 import java.util.ArrayList;

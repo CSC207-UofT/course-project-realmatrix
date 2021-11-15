@@ -1,6 +1,6 @@
 package use_case.generator;
 
-import framework.constants.Constants;
+import use_case.constants.Constants;
 import entity.Card;
 import entity.Pack;
 import use_case.input_boundaries.ReviewInputBoundary;
