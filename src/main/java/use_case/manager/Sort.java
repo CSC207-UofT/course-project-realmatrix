@@ -1,4 +1,4 @@
-package manager;
+package use_case.manager;
 
 import output_boundaries.SortOutputBoundary;
 

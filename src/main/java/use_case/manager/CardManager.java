@@ -1,4 +1,4 @@
-package manager;
+package use_case.manager;
 
 import entity.Card;
 import input_boundaries.CardInputBoundary;

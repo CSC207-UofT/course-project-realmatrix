@@ -1,8 +1,8 @@
 package command_line_interface;
 
 import Controller.ProgramState;
-import manager.LogInOutManager;
-import manager.UserManager;
+import use_case.manager.LogInOutManager;
+import use_case.manager.UserManager;
 import output_boundaries.RegisterOutputBoundary;
 import presenters.LogInOutPresenter;
 import presenters.RegisterPresenter;

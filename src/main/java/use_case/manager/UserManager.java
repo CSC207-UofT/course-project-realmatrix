@@ -1,4 +1,4 @@
-package manager;
+package use_case.manager;
 
 import entity.Pack;
 import entity.User;

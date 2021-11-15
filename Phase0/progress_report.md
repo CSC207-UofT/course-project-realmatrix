@@ -30,7 +30,7 @@ The skeleton program includes all classes listed in CRC model except `System`.
 
 - Under `src/main/java`:
   - Package `entity` includes `Card`, `Pack`, and `User`.
-  - Package `manager` includes `CardManager`, `PackManager` and `UserManager`.
+  - Package `use_case.use_case.manager` includes `CardManager`, `PackManager` and `UserManager`.
   - Package `use_case` includes `TestGenerator`.
   - Package `main` includes `CommandLineInterface`.
 

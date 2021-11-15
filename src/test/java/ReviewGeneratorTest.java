@@ -1,8 +1,7 @@
-import constants.Constants;
 import entity.Card;
 import entity.Pack;
-import manager.CardManager;
-import manager.PackManager;
+import use_case.manager.CardManager;
+import use_case.manager.PackManager;
 import org.junit.Before;
 import org.junit.Test;
 import output_boundaries.AddOutputBoundary;

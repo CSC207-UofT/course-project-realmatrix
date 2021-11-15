@@ -5,7 +5,7 @@ import constants.Constants;
 import entity.Card;
 import entity.Pack;
 import entity.User;
-import manager.CardManager;
+import use_case.manager.CardManager;
 
 import java.awt.*;
 import java.util.ArrayList;

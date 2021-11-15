@@ -1,8 +1,7 @@
 import entity.Card;
-import manager.CardManager;
+import use_case.manager.CardManager;
 import org.junit.Before;
 import org.junit.Test;
-import output_boundaries.ChangeOutputBoundary;
 import presenters.ChangePresenter;
 
 import static org.junit.Assert.*;

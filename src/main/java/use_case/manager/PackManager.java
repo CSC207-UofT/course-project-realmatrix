@@ -1,4 +1,4 @@
-package manager;
+package use_case.manager;
 
 import entity.*;
 import input_boundaries.PackInputBoundary;

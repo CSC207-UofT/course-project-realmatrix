@@ -1,7 +1,7 @@
 import entity.Pack;
 import entity.Card;
-import manager.CardManager;
-import manager.PackManager;
+import use_case.manager.CardManager;
+import use_case.manager.PackManager;
 //import manager.Manager;
 import org.junit.Before;
 import org.junit.Test;

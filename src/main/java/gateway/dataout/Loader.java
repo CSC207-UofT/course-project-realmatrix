@@ -3,7 +3,7 @@ package gateway.dataout;
 import entity.Card;
 import entity.Pack;
 import entity.User;
-import manager.UserManager;
+import use_case.manager.UserManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;

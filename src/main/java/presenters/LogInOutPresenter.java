@@ -1,6 +1,6 @@
 package presenters;
 
-import manager.LogInOutManager;
+import use_case.manager.LogInOutManager;
 import output_boundaries.LogInOutOutputBoundary;
 
 public class LogInOutPresenter implements LogInOutOutputBoundary {

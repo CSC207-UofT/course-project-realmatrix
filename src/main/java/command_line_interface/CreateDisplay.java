@@ -3,8 +3,8 @@ package command_line_interface;
 import Controller.ProgramState;
 import entity.Card;
 import entity.Pack;
-import manager.CardManager;
-import manager.PackManager;
+import use_case.manager.CardManager;
+import use_case.manager.PackManager;
 
 import java.util.Scanner;
 

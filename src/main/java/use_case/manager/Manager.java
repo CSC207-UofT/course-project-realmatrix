@@ -1,4 +1,4 @@
-package manager;
+package use_case.manager;
 
 import java.util.HashMap;
 import java.util.UUID;

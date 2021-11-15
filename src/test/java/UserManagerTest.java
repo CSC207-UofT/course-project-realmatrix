@@ -1,4 +1,4 @@
-import manager.UserManager;
+import use_case.manager.UserManager;
 import entity.User;
 import org.junit.Before;
 import org.junit.Test;

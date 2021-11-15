@@ -1,6 +1,6 @@
 package output_boundaries;
 
-import manager.LogInOutManager;
+import use_case.manager.LogInOutManager;
 
 public interface LogInOutOutputBoundary {
     public void setLogInOutResult(LogInOutManager.LoggedIn loginResult);

@@ -1,7 +1,7 @@
 package Controller;
 
 import entity.Card;
-import manager.CardManager;
+import use_case.manager.CardManager;
 import org.junit.Before;
 import org.junit.Test;
 import presenters.ChangePresenter;

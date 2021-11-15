@@ -1,8 +1,8 @@
 package Controller;
 
 import entity.*;
-import manager.CardManager;
-import manager.PackManager;
+import use_case.manager.CardManager;
+import use_case.manager.PackManager;
 import use_case.ReviewGenerator;
 import use_case.LearnGenerator;
 import Controller.ProgramState;

@@ -2,7 +2,7 @@ package gateway;
 
 import Controller.ProgramState;
 import entity.User;
-import manager.UserManager;
+import use_case.manager.UserManager;
 
 import java.io.IOException;
 

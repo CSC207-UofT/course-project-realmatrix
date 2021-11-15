@@ -1,4 +1,4 @@
-package manager;
+package use_case.manager;
 
 import entity.User;
 import input_boundaries.LogInOutInputBoundary;

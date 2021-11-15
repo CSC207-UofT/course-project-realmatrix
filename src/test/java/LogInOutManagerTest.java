@@ -1,12 +1,12 @@
 import entity.User;
-import manager.LogInOutManager;
-import manager.UserManager;
 import org.junit.Before;
 import org.junit.Test;
 import output_boundaries.LogInOutOutputBoundary;
 import output_boundaries.RegisterOutputBoundary;
 import presenters.LogInOutPresenter;
 import presenters.RegisterPresenter;
+import use_case.manager.LogInOutManager;
+import use_case.manager.UserManager;
 
 import static org.junit.Assert.*;
 

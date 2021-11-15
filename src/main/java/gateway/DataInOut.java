@@ -5,7 +5,7 @@ import entity.User;
 import gateway.datain.DataInFactory;
 import gateway.datain.Writer;
 import gateway.dataout.Loader;
-import manager.UserManager;
+import use_case.manager.UserManager;
 
 import java.io.IOException;
 
