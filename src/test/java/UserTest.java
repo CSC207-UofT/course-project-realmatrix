@@ -1,5 +1,5 @@
-import entity.User;
 import entity.Pack;
+import entity.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class UserTest {
     Pack pack3;
 
     @Before
-    public void createUser(){
+    public void createUser() {
         u = new User(id, name, password);
         pack1 = new Pack("01", "CSC207");
         pack2 = new Pack("02", "CSC236");
@@ -23,36 +23,36 @@ public class UserTest {
     }
 
     @Test
-    public void testGetId(){
+    public void testGetId() {
         assertEquals(id, u.getId());
     }
 
     @Test
-    public void testGetName(){
+    public void testGetName() {
         assertEquals(name, u.getName());
     }
 
     @Test
-    public void testGetPassword(){
+    public void testGetPassword() {
         assertEquals(password, u.getPassword());
     }
 
     @Test
-    public void testChangeName(){
+    public void testChangeName() {
         String newName = "Ziqi Shu";
         u.changeName(newName);
         assertEquals(newName, u.getName());
     }
 
     @Test
-    public void testChangePassword(){
+    public void testChangePassword() {
         String newPassWord = "NewPassWord";
         u.changePassword(newPassWord);
         assertEquals(newPassWord, u.getPassword());
     }
 
     @Test
-    public void testCreatePackage(){
+    public void testCreatePackage() {
         try {
             u.addPackage(pack1);
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class UserTest {
     }
 
     @Test
-    public void testGetPackList(){
+    public void testGetPackList() {
         try {
             u.addPackage(pack1);
         } catch (Exception e) {
@@ -103,7 +103,7 @@ public class UserTest {
     }
 
     @Test
-    public void testDeletePackage(){
+    public void testDeletePackage() {
         try {
             u.addPackage(pack1);
         } catch (Exception e) {

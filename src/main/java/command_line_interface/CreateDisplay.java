@@ -8,11 +8,11 @@ import use_case.manager.PackManager;
 
 import java.util.Scanner;
 
-public class CreateDisplay implements displayInterface{
+public class CreateDisplay implements displayInterface {
 
-    private ProgramState state;
+    private final ProgramState state;
 
-    public CreateDisplay(){
+    public CreateDisplay() {
         this.state = new ProgramState();
     }
 

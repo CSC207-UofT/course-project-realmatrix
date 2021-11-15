@@ -1,12 +1,12 @@
 package Controller;
 
 import entity.Card;
-import use_case.manager.CardManager;
 import org.junit.Before;
 import org.junit.Test;
 import presenters.ChangePresenter;
+import use_case.manager.CardManager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CardControllerTest {
     CardController cc;
@@ -15,40 +15,41 @@ public class CardControllerTest {
     ChangePresenter cp;
 
     @Before
-    public void createCardController(){
+    public void createCardController() {
         cm = new CardManager();
         cc = new CardController(cm);
         cp = new ChangePresenter();
     }
 
     @Test
-    public void testCreateNewCard(){
+    public void testCreateNewCard() {
         Card newCard = cc.createNewCard("newTerm", "newDef");
         assertEquals("newTerm", newCard.getTerm());
         assertEquals("newDef", newCard.getDefinition());
     }
+
     @Test
-    public void testSetCurrCard(){
+    public void testSetCurrCard() {
         cc.setCurrCard(c1);
         assertEquals(c1, cc.getCurrCard());
     }
 
     @Test
-    public void testChangeCardTerm(){
+    public void testChangeCardTerm() {
         cc.setCurrCard(c1);
         cc.changeCardTerm("c1NewTerm", cp);
         assertEquals("c1NewTerm", cc.getCurrCard().getTerm());
     }
 
     @Test
-    public void testChangeCardDefinition(){
+    public void testChangeCardDefinition() {
         cc.setCurrCard(c1);
         cc.changeCardDefinition("c1NewDef");
         assertEquals("c1NewDef", cc.getCurrCard().getDefinition());
     }
 
     @Test
-    public void testGetCurrCard(){
+    public void testGetCurrCard() {
         cc.setCurrCard(c1);
         assertEquals(c1, cc.getCurrCard());
     }
@@ -68,16 +69,16 @@ public class CardControllerTest {
 //    }
 
     @Test
-    public void testIncreaseProficiency(){
+    public void testIncreaseProficiency() {
         cc.setCurrCard(c1);
         cc.increaseProficiency();
-        assertEquals(c1.getProficiency(),1);
+        assertEquals(c1.getProficiency(), 1);
         cc.increaseProficiency();
-        assertEquals(c1.getProficiency(),2);
+        assertEquals(c1.getProficiency(), 2);
     }
 
     @Test
-    public void testDecreaseProficiency(){
+    public void testDecreaseProficiency() {
         cc.setCurrCard(c1);
 
         cc.increaseProficiency();

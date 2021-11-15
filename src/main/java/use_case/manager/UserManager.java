@@ -21,8 +21,9 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Create a new user if the user doesn't exist in database.
-     * @param name      the username of this user
-     * @param password  the password of this user
+     *
+     * @param name       the username of this user
+     * @param password   the password of this user
      * @param registerOB the output boundary (abstract interface for presenter)
      */
     @Override
@@ -39,6 +40,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Private helper function to createNewUser. Check if a username is unique.
+     *
      * @param username user's choice of username
      * @return true if it is unique; false otherwise
      */
@@ -53,7 +55,8 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * This method is only used in Loader, because user registered before and doesn't need a new id.
-     * @param id id of user
+     *
+     * @param id   id of user
      * @param user User
      */
     public void putUser(String id, User user) {
@@ -62,7 +65,8 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Change name of current user.
-     * @param user the user that needs to change name
+     *
+     * @param user    the user that needs to change name
      * @param newName new name
      */
     @Override
@@ -78,7 +82,8 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Change password of current user.
-     * @param user the user that needs to change password
+     *
+     * @param user        the user that needs to change password
      * @param newPassword new password
      */
     @Override
@@ -89,6 +94,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Add pack into the user's arraylist of packs.
+     *
      * @param user the user that needs to add pack
      * @param pack the pack to be added
      */

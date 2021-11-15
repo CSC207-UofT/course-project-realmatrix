@@ -1,17 +1,15 @@
 package command_line_interface;
 
-import Controller.LearningSystem;
 import Controller.ProgramState;
 import Controller.ReviewController;
 import constants.Constants;
 import entity.Card;
 
-import java.nio.channels.ScatteringByteChannel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ReviewDisplay implements displayInterface{
-    private ProgramState state;
+public class ReviewDisplay implements displayInterface {
+    private final ProgramState state;
 
     public ReviewDisplay() {
         this.state = new ProgramState();
@@ -34,10 +32,10 @@ public class ReviewDisplay implements displayInterface{
         String option = in.nextLine();
         ArrayList<Card> temp = new ArrayList<>();
         if (!option.equals("99")) {
-            
-            try{
+
+            try {
                 temp = con.reviewableCardList();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 //            System.out.println("test:"+ temp.toString());

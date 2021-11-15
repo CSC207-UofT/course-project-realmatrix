@@ -6,7 +6,8 @@ import entity.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class ProgramStateTest {
     ProgramState ps;
@@ -15,7 +16,7 @@ public class ProgramStateTest {
     Card currCard;
 
     @Before
-    public void createProgramState(){
+    public void createProgramState() {
         ps = new ProgramState();
         currCard = new Card("currCardId", "currCardTerm", "currCardDef");
         currUser = new User("currUserId", "currUserName", "currUserPasswrod");
@@ -24,59 +25,56 @@ public class ProgramStateTest {
     }
 
     @Test
-    public void testSetCurrUser(){
+    public void testSetCurrUser() {
         ps.setCurrUser(currUser);
         assertEquals(currUser, ps.getCurrUser());
     }
 
     @Test
-    public void testSetCurrCard(){
+    public void testSetCurrCard() {
         ps.setCurrCard(currCard);
         assertEquals(currCard, ps.getCurrCard());
     }
 
     @Test
-    public void testSetCurrPack(){
+    public void testSetCurrPack() {
         ps.setCurrPack(currPack);
         assertEquals(currPack, ps.getCurrPack());
     }
 
     @Test
-    public void testToString(){
+    public void testToString() {
         ps.setCurrUser(currUser);
         assertEquals("Current User is: " + currUser.toString() +
                 "\n" + "Current Pack is: " + "NULL" + "\n" + "Current Card is: " + "NULL" + "\n", ps.toString());
     }
 
     @Test
-    public void testGetCurrUser(){
+    public void testGetCurrUser() {
         assertNull(ps.getCurrUser());
     }
 
     @Test
-    public void testGetCurrCard(){
+    public void testGetCurrCard() {
         assertNull(ps.getCurrCard());
     }
 
     @Test
-    public void testGetCurrPack(){
+    public void testGetCurrPack() {
         assertNull(ps.getCurrPack());
     }
 
     @Test
-    public void testChoosePack(){
+    public void testChoosePack() {
         ps.setCurrUser(currUser);
 
-        try{
+        try {
             currUser.addPackage(currPack);
             assertEquals(currPack, ps.choosePack("currPackName"));
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 }

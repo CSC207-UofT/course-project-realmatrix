@@ -1,6 +1,5 @@
 package main;
 
-import GUI.start.StartFrame;
 import command_line_interface.CommandLineInterface;
 
 public class Main {

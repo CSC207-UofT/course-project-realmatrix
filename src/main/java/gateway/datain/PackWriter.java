@@ -14,8 +14,9 @@ public class PackWriter extends Writer {
 
     /**
      * Construct a CardWriter object.
+     *
      * @param state the state the program is in
-     * @param o the object (pack) to write/update
+     * @param o     the object (pack) to write/update
      */
     public PackWriter(ProgramState state, Object o) {
         super(state, o);
@@ -24,6 +25,7 @@ public class PackWriter extends Writer {
 
     /**
      * Write or update a package
+     *
      * @throws IOException
      */
     @Override
@@ -38,6 +40,7 @@ public class PackWriter extends Writer {
 
     /**
      * Archive a package. Effectively, this package is deleted because it won't be loaded next time the program runs.
+     *
      * @throws IOException
      */
     @Override

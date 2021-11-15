@@ -1,4 +1,3 @@
-import use_case.manager.UserManager;
 import entity.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,8 +5,9 @@ import output_boundaries.ChangeOutputBoundary;
 import output_boundaries.RegisterOutputBoundary;
 import presenters.ChangePresenter;
 import presenters.RegisterPresenter;
+import use_case.manager.UserManager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserManagerTest {
     UserManager um;
@@ -32,7 +32,7 @@ public class UserManagerTest {
      */
     @Test
     public void testCreateNewUser() {
-        for (User user : um.getItems().values()){
+        for (User user : um.getItems().values()) {
             assertEquals(user1Name, user.getName());
             assertEquals(user1Password, user.getPassword());
         }
@@ -42,7 +42,7 @@ public class UserManagerTest {
      * Test putUser.
      */
     @Test
-    public void testPutUser(){
+    public void testPutUser() {
         um.putUser(user2.getId(), user2);
         assertEquals(user2, um.getItems().get(user2.getId()));
     }
@@ -51,7 +51,7 @@ public class UserManagerTest {
      * Test changeInfo.
      */
     @Test
-    public void testChangeInfo(){
+    public void testChangeInfo() {
         String newName = "user2_newName";
         String newPassword = "user2_newPassword";
         um.changeName(user2, newName, changeOutputBoudary);

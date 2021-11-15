@@ -1,19 +1,19 @@
 package command_line_interface;
 
 import Controller.ProgramState;
-import use_case.manager.LogInOutManager;
-import use_case.manager.UserManager;
 import output_boundaries.RegisterOutputBoundary;
 import presenters.LogInOutPresenter;
 import presenters.RegisterPresenter;
+import use_case.manager.LogInOutManager;
+import use_case.manager.UserManager;
 
 import java.util.Scanner;
 
 public class LoginAndRegisterDisplay {
 
-    private ProgramState state;
+    private final ProgramState state;
 
-    public LoginAndRegisterDisplay(){
+    public LoginAndRegisterDisplay() {
         this.state = new ProgramState();
     }
 

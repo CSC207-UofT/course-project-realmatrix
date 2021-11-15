@@ -1,10 +1,11 @@
 import entity.Card;
-import use_case.manager.CardManager;
 import org.junit.Before;
 import org.junit.Test;
 import presenters.ChangePresenter;
+import use_case.manager.CardManager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class CardManagerTest {
     CardManager cm;
@@ -86,7 +87,7 @@ public class CardManagerTest {
     }
 
     @Test(timeout = 50)
-    public void TestSetCurrCard(){
+    public void TestSetCurrCard() {
         cm.setCurrCard(d);
         assertEquals(d, cm.getCurrCard());
     }

@@ -1,23 +1,18 @@
 package command_line_interface;
 
 import Controller.ProgramState;
-import constants.Constants;
-import entity.Card;
 import entity.Pack;
-import entity.User;
-import use_case.manager.CardManager;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CreateOrChooseDisplay implements displayInterface{
+public class CreateOrChooseDisplay implements displayInterface {
 
     private ProgramState state;
-    private CreateDisplay createDisplay;
-    private ChooseDisplay chooseDisplay;
+    private final CreateDisplay createDisplay;
+    private final ChooseDisplay chooseDisplay;
 
-    public CreateOrChooseDisplay(){
+    public CreateOrChooseDisplay() {
         this.state = new ProgramState();
         this.chooseDisplay = new ChooseDisplay();
         this.createDisplay = new CreateDisplay();
@@ -37,7 +32,7 @@ public class CreateOrChooseDisplay implements displayInterface{
         //TODO: cannot display the user's packages, but there
         ArrayList<Pack> userPackages = this.state.getCurrUser().getPackages();
         System.out.println("The following are all packages you have created:");
-        for (Pack p:userPackages){
+        for (Pack p : userPackages) {
             System.out.println(p.getName());
         }
         System.out.println();
@@ -45,25 +40,19 @@ public class CreateOrChooseDisplay implements displayInterface{
         System.out.println("Create or Choose package? 1. create, 2. choose");
         Scanner in = new Scanner(System.in);
         String opt = in.nextLine();
-        while(!(opt.equals("1") || opt.equals("2"))){
+        while (!(opt.equals("1") || opt.equals("2"))) {
             System.out.println("Create or Choose package? 1. create, 2. choose");
             opt = in.nextLine();
         }
-        if(opt.equals("1")){
+        if (opt.equals("1")) {
             this.createDisplay.setState(this.state);
             this.createDisplay.prompt();
             this.state = this.createDisplay.getState();
-
-//            System.out.print(Constants.CLEAR_CONSOLE);
-//            System.out.flush();
         }
-        if(opt.equals("2")){
+        if (opt.equals("2")) {
             this.chooseDisplay.setState(this.state);
             this.chooseDisplay.prompt();
             this.state = this.chooseDisplay.getState();
-
-//            System.out.print(Constants.CLEAR_CONSOLE);
-//            System.out.flush();
         }
     }
 }

@@ -2,15 +2,14 @@ package Controller;
 
 import entity.Card;
 import entity.Pack;
-import use_case.manager.CardManager;
-import use_case.manager.PackManager;
 import org.junit.Before;
 import org.junit.Test;
+import use_case.manager.CardManager;
+import use_case.manager.PackManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class LearnControllerTest {
     LearnController lc;
@@ -33,17 +32,17 @@ public class LearnControllerTest {
     }
 
     @Test
-    public void testLearnDisplayOnTerm(){
+    public void testLearnDisplayOnTerm() {
         assertEquals("Card1Term", lc.learnDisplay("t", c1));
     }
 
     @Test
-    public void testLearnDisplayOnDefinition(){
+    public void testLearnDisplayOnDefinition() {
         assertEquals("Card2Definition", lc.learnDisplay("d", c2));
     }
 
     @Test
-    public void testLearnableCardListAllLearnable(){
+    public void testLearnableCardListAllLearnable() {
         ArrayList<Card> expectedList = new ArrayList<>();
         expectedList.add(c1);
         expectedList.add(c2);
@@ -51,7 +50,7 @@ public class LearnControllerTest {
     }
 
     @Test
-    public void testLearnableCardListNotAllLearnable(){
+    public void testLearnableCardListNotAllLearnable() {
         ArrayList<Card> expectedList = new ArrayList<>();
         cm.setCurrCard(c1);
         cm.increaseProficiency();
@@ -60,14 +59,13 @@ public class LearnControllerTest {
     }
 
     @Test
-    public void testUpdateMemProficiency(){
+    public void testUpdateMemProficiency() {
         lc.updateMemProficiency("1", c1);
         lc.updateMemProficiency("2", c1);
         lc.updateMemProficiency("2", c2);
         assertEquals(3, c1.getProficiency());
         assertEquals(1, c2.getProficiency());
     }
-
 
 
 }

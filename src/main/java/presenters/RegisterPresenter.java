@@ -7,6 +7,7 @@ public class RegisterPresenter implements RegisterOutputBoundary {
 
     /**
      * Get the registration result.
+     *
      * @param result a boolean value representing registration succeeds or fails.
      */
     public void setRegisterResult(boolean result) {
@@ -20,8 +21,7 @@ public class RegisterPresenter implements RegisterOutputBoundary {
     public void presentRegisterResult() {
         if (this.registerResult) {
             System.out.println("Registration succeeds!");
-        }
-        else {
+        } else {
             System.out.println("Registration fails...Please use another username");
         }
     }

@@ -1,7 +1,6 @@
 package command_line_interface;
 
 import Controller.ProgramState;
-import constants.Constants;
 
 import java.util.Scanner;
 
@@ -9,12 +8,12 @@ public class CommandLineInterface {
 
     private ProgramState state;
 
-    private CreateOrChooseDisplay createOrChooseDisplay;
-    private LoginAndRegisterDisplay loginAndRegisterDisplay;
-    private LearnAndReviewDisplay learnAndReviewDisplay;
+    private final CreateOrChooseDisplay createOrChooseDisplay;
+    private final LoginAndRegisterDisplay loginAndRegisterDisplay;
+    private final LearnAndReviewDisplay learnAndReviewDisplay;
 
 
-    public CommandLineInterface(){
+    public CommandLineInterface() {
         this.state = new ProgramState();
 
         this.createOrChooseDisplay = new CreateOrChooseDisplay();
@@ -35,7 +34,7 @@ public class CommandLineInterface {
 
         System.out.println("Type 99 to quit, else to continue");
         String quit = scanner.nextLine();
-        while(!quit.equals("99")){
+        while (!quit.equals("99")) {
             this.createOrChooseDisplay.setState(this.state);
             this.createOrChooseDisplay.prompt();
             this.state = this.createOrChooseDisplay.getState();

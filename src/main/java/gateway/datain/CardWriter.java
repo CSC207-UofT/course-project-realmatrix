@@ -14,8 +14,9 @@ public class CardWriter extends Writer {
 
     /**
      * Construct a CardWriter object.
+     *
      * @param state the state the program is in
-     * @param o the object (card) to write/update
+     * @param o     the object (card) to write/update
      */
     public CardWriter(ProgramState state, Object o) {
         super(state, o);
@@ -24,6 +25,7 @@ public class CardWriter extends Writer {
 
     /**
      * Write or update a card
+     *
      * @throws IOException
      */
     @Override
@@ -39,6 +41,7 @@ public class CardWriter extends Writer {
 
     /**
      * Archive a card. Effectively, this card is deleted because it won't be loaded next time the program runs.
+     *
      * @throws IOException
      */
     @Override
@@ -46,7 +49,7 @@ public class CardWriter extends Writer {
         new File("user_data/users/" + this.username + "/packages/" + this.packname +
                 "/archived_cards/").mkdirs();
         Files.move(new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
-                        this.card.getTerm() + ".txt").toPath(), new File("user_data/users/" +  this.username +
-                        "/packages/" +  this.packname + "/archived_cards/" + this.card.getTerm() + ".txt").toPath());
+                this.card.getTerm() + ".txt").toPath(), new File("user_data/users/" + this.username +
+                "/packages/" + this.packname + "/archived_cards/" + this.card.getTerm() + ".txt").toPath());
     }
 }

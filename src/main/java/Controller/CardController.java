@@ -37,7 +37,7 @@ public class CardController {
     public Card getCurrCard() {
         return this.cardInputBoundary.getCurrCard();
     }
-    
+
     public void setCurrCard(Card card) {
         this.cardInputBoundary.setCurrCard(card);
     }

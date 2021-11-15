@@ -9,6 +9,7 @@ import output_boundaries.ChangeOutputBoundary;
  */
 public class CardManager extends Manager<Card> implements CardInputBoundary {
     private Card currCard = null; // Initialize to the state where the user is not in a card
+
     public CardManager() {
         super();
     }
@@ -20,7 +21,7 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
      *
      * @param term       The term of the card
      * @param definition The definition of the term
-     * @return           The newly-created card
+     * @return The newly-created card
      */
     public Card createNewCard(String term, String definition) {
         String id = generateId();
@@ -31,7 +32,8 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
 
     /**
      * Change the card's term to a new term specified by user.
-     * @param newTerm the new term the card should change to
+     *
+     * @param newTerm              the new term the card should change to
      * @param changeOutputBoundary the output boundary for getting whether change is successful or not
      */
     public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) {
@@ -46,6 +48,7 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
     /**
      * Helper method of changeCardTerm.
      * Check if this newTerm already exists.
+     *
      * @param newTerm the new term
      * @return true if the new term does not exist; false otherwise
      */
@@ -60,6 +63,7 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
 
     /**
      * Change the card's definition to a new definition specified by user.
+     *
      * @param newDefinition the new definition the card should change to
      */
     public void changeCardDefinition(String newDefinition) {
@@ -82,6 +86,7 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
 
     /**
      * Getter for the current card the user is in.
+     *
      * @return the current card.
      */
     public Card getCurrCard() {

@@ -9,10 +9,16 @@ import output_boundaries.ChangeOutputBoundary;
  */
 public interface CardInputBoundary {
     Card createNewCard(String term, String definition);
+
     void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary);
+
     void changeCardDefinition(String newDefinition);
+
     void increaseProficiency();
+
     void decreaseProficiency();
+
     Card getCurrCard(); //May not be needed
+
     void setCurrCard(Card card);    //May not be needed
 }

@@ -23,6 +23,7 @@ public class LearnGeneratorTest {
 
     /**
      * Create a LearnGenerator with Pack of one card with proficiency > 0 and two card with proficiency equals 0.
+     *
      * @throws Exception if two or more cards in c1, c2, c3 have the same term.
      */
     @Before

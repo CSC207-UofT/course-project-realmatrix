@@ -15,8 +15,8 @@ public class Card {
      * Construct a Card with given id, term, and definition.
      * Initialize the proficiency of the card to 0.
      *
-     * @param id    The unique id of this card
-     * @param term  The term on the card
+     * @param id         The unique id of this card
+     * @param term       The term on the card
      * @param definition The definition to the term,
      *                   which is something the user wants to memorize
      */
@@ -63,6 +63,7 @@ public class Card {
 
     /**
      * Change the term on this card to a new term.
+     *
      * @param newTerm the new term for the card.
      */
     public void setTerm(String newTerm) {
@@ -71,6 +72,7 @@ public class Card {
 
     /**
      * Change the definition on this card.
+     *
      * @param newDefinition the new definition for the card.
      */
     public void setDefinition(String newDefinition) {

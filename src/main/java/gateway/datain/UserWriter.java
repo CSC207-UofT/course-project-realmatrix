@@ -9,13 +9,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class UserWriter extends Writer{
+public class UserWriter extends Writer {
     private final User user;
 
     /**
      * Construct a CardWriter object.
+     *
      * @param state the state the program is in
-     * @param o the object (pack) to write/update
+     * @param o     the object (pack) to write/update
      */
     public UserWriter(ProgramState state, Object o) {
         super(state, o);
@@ -24,6 +25,7 @@ public class UserWriter extends Writer{
 
     /**
      * Write or update a user
+     *
      * @throws IOException
      */
     @Override
@@ -37,6 +39,7 @@ public class UserWriter extends Writer{
 
     /**
      * Archive a user. Effectively, this user is deleted because it won't be loaded next time the program runs.
+     *
      * @throws IOException
      */
     @Override

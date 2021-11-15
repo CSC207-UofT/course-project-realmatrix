@@ -14,8 +14,7 @@ public class ChangePresenter implements ChangeOutputBoundary {
     public void presentChangeResult() {
         if (this.changeResult) {
             System.out.println("OK! You have the new username now.");
-        }
-        else {
+        } else {
             System.out.println("This name is taken. Please use another username");
         }
     }

@@ -1,7 +1,8 @@
 package GUI;
+
 import javax.swing.*;
 
-public class BasicFrame extends JFrame{
+public class BasicFrame extends JFrame {
     public BasicFrame(String title) {
         super();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

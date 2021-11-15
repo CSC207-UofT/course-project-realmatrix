@@ -6,7 +6,7 @@ import input_boundaries.UserInputBoundary;
 import output_boundaries.LogInOutOutputBoundary;
 
 /**
- * This controller manages log-in and log-out tasks for users. 
+ * This controller manages log-in and log-out tasks for users.
  */
 public class LogInOutController {
     public LogInOutInputBoundary logInOutIB;
@@ -26,7 +26,7 @@ public class LogInOutController {
      * @param username user's username, cannot be repeated
      * @param password user's password
      */
-    public void login(String username, String password, LogInOutOutputBoundary logInOutOB){
+    public void login(String username, String password, LogInOutOutputBoundary logInOutOB) {
         logInOutIB.logInUser(username, password, logInOutOB);
     }
 

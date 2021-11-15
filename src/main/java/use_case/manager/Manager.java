@@ -19,6 +19,7 @@ public abstract class Manager<T> {
 
     /**
      * Return a unique identifier
+     *
      * @return an id
      */
     protected String generateId() {

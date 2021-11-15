@@ -1,6 +1,7 @@
 package output_boundaries;
 
 public interface RegisterOutputBoundary {
-    public void setRegisterResult(boolean result);
-    public void presentRegisterResult();
+    void setRegisterResult(boolean result);
+
+    void presentRegisterResult();
 }

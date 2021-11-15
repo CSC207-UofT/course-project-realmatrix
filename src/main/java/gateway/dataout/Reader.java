@@ -10,6 +10,7 @@ public class Reader {
 
     /**
      * Return a complete list of file paths, in strings, leading to up till usernames.
+     *
      * @return A list of file paths in strings
      */
     ArrayList<String> readUsers() {
@@ -27,6 +28,7 @@ public class Reader {
 
     /**
      * Return a complete list of file paths, in strings, leading to up till package names, of a specified user.
+     *
      * @param userName The specified user
      * @return A list of file paths in strings
      */
@@ -45,6 +47,7 @@ public class Reader {
 
     /**
      * Return a complete list of file paths, in strings, leading to up till package names, of a specified user -> pack.
+     *
      * @param userName The specified user
      * @param packName The specified package
      * @return A list of file paths in strings

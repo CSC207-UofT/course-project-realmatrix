@@ -15,7 +15,7 @@ public class SearchPresenter<T> implements output_boundaries.SearchOutputBoundar
 
     @Override
     public void presentSearchResult() {
-        for (T object: this.searchResult) {
+        for (T object : this.searchResult) {
             System.out.println(object);
         }
     }

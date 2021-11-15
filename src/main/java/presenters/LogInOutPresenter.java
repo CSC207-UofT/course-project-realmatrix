@@ -1,13 +1,14 @@
 package presenters;
 
-import use_case.manager.LogInOutManager;
 import output_boundaries.LogInOutOutputBoundary;
+import use_case.manager.LogInOutManager;
 
 public class LogInOutPresenter implements LogInOutOutputBoundary {
     private LogInOutManager.LoggedIn loginResult; // A boolean value representing login succeeds or fails
 
     /**
      * Get the login result from LoginManager's login method.
+     *
      * @param loginResult a boolean value representing login succeeds or fails.
      */
     @Override

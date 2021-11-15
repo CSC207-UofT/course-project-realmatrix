@@ -38,15 +38,15 @@ public class LogInOutManager implements LogInOutInputBoundary {
     }
 
     /**
-     *
      * /**
      * Return the User with given name and password
+     *
      * @param name     name of a User
      * @param password password of a User (matches the name)
      * @return User    the user with given name and password
      * @throws Exception A UserNotFound exception.
      */
-    private User findUser(String name, String password) throws Exception{
+    private User findUser(String name, String password) throws Exception {
         for (User user : this.manager.getItems().values()) {
             if (Objects.equals(user.getName(), name) && Objects.equals(user.getPassword(), password)) {
                 return user;
@@ -58,8 +58,9 @@ public class LogInOutManager implements LogInOutInputBoundary {
 
     /**
      * Login the user with given username and password.
-     * @param name the username the client enters
-     * @param password the password the client enters
+     *
+     * @param name       the username the client enters
+     * @param password   the password the client enters
      * @param logInOutOB a outputBoundary that gets the result of login.
      */
     @Override
@@ -67,8 +68,7 @@ public class LogInOutManager implements LogInOutInputBoundary {
         if (this.loggedIn == LoggedIn.LOGIN_SUCCEED) {
             // This is the case where there's already a user signed in.
             this.loggedIn = LoggedIn.ALREADY_LOGGED_IN;
-        }
-        else {
+        } else {
             try {
                 this.currUser = this.findUser(name, password); // Check if there's a user with such username and password
                 this.loggedIn = LoggedIn.LOGIN_SUCCEED;
@@ -81,6 +81,7 @@ public class LogInOutManager implements LogInOutInputBoundary {
 
     /**
      * Sign off the current user.
+     *
      * @param logInOutOB
      */
     @Override

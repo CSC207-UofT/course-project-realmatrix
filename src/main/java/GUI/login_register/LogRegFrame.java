@@ -51,21 +51,21 @@ public abstract class LogRegFrame extends BasicFrame implements ActionListener {
 
     /**
      * Set layout for basic components:
-     *          username label-text field, password label-text field, back button.
+     * username label-text field, password label-text field, back button.
      */
     public void basicLayout() {
-        usernameLabel.setBounds(50,20,90,25);
+        usernameLabel.setBounds(50, 20, 90, 25);
         add(usernameLabel);
 
         username.setBounds(200, 20, 150, 25);
         add(username);
 
         pwLabel.setBounds(usernameLabel.getX(), usernameLabel.getY() + 30,
-                usernameLabel.getWidth(),usernameLabel.getHeight());
+                usernameLabel.getWidth(), usernameLabel.getHeight());
         add(pwLabel);
 
         pw.setBounds(username.getX(), username.getY() + 30,
-                username.getWidth(),username.getHeight());
+                username.getWidth(), username.getHeight());
         add(pw);
 
         backButton.setBounds(70, 120, 100, 40);

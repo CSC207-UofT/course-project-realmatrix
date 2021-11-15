@@ -19,12 +19,16 @@ public abstract class Writer {
         }
     }
 
-    /** Write the object into database
+    /**
+     * Write the object into database
+     *
      * @throws IOException
      */
     public abstract void write() throws IOException;
 
-    /** Archive the object in database (store in database but won't load in future)
+    /**
+     * Archive the object in database (store in database but won't load in future)
+     *
      * @throws IOException
      */
     public abstract void archive() throws IOException;

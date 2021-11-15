@@ -1,17 +1,16 @@
 package command_line_interface;
 
 import Controller.LearnController;
-import Controller.LearningSystem;
 import Controller.ProgramState;
 import constants.Constants;
 import entity.Card;
 
 import java.util.Scanner;
 
-public class LearnDisplay implements displayInterface{
-    private ProgramState state;
+public class LearnDisplay implements displayInterface {
+    private final ProgramState state;
 
-    public LearnDisplay(){
+    public LearnDisplay() {
         this.state = new ProgramState();
     }
 

@@ -24,7 +24,7 @@ public class StartFrame extends BasicFrame implements ActionListener {
         startPanel = new JPanel(new GridLayout(3, 1));
 
         helloMessage = new JLabel("Welcome to Recaller!", SwingConstants.CENTER);
-        helloMessage.setFont(new Font("verdana" ,Font.BOLD | Font.ITALIC,38));
+        helloMessage.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
         lgButton = new StartButton("Login");
         lgButton.addActionListener(this);
@@ -49,6 +49,7 @@ public class StartFrame extends BasicFrame implements ActionListener {
 
     /**
      * Trigger opening of new frame and closure of the start frame when pressing button
+     *
      * @param e ActionEvent item
      */
     @Override

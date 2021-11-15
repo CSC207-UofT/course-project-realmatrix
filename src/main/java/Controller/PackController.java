@@ -14,23 +14,23 @@ import output_boundaries.SortOutputBoundary;
 public class PackController {
     private final PackInputBoundary packIB;
 
-    public PackController(PackInputBoundary packIB){
+    public PackController(PackInputBoundary packIB) {
         this.packIB = packIB;
     }
 
     /**
      * Create and return a new pack with specified pack name.
      *
-     * @param packName   The name of the pack
+     * @param packName The name of the pack
      */
-    public void createPack(String packName){
+    public void createPack(String packName) {
         this.packIB.createNewPack(packName);
     }
 
     /**
      * Change a pack's name with specified pack name.
      *
-     * @param newPackName   The name of the pack
+     * @param newPackName The name of the pack
      */
     public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) {
         this.packIB.changePackName(newPackName, changeOutputBoudary);
@@ -38,9 +38,8 @@ public class PackController {
 
     /**
      * Add a new card into current pack.
-     *
      */
-    public String addCard(Card c, AddOutputBoundary AddOutputBoundary){
+    public String addCard(Card c, AddOutputBoundary AddOutputBoundary) {
         try {
             this.packIB.addCard(c, AddOutputBoundary);
             return "Card" + c.getTerm() + "created";
@@ -51,16 +50,16 @@ public class PackController {
 
     /**
      * Delete a specific card in the current pack.
-     *
      */
-    public void deleteCard(Card card){
+    public void deleteCard(Card card) {
         this.packIB.deleteCard(card);
     }
 
     /**
      * Users can search cards in this pack by card's term and definition.
      * Return an arraylist of cards that contain (not necessarily equal to) keyword.
-     * @param keyword  the keyword that the user searches
+     *
+     * @param keyword the keyword that the user searches
      */
     public void searchCard(String keyword, SearchOutputBoundary<Card> searchOutputBoundary) {
         this.packIB.searchCard(keyword, searchOutputBoundary);
@@ -82,6 +81,7 @@ public class PackController {
 
     /**
      * Getter for the current pack the user is in.
+     *
      * @return the current pack.
      */
     public Pack getCurrPack() {

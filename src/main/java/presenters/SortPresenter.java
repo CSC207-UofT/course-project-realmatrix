@@ -12,7 +12,7 @@ public class SortPresenter<T> implements output_boundaries.SortOutputBoundary<T>
 
     @Override
     public void presentSearchResult() {
-        for (T object: this.sortResult) {
+        for (T object : this.sortResult) {
             System.out.println(object);
         }
     }

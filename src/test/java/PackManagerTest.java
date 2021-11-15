@@ -1,8 +1,5 @@
-import entity.Pack;
 import entity.Card;
-import use_case.manager.CardManager;
-import use_case.manager.PackManager;
-//import manager.Manager;
+import entity.Pack;
 import org.junit.Before;
 import org.junit.Test;
 import output_boundaries.AddOutputBoundary;
@@ -11,13 +8,13 @@ import output_boundaries.SortOutputBoundary;
 import presenters.AddPresenter;
 import presenters.SearchPresenter;
 import presenters.SortPresenter;
+import use_case.manager.CardManager;
+import use_case.manager.PackManager;
 
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.Collections;
-//import java.util.Comparator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PackManagerTest {
     PackManager pm;
@@ -50,12 +47,12 @@ public class PackManagerTest {
     }
 
     @Test
-    public void TestCreateNewPack(){
+    public void TestCreateNewPack() {
         assertEquals(pName, p.getName());
     }
 
     @Test
-    public void TestAddCard(){
+    public void TestAddCard() {
         List<Card> cardList = pm.sortZtoA(sortOutputBoundary);
         assertEquals(c1, cardList.get(0));
     }

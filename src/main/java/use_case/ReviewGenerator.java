@@ -1,13 +1,12 @@
 package use_case;
 
+import constants.Constants;
 import entity.Card;
 import entity.Pack;
-import constants.Constants;
 import input_boundaries.ReviewInputBoundary;
 
-import java.util.Collections;
-
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundary {
 
@@ -18,10 +17,11 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
     /**
      * Generate a card list containing all cards eligible for reviewing
      * with random order and multiple occurrences of each card.
+     *
      * @return an arraylist of card
      */
     @Override
-    public ArrayList<Card> getDoCardList(){
+    public ArrayList<Card> getDoCardList() {
         doable();
         return this.withProficiencyBasedCards();
     }
@@ -43,11 +43,11 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
      * Helper method for getDoCardList().
      * Return a list of doable cards, each card is repeated for some times according to its proficiency.
      */
-    private ArrayList<Card> withProficiencyBasedCards(){
+    private ArrayList<Card> withProficiencyBasedCards() {
         ArrayList<Card> newCards = new ArrayList<>();
-        for (Card c : this.cardList){
+        for (Card c : this.cardList) {
             int prof = c.getProficiency();
-            switch (prof){
+            switch (prof) {
                 case 1:
                 case 2: { // Cards with proficiency 1/2 has 3 occurrences.
                     newCards.add(c);

@@ -1,6 +1,6 @@
 package entity;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * A pack that stores cards.
@@ -14,8 +14,9 @@ public class Pack {
 
     /**
      * Construct a pack with given id and name.
-     * @param id    a unique id of the pack
-     * @param name  name of the pack
+     *
+     * @param id   a unique id of the pack
+     * @param name name of the pack
      */
     public Pack(String id, String name) {
         this.id = id;
@@ -27,7 +28,7 @@ public class Pack {
      * Add a new Card into the pack's cardList.
      * Throws an exception if the new card's term already exists in the pack.
      *
-     * @param card  a Card item
+     * @param card a Card item
      */
     public void addCard(Card card) throws Exception {
         for (Card c : this.cardList) {
@@ -40,6 +41,7 @@ public class Pack {
 
     /**
      * Remove a Card in a pack.
+     *
      * @param card the card to be removed
      */
     public void deleteCard(Card card) {
@@ -59,7 +61,7 @@ public class Pack {
     }
 
     /**
-    Change the name of the pack.
+     * Change the name of the pack.
      */
     public void changeName(String newName) {
         this.name = newName;

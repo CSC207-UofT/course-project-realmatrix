@@ -2,18 +2,14 @@ package command_line_interface;
 
 import Controller.ProgramState;
 import constants.Constants;
-import entity.Card;
-import entity.Pack;
-import entity.User;
 
-import java.util.Properties;
 import java.util.Scanner;
 
-public class LearnAndReviewDisplay implements displayInterface{
+public class LearnAndReviewDisplay implements displayInterface {
 
     private ProgramState state;
-    private LearnDisplay learnDisplay;
-    private ReviewDisplay reviewDisplay;
+    private final LearnDisplay learnDisplay;
+    private final ReviewDisplay reviewDisplay;
 
     public LearnAndReviewDisplay() {
         this.state = new ProgramState();
@@ -24,7 +20,7 @@ public class LearnAndReviewDisplay implements displayInterface{
     public void setState(ProgramState state) {
         this.state.setCurrUser(state.getCurrUser());
         this.state.setCurrPack(state.getCurrPack());
-        if(state.getCurrCard()!=null){
+        if (state.getCurrCard() != null) {
             this.state.setCurrCard(state.getCurrCard());
         }
     }

@@ -16,7 +16,7 @@ public class RegisterFrame extends LogRegFrame {
         // Create component: register button
         rgButton = new JButton("Register");
         rgButton.addActionListener(this);
-        
+
         // Create component: confirm password label-text field
         pw2Label = new JLabel("Password Again: ", JLabel.TRAILING);
         pw2 = new JPasswordField(20);
@@ -29,7 +29,7 @@ public class RegisterFrame extends LogRegFrame {
 
     /**
      * Layout the rest of the components relative to basic components:
-     *      password confirming label-text field, register button
+     * password confirming label-text field, register button
      */
     @Override
     protected void layoutRestComp() {
@@ -48,7 +48,7 @@ public class RegisterFrame extends LogRegFrame {
 
     /**
      * Set actions for clicking register and back buttons.
-     *
+     * <p>
      * Clicking register button: check register successful or not
      * Clicking back button: back to the start frame
      *

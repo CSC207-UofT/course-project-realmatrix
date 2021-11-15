@@ -2,7 +2,8 @@ import entity.Card;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class CardTest {
     String id = "1234";
@@ -10,7 +11,8 @@ public class CardTest {
     String definition = "a tall cupboard or wardrobe with a door, used for storage.";
     Card c;
 
-    @Before public void createCard() {
+    @Before
+    public void createCard() {
         c = new Card(id, term, definition);
     }
 

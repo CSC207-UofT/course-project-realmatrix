@@ -4,8 +4,8 @@ import entity.Card;
 import entity.Pack;
 import input_boundaries.CardInputBoundary;
 import input_boundaries.ReviewInputBoundary;
-import use_case.manager.CardManager;
 import use_case.ReviewGenerator;
+import use_case.manager.CardManager;
 
 import java.util.ArrayList;
 

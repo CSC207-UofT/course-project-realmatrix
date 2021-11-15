@@ -1,7 +1,9 @@
 package gateway.datain;
 
 import Controller.ProgramState;
-import entity.*;
+import entity.Card;
+import entity.Pack;
+import entity.User;
 
 import java.io.IOException;
 
@@ -12,9 +14,8 @@ import java.io.IOException;
 public class DataInFactory {
 
     /**
-     *
      * @param state the current state the program is in
-     * @param o the object needs to write/archive
+     * @param o     the object needs to write/archive
      * @return a Writer according to objects we need to write/archive.
      * @throws IOException the object cannot be written/archived into database
      */

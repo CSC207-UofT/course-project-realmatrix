@@ -1,20 +1,20 @@
-import entity.Pack;
 import entity.Card;
+import entity.Pack;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PackTest {
     String id = "123456";
-    String name  = "COG250";
+    String name = "COG250";
     Pack p;
 
     @Before
-    public void createPack(){
+    public void createPack() {
         p = new Pack(id, name);
     }
 
@@ -31,23 +31,23 @@ public class PackTest {
     }
 
     @Test
-    public void  TestGetId(){
+    public void TestGetId() {
         assertEquals(id, p.getId());
     }
 
     @Test
-    public void TestGetName(){
+    public void TestGetName() {
         assertEquals(name, p.getName());
     }
 
     @Test
-    public void TestGetCard(){
+    public void TestGetCard() {
         List<Card> expected = new ArrayList<>();
         assertEquals(expected, p.getCards());
     }
 
     @Test
-    public void TestChangeName(){
+    public void TestChangeName() {
         String newName = "COG250 Terminology";
         p.changeName(newName);
         assertEquals(newName, p.getName());

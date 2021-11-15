@@ -10,6 +10,8 @@ import output_boundaries.LogInOutOutputBoundary;
 public interface LogInOutInputBoundary {
 
     void logInUser(String username, String password, LogInOutOutputBoundary logInOutOB);
+
     User getCurrUser() throws Exception;
+
     void signOffUser(LogInOutOutputBoundary logInOutOB);
 }

@@ -1,7 +1,6 @@
 package entity;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * A single user.
@@ -40,7 +39,7 @@ public class User {
     }
 
     public void addPackage(Pack pack) throws Exception {
-        for (Pack p: this.packages) {
+        for (Pack p : this.packages) {
             if (pack.getName().equals(p.getName())) {
                 throw new Exception("Pack already exists."); //TODO: PackExistError
             }
@@ -48,12 +47,11 @@ public class User {
         this.packages.add(pack);
     }
 
-    public ArrayList<Pack> getPackages(){
+    public ArrayList<Pack> getPackages() {
         return this.packages;
     }
 
     /**
-     *
      * @param pack the package to be deleted
      * @return return true if package is successfully deleted, false if package is not in the list
      */

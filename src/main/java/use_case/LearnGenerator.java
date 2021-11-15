@@ -33,8 +33,8 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
     @Override
     protected void doable() {
 //        System.out.println(this.pack.getCards());
-        for(Card c: this.pack.getCards()){
-            if(c.getProficiency()==0){
+        for (Card c : this.pack.getCards()) {
+            if (c.getProficiency() == 0) {
                 this.cardList.add(c);
             }
         }

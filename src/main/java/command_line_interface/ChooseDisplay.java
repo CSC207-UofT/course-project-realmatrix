@@ -1,17 +1,14 @@
 package command_line_interface;
 
 import Controller.ProgramState;
-import constants.Constants;
 import entity.Pack;
-import entity.User;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ChooseDisplay implements displayInterface{
-    private ProgramState state;
+public class ChooseDisplay implements displayInterface {
+    private final ProgramState state;
 
-    public ChooseDisplay(){
+    public ChooseDisplay() {
         this.state = new ProgramState();
     }
 
@@ -40,9 +37,9 @@ public class ChooseDisplay implements displayInterface{
                 flag = true;
             }
         }
-        if(flag){
+        if (flag) {
             this.state.setCurrPack(chosenPack);
-        }else{
+        } else {
             throw new Exception("Package not found");
         }
 

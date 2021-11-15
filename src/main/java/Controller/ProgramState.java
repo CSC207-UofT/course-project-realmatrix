@@ -1,6 +1,8 @@
 package Controller;
 
-import entity.*;
+import entity.Card;
+import entity.Pack;
+import entity.User;
 
 public class ProgramState {
     private User currUser;
@@ -29,25 +31,25 @@ public class ProgramState {
         String user;
         String pack;
         String card;
-        if(this.currUser==null){
+        if (this.currUser == null) {
             user = "NULL";
-        }else{
+        } else {
             user = this.currUser.toString();
         }
-        if(this.currPack==null){
+        if (this.currPack == null) {
             pack = "NULL";
-        }else{
+        } else {
             pack = this.currPack.toString();
         }
-        if(this.currCard==null){
+        if (this.currCard == null) {
             card = "NULL";
-        }else{
+        } else {
             card = this.currCard.toString();
         }
 
         return "Current User is: " + user + "\n" +
-                    "Current Pack is: " + pack + "\n" +
-                    "Current Card is: " + card + "\n";
+                "Current Pack is: " + pack + "\n" +
+                "Current Card is: " + card + "\n";
     }
 
     public User getCurrUser() {
@@ -62,9 +64,9 @@ public class ProgramState {
         return this.currPack;
     }
 
-    public Pack choosePack(String name) throws Exception{
-        for(Pack p: this.currUser.getPackages()){
-            if(p.getName().equals(name)){
+    public Pack choosePack(String name) throws Exception {
+        for (Pack p : this.currUser.getPackages()) {
+            if (p.getName().equals(name)) {
                 return p;
             }
         }

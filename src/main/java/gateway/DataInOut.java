@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Concrete class for IDataInOut, can store and load data from database.
  */
-public class DataInOut implements IDataInOut{
+public class DataInOut implements IDataInOut {
     private final DataInFactory factory;    // A factory for creating Writer class
 
     // Initialize a factory
