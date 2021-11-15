@@ -11,4 +11,4 @@ To solve the problem, we implement Factory Design Pattern. This pattern takes in
 We plan to use this design pattern to update status in `ProgramState`. For example, if `LogInOutManager` successfully signs in a user, it will trigger `ProgramState` to update its `user` attribute from `null` to the user that signs in.
 
 ### Plan to implement: _Template Method Design Pattern
-We plan 
+We plan to 
