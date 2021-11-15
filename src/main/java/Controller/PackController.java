@@ -67,17 +67,13 @@ public class PackController {
     }
 
 
-    // The following 4 methods sort card in a pack
+    // The following 3 methods sort card in a pack
     public void sortCardAtoZ(SortOutputBoundary<Card> sortOutputBoundary) {
         this.packIB.sortAtoZ(sortOutputBoundary);
     }
 
     public void sortPackNewToOld(SortOutputBoundary<Card> sortOutputBoundary) {
         this.packIB.sortNewToOld(sortOutputBoundary);
-    }
-
-    public void sortPackProfLowToHigh(SortOutputBoundary<Card> sortOutputBoundary) {
-        this.packIB.sortProLowToHigh();
     }
 
     public void sortPackRandom(SortOutputBoundary<Card> sortOutputBoundary) {

@@ -40,7 +40,7 @@ public class ReviewDisplay implements displayInterface{
             }catch(Exception e){
                 System.out.println(e.getMessage());
             }
-            System.out.println("test:"+ temp.toString());
+//            System.out.println("test:"+ temp.toString());
             System.out.println();
             for (Card c : temp) {
                 System.out.println(c.getTerm());
