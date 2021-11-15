@@ -1,7 +1,7 @@
 # A summary of design patterns our group has implemented (or plans to implement).
 
 ### Already implemented: _Factory Design Pattern_
-This design pattern is implemented in `interface_adapter.gateway`. Some background about our `Writer` class which write data into database:  we have different `Writer` class for writing different entity (e.g. `CardWriter` to write a `Card` object into database). 
+This design pattern is implemented in `interface_adapter.gateway`. Some background about our `Writer` class which write data into database:  we have different `Writer` class for writing different entity (e.g. `CardWriter` to write a `Card` object into database, `PackWriter` to write a `Pack` object into database). 
 
 Thus, if we do not implement Factory Design Pattern, then every time we want to write an entity into the database, we have to decide which writer class should be instantiated. This causes high-coupling problems.
 
