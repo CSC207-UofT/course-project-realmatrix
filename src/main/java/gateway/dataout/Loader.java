@@ -53,7 +53,7 @@ public class Loader {
      * @param user the given user
      * @throws IOException
      */
-    public void userLoad(User user) throws IOException {
+    public void userLoad(User user) throws Exception {
         Reader reader = new Reader();
         for (String packPath : reader.readPacks(user.getName())) { // load this user's packages
             Pack pack = this.putPack(packPath, user);
@@ -90,7 +90,7 @@ public class Loader {
      * @return the loaded package
      * @throws IOException
      */
-    private Pack putPack(String packPath, User user) throws IOException {
+    private Pack putPack(String packPath, User user) throws Exception {
         BufferedReader packInfoFileReader
                 = Files.newBufferedReader(Path.of(packPath + "/package_info.txt"));
         String packInfo = packInfoFileReader.readLine();
@@ -99,12 +99,7 @@ public class Loader {
         String packName = packInfo.split(",")[1];
         //TODO: This line is bad: directly use constructor of entity class
         Pack pack = new Pack(packId, packName);
-        try{
-            user.addPackage(pack); // put Pack into User
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
+        user.addPackage(pack); // put Pack into User
         return pack;
     }
 

@@ -19,6 +19,6 @@ public interface IDataInOut {
     public UserManager initialLoad() throws IOException;
 
     //TODO: Consider pass in a String username and return
-    public void userLoad(User user) throws IOException;
+    public void userLoad(User user) throws Exception;
 
 }

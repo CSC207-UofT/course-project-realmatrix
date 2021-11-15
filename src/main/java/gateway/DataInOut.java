@@ -41,7 +41,7 @@ public class DataInOut implements IDataInOut{
 
     @Override
     //TODO: Consider pass in a String username and return
-    public void userLoad(User user) throws IOException {
+    public void userLoad(User user) throws Exception {
         Loader loader = new Loader();
         loader.userLoad(user);
     }

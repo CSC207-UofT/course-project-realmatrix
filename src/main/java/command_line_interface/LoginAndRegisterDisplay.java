@@ -1,7 +1,6 @@
 package command_line_interface;
 
 import Controller.ProgramState;
-import constants.Constants;
 import manager.LogInOutManager;
 import manager.UserManager;
 import output_boundaries.RegisterOutputBoundary;
@@ -75,13 +74,17 @@ public class LoginAndRegisterDisplay {
             String userName = userInput.nextLine();
             System.out.print("Please input your password: ");
             String password1 = in.nextLine();
-            try {
-                lm.logInUser(userName, password1, logOB);
-            } catch (Exception Exception) {//to be changed more specific
-                lm.signOffUser(logOB);
-                lm.logInUser(userName, password1, logOB);
-            }
+            lm.logInUser(userName, password1, logOB);
             this.state.setCurrUser(lm.getCurrUser());
+            logOB.presentLogInOutResult();
+
+//            try {
+//
+//            } catch (Exception Exception) {//to be changed more specific
+//                lm.signOffUser(logOB);
+//                lm.logInUser(userName, password1, logOB);
+//            }
+
         }
     }
 }
