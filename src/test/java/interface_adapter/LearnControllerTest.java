@@ -11,6 +11,7 @@ import use_case.manager.PackManager;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LearnControllerTest {
     LearnController lc;
@@ -46,8 +47,14 @@ public class LearnControllerTest {
     public void testLearnableCardListAllLearnable() {
         ArrayList<Card> expectedList = new ArrayList<>();
         expectedList.add(c1);
+        expectedList.add(c1);
         expectedList.add(c2);
-        assertEquals(expectedList, lc.learnableCardList());
+        expectedList.add(c2);
+        for (Card c: lc.learnableCardList()){
+            assertTrue(expectedList.contains(c));
+            expectedList.remove(c);
+        }
+        assertEquals(0, expectedList.size());
     }
 
     @Test
@@ -56,7 +63,12 @@ public class LearnControllerTest {
         cm.setCurrCard(c1);
         cm.increaseProficiency();
         expectedList.add(c2);
-        assertEquals(expectedList, lc.learnableCardList());
+        expectedList.add(c2);
+        for (Card c: lc.learnableCardList()){
+            assertTrue(expectedList.contains(c));
+            expectedList.remove(c);
+        }
+        assertEquals(0, expectedList.size());
     }
 
     @Test
