@@ -3,12 +3,12 @@ package interface_adapter.gateway.dataout;
 import entity.Card;
 import entity.Pack;
 import entity.User;
-import use_case.manager.UserManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 /**
  * Data files are structured in this way:
@@ -38,15 +38,13 @@ public class Loader {
      *
      * @return Returns a UserManager.
      */
-    // TODO: Return UserManager from database is not clean.
-    //TODO: Consider return a hashmap <String username, String password>.
-    public UserManager initialLoad() throws IOException {
-        UserManager manager = new UserManager();
+    public HashMap<String, String> initialLoad() throws IOException {
+        HashMap<String, String> map = new HashMap<>();
         Reader reader = new Reader();
         for (String userPath : reader.readUsers()) { // load users
-            this.putUser(userPath, manager);
+            this.putUser(userPath, map);
         }
-        return manager;
+        return map;
     }
 
     /**
@@ -66,24 +64,20 @@ public class Loader {
     }
 
     /**
-     * Helper to Loader.initialLoad(). Load user into user manager.
+     * Helper to Loader.initialLoad(). Load user info.
      *
      * @param userPath directory of user_info.txt
-     * @param manager  user manager to save the user to
-     * @return the loaded user
+     * @param map  map to save the user info to
      * @throws IOException
      */
-    private User putUser(String userPath, UserManager manager) throws IOException {
+    private void putUser(String userPath, HashMap<String, String> map) throws IOException {
         BufferedReader userInfoFileReader = Files.newBufferedReader(Path.of(userPath + "/user_info.txt"));
         String userInfo = userInfoFileReader.readLine();
         userInfoFileReader.close();
         String userId = userInfo.split(",")[0];
         String userName = userInfo.split(",")[1];
         String userPassword = userInfo.split(",")[2];
-        //TODO: This line is bad: directly use constructor of entity class
-        User user = new User(userId, userName, userPassword);
-        manager.putUser(userId, user); // put User into UserManager
-        return user;
+        map.put(userName, userPassword);
     }
 
     /**
@@ -101,7 +95,6 @@ public class Loader {
         packInfoFileReader.close();
         String packId = packInfo.split(",")[0];
         String packName = packInfo.split(",")[1];
-        //TODO: This line is bad: directly use constructor of entity class
         Pack pack = new Pack(packId, packName);
         user.addPackage(pack); // put Pack into User
         return pack;
@@ -122,7 +115,6 @@ public class Loader {
         String cardTerm = cardInfo.split(",")[1];
         String cardDefinition = cardInfo.split(",")[2];
         String cardProficiency = cardInfo.split(",")[3];
-        //TODO: This line is bad: directly use constructor of entity class
         Card card = new Card(cardId, cardTerm, cardDefinition);
         card.setProficiency(Integer.parseInt(cardProficiency));
         try {

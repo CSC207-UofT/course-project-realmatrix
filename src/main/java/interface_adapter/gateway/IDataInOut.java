@@ -2,9 +2,9 @@ package interface_adapter.gateway;
 
 import interface_adapter.Controller.ProgramState;
 import entity.User;
-import use_case.manager.UserManager;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * The interface that implements dependency inversion:
@@ -15,10 +15,8 @@ public interface IDataInOut {
 
     void archive(ProgramState state, Object o) throws IOException;
 
-    //TODO: Consider return a hashmap <String username, String password>.
-    UserManager initialLoad() throws IOException;
+    HashMap<String, String> initialLoad() throws IOException;
 
-    //TODO: Consider pass in a String username and return
     void userLoad(User user) throws Exception;
 
 }

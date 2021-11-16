@@ -5,9 +5,9 @@ import entity.User;
 import interface_adapter.gateway.datain.DataInFactory;
 import interface_adapter.gateway.datain.Writer;
 import interface_adapter.gateway.dataout.Loader;
-import use_case.manager.UserManager;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Concrete class for IDataInOut, can store and load data from database.
@@ -33,14 +33,12 @@ public class DataInOut implements IDataInOut {
     }
 
     @Override
-    //TODO: Consider return a hashmap <String username, String password>.
-    public UserManager initialLoad() throws IOException {
+    public HashMap<String, String> initialLoad() throws IOException {
         Loader loader = new Loader();
         return loader.initialLoad();
     }
 
     @Override
-    //TODO: Consider pass in a String username and return
     public void userLoad(User user) throws Exception {
         Loader loader = new Loader();
         loader.userLoad(user);
