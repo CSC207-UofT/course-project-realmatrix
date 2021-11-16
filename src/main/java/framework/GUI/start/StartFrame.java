@@ -1,8 +1,8 @@
 package framework.GUI.start;
 
+import framework.GUI.BasicFrame;
 import framework.GUI.login_register.LoginFrame;
 import framework.GUI.login_register.RegisterFrame;
-import framework.GUI.BasicFrame;
 
 import javax.swing.*;
 import java.awt.*;

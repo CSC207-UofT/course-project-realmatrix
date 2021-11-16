@@ -1,9 +1,9 @@
-package framework.command_line_interface.GUI;
+package framework.command_line_interface;
 
-import use_case.constants.Constants;
+import entity.Card;
 import interface_adapter.Controller.LearnController;
 import interface_adapter.Controller.ProgramState;
-import entity.Card;
+import use_case.constants.Constants;
 
 import java.util.Scanner;
 

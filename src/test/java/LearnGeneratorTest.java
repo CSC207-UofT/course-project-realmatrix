@@ -24,7 +24,6 @@ public class LearnGeneratorTest {
 
     /**
      * Create a LearnGenerator with Pack of one card with proficiency > 0 and two card with proficiency equals 0.
-     *
      */
     @Before
     public void createLearnGenerator() {

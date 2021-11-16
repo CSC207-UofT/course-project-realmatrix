@@ -22,10 +22,10 @@ public class PackTest {
     public void TestAddCard() {
         Card c = new Card("135", "fragmentation", "don't feel himself as a unit");
         Card d = new Card("136", "equivocation", "explaining things by assuming itself");
-        try{
+        try {
             p.addCard(c);
             p.addCard(d);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         List<Card> expected = new ArrayList<>();

@@ -50,7 +50,7 @@ public class LearnControllerTest {
         expectedList.add(c1);
         expectedList.add(c2);
         expectedList.add(c2);
-        for (Card c: lc.learnableCardList()){
+        for (Card c : lc.learnableCardList()) {
             assertTrue(expectedList.contains(c));
             expectedList.remove(c);
         }
@@ -64,7 +64,7 @@ public class LearnControllerTest {
         cm.increaseProficiency();
         expectedList.add(c2);
         expectedList.add(c2);
-        for (Card c: lc.learnableCardList()){
+        for (Card c : lc.learnableCardList()) {
             assertTrue(expectedList.contains(c));
             expectedList.remove(c);
         }

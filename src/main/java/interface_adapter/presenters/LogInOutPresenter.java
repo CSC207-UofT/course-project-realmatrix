@@ -1,7 +1,7 @@
 package interface_adapter.presenters;
 
-import use_case.output_boundaries.LogInOutOutputBoundary;
 import use_case.manager.LogInOutManager;
+import use_case.output_boundaries.LogInOutOutputBoundary;
 
 public class LogInOutPresenter implements LogInOutOutputBoundary {
     private LogInOutManager.LoggedIn loginResult; // A boolean value representing login succeeds or fails

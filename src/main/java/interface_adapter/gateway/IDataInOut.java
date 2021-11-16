@@ -1,7 +1,7 @@
 package interface_adapter.gateway;
 
-import interface_adapter.Controller.ProgramState;
 import entity.User;
+import interface_adapter.Controller.ProgramState;
 import use_case.manager.UserManager;
 
 import java.io.IOException;

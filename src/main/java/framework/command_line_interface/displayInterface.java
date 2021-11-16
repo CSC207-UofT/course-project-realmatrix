@@ -1,4 +1,4 @@
-package framework.command_line_interface.GUI;
+package framework.command_line_interface;
 
 import interface_adapter.Controller.ProgramState;
 
