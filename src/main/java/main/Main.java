@@ -1,6 +1,6 @@
 package main;
 
-import framework.command_line_interface.GUI.CommandLineInterface;
+import framework.command_line_interface.CommandLineInterface;
 
 public class Main {
 

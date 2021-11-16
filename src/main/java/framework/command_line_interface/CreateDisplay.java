@@ -1,8 +1,8 @@
-package framework.command_line_interface.GUI;
+package framework.command_line_interface;
 
-import interface_adapter.Controller.ProgramState;
 import entity.Card;
 import entity.Pack;
+import interface_adapter.Controller.ProgramState;
 import use_case.manager.CardManager;
 import use_case.manager.PackManager;
 

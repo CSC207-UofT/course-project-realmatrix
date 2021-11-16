@@ -6,9 +6,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class UserTest {
-    String password = "001";
-    String name = "Ziqi";
-    String id = "UserId";
+    final String password = "001";
+    final String name = "Ziqi";
+    final String id = "UserId";
     User u;
     Pack pack1;
     Pack pack2;
@@ -52,7 +52,7 @@ public class UserTest {
     }
 
     @Test
-    public void testCreatePackage() {
+    public void testAddPackage() {
         try {
             u.addPackage(pack1);
         } catch (Exception e) {
@@ -73,6 +73,7 @@ public class UserTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         assertEquals(3, u.getPackages().size());
         assertEquals(pack1, u.getPackages().get(0));
         assertEquals(pack2, u.getPackages().get(1));

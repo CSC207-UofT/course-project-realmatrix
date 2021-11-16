@@ -1,7 +1,7 @@
 package interface_adapter.gateway;
 
-import interface_adapter.Controller.ProgramState;
 import entity.User;
+import interface_adapter.Controller.ProgramState;
 import interface_adapter.gateway.datain.DataInFactory;
 import interface_adapter.gateway.datain.Writer;
 import interface_adapter.gateway.dataout.Loader;

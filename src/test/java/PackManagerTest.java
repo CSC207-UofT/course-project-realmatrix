@@ -18,19 +18,19 @@ import static org.junit.Assert.assertEquals;
 
 public class PackManagerTest {
     PackManager pm;
-    String pName = "COG250";
+    final String pName = "COG250";
     Pack p;
-    String c1Term = "Equivocation";
-    String c1Definition = "Explaining something by assuming itself.";
-    String c2Term = "Fragmentation";
-    String c2Definition = "Don't feel himself as a unit.";
+    final String c1Term = "Equivocation";
+    final String c1Definition = "Explaining something by assuming itself.";
+    final String c2Term = "Fragmentation";
+    final String c2Definition = "Don't feel himself as a unit.";
     CardManager cm1;
     CardManager cm2;
     Card c1;
     Card c2;
-    AddOutputBoundary AddOutputBoundary = new AddPresenter();
-    SortOutputBoundary<Card> sortOutputBoundary = new SortPresenter<>();
-    SearchOutputBoundary<Card> searchOutputBoundary = new SearchPresenter<>();
+    final AddOutputBoundary AddOutputBoundary = new AddPresenter();
+    final SortOutputBoundary<Card> sortOutputBoundary = new SortPresenter<>();
+    final SearchOutputBoundary<Card> searchOutputBoundary = new SearchPresenter<>();
 
     @Before
     public void createPackManager() {

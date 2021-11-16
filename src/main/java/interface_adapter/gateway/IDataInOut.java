@@ -1,7 +1,7 @@
 package interface_adapter.gateway;
 
-import interface_adapter.Controller.ProgramState;
 import entity.User;
+import interface_adapter.Controller.ProgramState;
 
 import java.io.IOException;
 import java.util.HashMap;

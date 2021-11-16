@@ -2,9 +2,9 @@ package interface_adapter;
 
 import entity.Card;
 import interface_adapter.Controller.CardController;
+import interface_adapter.presenters.ChangePresenter;
 import org.junit.Before;
 import org.junit.Test;
-import interface_adapter.presenters.ChangePresenter;
 import use_case.manager.CardManager;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class CardControllerTest {
     CardController cc;
     CardManager cm;
-    Card c1 = new Card("011", "closet", "a tall cupboard or wardrobe with a door, used for storage.");
+    final Card c1 = new Card("011", "closet", "a tall cupboard or wardrobe with a door, used for storage.");
     ChangePresenter cp;
 
     @Before

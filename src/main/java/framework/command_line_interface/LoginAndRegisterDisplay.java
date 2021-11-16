@@ -1,11 +1,11 @@
-package framework.command_line_interface.GUI;
+package framework.command_line_interface;
 
 import interface_adapter.Controller.ProgramState;
-import use_case.output_boundaries.RegisterOutputBoundary;
 import interface_adapter.presenters.LogInOutPresenter;
 import interface_adapter.presenters.RegisterPresenter;
 import use_case.manager.LogInOutManager;
 import use_case.manager.UserManager;
+import use_case.output_boundaries.RegisterOutputBoundary;
 
 import java.util.Scanner;
 

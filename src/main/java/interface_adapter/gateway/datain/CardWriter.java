@@ -1,7 +1,7 @@
 package interface_adapter.gateway.datain;
 
-import interface_adapter.Controller.ProgramState;
 import entity.Card;
+import interface_adapter.Controller.ProgramState;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,7 +26,6 @@ public class CardWriter extends Writer {
     /**
      * Write or update a card
      *
-     * @throws IOException
      */
     @Override
     public void write() throws IOException {
@@ -42,7 +41,6 @@ public class CardWriter extends Writer {
     /**
      * Archive a card. Effectively, this card is deleted because it won't be loaded next time the program runs.
      *
-     * @throws IOException
      */
     @Override
     public void archive() throws IOException {

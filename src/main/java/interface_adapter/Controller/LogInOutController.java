@@ -9,8 +9,8 @@ import use_case.output_boundaries.LogInOutOutputBoundary;
  * This controller manages log-in and log-out tasks for users.
  */
 public class LogInOutController {
-    public LogInOutInputBoundary logInOutIB;
-    public UserInputBoundary userIB;
+    public final LogInOutInputBoundary logInOutIB;
+    public final UserInputBoundary userIB;
 
     /**
      * interface_adapter.Controller for login

@@ -11,7 +11,7 @@ import use_case.output_boundaries.RegisterOutputBoundary;
  * A controller that allows users to change username/password and add packs.
  */
 public class UserController {
-    UserInputBoundary userIB;
+    final UserInputBoundary userIB;
 
     public UserController(UserInputBoundary userIB) {
         this.userIB = userIB;

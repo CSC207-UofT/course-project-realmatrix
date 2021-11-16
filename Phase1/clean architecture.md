@@ -12,7 +12,7 @@ In order to render our project to comply with Clean Architecture, we organize ou
 
 ### What makes our code clean
 ##### Two main aspects：
-1. Implementation of `InputBoudnary` interface and `OutputBoudnary` interface. 
+1. Implementation of `InputBoundary` interface and `OutputBoundary` interface. 
    - Having these two boundaries **reduces dependency**: controllers won't directly make use of specific usecase classes; usecase class won't directly make use of specific interface_adapter.Controller.presenters.
 
 

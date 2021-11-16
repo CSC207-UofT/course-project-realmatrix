@@ -1,8 +1,8 @@
 package framework.GUI.start;
 
+import framework.GUI.BasicFrame;
 import framework.GUI.login_register.LoginFrame;
 import framework.GUI.login_register.RegisterFrame;
-import framework.GUI.BasicFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StartFrame extends BasicFrame implements ActionListener {
-    JPanel startPanel;      // The panel shown on the start frame
-    JLabel helloMessage;    // Greet the user
-    StartButton lgButton;   // A JButton for login
-    StartButton rgButton;   // A JButton for registration
+    final JPanel startPanel;      // The panel shown on the start frame
+    final JLabel helloMessage;    // Greet the user
+    final StartButton lgButton;   // A JButton for login
+    final StartButton rgButton;   // A JButton for registration
 
     /**
      * Build a StartFrame.

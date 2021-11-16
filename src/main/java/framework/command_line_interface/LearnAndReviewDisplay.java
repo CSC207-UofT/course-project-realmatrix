@@ -1,7 +1,7 @@
-package framework.command_line_interface.GUI;
+package framework.command_line_interface;
 
-import use_case.constants.Constants;
 import interface_adapter.Controller.ProgramState;
+import use_case.constants.Constants;
 
 import java.util.Scanner;
 

@@ -1,7 +1,7 @@
-package framework.command_line_interface.GUI;
+package framework.command_line_interface;
 
-import interface_adapter.Controller.ProgramState;
 import entity.Pack;
+import interface_adapter.Controller.ProgramState;
 
 import java.util.ArrayList;
 import java.util.Scanner;

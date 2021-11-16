@@ -11,14 +11,14 @@ import static org.junit.Assert.assertEquals;
 
 public class UserManagerTest {
     UserManager um;
-    String user1Name = "newUser1";
-    String user1Password = "user_password1";
-    String user2Name = "newUser2";
-    String user2Password = "user_password2";
-    String user2Id = "user_id2";
+    final String user1Name = "newUser1";
+    final String user1Password = "user_password1";
+    final String user2Name = "newUser2";
+    final String user2Password = "user_password2";
+    final String user2Id = "user_id2";
     User user2;
-    ChangeOutputBoundary changeOutputBoudary = new ChangePresenter();
-    RegisterOutputBoundary registerOB = new RegisterPresenter();
+    final ChangeOutputBoundary changeOutputBoudary = new ChangePresenter();
+    final RegisterOutputBoundary registerOB = new RegisterPresenter();
 
     @Before
     public void createUserManager() {
