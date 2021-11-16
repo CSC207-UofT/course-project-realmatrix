@@ -7,7 +7,7 @@ import java.util.UUID;
  * An abstract manager.
  */
 public abstract class Manager<T> {
-    protected HashMap<String, T> idToItem;
+    protected final HashMap<String, T> idToItem;
 
     public Manager() {
         this.idToItem = new HashMap<>();

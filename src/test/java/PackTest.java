@@ -9,8 +9,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class PackTest {
-    String id = "123456";
-    String name = "COG250";
+    final String id = "123456";
+    final String name = "COG250";
     Pack p;
 
     @Before

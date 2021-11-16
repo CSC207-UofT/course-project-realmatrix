@@ -14,15 +14,15 @@ import static org.junit.Assert.*;
 
 
 public class ReviewGeneratorTest {
-    CardManager cm = new CardManager();
-    PackManager pm = new PackManager();
+    final CardManager cm = new CardManager();
+    final PackManager pm = new PackManager();
     Pack p1;
     Card c1;
     Card c2;
     Card c3;
     Card c4;
     ReviewGenerator rg;
-    AddOutputBoundary AddOutputBoundary = new AddPresenter();
+    final AddOutputBoundary AddOutputBoundary = new AddPresenter();
 
     /**
      * Create rg with card1 of proficiency 2, card2 of proficiency 3, card3 of proficiency 0, card4 of proficiency 5.

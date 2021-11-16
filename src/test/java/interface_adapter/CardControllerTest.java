@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class CardControllerTest {
     CardController cc;
     CardManager cm;
-    Card c1 = new Card("011", "closet", "a tall cupboard or wardrobe with a door, used for storage.");
+    final Card c1 = new Card("011", "closet", "a tall cupboard or wardrobe with a door, used for storage.");
     ChangePresenter cp;
 
     @Before

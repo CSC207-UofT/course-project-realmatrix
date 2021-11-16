@@ -6,9 +6,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 public class CardTest {
-    String id = "1234";
-    String term = "closet";
-    String definition = "a tall cupboard or wardrobe with a door, used for storage.";
+    final String id = "1234";
+    final String term = "closet";
+    final String definition = "a tall cupboard or wardrobe with a door, used for storage.";
     Card c;
 
     @Before
