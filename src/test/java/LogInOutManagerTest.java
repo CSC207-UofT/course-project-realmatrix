@@ -11,12 +11,12 @@ import static org.junit.Assert.*;
 
 
 public class LogInOutManagerTest {
-    UserManager um = new UserManager();
+    final UserManager um = new UserManager();
     LogInOutManager lm;
-    String user1Name = "newUser1";
-    String user1Password = "user_password1";
-    LogInOutOutputBoundary lp = new LogInOutPresenter();
-    RegisterOutputBoundary rp = new RegisterPresenter();
+    final String user1Name = "newUser1";
+    final String user1Password = "user_password1";
+    final LogInOutOutputBoundary lp = new LogInOutPresenter();
+    final RegisterOutputBoundary rp = new RegisterPresenter();
 
     @Before
     public void createLogInOutManager() {

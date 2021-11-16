@@ -10,8 +10,8 @@ import java.util.ArrayList;
  * cards for user to learn and review
  */
 public abstract class TaskGenerator {
-    protected Pack pack;
-    protected ArrayList<Card> cardList;
+    protected final Pack pack;
+    protected final ArrayList<Card> cardList;
 
     public TaskGenerator(Pack pack) {
         this.pack = pack;

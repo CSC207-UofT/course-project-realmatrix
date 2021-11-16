@@ -7,7 +7,7 @@ import use_case.output_boundaries.RegisterOutputBoundary;
  * A register interface_adapter.Controller that allow user to register.
  */
 public class RegisterController {
-    UserInputBoundary userIB;
+    final UserInputBoundary userIB;
 
     public RegisterController(UserInputBoundary userIB) {
         this.userIB = userIB;

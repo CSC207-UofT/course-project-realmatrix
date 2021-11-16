@@ -14,13 +14,13 @@ import static org.junit.Assert.*;
 
 public class LearnGeneratorTest {
     LearnGenerator lg;
-    CardManager cm = new CardManager();
-    PackManager pm = new PackManager();
+    final CardManager cm = new CardManager();
+    final PackManager pm = new PackManager();
     Pack p1;
     Card c1;
     Card c2;
     Card c3;
-    AddOutputBoundary addOutputBoundary = new AddPresenter();
+    final AddOutputBoundary addOutputBoundary = new AddPresenter();
 
     /**
      * Create a LearnGenerator with Pack of one card with proficiency > 0 and two card with proficiency equals 0.

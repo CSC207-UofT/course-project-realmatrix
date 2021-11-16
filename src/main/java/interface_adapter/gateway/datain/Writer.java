@@ -5,7 +5,7 @@ import interface_adapter.Controller.ProgramState;
 import java.io.IOException;
 
 public abstract class Writer {
-    protected String username;
+    protected final String username;
     protected String packname;
 
     /**
@@ -22,14 +22,12 @@ public abstract class Writer {
     /**
      * Write the object into database
      *
-     * @throws IOException
      */
     public abstract void write() throws IOException;
 
     /**
      * Archive the object in database (store in database but won't load in future)
      *
-     * @throws IOException
      */
     public abstract void archive() throws IOException;
 }
