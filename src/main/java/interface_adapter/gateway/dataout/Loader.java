@@ -74,9 +74,8 @@ public class Loader {
         BufferedReader userInfoFileReader = Files.newBufferedReader(Path.of(userPath + "/user_info.txt"));
         String userInfo = userInfoFileReader.readLine();
         userInfoFileReader.close();
-        String userId = userInfo.split(",")[0];
-        String userName = userInfo.split(",")[1];
-        String userPassword = userInfo.split(",")[2];
+        String userName = userInfo.split(",")[0];
+        String userPassword = userInfo.split(",")[1];
         map.put(userName, userPassword);
     }
 
@@ -93,9 +92,8 @@ public class Loader {
                 = Files.newBufferedReader(Path.of(packPath + "/package_info.txt"));
         String packInfo = packInfoFileReader.readLine();
         packInfoFileReader.close();
-        String packId = packInfo.split(",")[0];
-        String packName = packInfo.split(",")[1];
-        Pack pack = new Pack(packId, packName);
+        String packName = packInfo.split(",")[0];
+        Pack pack = new Pack(packName);
         user.addPackage(pack); // put Pack into User
         return pack;
     }
@@ -111,11 +109,10 @@ public class Loader {
         BufferedReader cardInfoFileReader = Files.newBufferedReader(Path.of(cardPath));
         String cardInfo = cardInfoFileReader.readLine();
         cardInfoFileReader.close();
-        String cardId = cardInfo.split(",")[0];
-        String cardTerm = cardInfo.split(",")[1];
-        String cardDefinition = cardInfo.split(",")[2];
-        String cardProficiency = cardInfo.split(",")[3];
-        Card card = new Card(cardId, cardTerm, cardDefinition);
+        String cardTerm = cardInfo.split(",")[0];
+        String cardDefinition = cardInfo.split(",")[1];
+        String cardProficiency = cardInfo.split(",")[2];
+        Card card = new Card(cardTerm, cardDefinition);
         card.setProficiency(Integer.parseInt(cardProficiency));
         try {
             pack.addCard(card); // put Card into Pack
@@ -123,21 +120,4 @@ public class Loader {
             e.printStackTrace();
         }
     }
-
-    // Tests
-//    public static void main(String... args) throws IOException {
-//        DataInOutFactory factory = new DataInOutFactory();
-//        UserManager manager = factory.load();
-//        System.out.println(manager.getItems().keySet());
-//        for (User user : manager.getItems().values()) {
-//            System.out.println(user.getName());
-//            factory.load(user);
-//            for (Pack pack : user.getPackages()) {
-//                System.out.println(pack.getName());
-//                for (Card card : pack.getCards()) {
-//                    System.out.println(card.getTerm());
-//                }
-//            }
-//        }
-//    }
 }

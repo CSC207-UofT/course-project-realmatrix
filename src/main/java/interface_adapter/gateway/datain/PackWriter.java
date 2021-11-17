@@ -34,7 +34,7 @@ public class PackWriter extends Writer {
         BufferedWriter writer =
                 new BufferedWriter(new FileWriter("user_data/users/" + this.username
                         + "/packages/" + this.pack.getName() + "/package_info.txt"));
-        writer.write(this.pack.getId() + "," + this.pack.getName());
+        writer.write(this.pack.getName());
         writer.close();
     }
 

@@ -33,7 +33,7 @@ public class CardWriter extends Writer {
         BufferedWriter writer =
                 new BufferedWriter(new FileWriter("user_data/users/" + this.username
                         + "/packages/" + this.packname + "/cards/" + this.card.getTerm() + ".txt"));
-        writer.write(this.card.getId() + "," + this.card.getTerm() + ","
+        writer.write(this.card.getTerm() + ","
                 + this.card.getDefinition() + "," + this.card.getProficiency());
         writer.close();
     }
