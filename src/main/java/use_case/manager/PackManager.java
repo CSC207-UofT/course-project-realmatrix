@@ -32,9 +32,8 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
      * @return The newly-created pack
      */
     public Pack createNewPack(String packName) {
-        String id = generateId();
-        Pack p = new Pack(id, packName);
-        this.idToItem.put(id, p);
+        Pack p = new Pack(packName);
+        this.getItems().add(p);
         return p;
     }
 
@@ -63,7 +62,7 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
      * @return true if it is unique; false otherwise
      */
     private boolean uniquePackname(String newPackName) {
-        for (Pack p : this.idToItem.values()) {
+        for (Pack p : this.getItems()) {
             if (newPackName.equals(p.getName())) {
                 return true;
             }

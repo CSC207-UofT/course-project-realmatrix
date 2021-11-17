@@ -6,20 +6,14 @@ import java.util.ArrayList;
  * A single user.
  */
 public class User {
-    private final String id;
     private String name;
     private String password;
     private final ArrayList<Pack> packages;
 
-    public User(String id, String name, String password) {
-        this.id = id;
+    public User(String name, String password) {
         this.name = name;
         this.password = password;
         this.packages = new ArrayList<>();
-    }
-
-    public String getId() {
-        return this.id;
     }
 
     public String getName() {

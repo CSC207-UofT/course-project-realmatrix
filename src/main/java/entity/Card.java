@@ -5,7 +5,6 @@ package entity;
  * the user wants to memorize.
  */
 public class Card {
-    private final String id;
     private String term;
     private String definition;
     private boolean definitionHidden; // If true, hide definition so that users cannot see
@@ -15,13 +14,11 @@ public class Card {
      * Construct a Card with given id, term, and definition.
      * Initialize the proficiency of the card to 0.
      *
-     * @param id         The unique id of this card
      * @param term       The term on the card
      * @param definition The definition to the term,
      *                   which is something the user wants to memorize
      */
-    public Card(String id, String term, String definition) {
-        this.id = id;
+    public Card(String term, String definition) {
         this.term = term;
         this.definition = definition;
         this.definitionHidden = false;
@@ -35,10 +32,6 @@ public class Card {
 
     public void unhideDefinition() {
         this.definitionHidden = false;
-    }
-
-    public String getId() {
-        return this.id;
     }
 
     public String getTerm() {

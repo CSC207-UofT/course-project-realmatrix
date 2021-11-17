@@ -13,7 +13,7 @@ public class CardTest {
 
     @Before
     public void createCard() {
-        c = new Card(id, term, definition);
+        c = new Card(term, definition);
     }
 
     @Test(timeout = 50)
@@ -54,11 +54,6 @@ public class CardTest {
         assertSame(c.getTerm(), newTerm);
     }
 
-
-    @Test(timeout = 50)
-    public void TestGetId() {
-        assertSame(c.getId(), id);
-    }
 
     @Test(timeout = 50)
     public void TestSetProficiencyInRange() {

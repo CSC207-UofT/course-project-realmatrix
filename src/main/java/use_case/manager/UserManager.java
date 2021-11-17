@@ -29,9 +29,8 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     @Override
     public void createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
         if (uniqueUsername(name)) {
-            String id = super.generateId();
-            User user = new User(id, name, password);
-            this.idToItem.put(id, user);
+            User user = new User(name, password);
+            this.getItems().add(user);
             registerOB.setRegisterResult(true);
         } else {
             registerOB.setRegisterResult(false);
@@ -45,7 +44,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @return true if it is unique; false otherwise
      */
     private boolean uniqueUsername(String username) {
-        for (User user : this.getItems().values()) {
+        for (User user : this.getItems()) {
             if (Objects.equals(user.getName(), username)) {
                 return false;
             }
@@ -56,11 +55,10 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     /**
      * This method is only used in Loader, because user registered before and doesn't need a new id.
      *
-     * @param id   id of user
      * @param user User
      */
-    public void putUser(String id, User user) {
-        this.idToItem.put(id, user);
+    public void putUser(User user) {
+        this.getItems().add(user);
     }
 
     /**

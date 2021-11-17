@@ -9,19 +9,18 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class PackTest {
-    final String id = "123456";
     final String name = "COG250";
     Pack p;
 
     @Before
     public void createPack() {
-        p = new Pack(id, name);
+        p = new Pack(name);
     }
 
     @Test
     public void TestAddCard() {
-        Card c = new Card("135", "fragmentation", "don't feel himself as a unit");
-        Card d = new Card("136", "equivocation", "explaining things by assuming itself");
+        Card c = new Card("fragmentation", "don't feel himself as a unit");
+        Card d = new Card("equivocation", "explaining things by assuming itself");
         try {
             p.addCard(c);
             p.addCard(d);
@@ -32,11 +31,6 @@ public class PackTest {
         expected.add(c);
         expected.add(d);
         assertEquals(expected, p.getCards());
-    }
-
-    @Test
-    public void TestGetId() {
-        assertEquals(id, p.getId());
     }
 
     @Test

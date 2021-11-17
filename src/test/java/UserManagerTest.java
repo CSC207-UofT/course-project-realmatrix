@@ -24,7 +24,7 @@ public class UserManagerTest {
     public void createUserManager() {
         um = new UserManager();
         um.createNewUser(user1Name, user1Password, registerOB);
-        user2 = new User(user2Id, user2Name, user2Password);
+        user2 = new User(user2Name, user2Password);
     }
 
     /**
@@ -32,19 +32,10 @@ public class UserManagerTest {
      */
     @Test
     public void testCreateNewUser() {
-        for (User user : um.getItems().values()) {
+        for (User user : um.getItems()) {
             assertEquals(user1Name, user.getName());
             assertEquals(user1Password, user.getPassword());
         }
-    }
-
-    /**
-     * Test putUser.
-     */
-    @Test
-    public void testPutUser() {
-        um.putUser(user2.getId(), user2);
-        assertEquals(user2, um.getItems().get(user2.getId()));
     }
 
     /**

@@ -24,9 +24,8 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
      * @return The newly-created card
      */
     public Card createNewCard(String term, String definition) {
-        String id = generateId();
-        Card c = new Card(id, term, definition);
-        this.idToItem.put(id, c);
+        Card c = new Card(term, definition);
+        this.getItems().add(c);
         return c;
     }
 
@@ -53,7 +52,7 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
      * @return true if the new term does not exist; false otherwise
      */
     private boolean uniqueCardTerm(String newTerm) {
-        for (Card c : this.idToItem.values()) {
+        for (Card c : this.getItems()) {
             if (newTerm.equals(c.getTerm())) {
                 return false;
             }

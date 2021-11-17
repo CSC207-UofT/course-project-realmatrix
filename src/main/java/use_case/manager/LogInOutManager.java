@@ -47,7 +47,7 @@ public class LogInOutManager implements LogInOutInputBoundary {
      * @throws Exception A UserNotFound exception.
      */
     private User findUser(String name, String password) throws Exception {
-        for (User user : this.manager.getItems().values()) {
+        for (User user : this.manager.getItems()) {
             if (Objects.equals(user.getName(), name) && Objects.equals(user.getPassword(), password)) {
                 return user;
             }

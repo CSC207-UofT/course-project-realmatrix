@@ -9,17 +9,14 @@ import java.util.ArrayList;
 public class Pack {
 
     private final ArrayList<Card> cardList; // oldest cards in the front, newly added ones at the end
-    private final String id;
     private String name;
 
     /**
      * Construct a pack with given id and name.
      *
-     * @param id   a unique id of the pack
      * @param name name of the pack
      */
-    public Pack(String id, String name) {
-        this.id = id;
+    public Pack(String name) {
         this.name = name;
         this.cardList = new ArrayList<>();
     }
@@ -46,10 +43,6 @@ public class Pack {
      */
     public void deleteCard(Card card) {
         this.cardList.remove(card);
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {

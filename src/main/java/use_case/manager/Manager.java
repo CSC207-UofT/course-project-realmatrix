@@ -1,28 +1,19 @@
 package use_case.manager;
 
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.HashSet;
 
 /**
  * An abstract manager.
  */
 public abstract class Manager<T> {
-    protected final HashMap<String, T> idToItem;
+    private final HashSet<T> idToItem;
 
     public Manager() {
-        this.idToItem = new HashMap<>();
+        this.idToItem = new HashSet<>();
     }
 
-    public HashMap<String, T> getItems() {
+    public HashSet<T> getItems() {
         return this.idToItem;
-    }
-
-    /**
-     * Return a unique identifier
-     *
-     * @return an id
-     */
-    protected String generateId() {
-        return UUID.randomUUID().toString();
     }
 }

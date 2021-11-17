@@ -16,15 +16,10 @@ public class UserTest {
 
     @Before
     public void createUser() {
-        u = new User(id, name, password);
-        pack1 = new Pack("01", "CSC207");
-        pack2 = new Pack("02", "CSC236");
-        pack3 = new Pack("03", "COG250");
-    }
-
-    @Test
-    public void testGetId() {
-        assertEquals(id, u.getId());
+        u = new User(name, password);
+        pack1 = new Pack("CSC207");
+        pack2 = new Pack("CSC236");
+        pack3 = new Pack("COG250");
     }
 
     @Test
