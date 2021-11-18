@@ -3,6 +3,7 @@ package framework.GUI.user;
 import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.start.StartFrame;
+import interface_adapter.presenters.ChangePresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -75,6 +76,8 @@ public class UserFrame extends BasicFrame implements ActionListener {
             new StartFrame();
         } else if (e.getSource() == changeNameButton) {
             new ChangeUsernameFrame(user);
+        } else if (e.getSource() == changePasswordButton) {
+            new ChangePasswordFrame(user);
         }
         // TODO: Complete conditionals for each of the five buttons
         setVisible(false);

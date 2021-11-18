@@ -13,29 +13,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
+public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     final User user;
-    final JPanel changeNamePanel;
+    final JPanel changePasswordPanel;
     final JLabel message;
-    final JTextField newName;
-    final JLabel newNameLabel;
+    final JTextField newPassword;
+    final JLabel newPasswordLabel;
     final JButton finishButton;
 
     /**
      * Build a StartFrame.
      */
-    public ChangeUsernameFrame(User user) {
+    public ChangePasswordFrame(User user) {
         super("Recaller");
         this.user = user;
         // 1. Create components shown on the frame
-        changeNamePanel = new JPanel(new GridLayout(3, 1));
+        changePasswordPanel = new JPanel(new GridLayout(3, 1));
 
         message = new JLabel("Change username", SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        newName = new JTextField(20);
-        newNameLabel = new JLabel("new username: ", JLabel.TRAILING); // TODO: label doesn't show up. fix this
-        newName.add(newNameLabel);
+        newPassword = new JTextField(20);
+        newPasswordLabel = new JLabel("new username: ", JLabel.TRAILING); // TODO: label doesn't show up. fix this
+        newPassword.add(newPasswordLabel);
 
         finishButton = new JButton("done");
         finishButton.addActionListener(this);
@@ -44,15 +44,15 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
         addComp();
 
         // 3. Add the panel to the frame
-        add(changeNamePanel);
+        add(changePasswordPanel);
 
         setVisible(true);
     }
 
     private void addComp() {
-        changeNamePanel.add(message);
-        changeNamePanel.add(newName);
-        changeNamePanel.add(finishButton);
+        changePasswordPanel.add(message);
+        changePasswordPanel.add(newPassword);
+        changePasswordPanel.add(finishButton);
     }
 
     /**
@@ -61,14 +61,10 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
      * @param e ActionEvent item
      */
     @Override
-    public void actionPerformed(ActionEvent e) { // user finishes entering new name
+    public void actionPerformed(ActionEvent e) { // user finishes entering new password
         UserInputBoundary manager = new UserManager();
-        ChangeOutputBoundary presenter = new ChangePresenter();
-        manager.changeName(user, newName.getText(), presenter);
-        String result = presenter.presentChangeResult();
-        if (Objects.equals(result, "OK! You have the new username now.")) {
-            new UserFrame(user);
-        } // TODO: handle the case when name change somehow fails
+        manager.changePassword(user, newPassword.getText());
+        new UserFrame(user);
         setVisible(false);
     }
 }
