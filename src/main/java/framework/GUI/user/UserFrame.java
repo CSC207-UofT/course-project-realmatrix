@@ -31,7 +31,7 @@ public class UserFrame extends BasicFrame implements ActionListener {
         message = new JLabel("User homepage", SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        signOutButton = new JButton("Back");
+        signOutButton = new JButton("Sign off");
         signOutButton.addActionListener(this);
 
         changeNameButton = new JButton("change name");
