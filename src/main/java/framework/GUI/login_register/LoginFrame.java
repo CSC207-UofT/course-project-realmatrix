@@ -84,7 +84,6 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
     protected void check() throws Exception {
         String name = username.getText();
         String password = pw.getText();
-        // TODO: is there a way to get around creating these managers?
         UserManager userManager = new UserManager();
 
         // Load all usernames and passwords into userManager
@@ -101,7 +100,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
         String result = presenter.presentLogInOutResult();
         if (Objects.equals(result, "Login succeeds!")) {
             User user = logInOutManager.getCurrUser();
-            new UserFrame(user); // TODO: is there a way to get around creating user directly?
+            new UserFrame(user); // TODO: use program state to get current user
         } // TODO: handle other cases...
     }
 

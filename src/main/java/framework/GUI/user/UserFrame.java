@@ -73,8 +73,10 @@ public class UserFrame extends BasicFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == signOutButton) {
             new StartFrame();
+        } else if (e.getSource() == changeNameButton) {
+            new ChangeUsernameFrame(user);
         }
-        // TODO: Complete else if...else conditionals for each button click (go to other frames, e.g. change name frame)
+        // TODO: Complete conditionals for each of the five buttons
         setVisible(false);
     }
 }

@@ -94,15 +94,14 @@ public class RegisterFrame extends LogRegFrame {
         String password = pw.getText();
         String passwordConfirmation = pw2.getText();
         if (!Objects.equals(password, passwordConfirmation)) {
-            // TODO: handle this
+            // TODO: handle this case
         } else {
-            // TODO: is there a way to get around creating these managers?
             UserInputBoundary userManager = new UserManager();
             RegisterOutputBoundary presenter = new RegisterPresenter();
             User user = (User) userManager.createNewUser(name, password, presenter);
             String result = presenter.presentRegisterResult();
             if (Objects.equals(result, "Registration succeeds!")) {
-                new UserFrame(user); // TODO: is there a way to get around creating user directly?
+                new UserFrame(user); // TODO: use program state to get current user
             } // TODO: handle other cases...
         }
     }
