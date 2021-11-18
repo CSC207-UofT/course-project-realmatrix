@@ -51,7 +51,7 @@ public class User {
      */
     public boolean deletePackage(Pack pack) {
         for (int i = 0; i < this.packages.size(); i++) {
-            if (this.packages.get(i).getId().equals(pack.getId())) {
+            if (this.packages.get(i).getName().equals(pack.getName())) {
                 this.packages.remove(i);
                 return true;
             }

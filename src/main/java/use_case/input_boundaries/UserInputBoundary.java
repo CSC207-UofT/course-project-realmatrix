@@ -11,7 +11,7 @@ import use_case.output_boundaries.RegisterOutputBoundary;
  * **UserManager should implement this.**
  */
 public interface UserInputBoundary {
-    void createNewUser(String name, String password, RegisterOutputBoundary registerOB);
+    Object createNewUser(String name, String password, RegisterOutputBoundary registerOB);
 
     void changeName(User user, String newInfo, ChangeOutputBoundary changeOutputBoudary);
 

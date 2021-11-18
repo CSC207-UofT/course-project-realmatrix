@@ -1,10 +1,23 @@
 package framework.GUI.login_register;
 
+import entity.User;
 import framework.GUI.start.StartFrame;
+import framework.GUI.user.UserFrame;
+import interface_adapter.Controller.LogInOutController;
+import interface_adapter.gateway.DataInOut;
+import interface_adapter.gateway.IDataInOut;
+import interface_adapter.presenters.LogInOutPresenter;
+import use_case.input_boundaries.LogInOutInputBoundary;
+import use_case.input_boundaries.UserInputBoundary;
+import use_case.manager.LogInOutManager;
+import use_case.manager.UserManager;
+import use_case.output_boundaries.LogInOutOutputBoundary;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * A login frame which allows users to login.
@@ -48,7 +61,12 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == lgButton) {
-            check();
+            try {
+                check();
+                setVisible(false);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
 
         if (source == backButton) {
@@ -63,16 +81,32 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
      * If yes, goes to the user's UserFrame.
      */
 
-    protected void check() {
+    protected void check() throws Exception {
         String name = username.getText();
         String password = pw.getText();
-        // TODO: implement interface_adapter.Controller that can call LoginManager to check login
+        // TODO: is there a way to get around creating these managers?
+        UserManager userManager = new UserManager();
 
+        // Load all usernames and passwords into userManager
+        IDataInOut dbConnector = new DataInOut();
+        Map<String, String> nameToPassword = dbConnector.initialLoad();
+        for (String username : nameToPassword.keySet()) {
+            userManager.putUser(new User(username, nameToPassword.get(username)));
+        }
+
+        LogInOutInputBoundary logInOutManager = new LogInOutManager(userManager);
+        LogInOutController controller = new LogInOutController(userManager, logInOutManager);
+        LogInOutOutputBoundary presenter = new LogInOutPresenter();
+        controller.login(name, password, presenter);
+        String result = presenter.presentLogInOutResult();
+        if (Objects.equals(result, "Login succeeds!")) {
+            User user = logInOutManager.getCurrUser();
+            new UserFrame(user); // TODO: is there a way to get around creating user directly?
+        } // TODO: handle other cases...
     }
 
     // Test
     public static void main(String[] args) {
         new LoginFrame();
     }
-
 }

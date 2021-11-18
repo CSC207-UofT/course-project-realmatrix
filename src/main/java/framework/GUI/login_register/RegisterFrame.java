@@ -1,9 +1,21 @@
 package framework.GUI.login_register;
 
+import entity.User;
 import framework.GUI.start.StartFrame;
+import framework.GUI.user.UserFrame;
+import interface_adapter.Controller.LogInOutController;
+import interface_adapter.presenters.LogInOutPresenter;
+import interface_adapter.presenters.RegisterPresenter;
+import use_case.input_boundaries.LogInOutInputBoundary;
+import use_case.input_boundaries.UserInputBoundary;
+import use_case.manager.LogInOutManager;
+import use_case.manager.UserManager;
+import use_case.output_boundaries.LogInOutOutputBoundary;
+import use_case.output_boundaries.RegisterOutputBoundary;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.Objects;
 
 public class RegisterFrame extends LogRegFrame {
     private final JLabel pw2Label;          // Confirming password JLabel
@@ -61,6 +73,7 @@ public class RegisterFrame extends LogRegFrame {
             check();
             // TODO: need a controller that controls the whole registration process
             // TODO: need a RegisterManager
+            setVisible(false);
         }
 
         if (source == backButton) {
@@ -77,6 +90,21 @@ public class RegisterFrame extends LogRegFrame {
      */
     @Override
     protected void check() {
+        String name = username.getText();
+        String password = pw.getText();
+        String passwordConfirmation = pw2.getText();
+        if (!Objects.equals(password, passwordConfirmation)) {
+            // TODO: handle this
+        } else {
+            // TODO: is there a way to get around creating these managers?
+            UserInputBoundary userManager = new UserManager();
+            RegisterOutputBoundary presenter = new RegisterPresenter();
+            User user = (User) userManager.createNewUser(name, password, presenter);
+            String result = presenter.presentRegisterResult();
+            if (Objects.equals(result, "Registration succeeds!")) {
+                new UserFrame(user); // TODO: is there a way to get around creating user directly?
+            } // TODO: handle other cases...
+        }
     }
 
     // Test

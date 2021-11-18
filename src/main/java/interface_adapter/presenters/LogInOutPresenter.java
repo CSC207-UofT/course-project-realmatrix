@@ -19,26 +19,24 @@ public class LogInOutPresenter implements LogInOutOutputBoundary {
     /**
      * Present the login result.
      * TODO: popping up framework.command_line_interface.GUI windows with such string.
+     * @return
      */
     @Override
-    public void presentLogInOutResult() {
+    public String presentLogInOutResult() {
         switch (loginResult) {
             case LOGIN_SUCCEED:
-                System.out.println("Login succeeds!");
-                break;
+                return("Login succeeds!");
 
             case NO_SUCH_USER:
-                System.out.println(
+                return(
                         "Invalid name or password. If you are new, please create an account first.");
-                break;
 
             case ALREADY_LOGGED_IN:
-                System.out.println("You are signed in. Please sign off first.");
-                break;
+                return("You are signed in. Please sign off first.");
 
             case SIGNED_OFF:
-                System.out.println("Logged out successfully");
-                break;
+                return("Logged out successfully");
         }
+        return null;
     }
 }

@@ -27,13 +27,15 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @param registerOB the output boundary (abstract interface for presenter)
      */
     @Override
-    public void createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
+    public Object createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
         if (uniqueUsername(name)) {
             User user = new User(name, password);
             this.getItems().add(user);
             registerOB.setRegisterResult(true);
+            return user;
         } else {
             registerOB.setRegisterResult(false);
+            return null;
         }
     }
 

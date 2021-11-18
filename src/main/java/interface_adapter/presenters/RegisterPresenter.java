@@ -17,12 +17,13 @@ public class RegisterPresenter implements RegisterOutputBoundary {
     /**
      * Present the registration result.
      * TODO: popping up framework.command_line_interface.GUI windows with such strings.
+     * @return
      */
-    public void presentRegisterResult() {
+    public String presentRegisterResult() {
         if (this.registerResult) {
-            System.out.println("Registration succeeds!");
+            return("Registration succeeds!");
         } else {
-            System.out.println("Registration fails...Please use another username");
+            return("Registration fails...Please use another username");
         }
     }
 }
