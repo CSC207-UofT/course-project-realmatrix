@@ -32,7 +32,7 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
         newPassword = new JTextField(20);
-        newPasswordLabel = new JLabel("new username: ", JLabel.TRAILING); // TODO: label doesn't show up. fix this
+        newPasswordLabel = new JLabel("new password: ", JLabel.TRAILING); // TODO: label doesn't show up. fix this
         newPassword.add(newPasswordLabel);
 
         finishButton = new JButton("done");
