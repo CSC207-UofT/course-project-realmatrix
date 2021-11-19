@@ -18,7 +18,7 @@ public class ProgramStateTest {
 
     @Before
     public void createProgramState() {
-        ps = new ProgramState();
+        ps = ProgramState.getState();
         currCard = new Card("currCardTerm", "currCardDef");
         currUser = new User("currUserName", "currUserPasswrod");
         currPack = new Pack("currPackName");

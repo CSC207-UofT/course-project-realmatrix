@@ -9,7 +9,7 @@ public class ChooseDisplay implements displayInterface {
     private final ProgramState state;
 
     public ChooseDisplay() {
-        this.state = new ProgramState();
+        this.state = ProgramState.getState();
     }
 
     public void setState(ProgramState state) {

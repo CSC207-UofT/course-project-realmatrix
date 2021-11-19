@@ -14,7 +14,7 @@ public class LoginAndRegisterDisplay {
     private final ProgramState state;
 
     public LoginAndRegisterDisplay() {
-        this.state = new ProgramState();
+        this.state = ProgramState.getState();
     }
 
     public void setState(ProgramState state) {

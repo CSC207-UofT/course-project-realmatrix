@@ -14,7 +14,7 @@ public class CommandLineInterface {
 
 
     public CommandLineInterface() {
-        this.state = new ProgramState();
+        this.state = ProgramState.getState();
 
         this.createOrChooseDisplay = new CreateOrChooseDisplay();
         this.loginAndRegisterDisplay = new LoginAndRegisterDisplay();

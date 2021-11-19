@@ -13,7 +13,7 @@ public class CreateOrChooseDisplay implements displayInterface {
     private final ChooseDisplay chooseDisplay;
 
     public CreateOrChooseDisplay() {
-        this.state = new ProgramState();
+        this.state = ProgramState.getState();
         this.chooseDisplay = new ChooseDisplay();
         this.createDisplay = new CreateDisplay();
     }

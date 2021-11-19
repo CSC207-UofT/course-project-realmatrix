@@ -29,7 +29,7 @@ public class LearningSystem {
         this.cm = new CardManager();
         this.lg = new LearnGenerator(this.currPack);
         this.rg = new ReviewGenerator(this.currPack);
-        this.state = new ProgramState();
+        this.state = ProgramState.getState();
     }
 
 

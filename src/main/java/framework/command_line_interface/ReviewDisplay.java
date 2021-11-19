@@ -12,7 +12,7 @@ public class ReviewDisplay implements displayInterface {
     private final ProgramState state;
 
     public ReviewDisplay() {
-        this.state = new ProgramState();
+        this.state = ProgramState.getState();
     }
 
     public void setState(ProgramState state) {
