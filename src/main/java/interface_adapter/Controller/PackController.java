@@ -18,10 +18,12 @@ import java.io.IOException;
 public class PackController {
     private final PackInputBoundary packIB;
     private final IDataInOut dataInOut;
+    private final ProgramState programState;
 
-    public PackController(PackInputBoundary packIB, IDataInOut dataInOut) {
+    public PackController(PackInputBoundary packIB, IDataInOut dataInOut, ProgramState programState) {
         this.packIB = packIB;
         this.dataInOut = dataInOut;
+        this.programState = programState;
     }
 
     /**
@@ -38,9 +40,9 @@ public class PackController {
      *
      * @param newPackName The name of the pack
      */
-    public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) {
+    public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) throws IOException {
         this.packIB.changePackName(newPackName, changeOutputBoudary);
-        // TODO: how to save to database?
+        dataInOut.write(this.programState, this.programState.getCurrPack());
     }
 
     /**
@@ -48,7 +50,7 @@ public class PackController {
      */
     public void addCard(Card c, AddOutputBoundary AddOutputBoundary) throws IOException {
         if (this.packIB.addCard(c, AddOutputBoundary)) {
-            dataInOut.write(ProgramState.getState(), c);
+            dataInOut.write(this.programState, c);
             // TODO: may not be clean, may need ProgramStateManager or something like that
         }
     }
@@ -58,7 +60,7 @@ public class PackController {
      */
     public void deleteCard(Card card) throws IOException {
         this.packIB.deleteCard(card);
-        dataInOut.archive(ProgramState.getState(), card);
+        dataInOut.archive(this.programState, card);
         // TODO: may not be clean, may need ProgramStateManager or something like that
     }
 

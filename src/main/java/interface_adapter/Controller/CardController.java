@@ -5,13 +5,17 @@ import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 
+import java.io.IOException;
+
 public class CardController {
     private final CardInputBoundary cardInputBoundary;
     private final IDataInOut dataInOut;
+    private final ProgramState programState;
 
-    public CardController(CardInputBoundary cardInputBoundary, IDataInOut dataInOut) {
+    public CardController(CardInputBoundary cardInputBoundary, IDataInOut dataInOut, ProgramState programState) {
         this.cardInputBoundary = cardInputBoundary;
         this.dataInOut = dataInOut;
+        this.programState = programState;
     }
 
     /**
@@ -21,14 +25,15 @@ public class CardController {
         return this.cardInputBoundary.createNewCard(term, definition);
     }
 
-    public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) {
-        this.cardInputBoundary.changeCardTerm(newTerm, changeOutputBoundary);
-        // TODO: how to save to database
+    public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) throws IOException {
+        if (this.cardInputBoundary.changeCardTerm(newTerm, changeOutputBoundary)) {
+            dataInOut.write(this.programState, this.programState.getCurrCard());
+        }
     }
 
-    public void changeCardDefinition(String newDefinition) {
+    public void changeCardDefinition(String newDefinition) throws IOException {
         this.cardInputBoundary.changeCardDefinition(newDefinition);
-        // TODO: how to save to database
+        dataInOut.write(this.programState, this.programState.getCurrCard());
     }
 
     public void increaseProficiency() {

@@ -16,20 +16,23 @@ import java.io.IOException;
 public class UserController {
     final UserInputBoundary userIB;
     final IDataInOut dataInOut;
+    final ProgramState programState;
 
-    public UserController(UserInputBoundary userIB, IDataInOut dataInOut) {
+    public UserController(UserInputBoundary userIB, IDataInOut dataInOut, ProgramState programState) {
         this.userIB = userIB;
         this.dataInOut = dataInOut;
+        this.programState = programState;
     }
 
-    public void changeUserName(User user, String newName, ChangeOutputBoundary changeOutputBoudary) {
-        this.userIB.changeName(user, newName, changeOutputBoudary);
-        // TODO: how to save to database? may need overWrite method in gateway.
+    public void changeUserName(User user, String newName, ChangeOutputBoundary changeOutputBoudary) throws IOException {
+        if (this.userIB.changeName(user, newName, changeOutputBoudary)) {
+            dataInOut.write(this.programState, user);
+        }
     }
 
-    public void changePassword(User user, String newPassword) {
+    public void changePassword(User user, String newPassword) throws IOException {
         this.userIB.changePassword(user, newPassword);
-        // TODO: how to save to database? may need overWrite method in gateway.
+        dataInOut.write(this.programState, user);
     }
 
     /**
@@ -41,7 +44,7 @@ public class UserController {
     public void register(String username, String password, RegisterOutputBoundary registerOB) throws IOException {
         Object object = userIB.createNewUser(username, password, registerOB);
         if (object != null) {
-            dataInOut.write(ProgramState.getState(), object);
+            dataInOut.write(this.programState, object);
             // TODO: may not be clean, may need ProgramStateManager or something like that
         }
 
@@ -49,14 +52,14 @@ public class UserController {
 
     public void addPack(User user, Pack pack, AddOutputBoundary AddOutputBoundary) throws IOException {
         if (userIB.addPack(user, pack, AddOutputBoundary)) {
-            dataInOut.write(ProgramState.getState(), pack);
+            dataInOut.write(this.programState, pack);
             // TODO: may not be clean, may need ProgramStateManager or something like that
         }
     }
 
     public void deletePack(User user, Pack pack) throws IOException {
         userIB.deletePack(user, pack);
-        dataInOut.archive(ProgramState.getState(), pack);
+        dataInOut.archive(this.programState, pack);
         // TODO: may not be clean, may need ProgramStateManager or something like that
     }
 }
