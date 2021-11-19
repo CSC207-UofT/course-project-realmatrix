@@ -8,11 +8,12 @@ import java.util.Objects;
 
 public class LogInOutManager implements LogInOutInputBoundary {
     private LoggedIn loggedIn; // by default, no user logged in
+    //TODO: why is currUser useful? we may instead set ProgramState.currUser = user who signs in
     private Object currUser; // by default, no current user who is logged in
     private final UserManager manager;
 
     public LogInOutManager(UserManager manager) {
-        this.loggedIn = LoggedIn.SIGNED_OFF;
+        this.loggedIn = LoggedIn.FAIL;
         this.currUser = null;
         this.manager = manager;
     }
@@ -21,10 +22,8 @@ public class LogInOutManager implements LogInOutInputBoundary {
      * A enum class representing logged in status.
      */
     public enum LoggedIn {
-        SIGNED_OFF,         // No user is logged in currently
-        LOGIN_SUCCEED,      // Login succeeds
-        NO_SUCH_USER,       // Login fails
-        ALREADY_LOGGED_IN,  // There's already a user logged in the program, cannot log in again
+        SUCCEED,      // Login succeeds
+        FAIL,       // Login fails
     }
 
     @Override
@@ -65,16 +64,11 @@ public class LogInOutManager implements LogInOutInputBoundary {
      */
     @Override
     public void logInUser(String name, String password, LogInOutOutputBoundary logInOutOB) {
-        if (this.loggedIn == LoggedIn.LOGIN_SUCCEED) {
-            // This is the case where there's already a user signed in.
-            this.loggedIn = LoggedIn.ALREADY_LOGGED_IN;
-        } else {
-            try {
-                this.currUser = this.findUser(name, password); // Check if there's a user with such username and password
-                this.loggedIn = LoggedIn.LOGIN_SUCCEED;
-            } catch (Exception e) { //TODO: UserNotExist exception
-                this.loggedIn = LoggedIn.NO_SUCH_USER;
-            }
+        try {
+            this.currUser = this.findUser(name, password); // Check if there's a user with such username and password
+            this.loggedIn = LoggedIn.SUCCEED;
+        } catch (Exception e) { //TODO: UserNotExist exception
+            this.loggedIn = LoggedIn.FAIL;
         }
         logInOutOB.setLogInOutResult(this.loggedIn);
     }
@@ -86,7 +80,7 @@ public class LogInOutManager implements LogInOutInputBoundary {
      */
     @Override
     public void signOffUser(LogInOutOutputBoundary logInOutOB) {
-        this.loggedIn = LoggedIn.SIGNED_OFF;
+        this.loggedIn = LoggedIn.FAIL;
         this.currUser = null;
         logInOutOB.setLogInOutResult(this.loggedIn);
     }

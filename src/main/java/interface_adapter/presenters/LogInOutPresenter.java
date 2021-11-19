@@ -24,18 +24,12 @@ public class LogInOutPresenter implements LogInOutOutputBoundary {
     @Override
     public String presentLogInOutResult() {
         switch (loginResult) {
-            case LOGIN_SUCCEED:
+            case SUCCEED:
                 return("Login succeeds!");
 
-            case NO_SUCH_USER:
+            case FAIL:
                 return(
                         "Invalid name or password. If you are new, please create an account first.");
-
-            case ALREADY_LOGGED_IN:
-                return("You are signed in. Please sign off first.");
-
-            case SIGNED_OFF:
-                return("Logged out successfully");
         }
         return null;
     }
