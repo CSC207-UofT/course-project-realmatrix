@@ -1,8 +1,11 @@
 package use_case.manager;
 
 import entity.Card;
+import interface_adapter.Controller.ProgramState;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
+
+import java.io.IOException;
 
 /**
  * A CardManager contains all cards in the system.
@@ -10,8 +13,8 @@ import use_case.output_boundaries.ChangeOutputBoundary;
 public class CardManager extends Manager<Card> implements CardInputBoundary {
     private Card currCard = null; // Initialize to the state where the user is not in a card
 
-    public CardManager() {
-        super();
+    public CardManager(ProgramState state) {
+        super(state);
     }
     // TODO: idToItem stores all the cards in this pack.
 
@@ -35,10 +38,11 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
      * @param newTerm              the new term the card should change to
      * @param changeOutputBoundary the output boundary for getting whether change is successful or not
      */
-    public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) {
+    public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) throws IOException {
         if (uniqueCardTerm(newTerm)) {
             this.currCard.setTerm(newTerm);
             changeOutputBoundary.setChangeResult(true);
+            writer.write(getState(), currCard);
         } else {
             changeOutputBoundary.setChangeResult(false);
         }
@@ -65,22 +69,25 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
      *
      * @param newDefinition the new definition the card should change to
      */
-    public void changeCardDefinition(String newDefinition) {
+    public void changeCardDefinition(String newDefinition) throws IOException {
         this.currCard.setDefinition(newDefinition);
+        writer.write(getState(), currCard);
     }
 
     /**
      * Increase the proficiency of the card by 1.
      */
-    public void increaseProficiency() {
+    public void increaseProficiency() throws IOException {
         this.currCard.setProficiency(Math.min(this.currCard.getProficiency() + 1, 5));
+        writer.write(getState(), currCard);
     }
 
     /**
      * Decrease the proficiency of the card by 1.
      */
-    public void decreaseProficiency() {
+    public void decreaseProficiency() throws IOException {
         this.currCard.setProficiency(Math.max(this.currCard.getProficiency() - 1, 1));
+        writer.write(getState(), currCard);
     }
 
     /**
