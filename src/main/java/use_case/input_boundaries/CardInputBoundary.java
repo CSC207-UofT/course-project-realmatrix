@@ -3,8 +3,6 @@ package use_case.input_boundaries;
 import entity.Card;
 import use_case.output_boundaries.ChangeOutputBoundary;
 
-import java.io.IOException;
-
 /**
  * An input boundary that connects CardManager and CardController.
  * **CardManager must implement this interface**
@@ -12,13 +10,13 @@ import java.io.IOException;
 public interface CardInputBoundary {
     Card createNewCard(String term, String definition);
 
-    void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) throws IOException;
+    void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary);
 
-    void changeCardDefinition(String newDefinition) throws IOException;
+    void changeCardDefinition(String newDefinition);
 
-    void increaseProficiency() throws IOException;
+    void increaseProficiency();
 
-    void decreaseProficiency() throws IOException;
+    void decreaseProficiency();
 
     Card getCurrCard(); //May not be needed
 

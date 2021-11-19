@@ -2,15 +2,11 @@ package use_case.manager;
 
 import entity.Pack;
 import entity.User;
-import interface_adapter.Controller.ProgramState;
-import interface_adapter.gateway.DataInOut;
-import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
-import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -19,8 +15,8 @@ import java.util.Objects;
 //TODO: implement <sort> interface
 public class UserManager extends Manager<User> implements UserInputBoundary {
 
-    public UserManager(ProgramState state) {
-        super(state);
+    public UserManager() {
+        super();
     }
 
     /**
@@ -31,12 +27,11 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @param registerOB the output boundary (abstract interface for presenter)
      */
     @Override
-    public Object createNewUser(String name, String password, RegisterOutputBoundary registerOB) throws IOException {
+    public Object createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
         if (uniqueUsername(name)) {
             User user = new User(name, password);
             this.getItems().add(user);
             registerOB.setRegisterResult(true);
-            writer.write(getState(), user);
             return user;
         } else {
             registerOB.setRegisterResult(false);
@@ -75,13 +70,13 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @param newName new name
      */
     @Override
-    public void changeName(User user, String newName, ChangeOutputBoundary changeOutputBoundary) throws IOException {
+    public void changeName(User user, String newName, ChangeOutputBoundary changeOutputBoudary) {
         if (uniqueUsername(newName)) {
             user.changeName(newName);
-            changeOutputBoundary.setChangeResult(true);
-            writer.write(getState(), user);
+            changeOutputBoudary.setChangeResult(true);
+            //TODO: save the change into database
         } else {
-            changeOutputBoundary.setChangeResult(false);
+            changeOutputBoudary.setChangeResult(false);
         }
     }
 
@@ -92,9 +87,9 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @param newPassword new password
      */
     @Override
-    public void changePassword(User user, String newPassword) throws IOException {
+    public void changePassword(User user, String newPassword) {
         user.changePassword(newPassword);
-        writer.write(getState(), user);
+        // TODO: save the change into database
     }
 
     /**
@@ -109,17 +104,15 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
             user.addPackage(pack);
             AddOutputBoundary.presentAddSuccessView();
             // TODO: save to database
-            writer.write(getState(), pack);
         } catch (Exception e) {
             AddOutputBoundary.presentAddFailView();
         }
     }
 
     @Override
-    public void deletePack(User user, Pack pack) throws IOException {
+    public void deletePack(User user, Pack pack) {
         user.deletePackage(pack);
         //TODO: archive in database
-        writer.archive(getState(), pack);
     }
 
 //    /**

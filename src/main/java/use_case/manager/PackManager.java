@@ -2,14 +2,12 @@ package use_case.manager;
 
 import entity.Card;
 import entity.Pack;
-import interface_adapter.Controller.ProgramState;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.SearchOutputBoundary;
 import use_case.output_boundaries.SortOutputBoundary;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,8 +19,8 @@ import java.util.Comparator;
 public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputBoundary {
     private Pack currPack = null; // The initial state where the user is not in any pack
 
-    public PackManager(ProgramState state) {
-        super(state);
+    public PackManager() {
+        super();
     }
     //TODO: edit idToItem: contain all packs of current user
 
@@ -46,11 +44,11 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
      * @param changeOutputBoudary the output boundary for getting the result of change (successful or not)
      */
     @Override
-    public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) throws IOException {
+    public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) {
         if (uniquePackname(newPackName)) {
             this.currPack.changeName(newPackName);
             changeOutputBoudary.setChangeResult(true);
-            writer.write(getState(), currPack);
+            //TODO: save to database
         } else {
             changeOutputBoudary.setChangeResult(false);
         }
@@ -78,7 +76,6 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
     public void addCard(Card card, AddOutputBoundary AddOutputBoundary) {
         try {
             this.currPack.addCard(card);
-            writer.write(getState(), card);
             AddOutputBoundary.presentAddSuccessView();
         } catch (Exception e) {
             AddOutputBoundary.presentAddFailView();
@@ -88,9 +85,8 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
     /**
      * Delete a specific card in the current pack.
      */
-    public void deleteCard(Card card) throws IOException {
+    public void deleteCard(Card card) {
         this.currPack.deleteCard(card);
-        writer.archive(getState(), card);
     }
 
     /**
