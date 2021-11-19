@@ -11,7 +11,7 @@ public class LearnDisplay implements displayInterface {
     private final ProgramState state;
 
     public LearnDisplay() {
-        this.state = ProgramState.getState();
+        this.state = new ProgramState();
     }
 
     public void setState(ProgramState state) {

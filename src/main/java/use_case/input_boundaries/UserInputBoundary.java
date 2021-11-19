@@ -13,7 +13,7 @@ import use_case.output_boundaries.RegisterOutputBoundary;
 public interface UserInputBoundary {
     Object createNewUser(String name, String password, RegisterOutputBoundary registerOB);
 
-    void changeName(User user, String newInfo, ChangeOutputBoundary changeOutputBoudary);
+    boolean changeName(User user, String newInfo, ChangeOutputBoundary changeOutputBoudary);
 
     void changePassword(User user, String newInfo);
 

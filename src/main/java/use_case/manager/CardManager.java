@@ -34,13 +34,16 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
      *
      * @param newTerm              the new term the card should change to
      * @param changeOutputBoundary the output boundary for getting whether change is successful or not
+     * @return true if the user successfully changes the card term; false otherwise
      */
-    public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) {
+    public boolean changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) {
         if (uniqueCardTerm(newTerm)) {
             this.currCard.setTerm(newTerm);
             changeOutputBoundary.setChangeResult(true);
+            return true;
         } else {
             changeOutputBoundary.setChangeResult(false);
+            return false;
         }
     }
 

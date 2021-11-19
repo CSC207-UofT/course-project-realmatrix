@@ -10,7 +10,7 @@ import use_case.output_boundaries.ChangeOutputBoundary;
 public interface CardInputBoundary {
     Card createNewCard(String term, String definition);
 
-    void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary);
+    boolean changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary);
 
     void changeCardDefinition(String newDefinition);
 

@@ -42,14 +42,17 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
      *
      * @param newPackName         the new pack name
      * @param changeOutputBoudary the output boundary for getting the result of change (successful or not)
+     * @return true if user successfully changed the pack name; false otherwise
      */
     @Override
-    public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) {
+    public boolean changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) {
         if (uniquePackname(newPackName)) {
             this.currPack.changeName(newPackName);
             changeOutputBoudary.setChangeResult(true);
+            return true;
         } else {
             changeOutputBoudary.setChangeResult(false);
+            return true;
         }
     }
 

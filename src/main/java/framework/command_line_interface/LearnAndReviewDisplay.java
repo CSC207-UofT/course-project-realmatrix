@@ -12,7 +12,7 @@ public class LearnAndReviewDisplay implements displayInterface {
     private final ReviewDisplay reviewDisplay;
 
     public LearnAndReviewDisplay() {
-        this.state = ProgramState.getState();
+        this.state = new ProgramState();
         this.learnDisplay = new LearnDisplay();
         this.reviewDisplay = new ReviewDisplay();
     }
