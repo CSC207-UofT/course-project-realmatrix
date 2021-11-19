@@ -2,6 +2,8 @@ package interface_adapter;
 
 import entity.Card;
 import interface_adapter.Controller.CardController;
+import interface_adapter.gateway.DataInOut;
+import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +16,12 @@ public class CardControllerTest {
     CardManager cm;
     final Card c1 = new Card("closet", "a tall cupboard or wardrobe with a door, used for storage.");
     ChangePresenter cp;
+    IDataInOut dataInOut = new DataInOut();
 
     @Before
     public void createCardController() {
         cm = new CardManager();
-        cc = new CardController(cm);
+        cc = new CardController(cm, dataInOut);
         cp = new ChangePresenter();
     }
 
