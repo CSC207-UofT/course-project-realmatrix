@@ -2,20 +2,26 @@ package interface_adapter.Controller;
 
 import entity.Card;
 import entity.Pack;
+import interface_adapter.gateway.DataInOut;
+import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.SearchOutputBoundary;
 import use_case.output_boundaries.SortOutputBoundary;
 
+import java.io.IOException;
+
 /**
  * A package interface_adapter.Controller that can create/change packname   and   add/delete/search/sort card in a pack.
  */
 public class PackController {
     private final PackInputBoundary packIB;
+    private final IDataInOut dataInOut;
 
-    public PackController(PackInputBoundary packIB) {
+    public PackController(PackInputBoundary packIB, IDataInOut dataInOut) {
         this.packIB = packIB;
+        this.dataInOut = dataInOut;
     }
 
     /**
@@ -34,25 +40,26 @@ public class PackController {
      */
     public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) {
         this.packIB.changePackName(newPackName, changeOutputBoudary);
+        // TODO: how to save to database?
     }
 
     /**
      * Add a new card into current pack.
      */
-    public String addCard(Card c, AddOutputBoundary AddOutputBoundary) {
-        try {
-            this.packIB.addCard(c, AddOutputBoundary);
-            return "Card" + c.getTerm() + "created";
-        } catch (Exception e) {
-            return e.getMessage();
+    public void addCard(Card c, AddOutputBoundary AddOutputBoundary) throws IOException {
+        if (this.packIB.addCard(c, AddOutputBoundary)) {
+            dataInOut.write(ProgramState.getState(), c);
+            // TODO: may not be clean, may need ProgramStateManager or something like that
         }
     }
 
     /**
      * Delete a specific card in the current pack.
      */
-    public void deleteCard(Card card) {
+    public void deleteCard(Card card) throws IOException {
         this.packIB.deleteCard(card);
+        dataInOut.archive(ProgramState.getState(), card);
+        // TODO: may not be clean, may need ProgramStateManager or something like that
     }
 
     /**
@@ -79,6 +86,7 @@ public class PackController {
         this.packIB.sortRandom(sortOutputBoundary);
     }
 
+    //TODO: the following 2 methods may not be needed, since we have ProgramState
     /**
      * Getter for the current pack the user is in.
      *

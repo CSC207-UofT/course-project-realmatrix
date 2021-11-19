@@ -71,13 +71,16 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
 
     /**
      * Add a new card into current pack.
+     * Return true if successfully added; false otherwise.
      */
-    public void addCard(Card card, AddOutputBoundary AddOutputBoundary) {
+    public boolean addCard(Card card, AddOutputBoundary AddOutputBoundary) {
         try {
             this.currPack.addCard(card);
             AddOutputBoundary.presentAddSuccessView();
+            return true;
         } catch (Exception e) {
             AddOutputBoundary.presentAddFailView();
+            return false;
         }
     }
 
