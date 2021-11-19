@@ -95,17 +95,14 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      *
      * @param user the user that needs to add pack
      * @param pack the pack to be added
-     * @return true if successfully added; false otherwise
      */
     @Override
-    public boolean addPack(User user, Pack pack, AddOutputBoundary AddOutputBoundary) {
+    public void addPack(User user, Pack pack, AddOutputBoundary AddOutputBoundary) {
         try {
             user.addPackage(pack);
             AddOutputBoundary.presentAddSuccessView();
-            return true;
         } catch (Exception e) {
             AddOutputBoundary.presentAddFailView();
-            return false;
         }
     }
 
