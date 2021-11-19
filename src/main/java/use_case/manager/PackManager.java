@@ -48,7 +48,6 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
         if (uniquePackname(newPackName)) {
             this.currPack.changeName(newPackName);
             changeOutputBoudary.setChangeResult(true);
-            //TODO: save to database
         } else {
             changeOutputBoudary.setChangeResult(false);
         }

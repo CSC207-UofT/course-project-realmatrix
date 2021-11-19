@@ -74,7 +74,6 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
         if (uniqueUsername(newName)) {
             user.changeName(newName);
             changeOutputBoudary.setChangeResult(true);
-            //TODO: save the change into database
         } else {
             changeOutputBoudary.setChangeResult(false);
         }
@@ -89,7 +88,6 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     @Override
     public void changePassword(User user, String newPassword) {
         user.changePassword(newPassword);
-        // TODO: save the change into database
     }
 
     /**
@@ -103,7 +101,6 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
         try {
             user.addPackage(pack);
             AddOutputBoundary.presentAddSuccessView();
-            // TODO: save to database
         } catch (Exception e) {
             AddOutputBoundary.presentAddFailView();
         }
@@ -112,20 +109,5 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     @Override
     public void deletePack(User user, Pack pack) {
         user.deletePackage(pack);
-        //TODO: archive in database
     }
-
-//    /**
-//     * For testing purposes only.
-//     * @param args
-//     */
-//    public static void main(String[] args) throws Exception {
-//        UserManager um = new UserManager();
-//        um.createNewUser("Xing", "password");
-//        um.createNewUser("SuperDog", "super");
-//        um.createNewUser("FunkyCat", "funky");
-//        for (User user : um.idToItem.values()) {
-//            System.out.println(user.getId());
-//        }
-//    }
 }
