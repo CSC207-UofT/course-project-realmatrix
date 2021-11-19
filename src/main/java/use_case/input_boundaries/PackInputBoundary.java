@@ -14,7 +14,7 @@ public interface PackInputBoundary {
 
     void changePackName(String newPackName, ChangeOutputBoundary changePackNameOB);
 
-    boolean addCard(Card card, AddOutputBoundary AddOutputBoundary);
+    void addCard(Card card, AddOutputBoundary AddOutputBoundary);
 
     void deleteCard(Card card);
 
