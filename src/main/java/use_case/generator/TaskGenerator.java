@@ -4,6 +4,8 @@ import entity.Card;
 import entity.Pack;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * This class is a test generator that raise a collection of
@@ -11,25 +13,23 @@ import java.util.ArrayList;
  */
 public abstract class TaskGenerator {
     protected final Pack pack;
-    protected final ArrayList<Card> cardList;
+    protected Queue<Card> cards;
+    protected Card currCard; // current card the user is learning/reviewing
 
     public TaskGenerator(Pack pack) {
         this.pack = pack;
-        this.cardList = new ArrayList<>();
+        this.cards = new LinkedList<>();
+        cards.addAll(pack.getCards());
+        this.currCard = null;
     }
 
-    /**
-     * Generate a card list containing all cards eligible for learning/reviewing
-     * with random order and multiple occurrences of each card.
-     *
-     * @return an arraylist of card
-     */
-    public abstract ArrayList<Card> getDoCardList();
+    public abstract Card next();
 
-    /**
-     * Helper method for getDoCardList()
-     * Get a card list containing all cards that are eligible to be learnt or reviewed.
-     */
-    protected abstract void doable();
+    public boolean taskCompleted() {
+        return cards.peek() == null;
+    }
 
+    public Card getCurrCard() {
+        return currCard;
+    }
 }
