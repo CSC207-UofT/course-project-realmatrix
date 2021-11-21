@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface PackInputBoundary {
     Pack createNewPack(String packName);
 
-    void changePackName(String newPackName, ChangeOutputBoundary changePackNameOB);
+    boolean changePackName(String newPackName, ChangeOutputBoundary changePackNameOB);
 
     void addCard(Card card, AddOutputBoundary AddOutputBoundary);
 

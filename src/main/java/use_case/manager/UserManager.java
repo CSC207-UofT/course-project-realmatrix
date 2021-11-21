@@ -68,14 +68,17 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      *
      * @param user    the user that needs to change name
      * @param newName new name
+     * @return true if user successfully changed name; false otherwise
      */
     @Override
-    public void changeName(User user, String newName, ChangeOutputBoundary changeOutputBoudary) {
+    public boolean changeName(User user, String newName, ChangeOutputBoundary changeOutputBoudary) {
         if (uniqueUsername(newName)) {
             user.changeName(newName);
             changeOutputBoudary.setChangeResult(true);
+            return true;
         } else {
             changeOutputBoudary.setChangeResult(false);
+            return false;
         }
     }
 

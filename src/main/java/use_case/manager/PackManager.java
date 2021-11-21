@@ -41,15 +41,18 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
      * Change a pack's name.
      *
      * @param newPackName         the new pack name
-     * @param changeOutputBoundary the output boundary for getting the result of change (successful or not)
+     * @param changeOutputBoudary the output boundary for getting the result of change (successful or not)
+     * @return true if user successfully changed the pack name; false otherwise
      */
     @Override
-    public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoundary) {
+    public boolean changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) {
         if (uniquePackname(newPackName)) {
             this.currPack.changeName(newPackName);
-            changeOutputBoundary.setChangeResult(true);
+            changeOutputBoudary.setChangeResult(true);
+            return true;
         } else {
-            changeOutputBoundary.setChangeResult(false);
+            changeOutputBoudary.setChangeResult(false);
+            return true;
         }
     }
 
@@ -71,13 +74,16 @@ public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputB
 
     /**
      * Add a new card into current pack.
+     * Return true if successfully added; false otherwise.
      */
-    public void addCard(Card card, AddOutputBoundary AddOutputBoundary) {
+    public boolean addCard(Card card, AddOutputBoundary AddOutputBoundary) {
         try {
             this.currPack.addCard(card);
             AddOutputBoundary.presentAddSuccessView();
+            return true;
         } catch (Exception e) {
             AddOutputBoundary.presentAddFailView();
+            return false;
         }
     }
 

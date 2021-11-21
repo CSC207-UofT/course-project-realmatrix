@@ -2,10 +2,15 @@ package interface_adapter;
 
 import entity.Card;
 import interface_adapter.Controller.CardController;
+import interface_adapter.Controller.ProgramState;
+import interface_adapter.gateway.DataInOut;
+import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.manager.CardManager;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,11 +19,13 @@ public class CardControllerTest {
     CardManager cm;
     final Card c1 = new Card("closet", "a tall cupboard or wardrobe with a door, used for storage.");
     ChangePresenter cp;
+    IDataInOut dataInOut = new DataInOut();
+    ProgramState programState = new ProgramState();
 
     @Before
     public void createCardController() {
         cm = new CardManager();
-        cc = new CardController(cm);
+        cc = new CardController(cm, dataInOut, programState);
         cp = new ChangePresenter();
     }
 
@@ -36,14 +43,14 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testChangeCardTerm() {
+    public void testChangeCardTerm() throws IOException {
         cc.setCurrCard(c1);
         cc.changeCardTerm("c1NewTerm", cp);
         assertEquals("c1NewTerm", cc.getCurrCard().getTerm());
     }
 
     @Test
-    public void testChangeCardDefinition() {
+    public void testChangeCardDefinition() throws IOException {
         cc.setCurrCard(c1);
         cc.changeCardDefinition("c1NewDef");
         assertEquals("c1NewDef", cc.getCurrCard().getDefinition());
