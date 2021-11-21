@@ -4,6 +4,11 @@ import entity.Card;
 import entity.Pack;
 import use_case.manager.CardManager;
 
+/**
+ * Review a pack by going over all the cards in the pack, marking the unfamiliar ones, and reviewing those again until
+ * user gets familiar with that card. Update cards' proficiency along the way. Only the term part is shown but user can
+ * choose to reveal the definition part.
+ */
 public class ReviewGenerator extends TaskGenerator {
     private boolean showDefinition = false;
     private boolean cantRecall = false;

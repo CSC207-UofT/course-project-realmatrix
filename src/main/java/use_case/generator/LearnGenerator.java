@@ -3,6 +3,9 @@ package use_case.generator;
 import entity.Card;
 import entity.Pack;
 
+/**
+ * Learn a pack by going over all the cards once, showing both term and definition.
+ */
 public class LearnGenerator extends TaskGenerator {
 
     public LearnGenerator(Pack pack) {

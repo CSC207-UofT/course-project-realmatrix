@@ -8,8 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * This class is a test generator that raise a collection of
- * cards for user to learn and review
+ * An abstract task generator.
  */
 public abstract class TaskGenerator {
     protected final Pack pack;
@@ -23,12 +22,24 @@ public abstract class TaskGenerator {
         this.currCard = null;
     }
 
+    /**
+     * Dequeue the next card.
+     * @return the next card, or null if there's no card in the queue
+     */
     public abstract Card next();
 
+    /**
+     * Whether all the cards are dequeued.
+     * @return true if no cards in the queue, false otherwise
+     */
     public boolean taskCompleted() {
         return cards.peek() == null;
     }
 
+    /**
+     * Show the current card in progress.
+     * @return the card the user is at
+     */
     public Card getCurrCard() {
         return currCard;
     }
