@@ -10,61 +10,22 @@ import use_case.manager.CardManager;
 import java.util.ArrayList;
 
 public class ReviewController {
-    private final ReviewInputBoundary rg;
-    private final CardInputBoundary cm;
+    private final ReviewInputBoundary reviewIB;
 
-    public ReviewController(Pack p) {
-        this.rg = new ReviewGenerator(p);
-        this.cm = new CardManager();
+    public ReviewController(ReviewInputBoundary reviewIB) {
+        this.reviewIB = reviewIB;
     }
 
-    public String reviewDisplay(Card c) {
-        return c.getDefinition();
+    public Card next() {
+        return reviewIB.next();
+        // TODO: Where should I call the write method to update proficiency of the cards?
     }
 
-    /**
-     * get a list of reviewable cards
-     *
-     * @return a list of reviewable cards
-     * @throws Exception if no card need to be reviewed
-     */
-    public ArrayList<Card> reviewableCardList() throws Exception {
-        if (this.rg.getDoCardList().size() != 0) {
-            return this.rg.getDoCardList();
-        } else {
-            throw new Exception("no card need to be reviewed");
-        }
-
+    public void setShowDefinition() {
+        reviewIB.setShowDefinition();
     }
 
-    /**
-     * update the proficiency of the card that user currently reviewing
-     *
-     * @param opt user's option of the quality of reviewing
-     * @param c   the card that user currently learning
-     */
-    public void updateMemProficiency(String opt, Card c) {
-        this.cm.setCurrCard(c);
-        if (opt.equals("1")) {
-            this.cm.increaseProficiency();
-        }
-
-        if (opt.equals("3")) {
-            this.cm.decreaseProficiency();
-        }
-    }
-
-    /**
-     * update the proficiency of the card that user currently testing
-     *
-     * @param opt user's correctness
-     * @param c   the card that user currently learning
-     */
-    public void updateTestProficiency(String opt, Card c) {
-        this.cm.setCurrCard(c);
-        if (opt.equals("2")) {
-            this.cm.decreaseProficiency();
-            this.cm.decreaseProficiency();
-        }
+    public void setCantRecall() {
+        reviewIB.setCantRecall();
     }
 }
