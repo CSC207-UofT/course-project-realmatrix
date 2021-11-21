@@ -13,27 +13,23 @@ public class ReviewController {
     private final ReviewInputBoundary rg;
     private final CardInputBoundary cm;
 
-    public ReviewController(Pack p) {
-        this.rg = new ReviewGenerator(p);
-        this.cm = new CardManager();
+    public ReviewController(ReviewInputBoundary reviewInputBoundary, CardInputBoundary cardInputBoundary) {
+        this.rg = reviewInputBoundary;
+        this.cm = cardInputBoundary;
     }
 
-    public String reviewDisplay(Card c) {
-        return c.getDefinition();
-    }
+// Presenter will take over this
+//    public String reviewDisplay(Card c) {
+//        return c.getDefinition();
+//    }
 
     /**
      * get a list of reviewable cards
      *
      * @return a list of reviewable cards
-     * @throws Exception if no card need to be reviewed
      */
-    public ArrayList<Card> reviewableCardList() throws Exception {
-        if (this.rg.getDoCardList().size() != 0) {
-            return this.rg.getDoCardList();
-        } else {
-            throw new Exception("no card need to be reviewed");
-        }
+    public ArrayList<Card> reviewableCardList() {
+        return this.rg.getDoCardList();
 
     }
 
