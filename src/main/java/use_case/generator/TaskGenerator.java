@@ -32,15 +32,11 @@ public abstract class TaskGenerator {
      * Whether all the cards are dequeued.
      * @return true if no cards in the queue, false otherwise
      */
-    public boolean taskCompleted() {
-        return cards.peek() == null;
-    }
+    public abstract boolean taskCompleted();
 
     /**
      * Show the current card in progress.
      * @return the card the user is at
      */
-    public Card getCurrCard() {
-        return currCard;
-    }
+    public abstract Card getCurrCard();
 }
