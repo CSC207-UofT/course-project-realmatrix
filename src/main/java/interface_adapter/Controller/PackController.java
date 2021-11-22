@@ -2,7 +2,7 @@ package interface_adapter.Controller;
 
 import entity.Card;
 import entity.Pack;
-import interface_adapter.gateway.DataInOut;
+import entity.ProgramState;
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
