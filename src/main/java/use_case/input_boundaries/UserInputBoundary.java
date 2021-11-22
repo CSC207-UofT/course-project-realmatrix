@@ -17,7 +17,7 @@ public interface UserInputBoundary {
 
     void changePassword(User user, String newInfo);
 
-    void addPack(User user, Pack pack, AddOutputBoundary AddOutputBoundary);
+    boolean addPack(Pack pack, AddOutputBoundary AddOutputBoundary, ProgramStateInputBoundary programStateInputBoundary);
 
     void deletePack(User user, Pack pack);
 
