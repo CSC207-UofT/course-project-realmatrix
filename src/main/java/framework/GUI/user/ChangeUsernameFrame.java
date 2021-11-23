@@ -64,7 +64,7 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) { // user finishes entering new name
         UserInputBoundary manager = new UserManager();
         ChangeOutputBoundary presenter = new ChangePresenter();
-        manager.changeName(user, newName.getText(), presenter);
+        manager.changeName(newName.getText(), presenter);
         String result = presenter.presentChangeResult();
         if (Objects.equals(result, "OK! You have the new username now.")) {
             new UserFrame(user);

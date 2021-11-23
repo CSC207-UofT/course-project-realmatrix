@@ -1,7 +1,6 @@
 package interface_adapter.Controller;
 
 import entity.Card;
-import entity.ProgramState;
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
@@ -23,7 +22,7 @@ public class CardController {
      * Methods also in CardManager.java
      */
     public Card createNewCard(String term, String definition) {
-        return this.cardInputBoundary.createNewCard(term, definition);
+        return this.cardInputBoundary.addNewCard(term, definition, );
     }
 
     public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) throws IOException {

@@ -1,7 +1,6 @@
 package use_case.input_boundaries;
 
 import entity.Pack;
-import entity.User;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
@@ -10,16 +9,17 @@ import use_case.output_boundaries.RegisterOutputBoundary;
  * An input boundary that connects UserManager and UserController.
  * **UserManager should implement this.**
  */
-public interface UserInputBoundary {
-    Object createNewUser(String name, String password, RegisterOutputBoundary registerOB);
+public interface UserInputBoundary extends ManagerInputBoundary {
+    boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) throws Exception;
 
-    boolean changeName(User user, String newInfo, ChangeOutputBoundary changeOutputBoudary);
+    boolean changeName(String newName, ChangeOutputBoundary changeOutputBoundary);
 
-    void changePassword(User user, String newInfo);
+    void changePassword(String newInfo);
 
-    boolean addPack(Pack pack, AddOutputBoundary AddOutputBoundary, ProgramStateInputBoundary programStateInputBoundary);
+    // PackManager takes responsibility of the next two methods
+//    boolean addPack(Pack pack, AddOutputBoundary AddOutputBoundary);
 
-    void deletePack(User user, Pack pack);
+//    void deletePack(Pack pack);
 
 //    void searchPack(User user, Pack pack);
 //    void sortPack();

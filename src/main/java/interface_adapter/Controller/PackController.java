@@ -7,8 +7,8 @@ import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
-import use_case.output_boundaries.SearchOutputBoundary;
-import use_case.output_boundaries.SortOutputBoundary;
+import use_case.output_boundaries.SearchCardOutputBoundary;
+import use_case.output_boundaries.SortCardOutputBoundary;
 
 import java.io.IOException;
 
@@ -32,7 +32,7 @@ public class PackController {
      * @param packName The name of the pack
      */
     public void createPack(String packName) {
-        this.packIB.createNewPack(packName);
+        this.packIB.addNewPack(packName, );
     }
 
     /**
@@ -64,22 +64,22 @@ public class PackController {
      *
      * @param keyword the keyword that the user searches
      */
-    public void searchCard(String keyword, SearchOutputBoundary<Card> searchOutputBoundary) {
-        this.packIB.searchCard(keyword, searchOutputBoundary);
+    public void searchCard(String keyword, SearchCardOutputBoundary<Card> searchCardOutputBoundary) {
+        this.packIB.searchCard(keyword, searchCardOutputBoundary);
     }
 
 
     // The following 3 methods sort card in a pack
-    public void sortCardAtoZ(SortOutputBoundary<Card> sortOutputBoundary) {
-        this.packIB.sortAtoZ(sortOutputBoundary);
+    public void sortCardAtoZ(SortCardOutputBoundary sortCardOutputBoundary) {
+        this.packIB.sortAtoZ(sortCardOutputBoundary);
     }
 
-    public void sortPackNewToOld(SortOutputBoundary<Card> sortOutputBoundary) {
-        this.packIB.sortNewToOld(sortOutputBoundary);
+    public void sortPackNewToOld(SortCardOutputBoundary sortCardOutputBoundary) {
+        this.packIB.sortNewToOld(sortCardOutputBoundary);
     }
 
-    public void sortPackRandom(SortOutputBoundary<Card> sortOutputBoundary) {
-        this.packIB.sortRandom(sortOutputBoundary);
+    public void sortPackRandom(SortCardOutputBoundary sortCardOutputBoundary) {
+        this.packIB.sortRandom(sortCardOutputBoundary);
     }
 
     //TODO: the following 2 methods may not be needed, since we have ProgramState

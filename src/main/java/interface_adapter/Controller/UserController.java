@@ -27,11 +27,11 @@ public class UserController {
     }
 
     public void changeUserName(User user, String newName, ChangeOutputBoundary changeOutputBoudary) throws IOException {
-        this.userIB.changeName(user, newName, changeOutputBoudary);
+        this.userIB.changeName(newName, changeOutputBoudary);
     }
 
     public void changePassword(User user, String newPassword) throws IOException {
-        this.userIB.changePassword(user, newPassword);
+        this.userIB.changePassword(newPassword);
     }
 
     /**
@@ -45,10 +45,10 @@ public class UserController {
     }
 
     public void addPack(Pack pack, AddOutputBoundary addOutputBoundary, ProgramStateInputBoundary programStateInputBoundary) throws IOException {
-        userIB.addPack(pack, addOutputBoundary, programStateInputBoundary);
+        userIB.addPack(pack, addOutputBoundary);
     }
 
     public void deletePack(User user, Pack pack) throws IOException {
-        userIB.deletePack(user, pack);
+        userIB.deletePack(pack);
     }
 }

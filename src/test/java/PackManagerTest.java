@@ -1,13 +1,13 @@
 import entity.Card;
 import entity.Pack;
+import interface_adapter.presenters.SortCardCardPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.output_boundaries.AddOutputBoundary;
-import use_case.output_boundaries.SearchOutputBoundary;
-import use_case.output_boundaries.SortOutputBoundary;
+import use_case.output_boundaries.SearchCardOutputBoundary;
+import use_case.output_boundaries.SortCardOutputBoundary;
 import interface_adapter.presenters.AddPresenter;
-import interface_adapter.presenters.SearchPresenter;
-import interface_adapter.presenters.SortPresenter;
+import interface_adapter.presenters.SearchCardCardPresenter;
 import use_case.manager.CardManager;
 import use_case.manager.PackManager;
 
@@ -29,19 +29,19 @@ public class PackManagerTest {
     Card c1;
     Card c2;
     final AddOutputBoundary AddOutputBoundary = new AddPresenter();
-    final SortOutputBoundary<Card> sortOutputBoundary = new SortPresenter<>();
-    final SearchOutputBoundary<Card> searchOutputBoundary = new SearchPresenter<>();
+    final SortCardOutputBoundary sortCardOutputBoundary = new SortCardCardPresenter<>();
+    final SearchCardOutputBoundary<Card> searchCardOutputBoundary = new SearchCardCardPresenter<>();
 
     @Before
     public void createPackManager() {
         pm = new PackManager();
-        p = pm.createNewPack(pName);
+        p = pm.addNewPack(pName, );
         pm.setCurrPack(p);
         cm1 = new CardManager();
-        c1 = cm1.createNewCard(c1Term, c1Definition);
+        c1 = cm1.addNewCard(c1Term, c1Definition, );
         cm1.setCurrCard(c1);
         cm2 = new CardManager();
-        c2 = cm2.createNewCard(c2Term, c2Definition);
+        c2 = cm2.addNewCard(c2Term, c2Definition, );
         cm2.setCurrCard(c2);
         pm.addCard(c1, AddOutputBoundary);
     }
@@ -53,34 +53,34 @@ public class PackManagerTest {
 
     @Test
     public void TestAddCard() {
-        List<Card> cardList = pm.sortZtoA(sortOutputBoundary);
+        List<Card> cardList = pm.sortZtoA(sortCardOutputBoundary);
         assertEquals(c1, cardList.get(0));
     }
 
     @Test
     public void TestDeleteCard() {
         pm.deleteCard(c1);
-        List<Card> cardList = pm.sortZtoA(sortOutputBoundary);
+        List<Card> cardList = pm.sortZtoA(sortCardOutputBoundary);
         assertEquals(0, cardList.size());
     }
 
     @Test
     public void TestSearchCardTerm() {
         pm.addCard(c2, AddOutputBoundary);
-        List<Card> cardList = pm.searchCard(c2Term, searchOutputBoundary);
+        List<Card> cardList = pm.searchCard(c2Term, searchCardOutputBoundary);
         assertEquals(c2, cardList.get(0));
         assertEquals(1, cardList.size());
-        List<Card> cardList2 = pm.searchCard("tion", searchOutputBoundary);
+        List<Card> cardList2 = pm.searchCard("tion", searchCardOutputBoundary);
         assertEquals(2, cardList2.size());
     }
 
     @Test
     public void TestSearchCardByDefinition() {
         pm.addCard(c2, AddOutputBoundary);
-        List<Card> cardList = pm.searchCard(c2Definition, searchOutputBoundary);
+        List<Card> cardList = pm.searchCard(c2Definition, searchCardOutputBoundary);
         assertEquals(c2, cardList.get(0));
         assertEquals(1, cardList.size());
-        List<Card> cardList2 = pm.searchCard("self", searchOutputBoundary);
+        List<Card> cardList2 = pm.searchCard("self", searchCardOutputBoundary);
         assertEquals(2, cardList2.size());
 
     }
@@ -88,7 +88,7 @@ public class PackManagerTest {
     @Test
     public void TestSortOldToNew() {
         pm.addCard(c2, AddOutputBoundary);
-        List<Card> cardList = pm.sortOldToNew(sortOutputBoundary);
+        List<Card> cardList = pm.sortOldToNew(sortCardOutputBoundary);
         List<Card> actual = new ArrayList<>();
         actual.add(c1);
         actual.add(c2);
@@ -99,7 +99,7 @@ public class PackManagerTest {
     @Test
     public void TestSortAToZ() {
         pm.addCard(c2, AddOutputBoundary);
-        List<Card> cardList = pm.sortAtoZ(sortOutputBoundary);
+        List<Card> cardList = pm.sortAtoZ(sortCardOutputBoundary);
         List<Card> actual = new ArrayList<>();
         actual.add(c1);
         actual.add(c2);
@@ -109,7 +109,7 @@ public class PackManagerTest {
     @Test
     public void TestSortZToA() {
         pm.addCard(c2, AddOutputBoundary);
-        List<Card> cardList = pm.sortZtoA(sortOutputBoundary);
+        List<Card> cardList = pm.sortZtoA(sortCardOutputBoundary);
         List<Card> actual = new ArrayList<>();
         actual.add(c2);
         actual.add(c1);
