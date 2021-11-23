@@ -8,8 +8,4 @@ public interface ReviewOutputBoundary {
     public void setCurrCardStrRep(String cardStrRep);
 
     public String getCurrCardStrRep();
-
-    public void setShowDefinitionStatus();
-
-    public boolean getShowDefinitionStatus();
 }
