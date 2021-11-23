@@ -4,8 +4,6 @@ import entity.Card;
 import entity.Pack;
 import entity.ProgramState;
 import entity.User;
-import interface_adapter.presenters.AddPresenter;
-import interface_adapter.presenters.RegisterPresenter;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
@@ -49,15 +47,5 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
                 ProgramState.setCurrCard((Card) evt.getNewValue());
                 break;
         }
-    }
-
-    // Test observer
-    public static void main(String[] args) {
-        UserManager um = new UserManager();
-        um.createNewUser("a", "b", new RegisterPresenter());
-        System.out.println(new ProgramState());
-
-        um.addPack(new Pack("app"), new AddPresenter(), new ProgramStateManager());
-        System.out.println(new ProgramState());
     }
 }

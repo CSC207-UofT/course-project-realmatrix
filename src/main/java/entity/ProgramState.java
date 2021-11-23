@@ -69,16 +69,4 @@ public class ProgramState {
     public static Pack getCurrPack() {
         return currPack;
     }
-
-    // Test
-//    public static void main(String[] args) {
-//        ProgramState.setCurrUser(new User("name1", "pw1"));
-//        System.out.println(new ProgramState());
-//
-//        ProgramState.setCurrPack(new Pack("haha"));
-//        System.out.println(new ProgramState());
-//
-//        ProgramState.setCurrPack(null);
-//        System.out.println(new ProgramState());
-//    }
 }
