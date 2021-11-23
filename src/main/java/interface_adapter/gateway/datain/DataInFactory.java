@@ -2,7 +2,6 @@ package interface_adapter.gateway.datain;
 
 import entity.Card;
 import entity.Pack;
-import entity.ProgramState;
 import entity.User;
 
 import java.io.IOException;
@@ -14,19 +13,19 @@ import java.io.IOException;
 public class DataInFactory {
 
     /**
-     * @param state the current state the program is in
+     * @param partialDataPath the current state the program is in
      * @param o     the object needs to write/archive
      * @return a Writer according to objects we need to write/archive.
      * @throws IOException the object cannot be written/archived into database
      */
     // TODO: does checking data type follow clean architecture principles?
-    public Writer getWriter(ProgramState state, Object o) throws IOException {
+    public Writer getWriter(String[] partialDataPath, Object o) throws IOException {
         if (o instanceof Card) {
-            return new CardWriter(state, o);
+            return new CardWriter(partialDataPath, o);
         } else if (o instanceof Pack) {
-            return new PackWriter(state, o);
+            return new PackWriter(partialDataPath, o);
         } else if (o instanceof User) {
-            return new UserWriter(state, o);
+            return new UserWriter(partialDataPath, o);
         } else {
             throw new IOException("Cannot store such object into database. " +
                     "Please pass in only Card/Pack/User.");

@@ -1,7 +1,6 @@
 package interface_adapter.gateway.datain;
 
 import entity.Card;
-import entity.ProgramState;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,12 +13,11 @@ public class CardWriter extends Writer {
 
     /**
      * Construct a CardWriter object.
-     *
-     * @param state the state the program is in
+     *  @param partialDataPath the state the program is in
      * @param o     the object (card) to write/update
      */
-    public CardWriter(ProgramState state, Object o) {
-        super(state, o);
+    public CardWriter(String[] partialDataPath, Object o) {
+        super(partialDataPath);
         this.card = (Card) o;
     }
 

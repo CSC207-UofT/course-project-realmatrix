@@ -1,7 +1,5 @@
 package interface_adapter.gateway.datain;
 
-import entity.ProgramState;
-
 import java.io.IOException;
 
 public abstract class Writer {
@@ -12,10 +10,10 @@ public abstract class Writer {
      * Get pack/username from the program's current state.
      * This method helps writer classes to determine which path should write to.
      */
-    public Writer(ProgramState state, Object o) {
-        this.username = state.getCurrUser().getName();
-        if (state.getCurrPack() != null) {
-            this.packname = state.getCurrPack().getName();
+    public Writer(String[] partialDataPath) {
+        this.username = partialDataPath[0];
+        if (partialDataPath[1] != null) {
+            this.packname = partialDataPath[1];
         }
     }
 
