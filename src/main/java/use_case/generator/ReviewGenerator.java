@@ -2,9 +2,14 @@ package use_case.generator;
 
 import entity.Card;
 import entity.Pack;
+import use_case.constants.Constants;
 import use_case.input_boundaries.ReviewInputBoundary;
 import use_case.manager.CardManager;
 import use_case.output_boundaries.ReviewOutputBoundary;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Review a pack by going over all the cards in the pack, marking the unfamiliar ones, and reviewing those cards over
@@ -15,8 +20,21 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
     private boolean cantRecall = false;
     private final ReviewOutputBoundary reviewOB;
 
+    /**
+     * Each card appears a number of times x. The lower the proficiency of the card, the larger the x.
+     * @param pack pack where cards come from
+     * @param reviewOB output boundary
+     */
     public ReviewGenerator(Pack pack, ReviewOutputBoundary reviewOB) {
         super(pack);
+        List<Card> cardList = new ArrayList<>();
+        for (Card card : pack.getCards()) {
+            for (int i = 0; i < Constants.REVIEW_PROFICIENCY_MAX - card.getProficiency() + 1; i++) {
+                cardList.add(card);
+            }
+        }
+        Collections.shuffle(cardList);
+        cards.addAll(cardList);
         this.reviewOB = reviewOB;
     }
 

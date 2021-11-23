@@ -19,9 +19,6 @@ public abstract class TaskGenerator {
     public TaskGenerator(Pack pack) {
         this.pack = pack;
         this.cards = new LinkedList<>();
-        List<Card> cardList = pack.getCards();
-        Collections.shuffle(cardList);
-        cards.addAll(cardList);
         this.currCard = null;
     }
 
