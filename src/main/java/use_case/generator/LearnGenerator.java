@@ -38,7 +38,7 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
 
     @Override
     public Card getCurrCard() {
-        learnOB.setCurrCard(currCard);
+        learnOB.setCurrCardStrRep(currCard.toString());
         return currCard;
     }
 }

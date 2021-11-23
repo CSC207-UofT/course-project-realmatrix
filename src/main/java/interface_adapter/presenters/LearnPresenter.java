@@ -1,11 +1,10 @@
 package interface_adapter.presenters;
 
-import entity.Card;
 import use_case.output_boundaries.LearnOutputBoundary;
 
 public class LearnPresenter implements LearnOutputBoundary {
     private boolean learnCompleted = false;
-    private Card currCard = null;
+    private String currCardStrRep = null;
 
     public void setLearnCompleted() {
         this.learnCompleted = true;
@@ -15,11 +14,11 @@ public class LearnPresenter implements LearnOutputBoundary {
         return learnCompleted;
     }
 
-    public void setCurrCard(Card card) {
-        this.currCard = card;
+    public void setCurrCardStrRep(String cardStrRep) {
+        this.currCardStrRep = cardStrRep;
     }
 
-    public Card getCurrCard() {
-        return currCard;
+    public String getCurrCardStrRep() {
+        return currCardStrRep;
     }
 }

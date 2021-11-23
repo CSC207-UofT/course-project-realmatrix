@@ -64,7 +64,7 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
 
     @Override
     public Card getCurrCard() {
-        reviewOB.setCurrCard(currCard);
+        reviewOB.setCurrCardStrRep(currCard.toString());
         return currCard;
     }
 }

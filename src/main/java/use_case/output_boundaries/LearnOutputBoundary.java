@@ -1,13 +1,11 @@
 package use_case.output_boundaries;
 
-import entity.Card;
-
 public interface LearnOutputBoundary {
-    public void setLearnCompleted();
+    void setLearnCompleted();
 
-    public boolean getLearnCompleted();
+    boolean getLearnCompleted();
 
-    public void setCurrCard(Card card);
+    void setCurrCardStrRep(String cardStrRep);
 
-    public Card getCurrCard();
+    String getCurrCardStrRep();
 }

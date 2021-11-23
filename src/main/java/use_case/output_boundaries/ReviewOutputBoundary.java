@@ -1,15 +1,13 @@
 package use_case.output_boundaries;
 
-import entity.Card;
-
 public interface ReviewOutputBoundary {
     public void setReviewCompleted();
 
     public boolean getReviewCompleted();
 
-    public void setCurrCard(Card card);
+    public void setCurrCardStrRep(String cardStrRep);
 
-    public Card getCurrCard();
+    public String getCurrCardStrRep();
 
     public void setShowDefinitionStatus();
 
