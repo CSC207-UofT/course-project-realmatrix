@@ -42,17 +42,13 @@ public class PackController {
      */
     public void changePackName(String newPackName, ChangeOutputBoundary changeOutputBoudary) throws IOException {
         this.packIB.changePackName(newPackName, changeOutputBoudary);
-        dataInOut.write(this.programState, this.programState.getCurrPack());
     }
 
     /**
      * Add a new card into current pack.
      */
     public void addCard(Card c, AddOutputBoundary AddOutputBoundary) throws IOException {
-        if (this.packIB.addCard(c, AddOutputBoundary)) {
-            dataInOut.write(this.programState, c);
-            // TODO: may not be clean, may need ProgramStateManager or something like that
-        }
+        this.packIB.addCard(c, AddOutputBoundary);
     }
 
     /**
@@ -60,8 +56,6 @@ public class PackController {
      */
     public void deleteCard(Card card) throws IOException {
         this.packIB.deleteCard(card);
-        dataInOut.archive(this.programState, card);
-        // TODO: may not be clean, may need ProgramStateManager or something like that
     }
 
     /**

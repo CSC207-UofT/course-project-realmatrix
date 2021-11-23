@@ -34,7 +34,6 @@ public class CardController {
 
     public void changeCardDefinition(String newDefinition) throws IOException {
         this.cardInputBoundary.changeCardDefinition(newDefinition);
-        dataInOut.write(this.programState, this.programState.getCurrCard());
     }
 
     public void increaseProficiency() {
