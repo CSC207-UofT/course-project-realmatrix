@@ -3,8 +3,9 @@ package use_case.generator;
 import entity.Card;
 import entity.Pack;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -18,7 +19,9 @@ public abstract class TaskGenerator {
     public TaskGenerator(Pack pack) {
         this.pack = pack;
         this.cards = new LinkedList<>();
-        cards.addAll(pack.getCards());
+        List<Card> cardList = pack.getCards();
+        Collections.shuffle(cardList);
+        cards.addAll(cardList);
         this.currCard = null;
     }
 
