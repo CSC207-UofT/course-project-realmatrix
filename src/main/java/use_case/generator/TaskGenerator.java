@@ -3,9 +3,7 @@ package use_case.generator;
 import entity.Card;
 import entity.Pack;
 
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /**
