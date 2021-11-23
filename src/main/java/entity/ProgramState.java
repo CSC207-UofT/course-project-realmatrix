@@ -5,29 +5,26 @@ package entity;
  *      - the current user,
  *      - the current pack the current user is in,
  *      - the current card the user is learning/reviewing.
- *
- * All variables are static, ensuring creating a new instance of ProgramState won't affect
- * the tracking process.
  */
 public class ProgramState {
-    private static User currUser = null;
-    private static Pack currPack = null;
-    private static Card currCard = null;
+    private User currUser = null;
+    private Pack currPack = null;
+    private Card currCard = null;
 
 
     // Setter for currUser
-    public static void setCurrUser(User user) {
+    public void setCurrUser(User user) {
         currUser = user;
     }
 
     // Setter for currCard
-    public static void setCurrCard(Card card) {
+    public void setCurrCard(Card card) {
         currCard = card;
     }
 
     // Setter for currPack
-    public static void setCurrPack(Pack p) {
-        currPack = p;
+    public void setCurrPack(Pack pack) {
+        currPack = pack;
     }
 
     public String toString() {
@@ -56,17 +53,17 @@ public class ProgramState {
     }
 
     // Getter for currUser
-    public static User getCurrUser() {
+    public User getCurrUser() {
         return currUser;
     }
 
     // Getter for currCard
-    public static Card getCurrCard() {
+    public Card getCurrCard() {
         return currCard;
     }
 
     // Getter for currPack
-    public static Pack getCurrPack() {
+    public Pack getCurrPack() {
         return currPack;
     }
 }
