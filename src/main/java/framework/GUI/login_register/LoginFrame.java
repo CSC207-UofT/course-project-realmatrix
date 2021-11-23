@@ -8,7 +8,6 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.LogInOutPresenter;
 import use_case.input_boundaries.LogInOutInputBoundary;
-import use_case.input_boundaries.UserInputBoundary;
 import use_case.manager.LogInOutManager;
 import use_case.manager.UserManager;
 import use_case.output_boundaries.LogInOutOutputBoundary;

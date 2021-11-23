@@ -1,7 +1,7 @@
 package interface_adapter.gateway.datain;
 
 import entity.Card;
-import interface_adapter.Controller.ProgramState;
+import entity.ProgramState;
 
 import java.io.BufferedWriter;
 import java.io.File;

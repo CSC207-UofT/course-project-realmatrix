@@ -2,21 +2,38 @@ package use_case.manager;
 
 import entity.Pack;
 import entity.User;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Objects;
 
 /**
- * A manager that manages all Users.
+ * A manager that manages the current user's registration process and other actions.
+ * It is an observable class, which can induce changes to ProgramState.
  */
 //TODO: implement <sort> interface
 public class UserManager extends Manager<User> implements UserInputBoundary {
+    private final PropertyChangeSupport observable;
 
     public UserManager() {
         super();
+        this.observable = new PropertyChangeSupport(this);
+    }
+
+    /**
+     * Add ProgramStateManager as an observer to respond to the changes
+     * (creating new users, adding new packs) to this class.
+     */
+    private void addObserver() {
+        PropertyChangeListener observer = new ProgramStateManager();
+        observable.addPropertyChangeListener("user", observer);
+        observable.addPropertyChangeListener("pack", observer);
+        // TODO: make propertyName constant
     }
 
     /**
@@ -32,6 +49,9 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
             User user = new User(name, password);
             this.getItems().add(user);
             registerOB.setRegisterResult(true);
+
+            addObserver();
+            observable.firePropertyChange("user", null, user); //TODO: constant
             return user;
         } else {
             registerOB.setRegisterResult(false);
@@ -96,15 +116,17 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     /**
      * Add pack into the user's arraylist of packs.
      *
-     * @param user the user that needs to add pack
      * @param pack the pack to be added
      * @return true if successfully added; false otherwise
      */
     @Override
-    public boolean addPack(User user, Pack pack, AddOutputBoundary AddOutputBoundary) {
+    public boolean addPack(Pack pack, AddOutputBoundary AddOutputBoundary, ProgramStateInputBoundary programStateInputBoundary) {
         try {
-            user.addPackage(pack);
+            programStateInputBoundary.getCurrUser().addPackage(pack);
             AddOutputBoundary.presentAddSuccessView();
+
+            addObserver();
+            observable.firePropertyChange("pack", null, pack); // TODO: constant
             return true;
         } catch (Exception e) {
             AddOutputBoundary.presentAddFailView();

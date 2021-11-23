@@ -1,8 +1,10 @@
 package interface_adapter.Controller;
 
 import entity.Pack;
+import entity.ProgramState;
 import entity.User;
 import interface_adapter.gateway.IDataInOut;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
@@ -50,8 +52,8 @@ public class UserController {
 
     }
 
-    public void addPack(User user, Pack pack, AddOutputBoundary AddOutputBoundary) throws IOException {
-        if (userIB.addPack(user, pack, AddOutputBoundary)) {
+    public void addPack(Pack pack, AddOutputBoundary addOutputBoundary, ProgramStateInputBoundary programStateInputBoundary) throws IOException {
+        if (userIB.addPack(pack, addOutputBoundary, programStateInputBoundary)) {
             dataInOut.write(this.programState, pack);
             // TODO: may not be clean, may need ProgramStateManager or something like that
         }
