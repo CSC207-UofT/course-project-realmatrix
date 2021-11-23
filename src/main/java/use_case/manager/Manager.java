@@ -44,7 +44,8 @@ public abstract class Manager<T> {
      * @return true iff we successfully deleted an item
      */
     public boolean deleteItem(String name){
-        if(this.items.containsKey(name)){
+        this.currItem = this.items.get(name);
+        if(this.currItem != null){ // We have the item to be deleted
             this.items.remove(name);
             return true;
         }else{

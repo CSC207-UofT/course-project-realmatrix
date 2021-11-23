@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * An input boundary that connects CardManager and CardController.
  * **CardManager must implement this interface**
  */
-public interface CardInputBoundary {
+public interface CardInputBoundary extends ManagerInputBoundary {
     boolean addNewCard(String term, String definition, AddOutputBoundary addOutputBoundary);
 
     boolean changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary);
@@ -25,9 +25,9 @@ public interface CardInputBoundary {
 
     void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary);
 
-    ArrayList<Card> sortProLowToHigh();
+//    ArrayList<Card> sortProLowToHigh();
+//
+//    ArrayList<Card> sortProHighToLow();
 
-    ArrayList<Card> sortProHighToLow();
-
-    ArrayList<Card> sortRandom(SortCardOutputBoundary sortCardOutputBoundary);
+//    ArrayList<Card> sortRandom(SortCardOutputBoundary sortCardOutputBoundary);
 }

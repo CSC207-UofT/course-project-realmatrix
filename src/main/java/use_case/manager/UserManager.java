@@ -1,11 +1,9 @@
 package use_case.manager;
 
-import entity.Pack;
 import entity.User;
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
-import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
@@ -32,11 +30,11 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     /**
      * This is the registration method for user.
      * Create a new user if the user doesn't exist in database.
-     *  @param name       the username of this user
+     * @param name       the username of this user
      * @param password   the password of this user
      * @param registerOB the output boundary (abstract interface for presenter)
      */
-    public boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) throws Exception {
+    public boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
         if (!this.items.containsKey(name)) { // No user of such username, valid for registration
             this.currItem = new User(name, password);
             programStateInputBoundary.setCurrUser(this.currItem);
