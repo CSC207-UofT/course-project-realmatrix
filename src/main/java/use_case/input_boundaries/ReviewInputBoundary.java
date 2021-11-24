@@ -5,5 +5,9 @@ import entity.Card;
 import java.util.ArrayList;
 
 public interface ReviewInputBoundary {
-    ArrayList<Card> getDoCardList();
+    Card next();
+
+    public void setShowDefinition();
+
+    public void setCantRecall();
 }

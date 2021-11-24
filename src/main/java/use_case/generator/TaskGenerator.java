@@ -3,33 +3,43 @@ package use_case.generator;
 import entity.Card;
 import entity.Pack;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
- * This class is a test generator that raise a collection of
- * cards for user to learn and review
+ * An abstract task generator.
  */
 public abstract class TaskGenerator {
     protected final Pack pack;
-    protected final ArrayList<Card> cardList;
+    protected Queue<Card> cards;
+    protected Card currCard; // current card the user is learning/reviewing
 
     public TaskGenerator(Pack pack) {
         this.pack = pack;
-        this.cardList = new ArrayList<>();
+        this.cards = new LinkedList<>();
+        List<Card> cardList = pack.getCards();
+        Collections.shuffle(cardList);
+        cards.addAll(cardList);
+        this.currCard = null;
     }
 
     /**
-     * Generate a card list containing all cards eligible for learning/reviewing
-     * with random order and multiple occurrences of each card.
-     *
-     * @return an arraylist of card
+     * Dequeue the next card.
+     * @return the next card, or null if there's no card in the queue
      */
-    public abstract ArrayList<Card> getDoCardList();
+    public abstract Card next();
 
     /**
-     * Helper method for getDoCardList()
-     * Get a card list containing all cards that are eligible to be learnt or reviewed.
+     * Whether all the cards are dequeued.
+     * @return true if no cards in the queue, false otherwise
      */
-    protected abstract void doable();
+    public abstract boolean taskCompleted();
 
+    /**
+     * Show the current card in progress.
+     * @return the card the user is at
+     */
+    public abstract Card getCurrCard();
 }

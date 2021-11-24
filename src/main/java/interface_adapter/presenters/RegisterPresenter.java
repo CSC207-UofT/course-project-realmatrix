@@ -10,8 +10,18 @@ public class RegisterPresenter implements RegisterOutputBoundary {
      *
      * @param result a boolean value representing registration succeeds or fails.
      */
+    @Override
     public void setRegisterResult(boolean result) {
         this.registerResult = result;
+    }
+
+    /**
+     * Getter of registerResult
+     * @return true iff user is registered.
+     */
+    @Override
+    public boolean getRegisterResult(){
+        return this.registerResult;
     }
 
     /**
@@ -19,6 +29,7 @@ public class RegisterPresenter implements RegisterOutputBoundary {
      * TODO: popping up framework.command_line_interface.GUI windows with such strings.
      * @return
      */
+    @Override
     public String presentRegisterResult() {
         if (this.registerResult) {
             return("Registration succeeds!");
