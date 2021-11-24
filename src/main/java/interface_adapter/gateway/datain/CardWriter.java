@@ -11,7 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class CardWriter extends Writer {
-    private final Card card;
+    private final Card card;        // New card to be written
+
 
     /**
      * Construct a CardWriter object.
@@ -24,7 +25,7 @@ public class CardWriter extends Writer {
     }
 
     /**
-     * Write or update a card
+     * Write a new card
      *
      */
     @Override
@@ -41,15 +42,17 @@ public class CardWriter extends Writer {
     /**
      * Write the card's new term into database by renaming the card directory.
      *
-     * @param oldName the card's old name
-     * @param newName the card's new name
+     * @param oldO the card's old name
+     * @param newO the card's new name
      * @throws IOException fails to write
      */
     @Override
-    public void write(String oldName, String newName) throws IOException {
+    public void write(Object oldO, Object newO) throws IOException {
+        Card oldCard = (Card) oldO;
+        Card newCard = (Card) newO;
         Path old = Paths.get("user_data/users/" + this.username + "/packages/" + this.packname
-                + "/cards/" + oldName + ".txt");
-        Files.move(old, old.resolveSibling(newName));
+                + "/cards/" + oldCard.getTerm() + ".txt");
+        Files.move(old, old.resolveSibling(newCard.getTerm()));
     }
 
     /**

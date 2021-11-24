@@ -1,9 +1,7 @@
 package interface_adapter.gateway.datain;
 
+import entity.Pack;
 import entity.User;
-import interface_adapter.gateway.DataInOut;
-import use_case.manager.ProgramStateManager;
-import use_case.manager.UserManager;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 public class UserWriter extends Writer {
     private final User user;
@@ -44,14 +41,16 @@ public class UserWriter extends Writer {
     /**
      * Write the user's new name into database by renaming the user directory.
      *
-     * @param oldName the user's old name
-     * @param newName the user's new name
+     * @param oldO the user's old name
+     * @param newO the user's new name
      * @throws IOException fails to write
      */
     @Override
-    public void write(String oldName, String newName) throws IOException {
-        Path old = Paths.get("user_data/users/" + oldName);
-        Files.move(old, old.resolveSibling(newName));
+    public void write(Object oldO, Object newO) throws IOException {
+        User oldUser = (User) oldO;
+        User newUser = (User) newO;
+        Path old = Paths.get("user_data/users/" + oldUser.getName());
+        Files.move(old, old.resolveSibling(newUser.getName()));
     }
 
     /**

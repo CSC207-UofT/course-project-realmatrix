@@ -26,6 +26,12 @@ public class DataInOut implements IDataInOut {
     }
 
     @Override
+    public void write(String[] partialDataPath, Object oldO, Object newO) throws IOException {
+        Writer writer = this.factory.getWriter(partialDataPath, newO);
+        writer.write(oldO, newO);
+    }
+
+    @Override
     public void archive(String[] partialDataPath, Object o) throws IOException {
         Writer writer = this.factory.getWriter(partialDataPath, o);
         writer.archive();
