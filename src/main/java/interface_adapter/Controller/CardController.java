@@ -1,51 +1,45 @@
 package interface_adapter.Controller;
 
-import entity.Card;
-import entity.ProgramState;
-import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
-import use_case.input_boundaries.ProgramStateInputBoundary;
-import use_case.output_boundaries.AddOutputBoundary;
-import use_case.output_boundaries.ChangeOutputBoundary;
-import use_case.output_boundaries.SearchCardOutputBoundary;
-import use_case.output_boundaries.SortCardOutputBoundary;
+import use_case.output_boundaries.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class CardController {
     private final CardInputBoundary cardInputBoundary;
+    private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
 
-    public CardController(CardInputBoundary cardInputBoundary) {
+    public CardController(CardInputBoundary cardInputBoundary, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         this.cardInputBoundary = cardInputBoundary;
+        this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
     }
 
     /**
      * Methods also in CardManager.java
      */
-    public void addNewCard(String term, String definition, AddOutputBoundary addOutputBoundary) throws IOException {
+    public void addNewCard(String term, String definition, AddOutputBoundary addOutputBoundary) {
         if (this.cardInputBoundary.addNewCard(term, definition, addOutputBoundary)) {
-            this.cardInputBoundary.write();
+            this.cardInputBoundary.write(databaseErrorOutputBoundary);
         }
     }
 
-    public void changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) throws IOException {
+    public void changeCardTerm(String oldTerm, String newTerm, ChangeOutputBoundary changeOutputBoundary) {
         if (this.cardInputBoundary.changeCardTerm(newTerm, changeOutputBoundary)) {
-            this.cardInputBoundary.write();
+            this.cardInputBoundary.write(oldTerm, databaseErrorOutputBoundary);
         }
     }
 
-    public void changeCardDefinition(String newDefinition) throws IOException {
+    public void changeCardDefinition(String newDefinition) {
         this.cardInputBoundary.changeCardDefinition(newDefinition);
-        this.cardInputBoundary.write();
+        this.cardInputBoundary.write(databaseErrorOutputBoundary);
     }
 
     /**
      * Delete a specific card in the current pack.
      */
-    public void deleteCard(String cardTerm) throws IOException {
-        if (this.cardInputBoundary.deleteItem(cardTerm)) {
-            this.cardInputBoundary.archive();
+    public void deleteCard(String cardTerm) {
+        if (this.cardInputBoundary.deleteCard(cardTerm)) {
+            this.cardInputBoundary.archive(databaseErrorOutputBoundary);
         }
     }
 
@@ -53,13 +47,25 @@ public class CardController {
         this.cardInputBoundary.searchCard(keyword, searchCardOutputBoundary);
     }
 
+    public void sortOldToNew(SortCardOutputBoundary sortCardOutputBoundary) {
+        this.cardInputBoundary.sortOldToNew(sortCardOutputBoundary);
+    }
+
     public void sortAtoZ(SortCardOutputBoundary sortCardOutputBoundary) {
         this.cardInputBoundary.sortAtoZ(sortCardOutputBoundary);
     }
 
-    public void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary) {
-        this.cardInputBoundary.sortZtoA(sortCardOutputBoundary);
+    public void sortRandom(SortCardOutputBoundary sortCardOutputBoundary) {
+        this.cardInputBoundary.sortRandom(sortCardOutputBoundary);
     }
+
+    public void sortProLowToHigh(SortCardOutputBoundary sortCardOutputBoundary) {
+        this.cardInputBoundary.sortProLowToHigh(sortCardOutputBoundary);
+    }
+
+//    public void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary) {
+//        this.cardInputBoundary.sortZtoA(sortCardOutputBoundary);
+//    }
 
 //    public void increaseProficiency() {
 //        this.cardInputBoundary.increaseProficiency();

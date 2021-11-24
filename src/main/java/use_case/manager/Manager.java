@@ -2,6 +2,7 @@ package use_case.manager;
 
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -38,21 +39,6 @@ public abstract class Manager<T> {
 //     */
 //    public abstract boolean addItem(String name);
 
-    /**
-     * delete a existing item
-     * @param name: item name we want to delete
-     * @return true iff we successfully deleted an item
-     */
-    public boolean deleteItem(String name){
-        this.currItem = this.items.get(name);
-        if(this.currItem != null){ // We have the item to be deleted
-            this.items.remove(name);
-            return true;
-        }else{
-            return false;
-        }
-    }
-
 //    /**
 //     * change an existing item in items
 //     * @param name item name we want to change
@@ -79,18 +65,32 @@ public abstract class Manager<T> {
 
     /**
      * Write the required object into database.
-     * @throws IOException
      */
-    public void write() throws IOException {
-        dataInOut.write(findPartialDataPath(), currItem);
+    public void write(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+        try {
+            dataInOut.write(findPartialDataPath(), currItem);
+        } catch (IOException e) {
+            databaseErrorOutputBoundary.presentWriteErrMsg();
+        }
+    }
+
+    public void write(String oldName, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+        try {
+            dataInOut.write(findPartialDataPath(), oldName, currItem);
+        } catch (IOException e) {
+            databaseErrorOutputBoundary.presentWriteErrMsg();
+        }
     }
 
     /**
      * Archive (delete and store) the required object into database.
-     * @throws IOException
      */
-    public void archive() throws IOException {
-        dataInOut.archive(findPartialDataPath(), currItem);
+    public void archive(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+        try {
+            dataInOut.archive(findPartialDataPath(), currItem);
+        } catch (IOException e) {
+            databaseErrorOutputBoundary.presentWriteErrMsg();
+        }
     }
 
     /**

@@ -18,17 +18,12 @@ import java.util.HashMap;
  */
 //TODO: implement <sort> interface
 public class UserManager extends Manager<User> implements UserInputBoundary {
-    private HashMap<String, String> items = new HashMap<>();    // items for this manager is a map <username: password>
+    private final HashMap<String, String> items;    // items for this manager is a map <username: password>
 
-    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
+    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) throws IOException {
         super(dataInOut, programStateInputBoundary);
         this.currItem = programStateInputBoundary.getCurrUser();
-        try {
-            this.items = dataInOut.initialLoad();
-        } catch (IOException e) {
-
-        }
-
+        this.items = dataInOut.initialLoad();
     }
 
     /**

@@ -42,16 +42,15 @@ public class CardWriter extends Writer {
     /**
      * Write the card's new term into database by renaming the card directory.
      *
-     * @param oldO the card's old name
-     * @param newO the card's new name
+     * @param oldName the card's old term
+     * @param newO the card with new term
      * @throws IOException fails to write
      */
     @Override
-    public void write(Object oldO, Object newO) throws IOException {
-        Card oldCard = (Card) oldO;
+    public void write(String oldName, Object newO) throws IOException {
         Card newCard = (Card) newO;
         Path old = Paths.get("user_data/users/" + this.username + "/packages/" + this.packname
-                + "/cards/" + oldCard.getTerm() + ".txt");
+                + "/cards/" + oldName + ".txt");
         Files.move(old, old.resolveSibling(newCard.getTerm()));
     }
 

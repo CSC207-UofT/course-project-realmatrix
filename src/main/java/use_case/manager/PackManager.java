@@ -1,6 +1,5 @@
 package use_case.manager;
 
-import entity.Card;
 import entity.Pack;
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.PackInputBoundary;
@@ -17,7 +16,7 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
     public PackManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
         super(dataInOut, programStateInputBoundary);
         this.currItem = this.programStateInputBoundary.getCurrPack();
-        this.items = this.programStateInputBoundary.getCurrUser().getPackages();
+        this.items = this.programStateInputBoundary.getCurrUser().getPackageMap();
     }
 
     /**
@@ -41,6 +40,23 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
     }
 
     /**
+     * Delete a pack with specified pack name.
+     * @param packName the name of the pack to be deleted
+     * @return true if successfully deleted; false otherwise
+     */
+    @Override
+    public boolean deletePack(String packName) {
+        currItem = this.items.get(packName);
+        if(currItem != null){ // We have the item to be deleted
+            items.remove(packName);
+            programStateInputBoundary.getCurrUser().deletePackage(currItem);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
      * Change a pack's name.
      * If the new name doesn't exist, change succeeds. Otherwise, change fails.
      *
@@ -50,8 +66,11 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
      */
     @Override
     public boolean changePackName(String newPackName, ChangeOutputBoundary changeOutputBoundary) {
-        if (!this.items.containsKey(newPackName)) { // there is no pack with newPackName
-            this.currItem.changeName(newPackName);
+        Pack item = searchItem(newPackName);
+        if (item == null) { // No user of such username, valid for change
+            this.items.remove(currItem.getName()); // Remove pack with old name
+            currItem.changeName(newPackName);
+            this.items.put(newPackName, currItem);     // Add pack with new name
             changeOutputBoundary.setChangeResult(true);
             return true;
         } else {

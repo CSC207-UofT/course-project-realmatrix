@@ -12,12 +12,12 @@ import java.util.HashMap;
 public interface IDataInOut {
     void write(String[] partialDataPath, Object o) throws IOException;
 
-    void write(String[] partialDataPath, Object oldO, Object newO) throws IOException;
+    void write(String[] partialDataPath, String oldName, Object newO) throws IOException;
 
     void archive(String[] partialDataPath, Object o) throws IOException;
 
     HashMap<String, String> initialLoad() throws IOException;
 
-    void userLoad(User user) throws Exception;
+    void userLoad(User user) throws IOException;
 
 }

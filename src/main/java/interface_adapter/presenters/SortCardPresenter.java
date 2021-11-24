@@ -3,9 +3,8 @@ package interface_adapter.presenters;
 import use_case.output_boundaries.SortCardOutputBoundary;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class SortCardCardPresenter implements SortCardOutputBoundary {
+public class SortCardPresenter implements SortCardOutputBoundary {
     private ArrayList<String[]> sortResult;
 
     /**
@@ -13,7 +12,7 @@ public class SortCardCardPresenter implements SortCardOutputBoundary {
      * @param result the set value of result.
      */
     @Override
-    public void setSearchResult(ArrayList<String[]> result) {
+    public void setSortResult(ArrayList<String[]> result) {
         this.sortResult = result;
     }
 
@@ -27,7 +26,7 @@ public class SortCardCardPresenter implements SortCardOutputBoundary {
     }
 
     @Override
-    public void presentSearchResult() {
+    public void presentSortResult() {
         for (String[] arr : this.sortResult) {
             System.out.println(arr[0]); // arr[0] is cardTerm
             System.out.println(arr[1]); // arr[1] is cardDef

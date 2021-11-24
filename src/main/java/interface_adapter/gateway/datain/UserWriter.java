@@ -1,6 +1,5 @@
 package interface_adapter.gateway.datain;
 
-import entity.Pack;
 import entity.User;
 
 import java.io.BufferedWriter;
@@ -41,15 +40,14 @@ public class UserWriter extends Writer {
     /**
      * Write the user's new name into database by renaming the user directory.
      *
-     * @param oldO the user's old name
-     * @param newO the user's new name
+     * @param oldName the user's old name
+     * @param newO the user with new name
      * @throws IOException fails to write
      */
     @Override
-    public void write(Object oldO, Object newO) throws IOException {
-        User oldUser = (User) oldO;
+    public void write(String oldName, Object newO) throws IOException {
         User newUser = (User) newO;
-        Path old = Paths.get("user_data/users/" + oldUser.getName());
+        Path old = Paths.get("user_data/users/" + oldName);
         Files.move(old, old.resolveSibling(newUser.getName()));
     }
 

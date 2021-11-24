@@ -1,6 +1,5 @@
 package interface_adapter.gateway.datain;
 
-import entity.Card;
 import entity.Pack;
 
 import java.io.File;
@@ -36,15 +35,14 @@ public class PackWriter extends Writer {
     /**
      * Write the user's new name into database by renaming the pack directory.
      *
-     * @param oldO the pack's old name
-     * @param newO the pack's new name
+     * @param oldName the pack's old name
+     * @param newO the pack with new name
      * @throws IOException fails to write
      */
     @Override
-    public void write(Object oldO, Object newO) throws IOException {
-        Pack oldPack = (Pack) oldO;
+    public void write(String oldName, Object newO) throws IOException {
         Pack newPack = (Pack) newO;
-        Path old = Paths.get("user_data/users/" + this.username + "/packages/" + oldPack.getName());
+        Path old = Paths.get("user_data/users/" + this.username + "/packages/" + oldName);
         Files.move(old, old.resolveSibling(newPack.getName()));
     }
 

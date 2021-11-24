@@ -4,10 +4,7 @@ import entity.Card;
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
-import use_case.output_boundaries.AddOutputBoundary;
-import use_case.output_boundaries.ChangeOutputBoundary;
-import use_case.output_boundaries.SearchCardOutputBoundary;
-import use_case.output_boundaries.SortCardOutputBoundary;
+import use_case.output_boundaries.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,16 +12,15 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 /**
- * A CardManager contains all cards in the system.
+ * A CardManager manages all cards in current pack.
  */
 public class CardManager extends Manager<Card> implements Sort, CardInputBoundary {
-    private Card currCard; // Initialize to the state where the user is not in a card
     // Note items for this manager is a map <cardTerm: Card>
 
     public CardManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
         super(dataInOut, programStateInputBoundary);
-        this.currCard = this.programStateInputBoundary.getCurrCard();
-        this.items = this.programStateInputBoundary.getCurrPack().getCards();
+        this.currItem = this.programStateInputBoundary.getCurrCard();
+        this.items = this.programStateInputBoundary.getCurrPack().getCardMap();
     }
 
     /**
@@ -36,7 +32,8 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
      * @param addOutputBoundary an output boundary for showing the result of adding new pack
      * @return true if the pack is successfully added; false otherwise
      */
-    public boolean addNewCard(String term, String definition, AddOutputBoundary addOutputBoundary) {
+    public boolean addNewCard(String term, String definition,
+                              AddOutputBoundary addOutputBoundary) {
         if (!this.items.containsKey(term)) { // no card has such term, adding is valid
             Card c = new Card(term, definition);
             this.items.put(term, c);
@@ -49,6 +46,22 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
     }
 
     /**
+     * delete an existing card wit specified card term.
+     * @param term: the term of the card the user wants to delete
+     * @return true iff we successfully deleted an item
+     */
+    public boolean deleteCard(String term){
+        currItem = this.items.get(term);
+        if(currItem != null){ // We have the item to be deleted
+            items.remove(term);
+            programStateInputBoundary.getCurrPack().deleteCard(currItem);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
      * Change the card's term to a new term specified by user.
      * If the new term doesn't exist, change succeeds. Otherwise, change fails.
      *
@@ -57,8 +70,12 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
      * @return true if the user successfully changes the card term; false otherwise
      */
     public boolean changeCardTerm(String newTerm, ChangeOutputBoundary changeOutputBoundary) {
-        if (!this.items.containsKey(newTerm)) { // no card has such term, changing is valid
-            this.currCard.setTerm(newTerm);
+        Card card = searchItem(newTerm);
+        if (card == null) { // no card has such term, changing is valid
+            String oldName = currItem.getTerm();
+            this.items.remove(oldName);            // Remove card with old name
+            currItem.setTerm(newTerm);
+            this.items.put(newTerm, currItem);     // Add card with new name
             changeOutputBoundary.setChangeResult(true);
             return true;
         } else {
@@ -74,21 +91,21 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
      * @param newDefinition the new definition the card should change to
      */
     public void changeCardDefinition(String newDefinition) {
-        this.currCard.setDefinition(newDefinition);
+        this.currItem.setDefinition(newDefinition);
     }
 
 //    /**
 //     * Increase the proficiency of the card by 1.
 //     */
 //    public void increaseProficiency() {
-//        this.currCard.setProficiency(Math.min(this.currCard.getProficiency() + 1, 5));
+//        this.currItem.setProficiency(Math.min(this.currItem.getProficiency() + 1, 5));
 //    }
 //
 //    /**
 //     * Decrease the proficiency of the card by 1.
 //     */
 //    public void decreaseProficiency() {
-//        this.currCard.setProficiency(Math.max(this.currCard.getProficiency() - 1, 1));
+//        this.currItem.setProficiency(Math.max(this.currItem.getProficiency() - 1, 1));
 //    }
 
     /**
@@ -105,6 +122,17 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         }
         searchCardOutputBoundary.setSearchResult(termToDef);
     }
+
+    /**
+     * Return a card list sorted by date added: oldest to newest.
+     *
+     * @param sortOutputBoundary a sort output boundary for getting the sorted output.
+     * @return an arraylist of sorted cards
+     */
+    public void sortOldToNew(SortCardOutputBoundary sortOutputBoundary) {
+        presentSortResult(programStateInputBoundary.getCurrPack().getCardList(), sortOutputBoundary);
+    }
+
     /**
      * Sort cards by cards' terms' alphabetical order: a - z.
      *
@@ -116,51 +144,49 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         presentSortResult(sorted, sortCardOutputBoundary);
     }
 
-    /**
-     * Return a card list sorted by cards' terms' alphabetical order: z - a.
-     *
-     * @param sortCardOutputBoundary a sort output boundary for getting the sorted output.
-     */
-    public void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary) {
-        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
-        sorted.sort(new AlphabetComparator().reversed());
-        presentSortResult(sorted, sortCardOutputBoundary);
-    }
+//    /**
+//     * Return a card list sorted by cards' terms' alphabetical order: z - a.
+//     *
+//     * @param sortCardOutputBoundary a sort output boundary for getting the sorted output.
+//     */
+//    public void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary) {
+//        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
+//        sorted.sort(new AlphabetComparator().reversed());
+//        presentSortResult(sorted, sortCardOutputBoundary);
+//    }
 
 
     /**
      * Return a card list sorted by cards' proficiency: low to high.
      *
-     * @return an arraylist of sorted cards
+     * @param sortCardOutputBoundary an output boundary that gets the result of sorted cards
      */
-    public ArrayList<Card> sortProLowToHigh() {
+    public void sortProLowToHigh(SortCardOutputBoundary sortCardOutputBoundary) {
         ArrayList<Card> sorted = new ArrayList<>(this.items.values());
         sorted.sort(new ProficiencyComparator());
-        return sorted;
+        presentSortResult(sorted, sortCardOutputBoundary);
     }
-
-    /**
-     * Return a card list sorted by cards' proficiency: high to low.
-     *
-     * @return an arraylist of sorted cards
-     */
-    public ArrayList<Card> sortProHighToLow() {
-        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
-        sorted.sort(new ProficiencyComparator().reversed());
-        return sorted;
-    }
+//
+//    /**
+//     * Return a card list sorted by cards' proficiency: high to low.
+//     *
+//     * @return an arraylist of sorted cards
+//     */
+//    public ArrayList<Card> sortProHighToLow() {
+//        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
+//        sorted.sort(new ProficiencyComparator().reversed());
+//        return sorted;
+//    }
 
     /**
      * Return a card list sorted in random order.
      *
      * @param sortCardOutputBoundary a sort output boundary for getting the sorted output.
-     * @return an arraylist of randomly sorted cards
      */
-    public ArrayList<Card> sortRandom(SortCardOutputBoundary sortCardOutputBoundary) {
+    public void sortRandom(SortCardOutputBoundary sortCardOutputBoundary) {
         ArrayList<Card> sorted = new ArrayList<>(this.items.values());
         Collections.shuffle(sorted);
         presentSortResult(sorted, sortCardOutputBoundary);
-        return sorted;
     }
 
     /**
@@ -174,7 +200,7 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
             String[] termDefList = new String[]{c.getTerm(), c.getDefinition()};
             presentResult.add(termDefList);
         }
-        sortCardOutputBoundary.setSearchResult(presentResult);
+        sortCardOutputBoundary.setSortResult(presentResult);
     }
 
 
@@ -216,21 +242,5 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         public int compare(Card c1, Card c2) {
             return c1.getProficiency() - c2.getProficiency();
         }
-    }
-
-    /**
-     * Getter for the current card the user is in.
-     *
-     * @return the current card.
-     */
-    public Card getCurrCard() {
-        return this.currCard;
-    }
-
-    /**
-     * Change to the current card the user is in.
-     */
-    public void setCurrCard(Card card) {
-        this.currCard = card;
     }
 }
