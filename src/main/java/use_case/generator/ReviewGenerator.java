@@ -2,73 +2,62 @@ package use_case.generator;
 
 import entity.Card;
 import entity.Pack;
-import use_case.constants.Constants;
 import use_case.input_boundaries.ReviewInputBoundary;
+import use_case.manager.CardManager;
+import use_case.output_boundaries.ReviewOutputBoundary;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
+/**
+ * Review a pack by going over all the cards in the pack, marking the unfamiliar ones, and reviewing those cards over
+ * and over. Update cards' proficiency along the way. Only the term part is shown but user can choose to reveal the
+ * definition part.
+ */
 public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundary {
+    private boolean cantRecall = false;
+    private final ReviewOutputBoundary reviewOB;
 
-    public ReviewGenerator(Pack pack) {
+    public ReviewGenerator(Pack pack, ReviewOutputBoundary reviewOB) {
         super(pack);
+        this.reviewOB = reviewOB;
     }
 
-    /**
-     * Generate a card list containing all cards eligible for reviewing
-     * with random order and multiple occurrences of each card.
-     *
-     * @return an arraylist of card
-     */
     @Override
-    public ArrayList<Card> getDoCardList() {
-        doable();
-        return this.withProficiencyBasedCards();
-    }
-
-    /**
-     * Helper method for getDoCardList().
-     * Add a list of cards needs to be reviewed into this.cardList.
-     */
-    @Override
-    protected void doable() {
-        for (Card c : this.pack.getCards()) {
-            if (c.getProficiency() <= Constants.REVIEW_PROFICIENCY_MAX && c.getProficiency() > 0) {
-                this.cardList.add(c);
-            }
+    public Card next() {
+        if (cantRecall) {
+            cards.add(currCard);
+            // This is because user will recall that card eventually so the net effect on proficiency is
+            // (-2 * n + 1 < 0)
+            currCard.setProficiency(Math.min(0, currCard.getProficiency() - 2));
+        } else {
+            currCard.setProficiency(Math.max(5, currCard.getProficiency() + 1));
+        }
+        Card nextCard = cards.poll();
+        if (nextCard != null) {
+            nextCard.hideDefinition();
+            currCard = nextCard;
+            cantRecall = false;
+            return nextCard;
+        } else {
+            return null;
         }
     }
 
-    /**
-     * Helper method for getDoCardList().
-     * Return a list of doable cards, each card is repeated for some times according to its proficiency.
-     */
-    private ArrayList<Card> withProficiencyBasedCards() {
-        ArrayList<Card> newCards = new ArrayList<>();
-        for (Card c : this.cardList) {
-            int prof = c.getProficiency();
-            switch (prof) {
-                case 1:
-                case 2: { // Cards with proficiency 1/2 has 3 occurrences.
-                    newCards.add(c);
-                    newCards.add(c);
-                    newCards.add(c);
-                    break;
-                }
-                case 3:
-                case 4: { // Cards with proficiency 3/4 has 2 occurrences.
-                    newCards.add(c);
-                    newCards.add(c);
-                    break;
-                }
-                case 5: {
-                    newCards.add(c);
-                    break;
-                }
-            }
-        }
-        Collections.shuffle(newCards);
-        return newCards;
+    public void setShowDefinition() {
+        currCard.unhideDefinition();
+    }
+
+    public void setCantRecall() {
+        cantRecall = true;
+    }
+
+    @Override
+    public boolean taskCompleted() {
+        reviewOB.setReviewCompleted();
+        return cards.peek() == null;
+    }
+
+    @Override
+    public Card getCurrCard() {
+        reviewOB.setCurrCardStrRep(currCard.toString());
+        return currCard;
     }
 }
-

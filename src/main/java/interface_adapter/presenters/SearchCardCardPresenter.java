@@ -10,9 +10,21 @@ import java.util.HashMap;
 public class SearchCardCardPresenter implements SearchCardOutputBoundary {
     private HashMap<String, String> searchResult;
 
+    /**
+     * setter of search result.
+     * @param result
+     */
     @Override
     public void setSearchResult(HashMap<String, String> result) {
         this.searchResult = result;
+    }
+
+    /**
+     * Getter of search result.
+     */
+    @Override
+    public HashMap getSearchResult(){
+        return this.searchResult;
     }
 
     @Override

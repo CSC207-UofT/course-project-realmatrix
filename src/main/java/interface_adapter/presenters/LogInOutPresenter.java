@@ -17,6 +17,21 @@ public class LogInOutPresenter implements LogInOutOutputBoundary {
     }
 
     /**
+     * Getter for LogInOutResult
+     * @return true iff user successfully logged in.
+     */
+    @Override
+    public boolean getLogInOutResult(){
+        switch (loginResult) {
+            case SUCCEED:
+                return true;
+
+            case FAIL:
+                return false;
+        }
+        return false;
+    }
+    /**
      * Present the login result.
      * TODO: popping up framework.command_line_interface.GUI windows with such string.
      * @return

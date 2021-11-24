@@ -5,5 +5,7 @@ import use_case.manager.LogInOutManager;
 public interface LogInOutOutputBoundary {
     void setLogInOutResult(LogInOutManager.LoggedIn loginResult);
 
+    boolean getLogInOutResult();
+
     String presentLogInOutResult();
 }
