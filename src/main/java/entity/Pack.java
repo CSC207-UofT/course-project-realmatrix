@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class Pack {
 
-    private final HashMap<String, Card> cardMap; // oldest cards in the front, newly added ones at the end
+    private final ArrayList<Card> cardList; // oldest cards in the front, newly added ones at the end
     private String name;
 
     /**
@@ -19,17 +19,16 @@ public class Pack {
      */
     public Pack(String name) {
         this.name = name;
-        this.cardMap = new HashMap<>();
+        this.cardList = new ArrayList<>();
     }
 
     /**
      * Add a new Card into the pack's cardList.
-     * Throws an exception if the new card's term already exists in the pack.
      *
      * @param card a Card item
      */
     public void addCard(Card card) {
-        this.cardMap.put(card.getTerm(), card);
+        this.cardList.add(card);
     }
 
     /**
@@ -38,15 +37,27 @@ public class Pack {
      * @param card the card to be removed
      */
     public void deleteCard(Card card) {
-        this.cardMap.remove(card);
+        this.cardList.remove(card);
     }
 
     public String getName() {
         return name;
     }
 
-    public HashMap<String, Card> getCards() {
-        return this.cardMap;
+    public ArrayList<Card> getCardList() {
+        return this.cardList;
+    }
+
+    /**
+     * Return a card map that maps card term to card, allows more flexible use in other classes.
+     * @return a hah map of card term to card object.
+     */
+    public HashMap<String, Card> getCardMap() {
+        HashMap<String, Card> nameToCard = new HashMap<>();
+        for (Card c : this.cardList) {
+            nameToCard.put(c.getTerm(), c);
+        }
+        return nameToCard;
     }
 
     /**
