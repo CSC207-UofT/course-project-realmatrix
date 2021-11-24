@@ -1,12 +1,6 @@
 package interface_adapter.Controller;
 
-import entity.Pack;
-import entity.ProgramState;
-import entity.User;
-import interface_adapter.gateway.IDataInOut;
-import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
-import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;

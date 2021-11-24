@@ -5,6 +5,7 @@ import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
 import java.io.IOException;
@@ -18,12 +19,26 @@ import java.util.HashMap;
  */
 //TODO: implement <sort> interface
 public class UserManager extends Manager<User> implements UserInputBoundary {
-    private final HashMap<String, String> items;    // items for this manager is a map <username: password>
+    private HashMap<String, String> items;    // items for this manager is a map <username: password>
+    private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
 
-    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) throws IOException {
+    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         super(dataInOut, programStateInputBoundary);
         this.currItem = programStateInputBoundary.getCurrUser();
-        this.items = dataInOut.initialLoad();
+        this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
+        initialLoad(databaseErrorOutputBoundary);
+    }
+
+    /**
+     * Helper method for constructor
+     * @param databaseErrorOutputBoundary an output boundary that may show database connecting error messages
+     */
+    private void initialLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+        try {
+            this.items = dataInOut.initialLoad();
+        } catch (IOException e) {
+            databaseErrorOutputBoundary.presentLoadErrMsg();
+        }
     }
 
     /**
@@ -33,7 +48,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @param password   the password of this user
      * @param registerOB the output boundary (abstract interface for presenter)
      */
-    public boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) throws IOException {
+    public boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
         if (!this.items.containsKey(name)) { // No user of such username, valid for registration
             this.currItem = new User(name, password);
             programStateInputBoundary.setCurrUser(this.currItem);
@@ -73,6 +88,18 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     public void changePassword(String newPassword) {
         this.currItem.changePassword(newPassword);
         this.items.put(this.currItem.getName(), newPassword);
+    }
+
+    /**
+     * Load all packs/cards for current user who just logs in.
+     */
+    @Override
+    public void userLoad() {
+        try {
+            dataInOut.userLoad(currItem);
+        } catch (IOException e) {
+            databaseErrorOutputBoundary.presentLoadErrMsg();
+        }
     }
 
 //    /**

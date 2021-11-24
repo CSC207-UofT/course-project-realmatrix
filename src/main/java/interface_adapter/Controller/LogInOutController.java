@@ -1,9 +1,13 @@
 package interface_adapter.Controller;
 
 import entity.User;
+import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.LogInOutInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.LogInOutOutputBoundary;
+
+import java.util.HashMap;
 
 /**
  * This controller manages log-in and log-out tasks for users.
@@ -26,8 +30,11 @@ public class LogInOutController {
      * @param username user's username, cannot be repeated
      * @param password user's password
      */
-    public void login(String username, String password, LogInOutOutputBoundary logInOutOB) {
-        logInOutIB.logInUser(username, password, logInOutOB);
+    public void login(String username, String password, LogInOutOutputBoundary logInOutOB, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+        logInOutIB.initialLoad(databaseErrorOutputBoundary);
+        if (logInOutIB.logInUser(username, password, logInOutOB)) { // login succeeds
+            logInOutIB.userLoad(databaseErrorOutputBoundary); // loads all packs/cards for this user
+        }
     }
 
     /**
@@ -37,13 +44,13 @@ public class LogInOutController {
         logInOutIB.signOffUser(logInOutOB);
     }
 
-    /**
-     * Need to discuss whether this is useful.
-     *
-     * @return the current user.
-     */
-    //TODO: if we use observer DP to update program state, controller no need to call on this method
-    public User getCurrentUser() throws Exception {
-        return this.logInOutIB.getCurrUser();
-    }
+//    /**
+//     * Need to discuss whether this is useful.
+//     *
+//     * @return the current user.
+//     */
+//    //TODO: if we use observer DP to update program state, controller no need to call on this method
+//    public User getCurrentUser() throws Exception {
+//        return this.logInOutIB.getCurrUser();
+//    }
 }
