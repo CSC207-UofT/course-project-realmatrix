@@ -24,7 +24,6 @@ import java.util.HashMap;
  * package1/
  * package2/
  * ...
- * package_info.txt
  * cards/
  * archived_cards/
  * card1.txt
@@ -53,10 +52,11 @@ public class Loader {
      * @param user the given user
      * @throws IOException
      */
-    public void userLoad(User user) throws Exception {
+    public void userLoad(User user) throws IOException {
         Reader reader = new Reader();
         for (String packPath : reader.readPacks(user.getName())) { // load this user's packages
-            Pack pack = this.putPack(packPath, user);
+            Pack pack = new Pack(Path.of(packPath).getFileName().toString());
+            user.addPackage(pack);
             for (String cardPath : reader.readCards(user.getName(), pack.getName())) { // load this pack's cards
                 this.putCard(cardPath, pack);
             }
@@ -67,57 +67,52 @@ public class Loader {
      * Helper to Loader.initialLoad(). Load user info.
      *
      * @param userPath directory of user_info.txt
-     * @param map  map to save the user info to
-     * @throws IOException
+     * @param map  map to save the username to user password
+     * @throws IOException fails to load
      */
     private void putUser(String userPath, HashMap<String, String> map) throws IOException {
         BufferedReader userInfoFileReader = Files.newBufferedReader(Path.of(userPath + "/user_info.txt"));
-        String userInfo = userInfoFileReader.readLine();
+        String userPassword = userInfoFileReader.readLine();
+        String userName = Path.of(userPath).getFileName().toString();
         userInfoFileReader.close();
-        String userName = userInfo.split(",")[0];
-        String userPassword = userInfo.split(",")[1];
         map.put(userName, userPassword);
     }
 
-    /**
-     * Helper to Loader.userLoad(). Load pack into user.
-     *
-     * @param packPath directory of package_info.txt
-     * @param user     user to save package to
-     * @return the loaded package
-     * @throws IOException
-     */
-    private Pack putPack(String packPath, User user) throws Exception {
-        BufferedReader packInfoFileReader
-                = Files.newBufferedReader(Path.of(packPath + "/package_info.txt"));
-        String packInfo = packInfoFileReader.readLine();
-        packInfoFileReader.close();
-        String packName = packInfo.split(",")[0];
-        Pack pack = new Pack(packName);
-        user.addPackage(pack); // put Pack into User
-        return pack;
-    }
+//    /**
+//     * Helper to Loader.userLoad(). Load pack into user.
+//     *
+//     * @param packPath directory of package_info.txt
+//     * @param user     user to save package to
+//     * @return the loaded package
+//     * @throws IOException
+//     */
+//    private Pack putPack(String packPath, User user) throws IOException {
+//        BufferedReader packInfoFileReader
+//                = Files.newBufferedReader(Path.of(packPath + "/package_info.txt"));
+//        String packInfo = packInfoFileReader.readLine();
+//        packInfoFileReader.close();
+//        String packName = packInfo.split(",")[0];
+//        Pack pack = new Pack(packName);
+//        user.addPackage(pack); // put Pack into User
+//        return pack;
+//    }
 
     /**
      * Helper to Loader.userLoad(). Load card into pack.
      *
      * @param cardPath file path to card_term.txt
      * @param pack     pack to save card to
-     * @throws IOException
+     * @throws IOException fail to load
      */
     private void putCard(String cardPath, Pack pack) throws IOException {
         BufferedReader cardInfoFileReader = Files.newBufferedReader(Path.of(cardPath));
         String cardInfo = cardInfoFileReader.readLine();
         cardInfoFileReader.close();
-        String cardTerm = cardInfo.split(",")[0];
-        String cardDefinition = cardInfo.split(",")[1];
-        String cardProficiency = cardInfo.split(",")[2];
+        String cardTerm = Path.of(cardPath).getFileName().toString();
+        String cardDefinition = cardInfo.split(",")[0];
+        String cardProficiency = cardInfo.split(",")[1];
         Card card = new Card(cardTerm, cardDefinition);
         card.setProficiency(Integer.parseInt(cardProficiency));
-        try {
-            pack.addCard(card); // put Card into Pack
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        pack.addCard(card);
     }
 }

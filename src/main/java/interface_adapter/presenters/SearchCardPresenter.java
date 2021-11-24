@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * A presenter for search result.
  */
-public class SearchCardCardPresenter implements SearchCardOutputBoundary {
+public class SearchCardPresenter implements SearchCardOutputBoundary {
     private HashMap<String, String> searchResult;
 
     /**
@@ -23,7 +23,7 @@ public class SearchCardCardPresenter implements SearchCardOutputBoundary {
      * Getter of search result.
      */
     @Override
-    public HashMap getSearchResult(){
+    public HashMap<String, String> getSearchResult(){
         return this.searchResult;
     }
 

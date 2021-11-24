@@ -1,9 +1,9 @@
 package use_case.input_boundaries;
 
-import java.io.IOException;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
 public interface ManagerInputBoundary {
-    public boolean deleteItem(String name);
-    public void write() throws IOException;
-    public void archive() throws IOException;
+    public void write(DatabaseErrorOutputBoundary databaseErrorOutputBoundary);
+    public void write(String oldName, DatabaseErrorOutputBoundary databaseErrorOutputBoundary);
+    public void archive(DatabaseErrorOutputBoundary databaseErrorOutputBoundary);
 }

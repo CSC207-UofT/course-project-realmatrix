@@ -9,12 +9,12 @@ import java.util.HashMap;
 public class User {
     private String name;
     private String password;
-    private final HashMap<String, Pack> packages;
+    private final ArrayList<Pack> packageList;
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
-        this.packages = new HashMap<>();
+        this.packageList = new ArrayList<>();
     }
 
     public String getName() {
@@ -34,17 +34,29 @@ public class User {
     }
 
     public void addPackage(Pack pack) {
-        this.packages.put(pack.getName(), pack);
+        this.packageList.add(pack);
     }
 
-    public HashMap<String, Pack> getPackages() {
-        return this.packages;
+    public ArrayList<Pack> getPackageList() {
+        return this.packageList;
+    }
+
+    /**
+     * Return a pack map that maps pack name to pack, allows more flexible use in other classes.
+     * @return a hah map of pack name to pack object.
+     */
+    public HashMap<String, Pack> getPackageMap() {
+        HashMap<String, Pack> nameToPack = new HashMap<>();
+        for (Pack p : this.packageList) {
+            nameToPack.put(p.getName(), p);
+        }
+        return nameToPack;
     }
 
     /**
      * @param pack the package to be deleted
      */
     public void deletePackage(Pack pack) {
-        this.packages.remove(pack.getName());
+        this.packageList.remove(pack);
     }
 }

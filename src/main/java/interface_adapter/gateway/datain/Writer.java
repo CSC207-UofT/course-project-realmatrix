@@ -24,6 +24,14 @@ public abstract class Writer {
     public abstract void write() throws IOException;
 
     /**
+     * Rename the object with new name.
+     * @param oldName the old object's name which should be replaced
+     * @param newO the new object
+     * @throws IOException fails to write
+     */
+    public abstract void write(String oldName, Object newO) throws IOException;
+
+    /**
      * Archive the object in database (store in database but won't load in future)
      *
      */

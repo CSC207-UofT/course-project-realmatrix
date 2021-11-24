@@ -2,18 +2,18 @@ package interface_adapter.gateway.datain;
 
 import entity.Pack;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class PackWriter extends Writer {
     private final Pack pack;
 
     /**
      * Construct a CardWriter object.
-     *  @param partialDataPath the state the program is in
+     * @param partialDataPath the state the program is in
      * @param o     the object (pack) to write/update
      */
     public PackWriter(String[] partialDataPath, Object o) {
@@ -22,18 +22,28 @@ public class PackWriter extends Writer {
     }
 
     /**
-     * Write or update a package
+     * Write a new package
      *
      * @throws IOException
      */
     @Override
     public void write() throws IOException {
-        new File("user_data/users/" + this.username + "/packages/" + this.pack.getName()).mkdirs();
-        BufferedWriter writer =
-                new BufferedWriter(new FileWriter("user_data/users/" + this.username
-                        + "/packages/" + this.pack.getName() + "/package_info.txt"));
-        writer.write(this.pack.getName());
-        writer.close();
+        String packPath = "user_data/users/" + this.username + "/packages/" + this.pack.getName();
+        new File(packPath).mkdirs();
+    }
+
+    /**
+     * Write the pack's new name into database by renaming the pack directory.
+     *
+     * @param oldName the pack's old name
+     * @param newO the pack with new name
+     * @throws IOException fails to write
+     */
+    @Override
+    public void write(String oldName, Object newO) throws IOException {
+        Pack newPack = (Pack) newO;
+        Path old = Paths.get("user_data/users/" + this.username + "/packages/" + oldName);
+        Files.move(old, old.resolveSibling(newPack.getName()));
     }
 
     /**
@@ -47,5 +57,5 @@ public class PackWriter extends Writer {
         Files.move(new File("user_data/users/" + this.username + "/packages/" + this.pack.getName()).toPath(),
                 new File("user_data/users/" + this.username + "/archived_packages/" +
                         this.pack.getName()).toPath());
-    }
+    } // FIXME: same problem as UserWriter.archive.
 }

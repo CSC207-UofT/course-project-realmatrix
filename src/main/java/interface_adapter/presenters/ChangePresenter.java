@@ -23,12 +23,12 @@ public class ChangePresenter implements ChangeOutputBoundary {
         return this.changeResult;
     }
 
-    @Override
-    public String presentChangeResult() {
-        if (this.changeResult) {
-            return("OK! You have the new username now.");
-        } else {
-            return("This name is taken. Please use another username");
-        }
-    }
+//    @Override
+//    public String presentChangeResult() {
+//        if (this.changeResult) {
+//            return("OK! You have the new username now.");
+//        } else {
+//            return("This name is taken. Please use another username");
+//        }
+//    }
 }

@@ -1,6 +1,8 @@
 package framework.GUI.login_register;
 
 import framework.GUI.BasicFrame;
+import interface_adapter.Controller.ProgramStateController;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,9 +19,9 @@ public abstract class LogRegFrame extends BasicFrame implements ActionListener {
     protected final JPasswordField pw;          // The text field for entering password
     protected final JButton backButton;     // Button that goes back to StartFrame
 
-    public LogRegFrame(String title) {
+    public LogRegFrame(String title, ProgramStateInputBoundary programStateInputBoundary) {
         // Set the frame constraints
-        super(title);
+        super(title, programStateInputBoundary);
         setFrameConstraints();
 
         // Create component: the panel on this frame
@@ -80,7 +82,7 @@ public abstract class LogRegFrame extends BasicFrame implements ActionListener {
     /**
      * Method for checking whether registration/login is valid.
      */
-    protected abstract void check() throws Exception;
+    protected abstract boolean check() throws Exception;
 
     @Override
     public abstract void actionPerformed(ActionEvent e);

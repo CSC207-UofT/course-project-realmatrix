@@ -5,6 +5,7 @@ import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
 import java.io.IOException;
@@ -18,13 +19,26 @@ import java.util.HashMap;
  */
 //TODO: implement <sort> interface
 public class UserManager extends Manager<User> implements UserInputBoundary {
-    private final HashMap<String, String> items;
-    // Note items for this manager is a map <username: password>
+    private HashMap<String, String> items;    // items for this manager is a map <username: password>
+    private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
 
-    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) throws IOException {
+    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         super(dataInOut, programStateInputBoundary);
         this.currItem = programStateInputBoundary.getCurrUser();
-        this.items = dataInOut.initialLoad();
+        this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
+        initialLoad(databaseErrorOutputBoundary);
+    }
+
+    /**
+     * Helper method for constructor
+     * @param databaseErrorOutputBoundary an output boundary that may show database connecting error messages
+     */
+    private void initialLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+        try {
+            this.items = dataInOut.initialLoad();
+        } catch (IOException e) {
+            databaseErrorOutputBoundary.presentLoadErrMsg();
+        }
     }
 
     /**
@@ -56,8 +70,8 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
         Object item = searchItem(newName);
         if (item == null) { // No user of such username, valid for change
             this.items.remove(currItem.getName()); // Remove user with old name
-            currItem.changeName(newName);
             this.items.put(newName, currItem.getPassword());     // Add user with new name
+            currItem.changeName(newName);
             changeOutputBoundary.setChangeResult(true);
             return true;
         } else {
@@ -68,10 +82,24 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Change password of current user.
-     * @param newPassword new password*/
+     * @param newPassword new password
+     */
     @Override
     public void changePassword(String newPassword) {
         this.currItem.changePassword(newPassword);
+        this.items.put(this.currItem.getName(), newPassword);
+    }
+
+    /**
+     * Load all packs/cards for current user who just logs in.
+     */
+    @Override
+    public void userLoad() {
+        try {
+            dataInOut.userLoad(currItem);
+        } catch (IOException e) {
+            databaseErrorOutputBoundary.presentLoadErrMsg();
+        }
     }
 
 //    /**

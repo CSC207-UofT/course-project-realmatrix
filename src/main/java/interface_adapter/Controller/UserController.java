@@ -1,13 +1,8 @@
 package interface_adapter.Controller;
 
-import entity.Pack;
-import entity.ProgramState;
-import entity.User;
-import interface_adapter.gateway.IDataInOut;
-import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
-import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
 import java.io.IOException;
@@ -17,24 +12,22 @@ import java.io.IOException;
  */
 public class UserController {
     final UserInputBoundary userIB;
-    final IDataInOut dataInOut;
-    final ProgramState programState;
+    private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
 
-    public UserController(UserInputBoundary userIB, IDataInOut dataInOut, ProgramState programState) {
+    public UserController(UserInputBoundary userIB, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         this.userIB = userIB;
-        this.dataInOut = dataInOut;
-        this.programState = programState;
+        this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
     }
 
-    public void changeUserName(String newName, ChangeOutputBoundary changeOutputBoudary) throws IOException {
-        if (this.userIB.changeName(newName, changeOutputBoudary)) {
-            this.userIB.write();
+    public void changeUserName(String oldName, String newName, ChangeOutputBoundary changeOutputBoundary) {
+        if (this.userIB.changeName(newName, changeOutputBoundary)) {
+            this.userIB.write(oldName, databaseErrorOutputBoundary);
         }
     }
 
-    public void changePassword(String newPassword) throws IOException {
+    public void changePassword(String newPassword) {
         this.userIB.changePassword(newPassword);
-        this.userIB.write();
+        this.userIB.write(databaseErrorOutputBoundary);
     }
 
     /**
@@ -45,7 +38,7 @@ public class UserController {
      */
     public void register(String username, String password, RegisterOutputBoundary registerOB) throws IOException {
         if (userIB.createNewUser(username, password, registerOB)) {
-            this.userIB.write();
+            this.userIB.write(databaseErrorOutputBoundary);
         }
     }
 }

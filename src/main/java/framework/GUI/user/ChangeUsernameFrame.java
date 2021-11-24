@@ -1,11 +1,18 @@
 package framework.GUI.user;
 
+import entity.Pack;
 import entity.User;
 import framework.GUI.BasicFrame;
+import interface_adapter.Controller.UserController;
+import interface_adapter.gateway.DataInOut;
+import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.manager.UserManager;
 import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +21,7 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
-    final User user;
+    final String username;
     final JPanel changeNamePanel;
     final JLabel message;
     final JTextField newName;
@@ -24,9 +31,9 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
     /**
      * Build a StartFrame.
      */
-    public ChangeUsernameFrame(User user) {
-        super("Recaller");
-        this.user = user;
+    public ChangeUsernameFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
+        super("Recaller", programStateInputBoundary);
+        this.username = username;
         // 1. Create components shown on the frame
         changeNamePanel = new JPanel(new GridLayout(3, 1));
 
@@ -62,13 +69,31 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) { // user finishes entering new name
-        UserInputBoundary manager = new UserManager();
+        // Constructs a userManager
+        IDataInOut dataInOut = new DataInOut();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        UserInputBoundary manager = new UserManager(dataInOut, programStateInputBoundary, dbPresenter);
+
+        // Construct a UserController
+        DatabaseErrorOutputBoundary databaseErrorOutputBoundary = new DatabaseErrMsgPresenter();
+        UserController userController = new UserController(manager, databaseErrorOutputBoundary);
+
+        // Call change name method
         ChangeOutputBoundary presenter = new ChangePresenter();
-        manager.changeName(newName.getText(), presenter);
-        String result = presenter.presentChangeResult();
-        if (Objects.equals(result, "OK! You have the new username now.")) {
-            new UserFrame(user);
-        } // TODO: handle the case when name change somehow fails
-        setVisible(false);
+        userController.changeUserName(this.username, newName.getText(), presenter);
+
+        // Check if successfully changed
+        boolean result = presenter.getChangeResult();
+        if (result) {
+            JOptionPane.showMessageDialog(this, "Username changed successfully");
+            new UserFrame(newName.getText(), programStateInputBoundary);
+            setVisible(false);
+        } else {
+            // Pop up a window showing failing message
+            JOptionPane.showMessageDialog(this,
+                    "This username is taken. Please choose another one~", // TODO: constant
+                    "Changing username fails",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }
 }

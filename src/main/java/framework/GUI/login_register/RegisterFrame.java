@@ -2,10 +2,18 @@ package framework.GUI.login_register;
 
 import entity.User;
 import framework.GUI.start.StartFrame;
-import framework.GUI.user.UserFrame;
+//import framework.GUI.user.UserFrame;
+import interface_adapter.Controller.ProgramStateController;
+import interface_adapter.Controller.RegisterController;
+import interface_adapter.gateway.DataInOut;
+import interface_adapter.gateway.IDataInOut;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.RegisterPresenter;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
+import use_case.manager.ProgramStateManager;
 import use_case.manager.UserManager;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
 import javax.swing.*;
@@ -14,11 +22,11 @@ import java.util.Objects;
 
 public class RegisterFrame extends LogRegFrame {
     private final JLabel pw2Label;          // Confirming password JLabel
-    private final JTextField pw2;           // Confirmation password text field
+    private final JPasswordField pw2;       // Confirmation password text field
     private final JButton rgButton;         // Button that confirms registration
 
-    public RegisterFrame() {
-        super("Register");
+    public RegisterFrame(ProgramStateInputBoundary programStateInputBoundary) {
+        super("Register", programStateInputBoundary);
 
         // Create component: register button
         rgButton = new JButton("Register");
@@ -57,6 +65,8 @@ public class RegisterFrame extends LogRegFrame {
      * Set actions for clicking register and back buttons.
      * <p>
      * Clicking register button: check register successful or not
+     *      - If fails, pop up a window showing registration fails.
+     *      - If succeeds, goes to the user's UserFrame.
      * Clicking back button: back to the start frame
      *
      * @param e An ActionEvent item
@@ -65,44 +75,67 @@ public class RegisterFrame extends LogRegFrame {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == rgButton) {
-            check();
-            // TODO: need a controller that controls the whole registration process
-            // TODO: need a RegisterManager
-            setVisible(false);
+            if (!checkPasswordEqual()) {
+                JOptionPane.showMessageDialog(this,
+                        "Passwords didn't match. Try again.", // TODO: constant
+                        "Registration Fails",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+
+            if (check()) {  // Registration succeeds
+                setVisible(false);
+                //TODO: go to UserFrame.
+            } else {    // Registration fails: username already exists
+                JOptionPane.showMessageDialog(this,
+                        "This username is taken. Choose another one please~", // TODO: constant
+                        "Registration Fails",
+                        JOptionPane.WARNING_MESSAGE);
+            }
         }
 
         if (source == backButton) {
-            new StartFrame();
+            new StartFrame(new ProgramStateManager());
             setVisible(false);
         }
     }
 
     /**
+     * Helper for actionPerformed.
+     * Checks if the user enters same password twice for registration.
+     * @return true iff passwords are equal
+     */
+    private boolean checkPasswordEqual() {
+        String password = String.valueOf(pw.getPassword());
+        String passwordConfirmation = String.valueOf(pw2.getPassword());
+        return password.equals(passwordConfirmation);
+    }
+
+    /**
+     * Helper for actionPerformed.
      * Check if the user enters a non-existing username and password for registration.
-     * If not, pop up a window showing registration fails.
-     * If yes, goes to the user's UserFrame.
-     * // TODO: implement this method
      */
     @Override
-    protected void check() {
+    protected boolean check() {
         String name = username.getText();
-        String password = pw.getText();
-        String passwordConfirmation = pw2.getText();
-        if (!Objects.equals(password, passwordConfirmation)) {
-            // TODO: handle this case
-        } else {
-            UserInputBoundary userManager = new UserManager();
-            RegisterOutputBoundary presenter = new RegisterPresenter();
-            User user = (User) userManager.createNewUser(name, password, presenter);
-            String result = presenter.presentRegisterResult();
-            if (Objects.equals(result, "Registration succeeds!")) {
-                new UserFrame(user); // TODO: use program state to get current user
-            } // TODO: handle other cases...
-        }
+        String password = String.valueOf(pw.getPassword());
+
+        // Construct UserManager
+        IDataInOut dataInOut = new DataInOut();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        UserInputBoundary userManager = new UserManager(dataInOut, programStateInputBoundary, dbPresenter);
+
+        // Construct RegisterController
+        RegisterController rgController = new RegisterController(userManager, dbPresenter);
+
+        // Check registration
+        RegisterOutputBoundary rgPresenter = new RegisterPresenter();
+        rgController.register(name, password, rgPresenter);
+        return rgPresenter.getRegisterResult();
     }
 
     // Test
     public static void main(String[] args) {
-        new RegisterFrame();
+        ProgramStateInputBoundary ps = new ProgramStateManager();
+        new RegisterFrame(ps);
     }
 }
