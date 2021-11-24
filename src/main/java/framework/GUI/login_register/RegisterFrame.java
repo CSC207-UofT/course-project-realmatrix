@@ -3,6 +3,7 @@ package framework.GUI.login_register;
 import entity.User;
 import framework.GUI.start.StartFrame;
 //import framework.GUI.user.UserFrame;
+import interface_adapter.Controller.ProgramStateController;
 import interface_adapter.Controller.RegisterController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -24,8 +25,8 @@ public class RegisterFrame extends LogRegFrame {
     private final JPasswordField pw2;       // Confirmation password text field
     private final JButton rgButton;         // Button that confirms registration
 
-    public RegisterFrame() {
-        super("Register");
+    public RegisterFrame(ProgramStateInputBoundary programStateInputBoundary) {
+        super("Register", programStateInputBoundary);
 
         // Create component: register button
         rgButton = new JButton("Register");
@@ -93,7 +94,7 @@ public class RegisterFrame extends LogRegFrame {
         }
 
         if (source == backButton) {
-            new StartFrame();
+            new StartFrame(new ProgramStateManager());
             setVisible(false);
         }
     }
@@ -120,9 +121,8 @@ public class RegisterFrame extends LogRegFrame {
 
         // Construct UserManager
         IDataInOut dataInOut = new DataInOut();
-        ProgramStateInputBoundary psManager = new ProgramStateManager();
         DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
-        UserInputBoundary userManager = new UserManager(dataInOut, psManager, dbPresenter);
+        UserInputBoundary userManager = new UserManager(dataInOut, programStateInputBoundary, dbPresenter);
 
         // Construct RegisterController
         RegisterController rgController = new RegisterController(userManager, dbPresenter);
@@ -135,6 +135,7 @@ public class RegisterFrame extends LogRegFrame {
 
     // Test
     public static void main(String[] args) {
-        new RegisterFrame();
+        ProgramStateInputBoundary ps = new ProgramStateManager();
+        new RegisterFrame(ps);
     }
 }

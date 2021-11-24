@@ -3,6 +3,8 @@ package framework.GUI.user;
 import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.start.StartFrame;
+import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.manager.ProgramStateManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UserFrame extends BasicFrame implements ActionListener {
-    final User user;
+    final String username;
     final JPanel userPanel;
     final JLabel message;
     final JButton signOutButton;
@@ -20,15 +22,15 @@ public class UserFrame extends BasicFrame implements ActionListener {
     final JButton checkOutPackagesButton;
 
     /**
-     * Build a StartFrame.
+     * Build a UserFrame.
      */
-    public UserFrame(User user) {
-        super("Recaller");
-        this.user = user;
+    public UserFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
+        super(username + "'s Home Page", programStateInputBoundary);
+        this.username = username;
         // 1. Create components shown on the frame
         userPanel = new JPanel(new GridLayout(6, 1));
 
-        message = new JLabel("User homepage", SwingConstants.CENTER);
+        message = new JLabel(username + "'s Home Page", SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
         signOutButton = new JButton("Sign off");
@@ -72,13 +74,18 @@ public class UserFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == signOutButton) {
-            new StartFrame();
+            new StartFrame(new ProgramStateManager());
         } else if (e.getSource() == changeNameButton) {
-            new ChangeUsernameFrame(user);
+            new ChangeUsernameFrame(username, this.programStateInputBoundary);
         } else if (e.getSource() == changePasswordButton) {
-            new ChangePasswordFrame(user);
+            new ChangePasswordFrame(username, this.programStateInputBoundary);
         }
         // TODO: Complete conditionals for each of the five buttons
         setVisible(false);
+    }
+
+    public static void main(String[] args) {
+        ProgramStateInputBoundary ps = new ProgramStateManager();
+        new UserFrame("haha", ps);
     }
 }

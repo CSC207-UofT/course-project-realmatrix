@@ -6,5 +6,5 @@ public interface ChangeOutputBoundary {
 
     boolean getChangeResult();
 
-    String presentChangeResult();
+//    String presentChangeResult();
 }

@@ -3,7 +3,7 @@ package framework.GUI.login_register;
 import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.start.StartFrame;
-//import framework.GUI.user.UserFrame;
+import framework.GUI.user.UserFrame;
 import interface_adapter.Controller.LogInOutController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -31,8 +31,8 @@ import java.util.Objects;
 public class LoginFrame extends LogRegFrame implements ActionListener {
     private final JButton lgButton;       // Button that confirms login
 
-    public LoginFrame() {
-        super("Login");
+    public LoginFrame(ProgramStateInputBoundary programStateInputBoundary) {
+        super("Login", programStateInputBoundary);
 
         // Create component: login button
         lgButton = new JButton("Login");
@@ -70,7 +70,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
         if (source == lgButton) {
             if (check()) {  // login is successful
                 setVisible(false);
-                //TODO: new UserFrame
+                new UserFrame(username.getText(), this.programStateInputBoundary);
             } else {    // login fails
                 JOptionPane.showMessageDialog(this,
                         "Wrong password  OR  the username doesn't exist", // TODO: constant
@@ -80,7 +80,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
         }
 
         if (source == backButton) {
-            new StartFrame();
+            new StartFrame(new ProgramStateManager());
             setVisible(false);
         }
     }
@@ -96,10 +96,9 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
 
         // parameters for logInOutManager
         IDataInOut dataInOut = new DataInOut();
-        ProgramStateInputBoundary ps = new ProgramStateManager();
 
         // construct logInOutManager
-        LogInOutInputBoundary logInOutManager = new LogInOutManager(ps, dataInOut);
+        LogInOutInputBoundary logInOutManager = new LogInOutManager(programStateInputBoundary, dataInOut);
 
         // construct LogInOutController
         LogInOutController controller = new LogInOutController(logInOutManager);
@@ -114,6 +113,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
 
     // Test
     public static void main(String[] args) {
-        new StartFrame();
+        ProgramStateInputBoundary ps = new ProgramStateManager();
+        new LoginFrame(ps);
     }
 }
