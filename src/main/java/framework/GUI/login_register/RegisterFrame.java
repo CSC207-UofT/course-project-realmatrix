@@ -3,14 +3,9 @@ package framework.GUI.login_register;
 import entity.User;
 import framework.GUI.start.StartFrame;
 import framework.GUI.user.UserFrame;
-import interface_adapter.Controller.LogInOutController;
-import interface_adapter.presenters.LogInOutPresenter;
 import interface_adapter.presenters.RegisterPresenter;
-import use_case.input_boundaries.LogInOutInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
-import use_case.manager.LogInOutManager;
 import use_case.manager.UserManager;
-import use_case.output_boundaries.LogInOutOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
 import javax.swing.*;

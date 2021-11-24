@@ -45,9 +45,9 @@ public class UserManagerTest {
     public void testChangeInfo() {
         String newName = "user2_newName";
         String newPassword = "user2_newPassword";
-        um.changeName(user2, newName, changeOutputBoudary);
+        um.changeName(newName, changeOutputBoudary);
         assertEquals(newName, user2.getName());
-        um.changePassword(user2, newPassword);
+        um.changePassword(newPassword);
         assertEquals(newPassword, user2.getPassword());
     }
 }

@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A pack that stores cards.
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class Pack {
 
-    private final ArrayList<Card> cardList; // oldest cards in the front, newly added ones at the end
+    private final HashMap<String, Card> cardMap; // oldest cards in the front, newly added ones at the end
     private String name;
 
     /**
@@ -18,7 +19,7 @@ public class Pack {
      */
     public Pack(String name) {
         this.name = name;
-        this.cardList = new ArrayList<>();
+        this.cardMap = new HashMap<>();
     }
 
     /**
@@ -27,13 +28,8 @@ public class Pack {
      *
      * @param card a Card item
      */
-    public void addCard(Card card) throws Exception {
-        for (Card c : this.cardList) {
-            if (c.getTerm().equals(card.getTerm())) {
-                throw new Exception("Had this card already~ Try change a term.");
-            }
-        }
-        this.cardList.add(card);
+    public void addCard(Card card) {
+        this.cardMap.put(card.getTerm(), card);
     }
 
     /**
@@ -42,15 +38,15 @@ public class Pack {
      * @param card the card to be removed
      */
     public void deleteCard(Card card) {
-        this.cardList.remove(card);
+        this.cardMap.remove(card);
     }
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Card> getCards() {
-        return this.cardList;
+    public HashMap<String, Card> getCards() {
+        return this.cardMap;
     }
 
     /**

@@ -6,10 +6,19 @@ public class LearnPresenter implements LearnOutputBoundary {
     private boolean learnCompleted = false;
     private String currCardStrRep = null;
 
+    /**
+     * set learnCompleted to true after user learned
+     */
+    @Override
     public void setLearnCompleted() {
         this.learnCompleted = true;
     }
 
+    /**
+     * getter of LearnCompleted
+     * @return true if user already learned
+     */
+    @Override
     public boolean getLearnCompleted() {
         return learnCompleted;
     }

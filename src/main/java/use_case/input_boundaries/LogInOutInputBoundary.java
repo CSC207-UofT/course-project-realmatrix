@@ -1,6 +1,5 @@
 package use_case.input_boundaries;
 
-import entity.User;
 import use_case.output_boundaries.LogInOutOutputBoundary;
 
 /**
@@ -9,9 +8,7 @@ import use_case.output_boundaries.LogInOutOutputBoundary;
  */
 public interface LogInOutInputBoundary {
 
-    void logInUser(String username, String password, LogInOutOutputBoundary logInOutOB);
-
-    User getCurrUser() throws Exception;
+    void logInUser(String username, String password, LogInOutOutputBoundary logInOutOB) throws Exception;
 
     void signOffUser(LogInOutOutputBoundary logInOutOB);
 }
