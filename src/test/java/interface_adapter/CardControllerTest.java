@@ -2,7 +2,7 @@ package interface_adapter;
 
 import entity.Card;
 import interface_adapter.Controller.CardController;
-import interface_adapter.Controller.ProgramState;
+import entity.ProgramState;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;
@@ -25,7 +25,7 @@ public class CardControllerTest {
     @Before
     public void createCardController() {
         cm = new CardManager();
-        cc = new CardController(cm, dataInOut, programState);
+        cc = new CardController(cm);
         cp = new ChangePresenter();
     }
 

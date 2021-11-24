@@ -1,7 +1,6 @@
 package interface_adapter.gateway;
 
 import entity.User;
-import interface_adapter.Controller.ProgramState;
 import interface_adapter.gateway.datain.DataInFactory;
 import interface_adapter.gateway.datain.Writer;
 import interface_adapter.gateway.dataout.Loader;
@@ -21,14 +20,14 @@ public class DataInOut implements IDataInOut {
     }
 
     @Override
-    public void write(ProgramState state, Object o) throws IOException {
-        Writer writer = this.factory.getWriter(state, o);
+    public void write(String[] partialDataPath, Object o) throws IOException {
+        Writer writer = this.factory.getWriter(partialDataPath, o);
         writer.write();
     }
 
     @Override
-    public void archive(ProgramState state, Object o) throws IOException {
-        Writer writer = this.factory.getWriter(state, o);
+    public void archive(String[] partialDataPath, Object o) throws IOException {
+        Writer writer = this.factory.getWriter(partialDataPath, o);
         writer.archive();
     }
 

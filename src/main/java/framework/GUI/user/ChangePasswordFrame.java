@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     final User user;
@@ -61,7 +60,7 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) { // user finishes entering new password
         UserInputBoundary manager = new UserManager();
-        manager.changePassword(user, newPassword.getText());
+        manager.changePassword(newPassword.getText());
         new UserFrame(user);
         setVisible(false);
     }

@@ -29,24 +29,24 @@ public class ReviewGeneratorTest {
      */
     @Before
     public void createReviewGenerator() {
-        c1 = cm.createNewCard("card1Term", "card1Definition");
+        c1 = cm.addNewCard("card1Term", "card1Definition", );
         cm.setCurrCard(c1);
         cm.increaseProficiency();
         cm.increaseProficiency();   // c1 prof = 2
-        c2 = cm.createNewCard("card2Term", "card2Definition");
+        c2 = cm.addNewCard("card2Term", "card2Definition", );
         cm.setCurrCard(c2);
         cm.increaseProficiency();
         cm.increaseProficiency();
         cm.increaseProficiency();   // c2 prof = 3
-        c3 = cm.createNewCard("card3Term", "card3Definition");  // c3 prof = 0
-        c4 = cm.createNewCard("card4Term", "card4Definition");
+        c3 = cm.addNewCard("card3Term", "card3Definition", );  // c3 prof = 0
+        c4 = cm.addNewCard("card4Term", "card4Definition", );
         cm.setCurrCard(c4);
         cm.increaseProficiency();
         cm.increaseProficiency();
         cm.increaseProficiency();
         cm.increaseProficiency();
         cm.increaseProficiency();   // c4 prof = 5
-        p1 = pm.createNewPack("packName");
+        p1 = pm.addNewPack("packName", );
         pm.setCurrPack(p1);
         pm.addCard(c1, AddOutputBoundary);
         pm.addCard(c2, AddOutputBoundary);

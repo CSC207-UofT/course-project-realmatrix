@@ -19,7 +19,7 @@ public class CardManagerTest {
         cm = new CardManager();
         String term = "Homoncular Fallacy";
         String definition = "Assuming a mental fallacy";
-        c = cm.createNewCard(term, definition);
+        c = cm.addNewCard(term, definition, );
 
         cm.setCurrCard(c);
     }

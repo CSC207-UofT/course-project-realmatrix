@@ -27,12 +27,12 @@ public class LearnGeneratorTest {
      */
     @Before
     public void createLearnGenerator() {
-        c1 = cm.createNewCard("c1Term", "c1Definition");
-        c2 = cm.createNewCard("c2Term", "c2Definition");
-        c3 = cm.createNewCard("c3Term", "c3Definition");
+        c1 = cm.addNewCard("c1Term", "c1Definition", );
+        c2 = cm.addNewCard("c2Term", "c2Definition", );
+        c3 = cm.addNewCard("c3Term", "c3Definition", );
         cm.setCurrCard(c2);
         cm.increaseProficiency();
-        p1 = pm.createNewPack("pack1Name");
+        p1 = pm.addNewPack("pack1Name", );
         pm.setCurrPack(p1);
         pm.addCard(c1, addOutputBoundary);
         pm.addCard(c2, addOutputBoundary);

@@ -1,7 +1,6 @@
 package interface_adapter.gateway;
 
 import entity.User;
-import interface_adapter.Controller.ProgramState;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,9 +10,9 @@ import java.util.HashMap;
  * allows usecase classes to access database.
  */
 public interface IDataInOut {
-    void write(ProgramState state, Object o) throws IOException;
+    void write(String[] partialDataPath, Object o) throws IOException;
 
-    void archive(ProgramState state, Object o) throws IOException;
+    void archive(String[] partialDataPath, Object o) throws IOException;
 
     HashMap<String, String> initialLoad() throws IOException;
 
