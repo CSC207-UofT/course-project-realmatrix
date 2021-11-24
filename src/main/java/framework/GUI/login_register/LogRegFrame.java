@@ -80,7 +80,7 @@ public abstract class LogRegFrame extends BasicFrame implements ActionListener {
     /**
      * Method for checking whether registration/login is valid.
      */
-    protected abstract void check() throws Exception;
+    protected abstract boolean check() throws Exception;
 
     @Override
     public abstract void actionPerformed(ActionEvent e);

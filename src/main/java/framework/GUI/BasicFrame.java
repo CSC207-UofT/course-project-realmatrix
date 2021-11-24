@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class BasicFrame extends JFrame {
     public BasicFrame(String title) {
-        super();
+        super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 600);
         setLocationRelativeTo(null);

@@ -22,7 +22,7 @@ public class PackWriter extends Writer {
     }
 
     /**
-     * Write or update a package
+     * Write a new package
      *
      * @throws IOException
      */
@@ -33,7 +33,7 @@ public class PackWriter extends Writer {
     }
 
     /**
-     * Write the user's new name into database by renaming the pack directory.
+     * Write the pack's new name into database by renaming the pack directory.
      *
      * @param oldName the pack's old name
      * @param newO the pack with new name

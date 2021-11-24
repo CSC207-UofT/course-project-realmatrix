@@ -99,7 +99,11 @@ public abstract class Manager<T> {
      */
     private String[] findPartialDataPath() {
         String userPath = this.programStateInputBoundary.getCurrUser().getName();
-        String packPath = this.programStateInputBoundary.getCurrPack().getName();
+        String packPath = null;
+        if (this.programStateInputBoundary.getCurrPack() != null) {
+            packPath = this.programStateInputBoundary.getCurrPack().getName();
+        }
+
         return new String[]{userPath, packPath};
     }
 

@@ -1,1 +1,1 @@
-xing,password
+password

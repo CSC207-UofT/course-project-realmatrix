@@ -24,14 +24,6 @@ public class LogInOutManager implements LogInOutInputBoundary {
     }
 
     /**
-     * A enum class representing logged in status.
-     */
-    public enum LoggedIn {
-        SUCCEED,      // Login succeeds
-        FAIL,       // Login fails
-    }
-
-    /**
      * Loads a map of username to user password for checking login.
      * @param databaseErrorOutputBoundary an outputBoundary that shows error messages if fail to connect to database.
      */
@@ -57,10 +49,10 @@ public class LogInOutManager implements LogInOutInputBoundary {
         if (password.equals(nameToPassword.get(name))) { // Check if there's a user with such username and password
             this.currUser = new User(name, password);
             programStateInputBoundary.setCurrUser(this.currUser);
-            logInOutOB.setLogInOutResult(LoggedIn.SUCCEED);
+            logInOutOB.setLogInOutResult(true);
             return true;
         } else {
-            logInOutOB.setLogInOutResult(LoggedIn.FAIL);
+            logInOutOB.setLogInOutResult(false);
             return false;
         }
     }
@@ -88,6 +80,6 @@ public class LogInOutManager implements LogInOutInputBoundary {
     public void signOffUser(LogInOutOutputBoundary logInOutOB) {
         this.currUser = null;
         programStateInputBoundary.setCurrUser(null);
-        logInOutOB.setLogInOutResult(LoggedIn.FAIL);
+        logInOutOB.setLogInOutResult(false);
     }
 }

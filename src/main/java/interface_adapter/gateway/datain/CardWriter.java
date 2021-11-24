@@ -34,8 +34,7 @@ public class CardWriter extends Writer {
         new File(cardPath).mkdirs();
         BufferedWriter writer =
                 new BufferedWriter(new FileWriter(cardPath + this.card.getTerm() + ".txt"));
-        writer.write(this.card.getTerm() + ","
-                + this.card.getDefinition() + "," + this.card.getProficiency());
+        writer.write(this.card.getDefinition() + "," + this.card.getProficiency());
         writer.close();
     }
 

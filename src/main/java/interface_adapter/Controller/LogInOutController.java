@@ -14,13 +14,11 @@ import java.util.HashMap;
  */
 public class LogInOutController {
     public final LogInOutInputBoundary logInOutIB;
-    public final UserInputBoundary userIB;
 
     /**
      * interface_adapter.Controller for login
      */
-    public LogInOutController(UserInputBoundary userIB, LogInOutInputBoundary logInOutIB) {
-        this.userIB = userIB;
+    public LogInOutController(LogInOutInputBoundary logInOutIB) {
         this.logInOutIB = logInOutIB;
     }
 

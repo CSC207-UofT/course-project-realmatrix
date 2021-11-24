@@ -32,8 +32,8 @@ public class UserWriter extends Writer {
         String userFilePath = "user_data/users/" + user.getName();
         new File(userFilePath).mkdirs();
         BufferedWriter writer =
-                new BufferedWriter(new FileWriter(userFilePath + "/password.txt"));
-        writer.write(user.getName() + "," + user.getPassword());
+                new BufferedWriter(new FileWriter(userFilePath + "/user_info.txt"));
+        writer.write(user.getPassword());
         writer.close();
     }
 

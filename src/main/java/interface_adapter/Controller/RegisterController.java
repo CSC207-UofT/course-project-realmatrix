@@ -9,9 +9,11 @@ import use_case.output_boundaries.RegisterOutputBoundary;
  */
 public class RegisterController {
     final UserInputBoundary userIB;
+    final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
 
-    public RegisterController(UserInputBoundary userIB) {
+    public RegisterController(UserInputBoundary userIB, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         this.userIB = userIB;
+        this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
     }
 
     /**
@@ -24,6 +26,7 @@ public class RegisterController {
                          RegisterOutputBoundary registerOB) {
         if (userIB.createNewUser(username, password, registerOB)) {
             userIB.userLoad();
+            userIB.write(databaseErrorOutputBoundary);
         }
     }
 }

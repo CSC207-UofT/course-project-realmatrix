@@ -1,18 +1,25 @@
 package framework.GUI.login_register;
 
 import entity.User;
+import framework.GUI.BasicFrame;
 import framework.GUI.start.StartFrame;
-import framework.GUI.user.UserFrame;
+//import framework.GUI.user.UserFrame;
 import interface_adapter.Controller.LogInOutController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.LogInOutPresenter;
 import use_case.input_boundaries.LogInOutInputBoundary;
+import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.input_boundaries.UserInputBoundary;
 import use_case.manager.LogInOutManager;
+import use_case.manager.ProgramStateManager;
 import use_case.manager.UserManager;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.LogInOutOutputBoundary;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -50,8 +57,9 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
 
     /**
      * Set actions for clicking login and back buttons.
-     * <p>
      * Clicking login button: check login successful or not
+     *      - if successful: go to UserFrame
+     *      - if not: pop up a fail message window
      * Clicking back button: back to the start frame
      *
      * @param e An ActionEvent item
@@ -60,11 +68,14 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == lgButton) {
-            try {
-                check();
+            if (check()) {  // login is successful
                 setVisible(false);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                //TODO: new UserFrame
+            } else {    // login fails
+                JOptionPane.showMessageDialog(this,
+                        "Wrong password  OR  the username doesn't exist", // TODO: constant
+                        "Login Fails",
+                        JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -75,36 +86,34 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
     }
 
     /**
+     * Helper method for actionPerformed
      * Check if the user enters the correct username and password for login.
-     * If not, pop up a window showing login fails.
-     * If yes, goes to the user's UserFrame.
      */
 
-    protected void check() throws Exception {
+    protected boolean check() {
         String name = username.getText();
-        String password = pw.getText();
-        UserManager userManager = new UserManager();
+        String password = String.valueOf(pw.getPassword());
 
-        // Load all usernames and passwords into userManager
-        IDataInOut dbConnector = new DataInOut();
-        Map<String, String> nameToPassword = dbConnector.initialLoad();
-        for (String username : nameToPassword.keySet()) {
-            userManager.putUser(new User(username, nameToPassword.get(username)));
-        }
+        // parameters for logInOutManager
+        IDataInOut dataInOut = new DataInOut();
+        ProgramStateInputBoundary ps = new ProgramStateManager();
 
-        LogInOutInputBoundary logInOutManager = new LogInOutManager(userManager, );
-        LogInOutController controller = new LogInOutController(userManager, logInOutManager);
-        LogInOutOutputBoundary presenter = new LogInOutPresenter();
-        controller.login(name, password, presenter);
-        String result = presenter.presentLogInOutResult();
-        if (Objects.equals(result, "Login succeeds!")) {
-            User user = logInOutManager.getCurrUser();
-            new UserFrame(user); // TODO: use program state to get current user
-        } // TODO: handle other cases...
+        // construct logInOutManager
+        LogInOutInputBoundary logInOutManager = new LogInOutManager(ps, dataInOut);
+
+        // construct LogInOutController
+        LogInOutController controller = new LogInOutController(logInOutManager);
+
+        // parameters for login method
+        LogInOutOutputBoundary logPresenter = new LogInOutPresenter();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+
+        controller.login(name, password, logPresenter, dbPresenter);
+        return logPresenter.getLogInOutResult();
     }
 
     // Test
     public static void main(String[] args) {
-        new LoginFrame();
+        new StartFrame();
     }
 }
