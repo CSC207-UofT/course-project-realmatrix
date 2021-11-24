@@ -7,13 +7,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class PackWriter extends Writer {
     private final Pack pack;
 
     /**
      * Construct a CardWriter object.
-     *  @param partialDataPath the state the program is in
+     * @param partialDataPath the state the program is in
      * @param o     the object (pack) to write/update
      */
     public PackWriter(String[] partialDataPath, Object o) {
@@ -28,12 +30,21 @@ public class PackWriter extends Writer {
      */
     @Override
     public void write() throws IOException {
-        new File("user_data/users/" + this.username + "/packages/" + this.pack.getName()).mkdirs();
-        BufferedWriter writer =
-                new BufferedWriter(new FileWriter("user_data/users/" + this.username
-                        + "/packages/" + this.pack.getName() + "/package_info.txt"));
-        writer.write(this.pack.getName());
-        writer.close();
+        String packPath = "user_data/users/" + this.username + "/packages/" + this.pack.getName();
+        new File(packPath).mkdirs();
+    }
+
+    /**
+     * Write the user's new name into database by renaming the pack directory.
+     *
+     * @param oldName the pack's old name
+     * @param newName the pack's new name
+     * @throws IOException fails to write
+     */
+    @Override
+    public void write(String oldName, String newName) throws IOException {
+        Path old = Paths.get("user_data/users/" + this.username + "/packages/" + oldName);
+        Files.move(old, old.resolveSibling(newName));
     }
 
     /**
@@ -47,5 +58,5 @@ public class PackWriter extends Writer {
         Files.move(new File("user_data/users/" + this.username + "/packages/" + this.pack.getName()).toPath(),
                 new File("user_data/users/" + this.username + "/archived_packages/" +
                         this.pack.getName()).toPath());
-    }
+    } // FIXME: same problem as UserWriter.archive.
 }

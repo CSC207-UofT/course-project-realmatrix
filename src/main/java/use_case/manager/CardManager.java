@@ -17,7 +17,7 @@ import java.util.HashMap;
 /**
  * A CardManager contains all cards in the system.
  */
-public class CardManager extends Manager<Card> implements CardInputBoundary {
+public class CardManager extends Manager<Card> implements Sort, CardInputBoundary {
     private Card currCard; // Initialize to the state where the user is not in a card
     // Note items for this manager is a map <cardTerm: Card>
 

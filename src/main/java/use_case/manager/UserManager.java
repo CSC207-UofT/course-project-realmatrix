@@ -18,13 +18,17 @@ import java.util.HashMap;
  */
 //TODO: implement <sort> interface
 public class UserManager extends Manager<User> implements UserInputBoundary {
-    private final HashMap<String, String> items;
-    // Note items for this manager is a map <username: password>
+    private HashMap<String, String> items = new HashMap<>();    // items for this manager is a map <username: password>
 
-    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) throws IOException {
+    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
         super(dataInOut, programStateInputBoundary);
         this.currItem = programStateInputBoundary.getCurrUser();
-        this.items = dataInOut.initialLoad();
+        try {
+            this.items = dataInOut.initialLoad();
+        } catch (IOException e) {
+
+        }
+
     }
 
     /**
@@ -34,7 +38,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @param password   the password of this user
      * @param registerOB the output boundary (abstract interface for presenter)
      */
-    public boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
+    public boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) throws IOException {
         if (!this.items.containsKey(name)) { // No user of such username, valid for registration
             this.currItem = new User(name, password);
             programStateInputBoundary.setCurrUser(this.currItem);
@@ -56,8 +60,8 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
         Object item = searchItem(newName);
         if (item == null) { // No user of such username, valid for change
             this.items.remove(currItem.getName()); // Remove user with old name
-            currItem.changeName(newName);
             this.items.put(newName, currItem.getPassword());     // Add user with new name
+            currItem.changeName(newName);
             changeOutputBoundary.setChangeResult(true);
             return true;
         } else {
@@ -68,10 +72,12 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Change password of current user.
-     * @param newPassword new password*/
+     * @param newPassword new password
+     */
     @Override
     public void changePassword(String newPassword) {
         this.currItem.changePassword(newPassword);
+        this.items.put(this.currItem.getName(), newPassword);
     }
 
 //    /**

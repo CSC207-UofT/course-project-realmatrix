@@ -24,7 +24,6 @@ import java.util.HashMap;
  * package1/
  * package2/
  * ...
- * package_info.txt
  * cards/
  * archived_cards/
  * card1.txt
@@ -53,7 +52,7 @@ public class Loader {
      * @param user the given user
      * @throws IOException
      */
-    public void userLoad(User user) throws Exception {
+    public void userLoad(User user) throws IOException {
         Reader reader = new Reader();
         for (String packPath : reader.readPacks(user.getName())) { // load this user's packages
             Pack pack = this.putPack(packPath, user);
@@ -87,7 +86,7 @@ public class Loader {
      * @return the loaded package
      * @throws IOException
      */
-    private Pack putPack(String packPath, User user) throws Exception {
+    private Pack putPack(String packPath, User user) throws IOException {
         BufferedReader packInfoFileReader
                 = Files.newBufferedReader(Path.of(packPath + "/package_info.txt"));
         String packInfo = packInfoFileReader.readLine();

@@ -11,8 +11,4 @@ public interface PackInputBoundary extends ManagerInputBoundary {
     boolean changePackName(String newPackName, ChangeOutputBoundary changePackNameOB);
 
     // These two may not be needed if we have observer for tracking program state
-    Pack getCurrPack();
-
-    void setCurrPack(Pack pack);
-
 }

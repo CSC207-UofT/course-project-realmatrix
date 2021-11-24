@@ -11,7 +11,7 @@ import use_case.output_boundaries.ChangeOutputBoundary;
 /**
  * A pack manager manages the current user's packs.
  */
-public class PackManager extends Manager<Pack> implements Sort<Card>, PackInputBoundary {
+public class PackManager extends Manager<Pack> implements PackInputBoundary {
     // Note items for this manager is a map <packName: Pack>
 
     public PackManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
