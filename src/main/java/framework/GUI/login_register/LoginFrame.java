@@ -92,7 +92,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
             userManager.putUser(new User(username, nameToPassword.get(username)));
         }
 
-        LogInOutInputBoundary logInOutManager = new LogInOutManager(userManager);
+        LogInOutInputBoundary logInOutManager = new LogInOutManager(userManager, );
         LogInOutController controller = new LogInOutController(userManager, logInOutManager);
         LogInOutOutputBoundary presenter = new LogInOutPresenter();
         controller.login(name, password, presenter);

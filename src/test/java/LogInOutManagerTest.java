@@ -7,8 +7,6 @@ import interface_adapter.presenters.RegisterPresenter;
 import use_case.manager.LogInOutManager;
 import use_case.manager.UserManager;
 
-import static org.junit.Assert.*;
-
 
 public class LogInOutManagerTest {
     final UserManager um = new UserManager();
@@ -21,7 +19,7 @@ public class LogInOutManagerTest {
     @Before
     public void createLogInOutManager() {
         um.createNewUser(user1Name, user1Password, rp);
-        lm = new LogInOutManager(um);
+        lm = new LogInOutManager(um, );
     }
 
     @Test

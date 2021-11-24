@@ -26,15 +26,15 @@ public class UserController {
         this.programState = programState;
     }
 
-    public void changeUserName(User user, String newName, ChangeOutputBoundary changeOutputBoudary) throws IOException {
-        if (this.userIB.changeName(user, newName, changeOutputBoudary)) {
-            dataInOut.write(this.programState, user);
+    public void changeUserName(String newName, ChangeOutputBoundary changeOutputBoudary) throws IOException {
+        if (this.userIB.changeName(newName, changeOutputBoudary)) {
+            this.userIB.write();
         }
     }
 
-    public void changePassword(User user, String newPassword) throws IOException {
-        this.userIB.changePassword(user, newPassword);
-        dataInOut.write(this.programState, user);
+    public void changePassword(String newPassword) throws IOException {
+        this.userIB.changePassword(newPassword);
+        this.userIB.write();
     }
 
     /**
@@ -44,24 +44,8 @@ public class UserController {
      * @param password user's password
      */
     public void register(String username, String password, RegisterOutputBoundary registerOB) throws IOException {
-        Object object = userIB.createNewUser(username, password, registerOB);
-        if (object != null) {
-            dataInOut.write(this.programState, object);
-            // TODO: may not be clean, may need ProgramStateManager or something like that
+        if (userIB.createNewUser(username, password, registerOB)) {
+            this.userIB.write();
         }
-
-    }
-
-    public void addPack(Pack pack, AddOutputBoundary addOutputBoundary, ProgramStateInputBoundary programStateInputBoundary) throws IOException {
-        if (userIB.addPack(pack, addOutputBoundary, programStateInputBoundary)) {
-            dataInOut.write(this.programState, pack);
-            // TODO: may not be clean, may need ProgramStateManager or something like that
-        }
-    }
-
-    public void deletePack(User user, Pack pack) throws IOException {
-        userIB.deletePack(user, pack);
-        dataInOut.archive(this.programState, pack);
-        // TODO: may not be clean, may need ProgramStateManager or something like that
     }
 }

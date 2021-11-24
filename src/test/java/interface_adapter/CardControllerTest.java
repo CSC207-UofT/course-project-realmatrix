@@ -25,7 +25,7 @@ public class CardControllerTest {
     @Before
     public void createCardController() {
         cm = new CardManager();
-        cc = new CardController(cm, dataInOut, programState);
+        cc = new CardController(cm);
         cp = new ChangePresenter();
     }
 

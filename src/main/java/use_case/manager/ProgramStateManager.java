@@ -4,60 +4,75 @@ import entity.Card;
 import entity.Pack;
 import entity.ProgramState;
 import entity.User;
-import interface_adapter.presenters.AddPresenter;
-import interface_adapter.presenters.RegisterPresenter;
 import use_case.input_boundaries.ProgramStateInputBoundary;
-import use_case.output_boundaries.RegisterOutputBoundary;
 
-import java.beans.PropertyChangeEvent;
-import java.util.Objects;
+import java.util.HashMap;
 
+/**
+ * A manager class for program state.
+ * Note, we only create **one instance** of it throughout the entire program.
+ */
 public class ProgramStateManager implements ProgramStateInputBoundary {
+    private final ProgramState ps;
+
+    public ProgramStateManager() {
+        ps = new ProgramState();
+    }
+
+//    /**
+//     * This method gets called when a bound property is changed.
+//     *
+//     * @param evt A PropertyChangeEvent object describing the event source
+//     *            and the property that has changed.
+//     */
+//    @Override
+//    public void propertyChange(PropertyChangeEvent evt) {
+//        switch (evt.getPropertyName()) {
+//            case "user":
+//                ProgramState.setCurrUser((User) evt.getNewValue());
+//                break;
+//
+//            case "pack":
+//                ProgramState.setCurrPack((Pack) evt.getNewValue());
+//                break;
+//
+//            case "card":
+//                ProgramState.setCurrCard((Card) evt.getNewValue());
+//                break;
+//        }
+//    }
+
     @Override
     public User getCurrUser() {
-        return ProgramState.getCurrUser();
+        return ps.getCurrUser();
     }
 
     @Override
     public Pack getCurrPack() {
-        return ProgramState.getCurrPack();
+        return ps.getCurrPack();
     }
 
     @Override
     public Card getCurrCard() {
-        return ProgramState.getCurrCard();
+        return ps.getCurrCard();
     }
 
-    /**
-     * This method gets called when a bound property is changed.
-     *
-     * @param evt A PropertyChangeEvent object describing the event source
-     *            and the property that has changed.
-     */
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        switch (evt.getPropertyName()) {
-            case "user":    // TODO: constant
-                ProgramState.setCurrUser((User) evt.getNewValue());
-                break;
-
-            case "pack":    // TODO: constant
-                ProgramState.setCurrPack((Pack) evt.getNewValue());
-                break;
-
-            case "card":    // TODO: constant
-                ProgramState.setCurrCard((Card) evt.getNewValue());
-                break;
-        }
+    public void setCurrUser(User user) {
+        ps.setCurrUser(user);
     }
 
-    // Test observer
-    public static void main(String[] args) {
-        UserManager um = new UserManager();
-        um.createNewUser("a", "b", new RegisterPresenter());
-        System.out.println(new ProgramState());
+    @Override
+    public void setCurrPack(String packname) {
+        // Know: ps.currUser is not null
+        HashMap<String, Pack> packMap = ps.getCurrUser().getPackages();
+        ps.setCurrPack(packMap.get(packname));
+    }
 
-        um.addPack(new Pack("app"), new AddPresenter(), new ProgramStateManager());
-        System.out.println(new ProgramState());
+    @Override
+    public void setCurrCard(String cardTerm) {
+        // Know: ps.currPack is not null
+        HashMap<String, Card> cardMap = ps.getCurrPack().getCards();
+        ps.setCurrCard(cardMap.get(cardTerm));
     }
 }
