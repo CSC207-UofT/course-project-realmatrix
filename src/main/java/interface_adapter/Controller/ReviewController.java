@@ -22,10 +22,13 @@ public class ReviewController {
         this.programState = programState;
     }
 
-    public Card next() throws IOException {
+    public void next() throws IOException {
         // before going to the next card, update current card's proficiency in database
-        dataInOut.write(programState, reviewIB.getCurrCard());
-        return reviewIB.next();
+        Card currCard = reviewIB.getCurrCard();
+        if (currCard != null) {
+            dataInOut.write(programState, reviewIB.getCurrCard());
+        }
+        reviewIB.next();
     }
 
     public void setShowDefinition() {

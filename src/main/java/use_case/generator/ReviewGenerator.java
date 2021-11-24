@@ -39,28 +39,35 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
     }
 
     @Override
-    public Card next() {
+    public void next() {
         if (cantRecall) {
-            cards.add(currCard);
-            // This is because user will recall that card eventually so the net effect on proficiency is
-            // (-2 * n + 1 < 0)
-            currCard.setProficiency(Math.min(0, currCard.getProficiency() - 2));
+            if (currCard != null) {
+                cards.add(currCard);
+                // This is because user will recall that card eventually so the net effect on proficiency is
+                // (-2 * n + 1 < 0)
+                currCard.setProficiency(Math.max(Constants.REVIEW_PROFICIENCY_MIN, currCard.getProficiency() - 2));
+            }
         } else {
-            currCard.setProficiency(Math.max(5, currCard.getProficiency() + 1));
+            if (currCard != null) {
+                currCard.setProficiency(Math.min(Constants.REVIEW_PROFICIENCY_MAX, currCard.getProficiency() + 1));
+            }
         }
         Card nextCard = cards.poll();
         if (nextCard != null) {
             nextCard.hideDefinition();
             currCard = nextCard;
             cantRecall = false;
-            return nextCard;
+            reviewOB.setCurrCardStrRep(currCard.toString());
         } else {
-            return null;
+            reviewOB.setReviewCompleted();
+            currCard = null;
+            reviewOB.setCurrCardStrRep(null);
         }
     }
 
     public void setShowDefinition() {
         currCard.unhideDefinition();
+        reviewOB.setCurrCardStrRep(currCard.toString());
     }
 
     public void setCantRecall() {
@@ -75,7 +82,6 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
 
     @Override
     public Card getCurrCard() {
-        reviewOB.setCurrCardStrRep(currCard.toString());
         return currCard;
     }
 }

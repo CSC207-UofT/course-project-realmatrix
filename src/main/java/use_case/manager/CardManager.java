@@ -1,6 +1,7 @@
 package use_case.manager;
 
 import entity.Card;
+import use_case.constants.Constants;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 
@@ -76,14 +77,14 @@ public class CardManager extends Manager<Card> implements CardInputBoundary {
      * Increase the proficiency of the card by 1.
      */
     public void increaseProficiency() {
-        this.currCard.setProficiency(Math.min(this.currCard.getProficiency() + 1, 5));
+        this.currCard.setProficiency(Math.min(this.currCard.getProficiency() + 1, Constants.REVIEW_PROFICIENCY_MAX));
     }
 
     /**
      * Decrease the proficiency of the card by 1.
      */
     public void decreaseProficiency() {
-        this.currCard.setProficiency(Math.max(this.currCard.getProficiency() - 1, 1));
+        this.currCard.setProficiency(Math.max(this.currCard.getProficiency() - 1, Constants.REVIEW_PROFICIENCY_MIN));
     }
 
     /**

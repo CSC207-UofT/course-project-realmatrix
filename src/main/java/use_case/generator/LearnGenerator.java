@@ -28,14 +28,15 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
     }
 
     @Override
-    public Card next() {
+    public void next() {
         Card nextCard = cards.poll();
         if (nextCard != null) {
             currCard = nextCard;
-            return nextCard;
+            learnOB.setCurrCardStrRep(currCard.toString());
         } else {
             learnOB.setLearnCompleted();
-            return null;
+            currCard = null;
+            learnOB.setCurrCardStrRep(null);
         }
     }
 
@@ -49,7 +50,6 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
 
     @Override
     public Card getCurrCard() {
-        learnOB.setCurrCardStrRep(currCard.toString());
         return currCard;
     }
 }

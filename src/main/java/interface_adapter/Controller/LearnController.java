@@ -16,7 +16,7 @@ public class LearnController {
         this.learnIB = learnIB;
     }
 
-    public Card next() {
-        return learnIB.next();
+    public void next() {
+        learnIB.next();
     }
 }

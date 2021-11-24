@@ -24,7 +24,7 @@ public abstract class TaskGenerator {
      * Dequeue the next card.
      * @return the next card, or null if there's no card in the queue
      */
-    public abstract Card next();
+    public abstract void next();
 
     /**
      * Whether all the cards are dequeued.
