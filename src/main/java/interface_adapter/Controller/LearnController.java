@@ -1,11 +1,8 @@
 package interface_adapter.Controller;
 
-import entity.Card;
-import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.LearnInputBoundary;
 
-import java.util.ArrayList;
-
+// TODO: before you change anything in this file, consult with Xing
 public class LearnController {
     private final LearnInputBoundary learnIB;
 

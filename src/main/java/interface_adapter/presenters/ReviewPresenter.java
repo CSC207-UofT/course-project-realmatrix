@@ -2,6 +2,7 @@ package interface_adapter.presenters;
 
 import use_case.output_boundaries.ReviewOutputBoundary;
 
+// TODO: before you change anything in this file, consult with Xing
 public class ReviewPresenter implements ReviewOutputBoundary {
     private boolean learnCompleted = false;
     private String currCardStrRep = null;

@@ -6,6 +6,7 @@ import entity.Pack;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// TODO: before you change anything in this file, consult with Xing
 /**
  * An abstract task generator.
  */
