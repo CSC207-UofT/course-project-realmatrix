@@ -74,6 +74,9 @@ public abstract class Manager<T> {
         }
     }
 
+    /**
+     * Write the object (with its name changed) into database.
+     */
     public void write(String oldName, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), oldName, currItem);
