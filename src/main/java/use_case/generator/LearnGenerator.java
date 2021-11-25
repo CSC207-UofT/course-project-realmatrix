@@ -8,6 +8,7 @@ import use_case.output_boundaries.LearnOutputBoundary;
 import java.util.Collections;
 import java.util.List;
 
+// TODO: before you change anything in this file, consult with Xing
 /**
  * Learn a pack by going over all the cards once, showing both term and definition.
  */
@@ -21,7 +22,7 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
      */
     public LearnGenerator(Pack pack, LearnOutputBoundary learnOB) {
         super(pack);
-        List<Card> cardList = pack.getCards();
+        List<Card> cardList = pack.getCardList();
         Collections.shuffle(cardList);
         cards.addAll(cardList);
         this.learnOB = learnOB;
