@@ -3,8 +3,6 @@ package interface_adapter.Controller;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.output_boundaries.*;
 
-import java.io.IOException;
-
 public class CardController {
     private final CardInputBoundary cardInputBoundary;
     private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
@@ -39,7 +37,7 @@ public class CardController {
      */
     public void deleteCard(String cardTerm) {
         if (this.cardInputBoundary.deleteCard(cardTerm)) {
-            this.cardInputBoundary.archive(databaseErrorOutputBoundary);
+            this.cardInputBoundary.delete(databaseErrorOutputBoundary);
         }
     }
 

@@ -14,7 +14,7 @@ public interface IDataInOut {
 
     void write(String[] partialDataPath, String oldName, Object newO) throws IOException;
 
-    void archive(String[] partialDataPath, Object o) throws IOException;
+    void delete(String[] partialDataPath, Object o) throws IOException;
 
     HashMap<String, String> initialLoad() throws IOException;
 
