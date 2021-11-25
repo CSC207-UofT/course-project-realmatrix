@@ -8,7 +8,7 @@ import use_case.input_boundaries.ReviewInputBoundary;
 
 import java.io.IOException;
 
-// TODO: before you change anything in this file, consult with Xing
+// TODO: before you change anything in this file, consult with Xing. Learn and review components work fine currently.
 public class ReviewController {
     private final ReviewInputBoundary reviewIB;
     private final IDataInOut dataInOut = new DataInOut();
