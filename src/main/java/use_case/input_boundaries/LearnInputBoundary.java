@@ -5,5 +5,5 @@ import entity.Card;
 import java.util.ArrayList;
 
 public interface LearnInputBoundary {
-    Card next();
+    void next();
 }

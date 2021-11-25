@@ -34,30 +34,7 @@ public class LearnController {
 //        }
 //    }
 
-    /**
-     * Return a list of card that needs to be learned
-     *
-     * @return a list of card
-     */
-
-    public ArrayList<Card> learnableCardList() {
-        return this.lg.getDoCardList();
-    }
-
-    /**
-     * update the proficiency of the card that user currently learning
-     *
-     * @param opt user's option of the quality of learning
-     * @param c   the card that user currently learning
-     */
-    public void updateMemProficiency(String opt, Card c) {
-        this.cm.setCurrCard(c);
-        if (opt.equals("1")) {
-            this.cm.increaseProficiency();
-            this.cm.increaseProficiency();
-        }
-        if (opt.equals("2")) {
-            this.cm.increaseProficiency();
-        }
+    public void next() {
+        learnIB.next();
     }
 }
