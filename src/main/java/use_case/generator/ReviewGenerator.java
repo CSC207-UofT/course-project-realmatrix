@@ -28,7 +28,7 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
     public ReviewGenerator(Pack pack, ReviewOutputBoundary reviewOB) {
         super(pack);
         List<Card> cardList = new ArrayList<>();
-        for (Card card : pack.getCards()) {
+        for (Card card : pack.getCardList()) {
             for (int i = 0; i < Constants.REVIEW_PROFICIENCY_MAX - card.getProficiency() + 1; i++) {
                 cardList.add(card);
             }
@@ -45,11 +45,13 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
                 cards.add(currCard);
                 // This is because user will recall that card eventually so the net effect on proficiency is
                 // (-2 * n + 1 < 0)
-                currCard.setProficiency(Math.max(Constants.REVIEW_PROFICIENCY_MIN, currCard.getProficiency() - 2));
+                currCard.setProficiency(Math.max(Constants.REVIEW_PROFICIENCY_MIN, currCard.getProficiency() +
+                        Constants.REVIEW_FAIL_NEG));
             }
         } else {
             if (currCard != null) {
-                currCard.setProficiency(Math.min(Constants.REVIEW_PROFICIENCY_MAX, currCard.getProficiency() + 1));
+                currCard.setProficiency(Math.min(Constants.REVIEW_PROFICIENCY_MAX, currCard.getProficiency()
+                        + Constants.REVIEW_SUCCEED_POS));
             }
         }
         Card nextCard = cards.poll();
