@@ -7,7 +7,6 @@ import interface_adapter.gateway.IDataInOut;
 import use_case.generator.ReviewGenerator;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ReviewInputBoundary;
-import use_case.manager.CardManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,11 +30,34 @@ public class ReviewController {
         reviewIB.next();
     }
 
-    public void setShowDefinition() {
-        reviewIB.setShowDefinition();
+    /**
+     * update the proficiency of the card that user currently reviewing
+     *
+     * @param opt user's option of the quality of reviewing
+     * @param c   the card that user currently learning
+     */
+    public void updateMemProficiency(String opt, Card c) {
+        this.cm.setCurrCard(c);
+        if (opt.equals("1")) {
+            this.cm.increaseProficiency();
+        }
+
+        if (opt.equals("3")) {
+            this.cm.decreaseProficiency();
+        }
     }
 
-    public void setCantRecall() {
-        reviewIB.setCantRecall();
+    /**
+     * update the proficiency of the card that user currently testing
+     *
+     * @param opt user's correctness
+     * @param c   the card that user currently learning
+     */
+    public void updateTestProficiency(String opt, Card c) {
+        this.cm.setCurrCard(c);
+        if (opt.equals("2")) {
+            this.cm.decreaseProficiency();
+            this.cm.decreaseProficiency();
+        }
     }
 }

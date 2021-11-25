@@ -2,17 +2,24 @@ package framework.GUI.user;
 
 import entity.User;
 import framework.GUI.BasicFrame;
+import interface_adapter.Controller.UserController;
+import interface_adapter.gateway.DataInOut;
+import interface_adapter.gateway.IDataInOut;
+import interface_adapter.presenters.ChangePresenter;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.manager.UserManager;
+import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class ChangePasswordFrame extends BasicFrame implements ActionListener {
-    final User user;
+    final String username;
     final JPanel changePasswordPanel;
     final JLabel message;
     final JTextField newPassword;
@@ -22,9 +29,9 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     /**
      * Build a StartFrame.
      */
-    public ChangePasswordFrame(User user) {
-        super("Recaller");
-        this.user = user;
+    public ChangePasswordFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
+        super("Change password", programStateInputBoundary);
+        this.username = username;
         // 1. Create components shown on the frame
         changePasswordPanel = new JPanel(new GridLayout(3, 1));
 
@@ -60,9 +67,22 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) { // user finishes entering new password
-        UserInputBoundary manager = new UserManager();
-        manager.changePassword(user, newPassword.getText());
-        new UserFrame(user);
+        // Constructs a userManager
+        IDataInOut dataInOut = new DataInOut();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        UserInputBoundary manager = new UserManager(dataInOut, programStateInputBoundary, dbPresenter);
+
+        // Construct a UserController
+        DatabaseErrorOutputBoundary databaseErrorOutputBoundary = new DatabaseErrMsgPresenter();
+        UserController userController = new UserController(manager, databaseErrorOutputBoundary);
+
+        // Call change password method
+        userController.changePassword(newPassword.getText());
+        manager.changePassword(newPassword.getText());
+
+        // Check if successfully changed
+        JOptionPane.showMessageDialog(this, "Password changed successfully.");
+        new UserFrame(username, programStateInputBoundary);
         setVisible(false);
     }
 }

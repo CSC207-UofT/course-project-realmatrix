@@ -3,6 +3,8 @@ package framework.GUI.start;
 import framework.GUI.BasicFrame;
 import framework.GUI.login_register.LoginFrame;
 import framework.GUI.login_register.RegisterFrame;
+import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.manager.ProgramStateManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +20,8 @@ public class StartFrame extends BasicFrame implements ActionListener {
     /**
      * Build a StartFrame.
      */
-    public StartFrame() {
-        super("Recaller");
+    public StartFrame(ProgramStateInputBoundary programStateInputBoundary) {
+        super("Recaller", programStateInputBoundary);
         // 1. Create components shown on the frame
         startPanel = new JPanel(new GridLayout(3, 1));
 
@@ -55,18 +57,19 @@ public class StartFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == lgButton) {
-            new LoginFrame();
+            new LoginFrame(this.programStateInputBoundary);
         }
 
         if (e.getSource() == rgButton) {
-            new RegisterFrame();
+            new RegisterFrame(this.programStateInputBoundary);
         }
         setVisible(false);
     }
 
     // Test
     public static void main(String[] args) {
-        JFrame f = new StartFrame();
+        ProgramStateInputBoundary ps = new ProgramStateManager();
+        JFrame f = new StartFrame(ps);
     }
 
 }

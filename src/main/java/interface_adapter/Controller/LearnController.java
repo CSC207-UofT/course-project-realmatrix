@@ -1,20 +1,38 @@
 package interface_adapter.Controller;
 
 import entity.Card;
-import entity.Pack;
-import use_case.generator.LearnGenerator;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.LearnInputBoundary;
-import use_case.manager.CardManager;
 
 import java.util.ArrayList;
 
 public class LearnController {
-    private final LearnInputBoundary learnIB;
+    private final LearnInputBoundary lg;
+    private final CardInputBoundary cm;
 
-    public LearnController(LearnInputBoundary learnIB) {
-        this.learnIB = learnIB;
+    public LearnController(LearnInputBoundary learnInputBoundary, CardInputBoundary cardInputBoundary) {
+        // TODO: controller takes in an entity clean?
+        this.lg = learnInputBoundary;
+        this.cm = cardInputBoundary;
     }
+// Presenter would take over this
+//    /**
+//     * return term or definition based on user's option
+//     *
+//     * @param opt option of user
+//     * @param c   Card c that user currently facing
+//     * @return term or definition
+//     */
+//    public String learnDisplay(String opt, Card c) {
+//        if (opt.equals("t")) {
+//            return c.getTerm();
+//        }
+//        if (opt.equals("d")) {
+//            return c.getDefinition();
+//        } else {
+//            return "";
+//        }
+//    }
 
     public void next() {
         learnIB.next();

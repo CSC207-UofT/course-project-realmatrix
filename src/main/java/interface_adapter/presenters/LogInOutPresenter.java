@@ -4,7 +4,7 @@ import use_case.manager.LogInOutManager;
 import use_case.output_boundaries.LogInOutOutputBoundary;
 
 public class LogInOutPresenter implements LogInOutOutputBoundary {
-    private LogInOutManager.LoggedIn loginResult; // A boolean value representing login succeeds or fails
+    private boolean loginResult; // A boolean value representing login succeeds or fails
 
     /**
      * Get the login result from LoginManager's login method.
@@ -12,25 +12,27 @@ public class LogInOutPresenter implements LogInOutOutputBoundary {
      * @param loginResult a boolean value representing login succeeds or fails.
      */
     @Override
-    public void setLogInOutResult(LogInOutManager.LoggedIn loginResult) {
+    public void setLogInOutResult(boolean loginResult) {
         this.loginResult = loginResult;
     }
 
     /**
-     * Present the login result.
-     * TODO: popping up framework.command_line_interface.GUI windows with such string.
-     * @return
+     * Getter for LogInOutResult
+     * @return true iff user successfully logged in.
      */
     @Override
-    public String presentLogInOutResult() {
-        switch (loginResult) {
-            case SUCCEED:
-                return("Login succeeds!");
-
-            case FAIL:
-                return(
-                        "Invalid name or password. If you are new, please create an account first.");
-        }
-        return null;
+    public boolean getLogInOutResult(){
+        return loginResult;
     }
+
+    // Deprecated for GUI
+//    /**
+//     * Present the login result.
+//     * TODO: popping up framework.command_line_interface.GUI windows with such string.
+//     * @return
+//     */
+//    @Override
+//    public String presentLogInOutResult() {
+//
+//    }
 }

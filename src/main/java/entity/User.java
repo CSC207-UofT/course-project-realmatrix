@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A single user.
@@ -8,12 +9,12 @@ import java.util.ArrayList;
 public class User {
     private String name;
     private String password;
-    private final ArrayList<Pack> packages;
+    private final ArrayList<Pack> packageList;
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
-        this.packages = new ArrayList<>();
+        this.packageList = new ArrayList<>();
     }
 
     public String getName() {
@@ -32,30 +33,30 @@ public class User {
         this.password = newPassword;
     }
 
-    public void addPackage(Pack pack) throws Exception {
-        for (Pack p : this.packages) {
-            if (pack.getName().equals(p.getName())) {
-                throw new Exception("Pack already exists."); //TODO: PackExistError
-            }
-        }
-        this.packages.add(pack);
+    public void addPackage(Pack pack) {
+        this.packageList.add(pack);
     }
 
-    public ArrayList<Pack> getPackages() {
-        return this.packages;
+    public ArrayList<Pack> getPackageList() {
+        return this.packageList;
+    }
+
+    /**
+     * Return a pack map that maps pack name to pack, allows more flexible use in other classes.
+     * @return a hah map of pack name to pack object.
+     */
+    public HashMap<String, Pack> getPackageMap() {
+        HashMap<String, Pack> nameToPack = new HashMap<>();
+        for (Pack p : this.packageList) {
+            nameToPack.put(p.getName(), p);
+        }
+        return nameToPack;
     }
 
     /**
      * @param pack the package to be deleted
-     * @return return true if package is successfully deleted, false if package is not in the list
      */
-    public boolean deletePackage(Pack pack) {
-        for (int i = 0; i < this.packages.size(); i++) {
-            if (this.packages.get(i).getName().equals(pack.getName())) {
-                this.packages.remove(i);
-                return true;
-            }
-        }
-        return false;
+    public void deletePackage(Pack pack) {
+        this.packageList.remove(pack);
     }
 }

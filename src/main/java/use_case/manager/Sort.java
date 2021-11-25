@@ -1,21 +1,19 @@
 package use_case.manager;
 
-import use_case.output_boundaries.SortOutputBoundary;
+import use_case.output_boundaries.SortCardOutputBoundary;
 
-import java.util.ArrayList;
+public interface Sort {
+    // Sort according to date added, from oldest to newest.
+    void sortOldToNew(SortCardOutputBoundary sortOutputBoundary);
 
-public interface Sort<T> {
     // Sort in alphabetical order (a-z), ignore case difference.
-    ArrayList<T> sortAtoZ(SortOutputBoundary<T> sortOutputBoundary);
+    void sortAtoZ(SortCardOutputBoundary sortCardOutputBoundary);
+
+    void sortRandom(SortCardOutputBoundary sortCardOutputBoundary);
 
     // Sort in alphabetical order (z-a), ignore case difference.
-    ArrayList<T> sortZtoA(SortOutputBoundary<T> sortOutputBoundary);
+//    void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary);
 
     // Sort according to date added, from newest to oldest.
-    ArrayList<T> sortNewToOld(SortOutputBoundary<T> sortOutputBoundary);
-
-    // Sort according to date added, from oldest to newest.
-    ArrayList<T> sortOldToNew(SortOutputBoundary<T> sortOutputBoundary);
-
-    ArrayList<T> sortRandom(SortOutputBoundary<T> sortOutputBoundary);
+//    void sortNewToOld(SortCardOutputBoundary<T> sortOutputBoundary);
 }

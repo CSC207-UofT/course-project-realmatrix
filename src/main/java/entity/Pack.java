@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A pack that stores cards.
@@ -23,16 +24,10 @@ public class Pack {
 
     /**
      * Add a new Card into the pack's cardList.
-     * Throws an exception if the new card's term already exists in the pack.
      *
      * @param card a Card item
      */
-    public void addCard(Card card) throws Exception {
-        for (Card c : this.cardList) {
-            if (c.getTerm().equals(card.getTerm())) {
-                throw new Exception("Had this card already~ Try change a term.");
-            }
-        }
+    public void addCard(Card card) {
         this.cardList.add(card);
     }
 
@@ -49,8 +44,20 @@ public class Pack {
         return name;
     }
 
-    public ArrayList<Card> getCards() {
+    public ArrayList<Card> getCardList() {
         return this.cardList;
+    }
+
+    /**
+     * Return a card map that maps card term to card, allows more flexible use in other classes.
+     * @return a hah map of card term to card object.
+     */
+    public HashMap<String, Card> getCardMap() {
+        HashMap<String, Card> nameToCard = new HashMap<>();
+        for (Card c : this.cardList) {
+            nameToCard.put(c.getTerm(), c);
+        }
+        return nameToCard;
     }
 
     /**

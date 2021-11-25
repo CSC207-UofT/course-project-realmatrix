@@ -1,6 +1,7 @@
 package interface_adapter.gateway.dataout;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -66,10 +67,10 @@ public class Reader {
     }
 
     // Testing purpose
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Reader reader = new Reader();
-        System.out.println(reader.readUsers());
-        System.out.println(reader.readPacks("Snoopy"));
-        System.out.println(reader.readCards("Snoopy", "greeting101"));
+        reader.readUsers();
+        Loader loader = new Loader();
+        System.out.println(loader.initialLoad());
     }
 }
