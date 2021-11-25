@@ -2,6 +2,7 @@ package interface_adapter.Controller;
 
 import entity.Card;
 import entity.Pack;
+import entity.ProgramState;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import use_case.generator.ReviewGenerator;
@@ -25,39 +26,17 @@ public class ReviewController {
         // before going to the next card, update current card's proficiency in database
         Card currCard = reviewIB.getCurrCard();
         if (currCard != null) {
-            dataInOut.write(programState, reviewIB.getCurrCard());
+            dataInOut.write(new String[] {programState.getCurrUser().getName(), programState.getCurrPack().getName()},
+                    reviewIB.getCurrCard());
         }
         reviewIB.next();
     }
 
-    /**
-     * update the proficiency of the card that user currently reviewing
-     *
-     * @param opt user's option of the quality of reviewing
-     * @param c   the card that user currently learning
-     */
-    public void updateMemProficiency(String opt, Card c) {
-        this.cm.setCurrCard(c);
-        if (opt.equals("1")) {
-            this.cm.increaseProficiency();
-        }
-
-        if (opt.equals("3")) {
-            this.cm.decreaseProficiency();
-        }
+    public void setCantRecall() {
+        reviewIB.setCantRecall();
     }
 
-    /**
-     * update the proficiency of the card that user currently testing
-     *
-     * @param opt user's correctness
-     * @param c   the card that user currently learning
-     */
-    public void updateTestProficiency(String opt, Card c) {
-        this.cm.setCurrCard(c);
-        if (opt.equals("2")) {
-            this.cm.decreaseProficiency();
-            this.cm.decreaseProficiency();
-        }
+    public void setShowDefinition() {
+        reviewIB.setShowDefinition();
     }
 }

@@ -7,32 +7,11 @@ import use_case.input_boundaries.LearnInputBoundary;
 import java.util.ArrayList;
 
 public class LearnController {
-    private final LearnInputBoundary lg;
-    private final CardInputBoundary cm;
+    private final LearnInputBoundary learnIB;
 
-    public LearnController(LearnInputBoundary learnInputBoundary, CardInputBoundary cardInputBoundary) {
-        // TODO: controller takes in an entity clean?
-        this.lg = learnInputBoundary;
-        this.cm = cardInputBoundary;
+    public LearnController(LearnInputBoundary learnIB) {
+        this.learnIB = learnIB;
     }
-// Presenter would take over this
-//    /**
-//     * return term or definition based on user's option
-//     *
-//     * @param opt option of user
-//     * @param c   Card c that user currently facing
-//     * @return term or definition
-//     */
-//    public String learnDisplay(String opt, Card c) {
-//        if (opt.equals("t")) {
-//            return c.getTerm();
-//        }
-//        if (opt.equals("d")) {
-//            return c.getDefinition();
-//        } else {
-//            return "";
-//        }
-//    }
 
     public void next() {
         learnIB.next();

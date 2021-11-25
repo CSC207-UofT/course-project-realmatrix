@@ -1,1 +1,1 @@
-big,large in size,3
+large in size,3

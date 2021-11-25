@@ -28,7 +28,7 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
     public ReviewGenerator(Pack pack, ReviewOutputBoundary reviewOB) {
         super(pack);
         List<Card> cardList = new ArrayList<>();
-        for (Card card : pack.getCards()) {
+        for (Card card : pack.getCardList()) {
             for (int i = 0; i < Constants.REVIEW_PROFICIENCY_MAX - card.getProficiency() + 1; i++) {
                 cardList.add(card);
             }

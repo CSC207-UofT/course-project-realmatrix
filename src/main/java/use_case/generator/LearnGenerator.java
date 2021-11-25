@@ -21,7 +21,7 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
      */
     public LearnGenerator(Pack pack, LearnOutputBoundary learnOB) {
         super(pack);
-        List<Card> cardList = pack.getCards();
+        List<Card> cardList = pack.getCardList();
         Collections.shuffle(cardList);
         cards.addAll(cardList);
         this.learnOB = learnOB;
