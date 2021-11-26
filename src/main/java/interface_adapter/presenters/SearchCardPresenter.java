@@ -27,11 +27,11 @@ public class SearchCardPresenter implements SearchCardOutputBoundary {
         return this.searchResult;
     }
 
-    @Override
-    public void presentSearchResult() {
-        for (String cardTerm : searchResult.keySet()) {
-            System.out.println(cardTerm);
-            System.out.println(searchResult.get(cardTerm));
-        }
-    }
+//    @Override
+//    public void presentSearchResult() {
+//        for (String cardTerm : searchResult.keySet()) {
+//            System.out.println(cardTerm);
+//            System.out.println(searchResult.get(cardTerm));
+//        }
+//    }
 }

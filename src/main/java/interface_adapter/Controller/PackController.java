@@ -1,9 +1,7 @@
 package interface_adapter.Controller;
 
 import use_case.input_boundaries.PackInputBoundary;
-import use_case.output_boundaries.AddOutputBoundary;
-import use_case.output_boundaries.ChangeOutputBoundary;
-import use_case.output_boundaries.DatabaseErrorOutputBoundary;
+import use_case.output_boundaries.*;
 
 /**
  * A package interface_adapter.Controller that can create/change packname   and   add/delete/search/sort card in a pack.
@@ -43,6 +41,14 @@ public class PackController {
         if (this.packIB.deletePack(packName)) {
             this.packIB.delete(databaseErrorOutputBoundary);
         }
+    }
+
+    /**
+     * Old-to-new is the order of packs shown to the user by default.
+     * @param sortPackOutputBoundary an output boundary that gets the result of sorted packs.
+     */
+    public void sortOldToNew(SortPackOutputBoundary sortPackOutputBoundary) {
+        this.packIB.sortOldToNew(sortPackOutputBoundary);
     }
 //    /**
 //     * Getter for the current pack the user is in.
