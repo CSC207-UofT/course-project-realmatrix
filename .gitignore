@@ -1,12 +1,13 @@
 # This .gitignore will automatically ignore certain Gradle and IntelliJ files that you likely won't want to commit!
 .idea
 CourseProject.iml
+out
 # Gradle .gitignore (https://github.com/github/gitignore/blob/master/Gradle.gitignore)
 .gradle
 **/build/
 !src/**/build/
 
-# Ignore Gradle GUI config
+# Ignore Gradle framework.command_line_interface.GUI config
 gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)

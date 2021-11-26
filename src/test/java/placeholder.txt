@@ -1,2 +1,0 @@
-put java tests in this directory
-it's best to group things together, see https://github.com/CSC207-UofT/Java-Shell
