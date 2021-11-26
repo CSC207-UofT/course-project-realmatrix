@@ -34,20 +34,41 @@ public class Constants {
     public static final String USER_NAME_TAKEN = "This username is taken. Choose another one please~";
     public static final String LOGIN_FAIL_MSG = "Wrong password  OR  the username doesn't exist";
     public static final String LOGIN_FAIL = "Login Fails";
-    public static final String LOGIN_BTN = "Login";
-    public static final String REG_BTN = "Register";
+
 
     //label
     public static final int EXTRA_X = 150;
     public static final int EXTRA_Y = 30;
-    public static final int PW2_COLUMNS = 20;
-    public static final int PW2_WIDTH = 130;
+    public static final int COLUMNS1 = 20;
+    public static final int PW_WIDTH = 130;
 
     public static final String PW_AGAIN = "Password Again: ";
 
     //GUI.start
-    public static final String RECALLER_BTN = "Recaller";
     public static final String WELLCOME_MSG = "Welcome to Recaller!";
 
+    //GUI.user
+    public static final String CHANGE_PW = "Change password";
+    public static final String NEW_PW_MSG = "new password: ";
+    public static final String CHANGE_USERNAME = "Change username";
+    public static final String NEW_USERNAME_MSG = "new username: ";
 
+    public static final String PW_CHANGED_SUCCEED = "Password changed successfully.";
+    public static final String USERNAME_CHANGED_SUCCEED = "Username changed successfully";
+    public static final String USERNAME_CHANGED_FAILED = "Changing username fails";
+
+    //Button
+    public static final String RECALLER_BTN = "Recaller";
+    public static final String DONE_BTN = "done";
+    public static final String LOGIN_BTN = "Login";
+    public static final String REG_BTN = "Register";
+    public static final String SIGN_OUT_BTN = "Sign off";
+    public static final String CHANGE_NAME_BTN = "change name";
+    public static final String CHANGE_PW_BTN = "change password";
+    public static final String CREATE_NEW_PACKAGE = "Create a package";
+    public static final String CHECK_OUT_PACKAGE = "Checkout my packages";
+
+    //Presenter
+    public static final String NANM_EXISTS = "Name already exists. Try a new name.";
+    public static final String SUC_VIEW = "Successfully added.";
 }

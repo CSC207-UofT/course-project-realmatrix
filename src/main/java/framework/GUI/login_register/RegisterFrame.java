@@ -1,9 +1,7 @@
 package framework.GUI.login_register;
 
-import entity.User;
 import framework.GUI.start.StartFrame;
 //import framework.GUI.user.UserFrame;
-import interface_adapter.Controller.ProgramStateController;
 import interface_adapter.Controller.RegisterController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -19,7 +17,6 @@ import use_case.constants.Constants;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.Objects;
 
 public class RegisterFrame extends LogRegFrame {
     private final JLabel pw2Label;          // Confirming password JLabel
@@ -35,7 +32,7 @@ public class RegisterFrame extends LogRegFrame {
 
         // Create component: confirm password label-text field
         pw2Label = new JLabel(Constants.PW_AGAIN, JLabel.TRAILING);
-        pw2 = new JPasswordField(Constants.PW2_COLUMNS);
+        pw2 = new JPasswordField(Constants.COLUMNS1);
 
         // Layout Components
         layoutRestComp();
@@ -50,7 +47,7 @@ public class RegisterFrame extends LogRegFrame {
     @Override
     protected void layoutRestComp() {
         pw2Label.setBounds(pwLabel.getX(), pwLabel.getY() + Constants.EXTRA_Y,
-                Constants.PW2_WIDTH, pwLabel.getHeight());
+                Constants.PW_WIDTH, pwLabel.getHeight());
         add(pw2Label);
 
         pw2.setBounds(pw.getX(), pw.getY() + Constants.EXTRA_Y,
