@@ -105,12 +105,10 @@ public class Loader {
      * @throws IOException fail to load
      */
     private void putCard(String cardPath, Pack pack) throws IOException {
-        BufferedReader cardInfoFileReader = Files.newBufferedReader(Path.of(cardPath));
         String cardFileName = Path.of(cardPath).getFileName().toString();
         String cardTerm = cardFileName.substring(0, cardFileName.lastIndexOf("."));
 
-        String cardInfo = cardInfoFileReader.readLine();
-        cardInfoFileReader.close();
+        String cardInfo = Files.readString(Path.of(cardPath));
         String cardDefinition = cardInfo.substring(0, cardInfo.lastIndexOf(","));
         String cardProficiency = cardInfo.substring(cardInfo.length() - 1);
         Card card = new Card(cardTerm, cardDefinition);
