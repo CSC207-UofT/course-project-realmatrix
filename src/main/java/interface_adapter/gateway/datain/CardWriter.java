@@ -54,15 +54,19 @@ public class CardWriter extends Writer {
     }
 
     /**
-     * Archive a card. Effectively, this card is deleted because it won't be loaded next time the program runs.
+     * Delete a card.
      *
      */
     @Override
-    public void archive() throws IOException {
-        new File("user_data/users/" + this.username + "/packages/" + this.packname +
-                "/archived_cards/").mkdirs();
-        Files.move(new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
-                this.card.getTerm() + ".txt").toPath(), new File("user_data/users/" + this.username +
-                "/packages/" + this.packname + "/archived_cards/" + this.card.getTerm() + ".txt").toPath());
-    } // FIXME: same problem as UserWriter.archive
+    public void delete() throws IOException {
+        new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
+                this.card.getTerm() + ".txt").delete();
+    }
+
+    //Test
+    public static void main(String[] args) throws IOException {
+        String[] path = new String[]{"test_user_1", "packA"};
+        CardWriter cw = new CardWriter(path, new Card("Card1", "card1definition"));
+        cw.delete();
+    }
 }

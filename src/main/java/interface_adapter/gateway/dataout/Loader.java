@@ -106,13 +106,23 @@ public class Loader {
      */
     private void putCard(String cardPath, Pack pack) throws IOException {
         BufferedReader cardInfoFileReader = Files.newBufferedReader(Path.of(cardPath));
+        String cardFileName = Path.of(cardPath).getFileName().toString();
+        String cardTerm = cardFileName.substring(0, cardFileName.lastIndexOf("."));
+
         String cardInfo = cardInfoFileReader.readLine();
         cardInfoFileReader.close();
-        String cardTerm = Path.of(cardPath).getFileName().toString();
-        String cardDefinition = cardInfo.split(",")[0];
-        String cardProficiency = cardInfo.split(",")[1];
+        String cardDefinition = cardInfo.substring(0, cardInfo.lastIndexOf(","));
+        String cardProficiency = cardInfo.substring(cardInfo.length() - 1);
         Card card = new Card(cardTerm, cardDefinition);
         card.setProficiency(Integer.parseInt(cardProficiency));
         pack.addCard(card);
+    }
+
+    // Test
+    public static void main(String[] args) throws IOException {
+        Loader loader = new Loader();
+        User user = new User("Xing", "password");
+        loader.userLoad(user);
+        System.out.println(user.getPackageList().get(0).getCardList());
     }
 }

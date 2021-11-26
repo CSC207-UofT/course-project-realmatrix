@@ -52,15 +52,17 @@ public class UserWriter extends Writer {
     }
 
     /**
-     * Archive a user. Effectively, this user is deleted because it won't be loaded next time the program runs.
-     *
-     * @throws IOException
+     * Delete a user.
      */
     @Override
-    public void archive() throws IOException {
-        new File("user_data/archived_users/").mkdirs();
-        Files.move(new File("user_data/users/" + user.getName()).toPath(),
-                new File("user_data/archived_users/" + user.getName()).toPath());
-    // FIXME: may be deleted completely without archiving, cuz move throws exception if target path exists.
+    public void delete() {
+        File userFolder = new File("user_data/users/" + user.getName());
+        File[] packs = userFolder.listFiles();
+        if(packs!=null) { // meaning userFolder is non-empty (contains some packs)
+            for(File p: packs) {
+                p.delete();
+            }
+        }
+        userFolder.delete();
     }
 }

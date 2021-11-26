@@ -32,8 +32,8 @@ public abstract class Writer {
     public abstract void write(String oldName, Object newO) throws IOException;
 
     /**
-     * Archive the object in database (store in database but won't load in future)
+     * Delete the object in database.
      *
      */
-    public abstract void archive() throws IOException;
+    public abstract void delete() throws IOException;
 }

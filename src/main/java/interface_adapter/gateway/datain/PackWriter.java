@@ -47,15 +47,17 @@ public class PackWriter extends Writer {
     }
 
     /**
-     * Archive a package. Effectively, this package is deleted because it won't be loaded next time the program runs.
-     *
-     * @throws IOException
+     * Delete a pack.
      */
     @Override
-    public void archive() throws IOException {
-        new File("user_data/users/" + this.username + "/archived_packages/").mkdirs();
-        Files.move(new File("user_data/users/" + this.username + "/packages/" + this.pack.getName()).toPath(),
-                new File("user_data/users/" + this.username + "/archived_packages/" +
-                        this.pack.getName()).toPath());
-    } // FIXME: same problem as UserWriter.archive.
+    public void delete() {
+        File packFolder = new File("user_data/users/" + this.username + "/packages/" + this.pack.getName());
+        File[] cards = packFolder.listFiles();
+        if(cards!=null) { // meaning packFolder is non-empty (contains some cards)
+            for(File c: cards) {
+                c.delete();
+            }
+        }
+        packFolder.delete();
+    }
 }

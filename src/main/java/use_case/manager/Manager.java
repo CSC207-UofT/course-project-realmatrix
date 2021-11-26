@@ -74,6 +74,9 @@ public abstract class Manager<T> {
         }
     }
 
+    /**
+     * Write the object (with its name changed) into database.
+     */
     public void write(String oldName, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), oldName, currItem);
@@ -84,10 +87,11 @@ public abstract class Manager<T> {
 
     /**
      * Archive (delete and store) the required object into database.
+     * @param databaseErrorOutputBoundary an output boundary that gets the error message if fails connect to database.
      */
-    public void archive(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void delete(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
-            dataInOut.archive(findPartialDataPath(), currItem);
+            dataInOut.delete(findPartialDataPath(), currItem);
         } catch (IOException e) {
             databaseErrorOutputBoundary.presentWriteErrMsg();
         }
