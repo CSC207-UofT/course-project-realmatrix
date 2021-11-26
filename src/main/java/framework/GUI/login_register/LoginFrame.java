@@ -1,5 +1,6 @@
 package framework.GUI.login_register;
 
+import entity.Card;
 import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.start.StartFrame;
@@ -9,6 +10,7 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.LogInOutPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.LogInOutInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
@@ -32,10 +34,10 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
     private final JButton lgButton;       // Button that confirms login
 
     public LoginFrame(ProgramStateInputBoundary programStateInputBoundary) {
-        super("Login", programStateInputBoundary);
+        super(Constants.LOGIN_BTN, programStateInputBoundary);
 
         // Create component: login button
-        lgButton = new JButton("Login");
+        lgButton = new JButton(Constants.LOGIN_BTN);
         lgButton.addActionListener(this);
 
         // Layout Components
@@ -49,7 +51,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
      */
     @Override
     protected void layoutRestComp() {
-        lgButton.setBounds(backButton.getX() + 150, backButton.getY(),
+        lgButton.setBounds(backButton.getX() + Constants.EXTRA_X, backButton.getY(),
                 backButton.getWidth(), backButton.getHeight());
         add(lgButton);
     }
@@ -73,8 +75,8 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
                 new UserFrame(username.getText(), this.programStateInputBoundary);
             } else {    // login fails
                 JOptionPane.showMessageDialog(this,
-                        "Wrong password  OR  the username doesn't exist", // TODO: constant
-                        "Login Fails",
+                        Constants.LOGIN_FAIL_MSG,
+                        Constants.LOGIN_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             }
         }

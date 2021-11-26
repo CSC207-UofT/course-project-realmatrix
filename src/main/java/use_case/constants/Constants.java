@@ -5,6 +5,8 @@ public class Constants {
     public static final int REVIEW_PROFICIENCY_MIN = 0;
     public static final int REVIEW_FAIL_NEG = -2;
     public static final int REVIEW_SUCCEED_POS = 1;
+//    public static final int PROFICIENCY_MAX = 3;
+//    public static final int PROFICIENCY_MIN = 0;
 
     public static final int CLEAR = 1;
     public static final int BLUR = -1;
@@ -22,5 +24,30 @@ public class Constants {
     public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
 
     public static final String CLEAR_CONSOLE = "\033[H\033[2J";
+
+    public static final String PRO_HIGHER_THAN_MAX = "Proficiency is higher than maximum";
+    public static final String PRO_LOWER_THAN_MIN = "Proficiency is lower than minimum";
+
+    //GUI.login_register
+    public static final String PASSWORD_NOT_MATCH = "Passwords didn't match. Try again.";
+    public static final String REG_FAIL = "Registration Fails";
+    public static final String USER_NAME_TAKEN = "This username is taken. Choose another one please~";
+    public static final String LOGIN_FAIL_MSG = "Wrong password  OR  the username doesn't exist";
+    public static final String LOGIN_FAIL = "Login Fails";
+    public static final String LOGIN_BTN = "Login";
+    public static final String REG_BTN = "Register";
+
+    //label
+    public static final int EXTRA_X = 150;
+    public static final int EXTRA_Y = 30;
+    public static final int PW2_COLUMNS = 20;
+    public static final int PW2_WIDTH = 130;
+
+    public static final String PW_AGAIN = "Password Again: ";
+
+    //GUI.start
+    public static final String RECALLER_BTN = "Recaller";
+    public static final String WELLCOME_MSG = "Welcome to Recaller!";
+
 
 }

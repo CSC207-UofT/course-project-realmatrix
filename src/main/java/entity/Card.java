@@ -54,6 +54,14 @@ public class Card {
         this.proficiency = pro;
     }
 
+//    public void setProficiencyToMax(){
+//        this.proficiency = Constants.PROFICIENCY_MAX;
+//    }
+//
+//    public void setProficiencyToMin(){
+//        this.proficiency = Constants.PROFICIENCY_MIN;
+//    }
+
     /**
      * Change the term on this card to a new term.
      *
