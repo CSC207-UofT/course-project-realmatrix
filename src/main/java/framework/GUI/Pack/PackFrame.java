@@ -23,11 +23,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PackFrame extends BasicFrame implements ActionListener {
     private final JPanel panel = new JPanel(null); // The whole panel in the frame
     // Pack name list
     private final JScrollPane packListPanel;  // A scrollable panel that stores a JList of pack names
+    private ArrayList<String> packList;     // Data for packListModel
+    private final DefaultListModel<String> packListModel;   // Model for JList
     private final JList<String> packJList;  // A JList that contains pack names
     // Search
     private final JLabel searchLabel;
@@ -46,7 +49,9 @@ public class PackFrame extends BasicFrame implements ActionListener {
     public PackFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Pack List", programStateInputBoundary);
         // Construct packListPanel
-        packJList = new JList(getPackList().toArray());
+        packListModel = new DefaultListModel<>();
+        setPackListModel();
+        packJList = new JList<>(packListModel);
         packListPanel = new JScrollPane(packJList);
         packListPanel.setSize(250, 600);
         panel.add(packListPanel);
@@ -58,7 +63,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
 
         searchText = new JTextField("");
         searchText.setBounds(335, 20, 140, 30);
-        searchFunctionality();
+        searchText.addActionListener(this);
         panel.add(searchText);
 
         // Sort
@@ -69,6 +74,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
         String[] sortOptions = new String[] {"Old - New", "A - Z"};
         sortBox = new JComboBox<>(sortOptions);
         sortBox.setBounds(335, 60, 150, 30);
+        sortBox.addActionListener(this);
         panel.add(sortBox);
         
         // Add pack
@@ -109,35 +115,50 @@ public class PackFrame extends BasicFrame implements ActionListener {
         setVisible(true);
     }
 
-    private void searchFunctionality() {
-        searchText.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SearchPackOutputBoundary searchPackOutputBoundary = new SearchPackPresenter();
-                packController.searchPack(searchText.getText(), searchPackOutputBoundary);
-                searchPackOutputBoundary.getSearchResult();
-//                checkSearch()
-                // TODO: if no item, pop window
-            }
-        });
-    }
-
     /**
-     * Helper method for construct JList of packs.
-     * Get a list of pack names this current user has.
-     * @return an arraylist of pack names.
+     * Helper method for construct packListModel of JList.
+     * Set this model to a list of pack names (in old-to-new order) this current user has.
      */
-    private ArrayList<String> getPackList() {
-        // Construct packManager
-        IDataInOut dataInOut = new DataInOut();
-        PackInputBoundary packManager = new PackManager(dataInOut, programStateInputBoundary);
-        // Construct packController
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
-        PackController packController = new PackController(packManager, dbPresenter);
+    private void setPackListModel() {
+        packListModel.removeAllElements();
         // Get arraylist of pack names
         SortPackOutputBoundary sortPackPresenter = new SortPackPresenter();
         packController.sortOldToNew(sortPackPresenter);
-        return sortPackPresenter.getSortResult();
+        packList = sortPackPresenter.getSortResult();
+
+        for (String packName : packList) {
+            packListModel.addElement(packName);
+        }
+    }
+
+    /**
+     * Set packListModel with a specified packNameList, used when search/sort.
+     * @param packNameList An arraylist that contains pack names in specific order.
+     */
+    private void setPackListModel(ArrayList<String> packNameList) {
+        // Get arraylist of pack names
+        packListModel.removeAllElements();
+        for (String packName : packNameList) {
+            packListModel.addElement(packName);
+        }
+    }
+
+    /**
+     * Search functionality.
+     */
+    private void search() {
+        SearchPackOutputBoundary searchPackOutputBoundary = new SearchPackPresenter();
+        packController.searchPack(searchText.getText(), searchPackOutputBoundary);
+        setPackListModel(searchPackOutputBoundary.getSearchResult());
+    }
+
+    /**
+     * Sort packs by pack names: A - Z order.
+     */
+    private void sortAToZ() {
+        SortPackOutputBoundary sortPackPresenter = new SortPackPresenter();
+        packController.sortAToZ(sortPackPresenter);
+        setPackListModel(sortPackPresenter.getSortResult());
     }
 
     //Test
@@ -157,6 +178,19 @@ public class PackFrame extends BasicFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == searchText) {
+            search();
+        }
 
+        if (e.getSource() == sortBox) {
+            String filter = (String) sortBox.getSelectedItem();
+            switch (Objects.requireNonNull(filter)) {
+                case "A - Z":
+                    sortAToZ();
+                    break;
+                case "Old - New":
+                    setPackListModel();
+            }
+        }
     }
 }

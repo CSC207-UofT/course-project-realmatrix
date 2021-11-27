@@ -4,8 +4,4 @@ public interface AddOutputBoundary {
     void setAddResult(boolean addResult);
 
     boolean getAddResult();
-
-    void presentAddSuccessView();
-
-    void presentAddFailView();
 }

@@ -37,11 +37,12 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         if (!this.items.containsKey(term)) { // no card has such term, adding is valid
             Card c = new Card(term, definition);
             this.items.put(term, c);
+            this.currItem = c;
             programStateInputBoundary.getCurrPack().addCard(c);
-            addOutputBoundary.presentAddSuccessView();
+            addOutputBoundary.setAddResult(true);
             return true;
         }
-        addOutputBoundary.presentAddFailView();
+        addOutputBoundary.setAddResult(false);
         return false;
     }
 

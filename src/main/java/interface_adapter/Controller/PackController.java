@@ -60,6 +60,14 @@ public class PackController {
     public void sortOldToNew(SortPackOutputBoundary sortPackOutputBoundary) {
         this.packIB.sortOldToNew(sortPackOutputBoundary);
     }
+
+    /**
+     * Sort packs by pack names, in alphabetic order: A - Z.
+     * @param sortPackOutputBoundary an output boundary that gets the result of sorted packs.
+     */
+    public void sortAToZ(SortPackOutputBoundary sortPackOutputBoundary) {
+        this.packIB.sortAToZ(sortPackOutputBoundary);
+    }
 //    /**
 //     * Getter for the current pack the user is in.
 //     *

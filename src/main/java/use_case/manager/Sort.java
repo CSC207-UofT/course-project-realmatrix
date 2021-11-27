@@ -9,8 +9,6 @@ public interface Sort {
     // Sort in alphabetical order (a-z), ignore case difference.
     void sortAtoZ(SortCardOutputBoundary sortCardOutputBoundary);
 
-    void sortRandom(SortCardOutputBoundary sortCardOutputBoundary);
-
     // Sort in alphabetical order (z-a), ignore case difference.
 //    void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary);
 
