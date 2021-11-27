@@ -68,6 +68,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
             if (check()) {  // add succeeds
                 success.setText("Add pack successful!");
                 packText.setText(packText.getText());
+                setVisible(false);
                 new PackFrame(programStateInputBoundary);
             } else {    // add fails: pack already exists
                 JOptionPane.showMessageDialog(this,
@@ -79,6 +80,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
 
         if (e.getSource() == backButton) {
             new PackFrame(programStateInputBoundary);
+            setVisible(false);
         }
 
     }

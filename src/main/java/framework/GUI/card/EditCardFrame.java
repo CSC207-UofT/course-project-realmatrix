@@ -83,6 +83,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
                 success.setText("Edit card successful!");
                 termText.setText(termText.getText());
                 defText.setText(defText.getText());
+                setVisible(false);
                 //TODO: go to CardFrame.
             } else {    // add fails: card already exists
                 JOptionPane.showMessageDialog(this,
@@ -93,6 +94,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         }
         if (e.getSource() == backButton) {
             programStateInputBoundary.setCurrCard(null);
+            setVisible(false);
             // TODO: go to CardFrame
         }
     }

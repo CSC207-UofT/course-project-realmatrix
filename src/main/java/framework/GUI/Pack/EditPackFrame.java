@@ -74,6 +74,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
                 success.setText("Edit pack successful!");
                 packText.setText(packText.getText());
                 new PackFrame(programStateInputBoundary);
+                setVisible(false);
             } else {    // add fails: pack already exists
                 JOptionPane.showMessageDialog(this,
                         "This Pack has existed. Edit another one please~", // TODO: constant
@@ -84,6 +85,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
 
         if (e.getSource() == backButton) {
             new PackFrame(programStateInputBoundary);
+            setVisible(false);
         }
 
     }

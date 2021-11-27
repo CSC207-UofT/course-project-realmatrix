@@ -77,6 +77,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         if (e.getSource() == addButton) {
             if (check()) {  // add succeeds
                 success.setText("Add card successful!");
+                setVisible(false);
                 //TODO: go to PackFrame.
             } else {    // add fails: card already exists
                 JOptionPane.showMessageDialog(this,
@@ -87,6 +88,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         }
 
         if (e.getSource() == backButton) {
+            setVisible(false);
             // TODO: go to PackFrame
         }
 

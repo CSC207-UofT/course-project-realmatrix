@@ -98,6 +98,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AddPackFrame(programStateInputBoundary);
+                setVisible(false);
             }
         });
         panel.add(addButton);
@@ -121,6 +122,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new UserFrame(programStateInputBoundary.getCurrUserName(), programStateInputBoundary);
+                setVisible(false);
             }
         });
         panel.add(backButton);
@@ -205,6 +207,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 new EditPackFrame(selectedPackName, programStateInputBoundary);
+                setVisible(false);
             }
         }
 
