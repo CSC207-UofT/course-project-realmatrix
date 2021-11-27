@@ -4,6 +4,7 @@ import entity.User;
 import interface_adapter.gateway.datain.DataInFactory;
 import interface_adapter.gateway.datain.Writer;
 import interface_adapter.gateway.dataout.Loader;
+import use_case.constants.Exceptions;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,9 +28,13 @@ public class DataInOut implements IDataInOut {
      * @throws IOException fails to write
      */
     @Override
-    public void write(String[] partialDataPath, Object o) throws IOException {
-        Writer writer = this.factory.getWriter(partialDataPath, o);
-        writer.write();
+    public void write(String[] partialDataPath, Object o) throws Exception {
+        try{
+            Writer writer = this.factory.getWriter(partialDataPath, o);
+            writer.write();
+        } catch (IOException e){
+            throw new Exception(Exceptions.StoreError);
+        }
     }
 
     /**
@@ -42,16 +47,20 @@ public class DataInOut implements IDataInOut {
      *                        necessary for determining the path for writing.
      * @param oldName the object's old name
      * @param newO the new object to be written into database.
-     * @throws IOException
+     * @throws Exception if new0 is invalid.
      */
     @Override
-    public void write(String[] partialDataPath, String oldName, Object newO) throws IOException {
-        Writer writer = this.factory.getWriter(partialDataPath, newO);
-        writer.write(oldName, newO);
+    public void write(String[] partialDataPath, String oldName, Object newO) throws Exception {
+        try{
+            Writer writer = this.factory.getWriter(partialDataPath, newO);
+            writer.write(oldName, newO);
+        } catch (IOException e){
+            throw new Exception(Exceptions.StoreError);
+        }
     }
 
     @Override
-    public void archive(String[] partialDataPath, Object o) throws IOException {
+    public void archive(String[] partialDataPath, Object o) throws Exception {
         Writer writer = this.factory.getWriter(partialDataPath, o);
         writer.archive();
     }

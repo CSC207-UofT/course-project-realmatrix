@@ -69,7 +69,7 @@ public abstract class Manager<T> {
     public void write(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), currItem);
-        } catch (IOException e) {
+        } catch (Exception e) {
             databaseErrorOutputBoundary.presentWriteErrMsg();
         }
     }
@@ -77,7 +77,7 @@ public abstract class Manager<T> {
     public void write(String oldName, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), oldName, currItem);
-        } catch (IOException e) {
+        } catch (Exception e) {
             databaseErrorOutputBoundary.presentWriteErrMsg();
         }
     }
@@ -88,7 +88,7 @@ public abstract class Manager<T> {
     public void archive(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.archive(findPartialDataPath(), currItem);
-        } catch (IOException e) {
+        } catch (Exception e) {
             databaseErrorOutputBoundary.presentWriteErrMsg();
         }
     }

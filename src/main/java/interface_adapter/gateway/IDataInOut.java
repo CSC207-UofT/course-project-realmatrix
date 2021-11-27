@@ -10,11 +10,15 @@ import java.util.HashMap;
  * allows usecase classes to access database.
  */
 public interface IDataInOut {
-    void write(String[] partialDataPath, Object o) throws IOException;
 
-    void write(String[] partialDataPath, String oldName, Object newO) throws IOException;
+    // Throw exception if and only if Object o is not Card/Pack/User.
+    void write(String[] partialDataPath, Object o) throws Exception;
 
-    void archive(String[] partialDataPath, Object o) throws IOException;
+    // Throw exception if and only if newO is not Card/Pack/User.
+    void write(String[] partialDataPath, String oldName, Object newO) throws Exception;
+
+    // Throw exception if Object o is not Card/Pack/User or if the archive rout exits.
+    void archive(String[] partialDataPath, Object o) throws Exception;
 
     HashMap<String, String> initialLoad() throws IOException;
 

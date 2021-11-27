@@ -1,12 +1,11 @@
 package interface_adapter.gateway.datain;
 
 import entity.User;
+import use_case.constants.Exceptions;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -42,25 +41,38 @@ public class UserWriter extends Writer {
      *
      * @param oldName the user's old name
      * @param newO the user with new name
-     * @throws IOException fails to write
+     * @throws Exception if the path of oldName is invalid or the new path exits
      */
     @Override
-    public void write(String oldName, Object newO) throws IOException {
+    public void write(String oldName, Object newO) throws Exception {
         User newUser = (User) newO;
-        Path old = Paths.get("user_data/users/" + oldName);
-        Files.move(old, old.resolveSibling(newUser.getName()));
+        try{
+            Path old = Paths.get("user_data/users/" + oldName);
+            Files.move(old, old.resolveSibling(newUser.getName()));
+        } catch (InvalidPathException e){
+            throw new Exception(Exceptions.InvalidPath);
+        } catch (IOException e){
+            throw new Exception(Exceptions.WritePathExist);
+        }
+
+
     }
 
     /**
      * Archive a user. Effectively, this user is deleted because it won't be loaded next time the program runs.
      *
-     * @throws IOException
+     * @throws Exception if the archive rout exists.
      */
     @Override
-    public void archive() throws IOException {
-        new File("user_data/archived_users/").mkdirs();
-        Files.move(new File("user_data/users/" + user.getName()).toPath(),
-                new File("user_data/archived_users/" + user.getName()).toPath());
+    public void archive() throws Exception {
+        try{
+            new File("user_data/archived_users/").mkdirs();
+            Files.move(new File("user_data/users/" + user.getName()).toPath(),
+                    new File("user_data/archived_users/" + user.getName()).toPath());
+        } catch (IOException e){
+            throw new Exception(Exceptions.ArchivePathExist);
+        }
+
     // FIXME: may be deleted completely without archiving, cuz move throws exception if target path exists.
     }
 }

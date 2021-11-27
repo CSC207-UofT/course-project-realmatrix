@@ -1,12 +1,14 @@
 package interface_adapter.gateway.datain;
 
 import entity.Card;
+import use_case.constants.Exceptions;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -43,14 +45,20 @@ public class CardWriter extends Writer {
      *
      * @param oldName the card's old term
      * @param newO the card with new term
-     * @throws IOException fails to write
+     * @throws Exception if the path of oldName is invalid or the new path exits
      */
     @Override
-    public void write(String oldName, Object newO) throws IOException {
+    public void write(String oldName, Object newO) throws Exception {
         Card newCard = (Card) newO;
-        Path old = Paths.get("user_data/users/" + this.username + "/packages/" + this.packname
-                + "/cards/" + oldName + ".txt");
-        Files.move(old, old.resolveSibling(newCard.getTerm()));
+        try{
+            Path old = Paths.get("user_data/users/" + this.username + "/packages/" + this.packname
+                    + "/cards/" + oldName + ".txt");
+            Files.move(old, old.resolveSibling(newCard.getTerm()));
+        } catch (InvalidPathException e){
+            throw new Exception(Exceptions.InvalidPath);
+        } catch (IOException e){
+            throw new Exception(Exceptions.WritePathExist);
+        }
     }
 
     /**
@@ -58,11 +66,16 @@ public class CardWriter extends Writer {
      *
      */
     @Override
-    public void archive() throws IOException {
+    public void archive() throws Exception {
         new File("user_data/users/" + this.username + "/packages/" + this.packname +
                 "/archived_cards/").mkdirs();
-        Files.move(new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
-                this.card.getTerm() + ".txt").toPath(), new File("user_data/users/" + this.username +
-                "/packages/" + this.packname + "/archived_cards/" + this.card.getTerm() + ".txt").toPath());
+        try{
+            Files.move(new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
+                    this.card.getTerm() + ".txt").toPath(), new File("user_data/users/" + this.username +
+                    "/packages/" + this.packname + "/archived_cards/" + this.card.getTerm() + ".txt").toPath());
+        } catch (IOException e){
+            throw new Exception(Exceptions.ArchivePathExist);
+        }
+
     } // FIXME: same problem as UserWriter.archive
 }

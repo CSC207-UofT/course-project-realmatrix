@@ -26,8 +26,7 @@ public class DataInFactory {
         } else if (o instanceof User) {
             return new UserWriter(partialDataPath, o);
         } else {
-            throw new IOException("Cannot store such object into database. " +
-                    "Please pass in only Card/Pack/User.");
+            throw new IOException();
         }
     }
 }
