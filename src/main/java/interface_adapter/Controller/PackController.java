@@ -37,6 +37,16 @@ public class PackController {
         }
     }
 
+    /**
+     * Search packs with specified pack name.
+     * All packs that contain (not necessarily equal) packName would be searched.
+     * @param str the text to be searched
+     * @param searchPackOutputBoundary an output boundary that gets the searched result
+     */
+    public void searchPack(String str, SearchPackOutputBoundary searchPackOutputBoundary) {
+        this.packIB.searchPack(str, searchPackOutputBoundary);
+    }
+
     public void deletePack(String packName) {
         if (this.packIB.deletePack(packName)) {
             this.packIB.delete(databaseErrorOutputBoundary);

@@ -6,6 +6,7 @@ import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.SearchPackOutputBoundary;
 import use_case.output_boundaries.SortPackOutputBoundary;
 
 import java.util.ArrayList;
@@ -80,6 +81,23 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
             changeOutputBoundary.setChangeResult(false);
             return false;
         }
+    }
+
+    /**
+     * Search packs with specified pack name.
+     * All packs that contain (not necessarily equal) packName would be searched.
+     * @param packName the packName to be searched
+     * @param searchPackOutputBoundary an output boundary that gets the searched result
+     */
+    @Override
+    public void searchPack(String packName, SearchPackOutputBoundary searchPackOutputBoundary) {
+        ArrayList<String> result = new ArrayList<>();
+        for (String name : this.items.keySet()) {
+            if (name.contains(packName)) {
+                result.add(packName);
+            }
+        }
+        searchPackOutputBoundary.setSearchResult(result);
     }
 
     /**
