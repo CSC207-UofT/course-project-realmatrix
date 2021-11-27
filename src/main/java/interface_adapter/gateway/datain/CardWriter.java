@@ -1,14 +1,12 @@
 package interface_adapter.gateway.datain;
 
 import entity.Card;
-import use_case.constants.Exceptions;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -45,37 +43,30 @@ public class CardWriter extends Writer {
      *
      * @param oldName the card's old term
      * @param newO the card with new term
-     * @throws Exception if the path of oldName is invalid or the new path exits
+     * @throws IOException fails to write
      */
     @Override
-    public void write(String oldName, Object newO) throws Exception {
+    public void write(String oldName, Object newO) throws IOException {
         Card newCard = (Card) newO;
-        try{
-            Path old = Paths.get("user_data/users/" + this.username + "/packages/" + this.packname
-                    + "/cards/" + oldName + ".txt");
-            Files.move(old, old.resolveSibling(newCard.getTerm()));
-        } catch (InvalidPathException e){
-            throw new Exception(Exceptions.InvalidPath);
-        } catch (IOException e){
-            throw new Exception(Exceptions.WritePathExist);
-        }
+        Path old = Paths.get("user_data/users/" + this.username + "/packages/" + this.packname
+                + "/cards/" + oldName + ".txt");
+        Files.move(old, old.resolveSibling(newCard.getTerm()));
     }
 
     /**
-     * Archive a card. Effectively, this card is deleted because it won't be loaded next time the program runs.
+     * Delete a card.
      *
      */
     @Override
-    public void archive() throws Exception {
-        new File("user_data/users/" + this.username + "/packages/" + this.packname +
-                "/archived_cards/").mkdirs();
-        try{
-            Files.move(new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
-                    this.card.getTerm() + ".txt").toPath(), new File("user_data/users/" + this.username +
-                    "/packages/" + this.packname + "/archived_cards/" + this.card.getTerm() + ".txt").toPath());
-        } catch (IOException e){
-            throw new Exception(Exceptions.ArchivePathExist);
-        }
+    public void delete() throws IOException {
+        new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
+                this.card.getTerm() + ".txt").delete();
+    }
 
-    } // FIXME: same problem as UserWriter.archive
+    //Test
+    public static void main(String[] args) throws IOException {
+        String[] path = new String[]{"test_user_1", "packA"};
+        CardWriter cw = new CardWriter(path, new Card("Card1", "card1definition"));
+        cw.delete();
+    }
 }

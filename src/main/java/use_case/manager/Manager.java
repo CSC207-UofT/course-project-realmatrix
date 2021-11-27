@@ -69,26 +69,30 @@ public abstract class Manager<T> {
     public void write(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), currItem);
-        } catch (Exception e) {
+        } catch (IOException e) {
             databaseErrorOutputBoundary.presentWriteErrMsg();
         }
     }
 
+    /**
+     * Write the object (with its name changed) into database.
+     */
     public void write(String oldName, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), oldName, currItem);
-        } catch (Exception e) {
+        } catch (IOException e) {
             databaseErrorOutputBoundary.presentWriteErrMsg();
         }
     }
 
     /**
      * Archive (delete and store) the required object into database.
+     * @param databaseErrorOutputBoundary an output boundary that gets the error message if fails connect to database.
      */
-    public void archive(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void delete(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
-            dataInOut.archive(findPartialDataPath(), currItem);
-        } catch (Exception e) {
+            dataInOut.delete(findPartialDataPath(), currItem);
+        } catch (IOException e) {
             databaseErrorOutputBoundary.presentWriteErrMsg();
         }
     }

@@ -1,11 +1,12 @@
 package interface_adapter.gateway.datain;
 
 import entity.User;
-import use_case.constants.Exceptions;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -41,38 +42,27 @@ public class UserWriter extends Writer {
      *
      * @param oldName the user's old name
      * @param newO the user with new name
-     * @throws Exception if the path of oldName is invalid or the new path exits
+     * @throws IOException fails to write
      */
     @Override
-    public void write(String oldName, Object newO) throws Exception {
+    public void write(String oldName, Object newO) throws IOException {
         User newUser = (User) newO;
-        try{
-            Path old = Paths.get("user_data/users/" + oldName);
-            Files.move(old, old.resolveSibling(newUser.getName()));
-        } catch (InvalidPathException e){
-            throw new Exception(Exceptions.InvalidPath);
-        } catch (IOException e){
-            throw new Exception(Exceptions.WritePathExist);
-        }
-
-
+        Path old = Paths.get("user_data/users/" + oldName);
+        Files.move(old, old.resolveSibling(newUser.getName()));
     }
 
     /**
-     * Archive a user. Effectively, this user is deleted because it won't be loaded next time the program runs.
-     *
-     * @throws Exception if the archive rout exists.
+     * Delete a user.
      */
     @Override
-    public void archive() throws Exception {
-        try{
-            new File("user_data/archived_users/").mkdirs();
-            Files.move(new File("user_data/users/" + user.getName()).toPath(),
-                    new File("user_data/archived_users/" + user.getName()).toPath());
-        } catch (IOException e){
-            throw new Exception(Exceptions.ArchivePathExist);
+    public void delete() {
+        File userFolder = new File("user_data/users/" + user.getName());
+        File[] packs = userFolder.listFiles();
+        if(packs!=null) { // meaning userFolder is non-empty (contains some packs)
+            for(File p: packs) {
+                p.delete();
+            }
         }
-
-    // FIXME: may be deleted completely without archiving, cuz move throws exception if target path exists.
+        userFolder.delete();
     }
 }

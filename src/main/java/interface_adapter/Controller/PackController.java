@@ -1,13 +1,9 @@
 package interface_adapter.Controller;
 
-import entity.ProgramState;
-import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
-
-import java.io.IOException;
 
 /**
  * A package interface_adapter.Controller that can create/change packname   and   add/delete/search/sort card in a pack.
@@ -45,7 +41,7 @@ public class PackController {
 
     public void deletePack(String packName) {
         if (this.packIB.deletePack(packName)) {
-            this.packIB.archive(databaseErrorOutputBoundary);
+            this.packIB.delete(databaseErrorOutputBoundary);
         }
     }
 //    /**

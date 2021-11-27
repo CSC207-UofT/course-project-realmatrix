@@ -2,6 +2,7 @@
 .idea
 CourseProject.iml
 out
+.github
 # Gradle .gitignore (https://github.com/github/gitignore/blob/master/Gradle.gitignore)
 .gradle
 **/build/

@@ -4,6 +4,7 @@ import entity.Card;
 import entity.ProgramState;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.ReviewInputBoundary;
 
 import java.io.IOException;
@@ -12,23 +13,26 @@ import java.io.IOException;
 public class ReviewController {
     private final ReviewInputBoundary reviewIB;
     private final IDataInOut dataInOut = new DataInOut();
-    private final ProgramState programState;
+    private final ProgramStateInputBoundary programStateInputBoundary;
 
-    public ReviewController(ReviewInputBoundary reviewIB, ProgramState programState) {
+    public ReviewController(ReviewInputBoundary reviewIB, ProgramStateInputBoundary programStateInputBoundary) {
         this.reviewIB = reviewIB;
-        this.programState = programState;
+        this.programStateInputBoundary = programStateInputBoundary;
     }
 
     public void next() throws IOException {
         // before going to the next card, update current card's proficiency in database
         Card currCard = reviewIB.getCurrCard();
         if (currCard != null) {
-            dataInOut.write(new String[] {programState.getCurrUser().getName(), programState.getCurrPack().getName()},
+            dataInOut.write(new String[] {programStateInputBoundary.getCurrUserName(), programStateInputBoundary.getCurrPackName()},
                     reviewIB.getCurrCard());
         }
         reviewIB.next();
     }
 
+    /**
+     * This method sets can't recall to true.
+     */
     public void setCantRecall() {
         reviewIB.setCantRecall();
     }

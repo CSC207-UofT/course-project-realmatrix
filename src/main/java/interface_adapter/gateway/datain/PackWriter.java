@@ -1,12 +1,10 @@
 package interface_adapter.gateway.datain;
 
 import entity.Pack;
-import use_case.constants.Exceptions;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -39,37 +37,27 @@ public class PackWriter extends Writer {
      *
      * @param oldName the pack's old name
      * @param newO the pack with new name
-     * @throws Exception if the path of oldName is invalid or the new path exits
+     * @throws IOException fails to write
      */
     @Override
-    public void write(String oldName, Object newO) throws Exception {
+    public void write(String oldName, Object newO) throws IOException {
         Pack newPack = (Pack) newO;
-        try{
-            Path old = Paths.get("user_data/users/" + this.username + "/packages/" + oldName);
-            Files.move(old, old.resolveSibling(newPack.getName()));
-        } catch (InvalidPathException e){
-            throw new Exception(Exceptions.InvalidPath);
-        } catch (IOException e){
-            throw new Exception(Exceptions.WritePathExist);
-        }
-
+        Path old = Paths.get("user_data/users/" + this.username + "/packages/" + oldName);
+        Files.move(old, old.resolveSibling(newPack.getName()));
     }
 
     /**
-     * Archive a package. Effectively, this package is deleted because it won't be loaded next time the program runs.
-     *
-     * @throws Exception if the archive route exits.
+     * Delete a pack.
      */
     @Override
-    public void archive() throws Exception {
-        new File("user_data/users/" + this.username + "/archived_packages/").mkdirs();
-        try {
-            Files.move(new File("user_data/users/" + this.username + "/packages/" + this.pack.getName()).toPath(),
-                    new File("user_data/users/" + this.username + "/archived_packages/" +
-                            this.pack.getName()).toPath());
-        } catch (IOException e){
-            throw new Exception(Exceptions.ArchivePathExist);
+    public void delete() {
+        File packFolder = new File("user_data/users/" + this.username + "/packages/" + this.pack.getName());
+        File[] cards = packFolder.listFiles();
+        if(cards!=null) { // meaning packFolder is non-empty (contains some cards)
+            for(File c: cards) {
+                c.delete();
+            }
         }
-
-    } // FIXME: same problem as UserWriter.archive.
+        packFolder.delete();
+    }
 }

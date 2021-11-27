@@ -9,7 +9,9 @@ import interface_adapter.presenters.ReviewPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.generator.ReviewGenerator;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.ReviewInputBoundary;
+import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.ReviewOutputBoundary;
 
 import java.io.IOException;
@@ -59,9 +61,9 @@ public class ReviewTest {
         reviewOutputBoundary = new ReviewPresenter();
         // notice in the line of code below I didn't get pack from program state
         reviewInputBoundary = new ReviewGenerator(pack, reviewOutputBoundary);
-        ProgramState state = new ProgramState();
+        ProgramStateInputBoundary state = new ProgramStateManager();
         state.setCurrUser(new User("xing", "password"));
-        state.setCurrPack(pack); // at a review session, program state should be at (xing/vocabulary/null)
+        state.setCurrPack(pack.getName()); // at a review session, program state should be at (xing/vocabulary/null)
         reviewController = new ReviewController(reviewInputBoundary, state);
     }
 

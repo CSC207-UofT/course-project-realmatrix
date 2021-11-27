@@ -25,8 +25,24 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
     }
 
     @Override
+    public String getCurrUserName() {
+        if (ps.getCurrUser() != null) {
+            return ps.getCurrUser().getName();
+        }
+        return null;
+    }
+
+    @Override
     public Pack getCurrPack() {
         return ps.getCurrPack();
+    }
+
+    @Override
+    public String getCurrPackName() {
+        if (ps.getCurrPack() != null) {
+            return ps.getCurrPack().getName();
+        }
+        return null;
     }
 
     @Override

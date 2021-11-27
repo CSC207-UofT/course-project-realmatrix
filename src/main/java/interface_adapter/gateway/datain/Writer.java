@@ -27,13 +27,13 @@ public abstract class Writer {
      * Rename the object with new name.
      * @param oldName the old object's name which should be replaced
      * @param newO the new object
-     * @throws Exception if the path of oldName is invalid or the new path exits
+     * @throws IOException fails to write
      */
-    public abstract void write(String oldName, Object newO) throws Exception;
+    public abstract void write(String oldName, Object newO) throws IOException;
 
     /**
-     * Archive the object in database (store in database but won't load in future)
+     * Delete the object in database.
      *
      */
-    public abstract void archive() throws Exception;
+    public abstract void delete() throws IOException;
 }
