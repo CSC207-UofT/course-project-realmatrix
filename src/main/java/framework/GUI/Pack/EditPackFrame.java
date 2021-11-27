@@ -1,6 +1,8 @@
 package framework.GUI.Pack;
 
 import javax.swing.*;
+
+import entity.Pack;
 import framework.GUI.BasicFrame;
 import interface_adapter.Controller.PackController;
 import interface_adapter.gateway.DataInOut;
@@ -71,7 +73,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
             if (check()) {  // Edit succeeds
                 success.setText("Edit pack successful!");
                 packText.setText(packText.getText());
-                //TODO: go to PackFrame.
+                new PackFrame(programStateInputBoundary);
             } else {    // add fails: pack already exists
                 JOptionPane.showMessageDialog(this,
                         "This Pack has existed. Edit another one please~", // TODO: constant
@@ -81,7 +83,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
         }
 
         if (e.getSource() == backButton) {
-            // TODO: go to PackFrame
+            new PackFrame(programStateInputBoundary);
         }
 
     }

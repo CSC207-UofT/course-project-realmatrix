@@ -1,5 +1,6 @@
 package interface_adapter.gateway.datain;
 
+import entity.Card;
 import entity.Pack;
 
 import java.io.File;
@@ -60,4 +61,11 @@ public class PackWriter extends Writer {
         }
         packFolder.delete();
     }
+
+    //Test
+//    public static void main(String[] args) throws IOException {
+//        String[] path = new String[]{"Xing", "mat137"};
+//        PackWriter pw = new PackWriter(path, new Pack("mat137"));
+//        pw.write("mat137", new Pack("mat136"));
+//    }
 }

@@ -19,6 +19,8 @@ import use_case.output_boundaries.SearchPackOutputBoundary;
 import use_case.output_boundaries.SortPackOutputBoundary;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -32,6 +34,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
     private ArrayList<String> packList;     // Data for packListModel
     private final DefaultListModel<String> packListModel;   // Model for JList
     private final JList<String> packJList;  // A JList that contains pack names
+    private String selectedPackName; // The pack name that the user selects
     // Search
     private final JLabel searchLabel;
     private final JTextField searchText;    // A text field for user to enter pack name for sesarch
@@ -39,10 +42,11 @@ public class PackFrame extends BasicFrame implements ActionListener {
     private final JLabel sortLabel;
     private final JComboBox<String> sortBox;
 
-    private final JButton addButton; // Add pack
-    private final JButton editButton; // Edit pack
-    private final JButton deletePack; // Delete pack
+    private final JButton addButton; // Add pack button
+    private final JButton editButton; // Edit pack button
+    private final JButton deleteButton; // Delete pack button
     private final JButton backButton; // Back button
+
     private final PackInputBoundary packManager = new PackManager(new DataInOut(), programStateInputBoundary);
     private final PackController packController = new PackController(packManager, new DatabaseErrMsgPresenter());
 
@@ -50,8 +54,18 @@ public class PackFrame extends BasicFrame implements ActionListener {
         super("Pack List", programStateInputBoundary);
         // Construct packListPanel
         packListModel = new DefaultListModel<>();
-        setPackListModel();
+        setPackListModel(); // By default, the model contains pack names by old-to-new order
+
         packJList = new JList<>(packListModel);
+        packJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); // User can only select one pack at a time
+        packJList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                selectedPackName = packJList.getSelectedValue();
+                programStateInputBoundary.setCurrPack(selectedPackName);
+            }
+        });
+
         packListPanel = new JScrollPane(packJList);
         packListPanel.setSize(250, 600);
         panel.add(packListPanel);
@@ -91,14 +105,14 @@ public class PackFrame extends BasicFrame implements ActionListener {
         // Edit pack
         editButton = new JButton("Edit pack");
         editButton.setBounds(280, 200, 200, 50);
-        // TODO: add action listener for edit button
+        editButton.addActionListener(this);
         panel.add(editButton);
 
         // Delete pack
-        deletePack = new JButton("Delete pack");
-        deletePack.setBounds(280, 280, 200, 50);
-        // TODO: add action listener
-        panel.add(deletePack);
+        deleteButton = new JButton("Delete pack");
+        deleteButton.setBounds(280, 280, 200, 50);
+        deleteButton.addActionListener(this);
+        panel.add(deleteButton);
 
         // Back button
         backButton = new JButton("Back to Home Page");
@@ -161,16 +175,6 @@ public class PackFrame extends BasicFrame implements ActionListener {
         setPackListModel(sortPackPresenter.getSortResult());
     }
 
-    //Test
-    public static void main(String[] args) throws IOException {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        User user = new User("Xing", "password");
-        Loader loader = new Loader();
-        loader.userLoad(user);
-        ps.setCurrUser(user);
-        new PackFrame(ps);
-    }
-
     /**
      * Invoked when an action occurs.
      *
@@ -192,5 +196,39 @@ public class PackFrame extends BasicFrame implements ActionListener {
                     setPackListModel();
             }
         }
+
+        if (e.getSource() == editButton) {
+            if (selectedPackName == null) {
+                JOptionPane.showMessageDialog(this,
+                        "Please select a pack first.", // TODO: constant
+                        "No pack for editting",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                new EditPackFrame(programStateInputBoundary);
+            }
+        }
+
+        if (e.getSource() == deleteButton) {
+            if (selectedPackName == null) {
+                JOptionPane.showMessageDialog(this,
+                        "Please select a pack first.", // TODO: constant
+                        "No pack for deletion",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                packController.deletePack(selectedPackName);
+                setPackListModel();
+            }
+        }
+
+    }
+
+    //Test
+    public static void main(String[] args) throws IOException {
+        ProgramStateInputBoundary ps = new ProgramStateManager();
+        User user = new User("Xing", "password");
+        Loader loader = new Loader();
+        loader.userLoad(user);
+        ps.setCurrUser(user);
+        new PackFrame(ps);
     }
 }
