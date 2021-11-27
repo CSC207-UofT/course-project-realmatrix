@@ -124,10 +124,9 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
     }
 
     /**
-     * Return a card list sorted by date added: oldest to newest.
+     * Sort a card list by date added: oldest to newest.
      *
      * @param sortOutputBoundary a sort output boundary for getting the sorted output.
-     * @return an arraylist of sorted cards
      */
     public void sortOldToNew(SortCardOutputBoundary sortOutputBoundary) {
         presentSortResult(programStateInputBoundary.getCurrPack().getCardList(), sortOutputBoundary);
@@ -157,7 +156,7 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
 
 
     /**
-     * Return a card list sorted by cards' proficiency: low to high.
+     * Sort a card list by cards' proficiency: low to high.
      *
      * @param sortCardOutputBoundary an output boundary that gets the result of sorted cards
      */

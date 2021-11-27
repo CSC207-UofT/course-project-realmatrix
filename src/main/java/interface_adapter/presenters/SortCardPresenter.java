@@ -25,11 +25,11 @@ public class SortCardPresenter implements SortCardOutputBoundary {
         return this.sortResult;
     }
 
-    @Override
-    public void presentSortResult() {
-        for (String[] arr : this.sortResult) {
-            System.out.println(arr[0]); // arr[0] is cardTerm
-            System.out.println(arr[1]); // arr[1] is cardDef
-        }
-    }
+//    @Override
+//    public void presentSortResult() {
+//        for (String[] arr : this.sortResult) {
+//            System.out.println(arr[0]); // arr[0] is cardTerm
+//            System.out.println(arr[1]); // arr[1] is cardDef
+//        }
+//    }
 }

@@ -1,6 +1,6 @@
 # This .gitignore will automatically ignore certain Gradle and IntelliJ files that you likely won't want to commit!
 .idea
-CourseProject.iml
+*.iml
 out
 # Gradle .gitignore (https://github.com/github/gitignore/blob/master/Gradle.gitignore)
 .gradle
