@@ -2,6 +2,7 @@ package framework.GUI.card;
 
 import javax.swing.*;
 import framework.GUI.BasicFrame;
+import framework.GUI.Pack.PackFrame;
 import interface_adapter.Controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -83,8 +84,8 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
                 success.setText("Edit card successful!");
                 termText.setText(termText.getText());
                 defText.setText(defText.getText());
+                new CardFrame(programStateInputBoundary);
                 setVisible(false);
-                //TODO: go to CardFrame.
             } else {    // add fails: card already exists
                 JOptionPane.showMessageDialog(this,
                         "This Card term has existed. Edit another one please~", // TODO: constant
@@ -94,8 +95,8 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         }
         if (e.getSource() == backButton) {
             programStateInputBoundary.setCurrCard(null);
+            new CardFrame(programStateInputBoundary);
             setVisible(false);
-            // TODO: go to CardFrame
         }
     }
 
