@@ -51,7 +51,7 @@ public class DataInOut implements IDataInOut {
     }
 
     @Override
-    public void delete(String[] partialDataPath, Object o) throws IOException {
+    public void delete(String[] partialDataPath, Object o) throws IOException{
         Writer writer = this.factory.getWriter(partialDataPath, o);
         writer.delete();
     }

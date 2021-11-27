@@ -9,9 +9,8 @@ public class Exceptions{
     public static final String ProficiencyHigherThanMax = "Proficiency is higher than max";
     public static final String ProficiencyLowerThanMin = "Proficiency is lower than min";
     public static final String NullUserName = "User name is null";
-    public static final String StoreError = "Cannot store such object into database. " +
-            "Please pass in only Card/Pack/User.";
-    public static final String ArchivePathExist = "Archive path exists";
+    public static final String InvalidObject = "Invalid Object";
+//    public static final String ArchivePathExist = "Archive path exists";
     public static final String WritePathExist = "Write path exists";
     public static final String InvalidPath = "Path is invalid";
 

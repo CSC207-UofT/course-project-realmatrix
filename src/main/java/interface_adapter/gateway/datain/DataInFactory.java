@@ -3,6 +3,7 @@ package interface_adapter.gateway.datain;
 import entity.Card;
 import entity.Pack;
 import entity.User;
+import use_case.constants.Exceptions;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class DataInFactory {
         } else if (o instanceof User) {
             return new UserWriter(partialDataPath, o);
         } else {
-            throw new IOException();
+            throw new IOException(Exceptions.InvalidObject);
         }
     }
 }
