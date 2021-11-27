@@ -1,9 +1,7 @@
 package framework.GUI.login_register;
 
-import entity.User;
 import framework.GUI.start.StartFrame;
 //import framework.GUI.user.UserFrame;
-import interface_adapter.Controller.ProgramStateController;
 import interface_adapter.Controller.RegisterController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -15,10 +13,10 @@ import use_case.manager.ProgramStateManager;
 import use_case.manager.UserManager;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
+import use_case.constants.Constants;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.Objects;
 
 public class RegisterFrame extends LogRegFrame {
     private final JLabel pw2Label;          // Confirming password JLabel
@@ -26,15 +24,15 @@ public class RegisterFrame extends LogRegFrame {
     private final JButton rgButton;         // Button that confirms registration
 
     public RegisterFrame(ProgramStateInputBoundary programStateInputBoundary) {
-        super("Register", programStateInputBoundary);
+        super(Constants.REG_BTN, programStateInputBoundary);
 
         // Create component: register button
-        rgButton = new JButton("Register");
+        rgButton = new JButton(Constants.REG_BTN);
         rgButton.addActionListener(this);
 
         // Create component: confirm password label-text field
-        pw2Label = new JLabel("Password Again: ", JLabel.TRAILING);
-        pw2 = new JPasswordField(20);
+        pw2Label = new JLabel(Constants.PW_AGAIN, JLabel.TRAILING);
+        pw2 = new JPasswordField(Constants.COLUMNS1);
 
         // Layout Components
         layoutRestComp();
@@ -48,15 +46,15 @@ public class RegisterFrame extends LogRegFrame {
      */
     @Override
     protected void layoutRestComp() {
-        pw2Label.setBounds(pwLabel.getX(), pwLabel.getY() + 30,
-                130, pwLabel.getHeight());
+        pw2Label.setBounds(pwLabel.getX(), pwLabel.getY() + Constants.EXTRA_Y,
+                Constants.PW_WIDTH, pwLabel.getHeight());
         add(pw2Label);
 
-        pw2.setBounds(pw.getX(), pw.getY() + 30,
+        pw2.setBounds(pw.getX(), pw.getY() + Constants.EXTRA_Y,
                 pw.getWidth(), pw.getHeight());
         add(pw2);
 
-        rgButton.setBounds(backButton.getX() + 150, backButton.getY(),
+        rgButton.setBounds(backButton.getX() + Constants.EXTRA_X, backButton.getY(),
                 backButton.getWidth(), backButton.getHeight());
         add(rgButton);
     }
@@ -77,8 +75,8 @@ public class RegisterFrame extends LogRegFrame {
         if (source == rgButton) {
             if (!checkPasswordEqual()) {
                 JOptionPane.showMessageDialog(this,
-                        "Passwords didn't match. Try again.", // TODO: constant
-                        "Registration Fails",
+                        Constants.PASSWORD_NOT_MATCH,
+                        Constants.REG_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             }
 
@@ -87,8 +85,8 @@ public class RegisterFrame extends LogRegFrame {
                 //TODO: go to UserFrame.
             } else {    // Registration fails: username already exists
                 JOptionPane.showMessageDialog(this,
-                        "This username is taken. Choose another one please~", // TODO: constant
-                        "Registration Fails",
+                        Constants.USER_NAME_TAKEN,
+                        Constants.REG_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             }
         }

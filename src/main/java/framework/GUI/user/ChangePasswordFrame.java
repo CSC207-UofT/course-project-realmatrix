@@ -1,16 +1,14 @@
 package framework.GUI.user;
 
-import entity.User;
 import framework.GUI.BasicFrame;
 import interface_adapter.Controller.UserController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
-import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.manager.UserManager;
-import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
 import javax.swing.*;
@@ -30,19 +28,19 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
      * Build a StartFrame.
      */
     public ChangePasswordFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
-        super("Change password", programStateInputBoundary);
+        super(Constants.CHANGE_PW, programStateInputBoundary);
         this.username = username;
         // 1. Create components shown on the frame
         changePasswordPanel = new JPanel(new GridLayout(3, 1));
 
-        message = new JLabel("Change password", SwingConstants.CENTER);
+        message = new JLabel(Constants.CHANGE_PW, SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        newPassword = new JTextField(20);
-        newPasswordLabel = new JLabel("new password: ", JLabel.TRAILING); // TODO: label doesn't show up. fix this
+        newPassword = new JTextField(Constants.COLUMNS1);
+        newPasswordLabel = new JLabel(Constants.NEW_PW_MSG, JLabel.TRAILING); // TODO: label doesn't show up. fix this
         newPassword.add(newPasswordLabel);
 
-        finishButton = new JButton("done");
+        finishButton = new JButton(Constants.DONE_BTN);
         finishButton.addActionListener(this);
 
         // 2. Add components to the panel
@@ -81,7 +79,7 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         manager.changePassword(newPassword.getText());
 
         // Check if successfully changed
-        JOptionPane.showMessageDialog(this, "Password changed successfully.");
+        JOptionPane.showMessageDialog(this, Constants.PW_CHANGED_SUCCEED);
         new UserFrame(username, programStateInputBoundary);
         setVisible(false);
     }
