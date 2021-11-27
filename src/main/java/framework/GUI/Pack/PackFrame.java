@@ -204,7 +204,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
                         "No pack for editting",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                new EditPackFrame(programStateInputBoundary);
+                new EditPackFrame(selectedPackName, programStateInputBoundary);
             }
         }
 

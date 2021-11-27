@@ -27,12 +27,12 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
     private final JButton editButton;
     private final JLabel success;
     private final JButton backButton;
+    private final String old_name;  // the original pack name
 
-    /** get original name of the chosen pack */
-    private final String old_name = packText.getText();
-
-    public EditPackFrame(ProgramStateInputBoundary programStateInputBoundary) {
+    public EditPackFrame(String oldName, ProgramStateInputBoundary programStateInputBoundary) {
         super("Edit Pack", programStateInputBoundary);
+        old_name = oldName;
+        packText.setText(old_name);
         JPanel panel = new JPanel();
 
         panel.setLayout(null);
@@ -103,11 +103,5 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
         ChangeOutputBoundary changePresenter = new ChangePresenter();
         pkController.changePackName(old_name, new_name, changePresenter);
         return changePresenter.getChangeResult();
-    }
-
-    // Test
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new EditPackFrame(ps);
     }
 }
