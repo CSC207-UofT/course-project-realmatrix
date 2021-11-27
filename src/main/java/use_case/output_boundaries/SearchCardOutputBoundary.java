@@ -7,5 +7,5 @@ public interface SearchCardOutputBoundary {
 
     HashMap<String, String> getSearchResult();
 
-    void presentSearchResult();
+//    void presentSearchResult();
 }

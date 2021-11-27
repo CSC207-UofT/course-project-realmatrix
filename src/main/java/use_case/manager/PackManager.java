@@ -6,6 +6,9 @@ import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.SortPackOutputBoundary;
+
+import java.util.ArrayList;
 
 /**
  * A pack manager manages the current user's packs.
@@ -77,6 +80,21 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
             changeOutputBoundary.setChangeResult(false);
             return false;
         }
+    }
+
+    /**
+     * Sort a card by date added: oldest to newest.
+     *
+     * @param sortPackOutputBoundary a sort output boundary for getting the sorted output.
+     */
+    @Override
+    public void sortOldToNew(SortPackOutputBoundary sortPackOutputBoundary) {
+        ArrayList<Pack> packList = programStateInputBoundary.getCurrUser().getPackageList();
+        ArrayList<String> packNameList = new ArrayList<>();
+        for (Pack p : packList) {
+            packNameList.add(p.getName());
+        }
+        sortPackOutputBoundary.setSortResult(packNameList);
     }
 //
 //    /**
