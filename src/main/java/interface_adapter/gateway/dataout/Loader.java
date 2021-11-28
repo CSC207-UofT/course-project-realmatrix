@@ -14,18 +14,15 @@ import java.util.HashMap;
  * Data files are structured in this way:
  * user_data/
  * users/
- * archived_users/
  * user1/
  * user2/
  * ...
  * user_info.txt
  * packages/
- * archived_packages/
  * package1/
  * package2/
  * ...
  * cards/
- * archived_cards/
  * card1.txt
  * card2.txt
  * ...
@@ -77,25 +74,6 @@ public class Loader {
         userInfoFileReader.close();
         map.put(userName, userPassword);
     }
-
-//    /**
-//     * Helper to Loader.userLoad(). Load pack into user.
-//     *
-//     * @param packPath directory of package_info.txt
-//     * @param user     user to save package to
-//     * @return the loaded package
-//     * @throws IOException
-//     */
-//    private Pack putPack(String packPath, User user) throws IOException {
-//        BufferedReader packInfoFileReader
-//                = Files.newBufferedReader(Path.of(packPath + "/package_info.txt"));
-//        String packInfo = packInfoFileReader.readLine();
-//        packInfoFileReader.close();
-//        String packName = packInfo.split(",")[0];
-//        Pack pack = new Pack(packName);
-//        user.addPackage(pack); // put Pack into User
-//        return pack;
-//    }
 
     /**
      * Helper to Loader.userLoad(). Load card into pack.

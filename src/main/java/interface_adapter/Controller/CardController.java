@@ -83,7 +83,7 @@ public class CardController {
      * Sort cards by alphabetic order (A-Z).
      * @param sortCardOutputBoundary an output boundary that gets the result of sorted cards.
      */
-    public void sortAtoZ(SortCardOutputBoundary sortCardOutputBoundary) {
+    public void sortAToZ(SortCardOutputBoundary sortCardOutputBoundary) {
         this.cardInputBoundary.sortAtoZ(sortCardOutputBoundary);
     }
 

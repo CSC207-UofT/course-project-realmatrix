@@ -1,6 +1,7 @@
 package use_case.manager;
 
 import entity.Card;
+import entity.Pack;
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
@@ -9,7 +10,6 @@ import use_case.output_boundaries.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 
 /**
  * A CardManager manages all cards in current pack.
@@ -37,11 +37,12 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         if (!this.items.containsKey(term)) { // no card has such term, adding is valid
             Card c = new Card(term, definition);
             this.items.put(term, c);
+            this.currItem = c;
             programStateInputBoundary.getCurrPack().addCard(c);
-            addOutputBoundary.presentAddSuccessView();
+            addOutputBoundary.setAddResult(true);
             return true;
         }
-        addOutputBoundary.presentAddFailView();
+        addOutputBoundary.setAddResult(false);
         return false;
     }
 
@@ -114,13 +115,14 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
      * @param searchCardOutputBoundary a search output boundary for getting the search result.
      */
     public void searchCard(String keyword, SearchCardOutputBoundary searchCardOutputBoundary) {
-        HashMap<String, String> termToDef = new HashMap<>();
-        for (Card c : this.items.values()) {
-            if (c.getTerm().contains(keyword) || c.getDefinition().contains(keyword)) {
-                termToDef.put(c.getTerm(), c.getDefinition());
+        ArrayList<Card> cardList = programStateInputBoundary.getCurrPack().getCardList();
+        ArrayList<String[]> result = new ArrayList<>();
+        for (Card c : cardList) {
+            if (c.getTerm().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(new String[]{c.getTerm(), c.getDefinition()});
             }
         }
-        searchCardOutputBoundary.setSearchResult(termToDef);
+        searchCardOutputBoundary.setSearchResult(result);
     }
 
     /**
