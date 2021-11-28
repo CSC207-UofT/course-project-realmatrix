@@ -38,7 +38,7 @@ public class PackController {
     }
 
     /**
-     * Search packs with specified pack name.
+     * Search packs with specified pack name (ignore case).
      * All packs that contain (not necessarily equal) packName would be searched.
      * @param str the text to be searched
      * @param searchPackOutputBoundary an output boundary that gets the searched result
@@ -68,20 +68,4 @@ public class PackController {
     public void sortAToZ(SortPackOutputBoundary sortPackOutputBoundary) {
         this.packIB.sortAToZ(sortPackOutputBoundary);
     }
-//    /**
-//     * Getter for the current pack the user is in.
-//     *
-//     * @return the current pack.
-//     */
-//    public Pack getCurrPack() {
-//        return this.packIB.getCurrPack();
-//    }
-//
-//    /**
-//     * Change to the current pack the user is in.
-//     */
-//    public void setCurrPack(Pack pack) {
-//        this.packIB.setCurrPack(pack);
-//    }
-
 }

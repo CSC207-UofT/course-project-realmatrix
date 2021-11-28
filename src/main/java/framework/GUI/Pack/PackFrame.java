@@ -199,10 +199,6 @@ public class PackFrame extends BasicFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-//        if (e.getSource() == searchText) {
-//            search();
-//        }
-
         if (e.getSource() == sortBox) {
             String filter = (String) sortBox.getSelectedItem();
             switch (Objects.requireNonNull(filter)) {
@@ -243,7 +239,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == deleteButton) {
+        if (e.getSource() == backButton) {
             new UserFrame(programStateInputBoundary.getCurrUserName(), programStateInputBoundary);
             setVisible(false);
         }

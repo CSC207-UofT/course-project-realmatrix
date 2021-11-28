@@ -4,8 +4,15 @@ import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.Pack.PackFrame;
 import framework.GUI.start.StartFrame;
+import interface_adapter.Controller.LogInOutController;
+import interface_adapter.gateway.DataInOut;
+import interface_adapter.gateway.IDataInOut;
+import interface_adapter.presenters.LogInOutPresenter;
+import use_case.input_boundaries.LogInOutInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.manager.LogInOutManager;
 import use_case.manager.ProgramStateManager;
+import use_case.output_boundaries.LogInOutOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,7 +77,7 @@ public class UserFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == signOutButton) {
-            new StartFrame(new ProgramStateManager());
+            signOff();
         } else if (e.getSource() == changeNameButton) {
             new ChangeUsernameFrame(username, this.programStateInputBoundary);
         } else if (e.getSource() == changePasswordButton) {
@@ -79,6 +86,25 @@ public class UserFrame extends BasicFrame implements ActionListener {
             new PackFrame(programStateInputBoundary);
         }
         setVisible(false);
+    }
+
+    /**
+     * Helper method for performing signing off
+     */
+    private void signOff() {
+        // Construct logInOutController
+        IDataInOut dataInOut = new DataInOut();
+        LogInOutInputBoundary logManager = new LogInOutManager(programStateInputBoundary, dataInOut);
+        LogInOutController logController = new LogInOutController(logManager);
+        // CheckSignOff
+        LogInOutOutputBoundary logPresenter = new LogInOutPresenter();
+        logController.signOff(logPresenter);
+
+        if (logPresenter.getLogInOutResult()) {    // log out success
+            new StartFrame(programStateInputBoundary);
+        }
+
+
     }
 
     public static void main(String[] args) {

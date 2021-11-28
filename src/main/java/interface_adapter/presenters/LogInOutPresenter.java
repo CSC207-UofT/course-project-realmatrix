@@ -1,10 +1,9 @@
 package interface_adapter.presenters;
 
-import use_case.manager.LogInOutManager;
 import use_case.output_boundaries.LogInOutOutputBoundary;
 
 public class LogInOutPresenter implements LogInOutOutputBoundary {
-    private boolean loginResult; // A boolean value representing login succeeds or fails
+    private boolean loginOutResult; // A boolean value representing login/out succeeds or fails
 
     /**
      * Get the login result from LoginManager's login method.
@@ -13,7 +12,7 @@ public class LogInOutPresenter implements LogInOutOutputBoundary {
      */
     @Override
     public void setLogInOutResult(boolean loginResult) {
-        this.loginResult = loginResult;
+        this.loginOutResult = loginResult;
     }
 
     /**
@@ -22,17 +21,6 @@ public class LogInOutPresenter implements LogInOutOutputBoundary {
      */
     @Override
     public boolean getLogInOutResult(){
-        return loginResult;
+        return loginOutResult;
     }
-
-    // Deprecated for GUI
-//    /**
-//     * Present the login result.
-//     * TODO: popping up framework.command_line_interface.GUI windows with such string.
-//     * @return
-//     */
-//    @Override
-//    public String presentLogInOutResult() {
-//
-//    }
 }
