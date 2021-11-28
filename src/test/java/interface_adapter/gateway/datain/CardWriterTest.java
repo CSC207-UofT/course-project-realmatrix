@@ -50,6 +50,15 @@ public class CardWriterTest {
         cw.delete();
     }
 
+    @Test
+    public void testDeleteCard() throws IOException {
+        cw.write();
+        Path path1 = Paths.get("user_data/users/" + testUsername1 + "/packages/" + testPackname1 + "/cards/" + oldTerm + ".txt");
+        assertTrue(Files.exists(path1));
+        cw.delete();
+        assertFalse(Files.exists(path1));
+    }
+
 
     @Test
     public void testWriteNewTerm() throws IOException {

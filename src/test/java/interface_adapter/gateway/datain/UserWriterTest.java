@@ -37,6 +37,13 @@ public class UserWriterTest {
         path1 = Paths.get("user_data/users/" + testUser.getName());
         assertTrue(Files.exists(path1));
         uw.delete();
+    }
+
+    @Test
+    public void testDeleteUser() throws IOException {
+        uw.write();
+        path1 = Paths.get("user_data/users/" + testUser.getName());
+        uw.delete();
         assertFalse(Files.exists(path1));
     }
 
