@@ -50,7 +50,7 @@ public class CardWriter extends Writer {
         Card newCard = (Card) newO;
         Path old = Paths.get("user_data/users/" + this.username + "/packages/" + this.packname
                 + "/cards/" + oldName + ".txt");
-        Files.move(old, old.resolveSibling(newCard.getTerm()));
+        Files.move(old, old.resolveSibling(newCard.getTerm() + ".txt"));
     }
 
     /**
@@ -65,8 +65,10 @@ public class CardWriter extends Writer {
 
     //Test
     public static void main(String[] args) throws IOException {
-        String[] path = new String[]{"test_user_1", "packA"};
+        String[] path = new String[]{"test_user_1", "packA1"};
         CardWriter cw = new CardWriter(path, new Card("Card1", "card1definition"));
-        cw.delete();
+        cw.write();
+        Card c = new Card("Card2", "card1definition");
+        cw.write("Card1", c);
     }
 }

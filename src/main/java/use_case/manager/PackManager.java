@@ -6,9 +6,11 @@ import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.SearchPackOutputBoundary;
 import use_case.output_boundaries.SortPackOutputBoundary;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * A pack manager manages the current user's packs.
@@ -34,11 +36,12 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
         if (!this.items.containsKey(packName)) { // no pack has such packname, adding is valid
             Pack p = new Pack(packName);
             this.items.put(packName, p);
+            this.currItem = p;
             programStateInputBoundary.getCurrUser().addPackage(p);
-            addOutputBoundary.presentAddSuccessView();
+            addOutputBoundary.setAddResult(true);
             return true;
         }
-        addOutputBoundary.presentAddFailView();
+        addOutputBoundary.setAddResult(false);
         return false;
     }
 
@@ -83,7 +86,25 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
     }
 
     /**
-     * Sort a card by date added: oldest to newest.
+     * Search packs with specified pack name (Ignore case).
+     * All packs that contain (not necessarily equal) packName would be searched.
+     * @param packName the packName to be searched
+     * @param searchPackOutputBoundary an output boundary that gets the searched result
+     */
+    @Override
+    public void searchPack(String packName, SearchPackOutputBoundary searchPackOutputBoundary) {
+        ArrayList<Pack> packList = programStateInputBoundary.getCurrUser().getPackageList();
+        ArrayList<String> result = new ArrayList<>();
+        for (Pack p : packList) {
+            if (p.getName().toLowerCase().contains(packName.toLowerCase())) {
+                result.add(p.getName());
+            }
+        }
+        searchPackOutputBoundary.setSearchResult(result);
+    }
+
+    /**
+     * Sort a pack by date added: oldest to newest.
      *
      * @param sortPackOutputBoundary a sort output boundary for getting the sorted output.
      */
@@ -96,175 +117,18 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
         }
         sortPackOutputBoundary.setSortResult(packNameList);
     }
-//
-//    /**
-//     * Add a new card into current pack.
-//     * Return true if successfully added; false otherwise.
-//     */
-//    public boolean addCard(Card card, AddOutputBoundary AddOutputBoundary) {
-//        try {
-//            this.currItem.addCard(card);
-//            AddOutputBoundary.presentAddSuccessView();
-//            return true;
-//        } catch (Exception e) {
-//            AddOutputBoundary.presentAddFailView();
-//            return false;
-//        }
-//    }
-//
-//    /**
-//     * Delete a specific card in the current pack.
-//     */
-//    public void deleteCard(Card card) {
-//        this.currItem.deleteCard(card);
-//    }
-//
-//    /**
-//     * Users can search cards by card's term and definition.
-//     * Return an arraylist of cards that contain (not necessarily equal to) keyword.
-//     *
-//     * @param keyword              the term that the user searches
-//     * @param searchOutputBoundary a search output boundary for getting the search result.
-//     * @return an arraylist of cards that contain keyword
-//     */
-//    public ArrayList<Card> searchCard(String keyword, SearchCardOutputBoundary<Card> searchOutputBoundary) {
-//        ArrayList<Card> lst = new ArrayList<>();
-//        for (Card c : this.currItem.getCards()) {
-//            if (c.getTerm().contains(keyword) || c.getDefinition().contains(keyword)) {
-//                lst.add(c);
-//            }
-//        }
-//        searchOutputBoundary.setSearchResult(lst);
-//        return lst;
-//    }
-//
-//    /**
-//     * Return a card list sorted by date added: oldest to newest.
-//     *
-//     * @param sortOutputBoundary a sort output boundary for getting the sorted output.
-//     * @return an arraylist of sorted cards
-//     */
-//    public ArrayList<Card> sortOldToNew(SortCardOutputBoundary<Card> sortOutputBoundary) {
-//        ArrayList<Card> lst = this.currItem.getCards();
-//        sortOutputBoundary.setSearchResult(lst);
-//        return lst;
-//    }
-//
-//    /**
-//     * Return a card list sorted by date added: newest to oldest
-//     *
-//     * @param sortOutputBoundary a sort output boundary for getting the sorted output.
-//     * @return an arraylist of sorted cards
-//     */
-//    public ArrayList<Card> sortNewToOld(SortCardOutputBoundary<Card> sortOutputBoundary) {
-//        ArrayList<Card> lst = new ArrayList<>(this.currItem.getCards());
-//        Collections.reverse(lst);
-//        sortOutputBoundary.setSearchResult(lst);
-//        return lst;
-//    }
-//
-//    /**
-//     * Return a card list sorted by cards' terms' alphabetical order: a - z.
-//     *
-//     * @param sortOutputBoundary a sort output boundary for getting the sorted output.
-//     * @return an arraylist of sorted cards
-//     */
-//    public ArrayList<Card> sortAtoZ(SortCardOutputBoundary<Card> sortOutputBoundary) {
-//        ArrayList<Card> lst = new ArrayList<>(this.currItem.getCards());
-//        lst.sort(new AlphabetComparator());
-//        sortOutputBoundary.setSearchResult(lst);
-//        return lst;
-//    }
-//
-//    /**
-//     * Return a card list sorted by cards' terms' alphabetical order: z - a.
-//     *
-//     * @param sortOutputBoundary a sort output boundary for getting the sorted output.
-//     * @return an arraylist of sorted cards
-//     */
-//    public ArrayList<Card> sortZtoA(SortCardOutputBoundary<Card> sortOutputBoundary) {
-//        ArrayList<Card> lst = new ArrayList<>(this.currItem.getCards());
-//        lst.sort(new AlphabetComparator().reversed());
-//        sortOutputBoundary.setSearchResult(lst);
-//        return lst;
-//    }
-//
-//
-//    /**
-//     * Return a card list sorted by cards' proficiency: low to high.
-//     *
-//     * @return an arraylist of sorted cards
-//     */
-//    public ArrayList<Card> sortProLowToHigh() {
-//        ArrayList<Card> lst = new ArrayList<>(this.currItem.getCards());
-//        lst.sort(new ProficiencyComparator());
-//        return lst;
-//    }
-//
-//    /**
-//     * Return a card list sorted by cards' proficiency: high to low.
-//     *
-//     * @return an arraylist of sorted cards
-//     */
-//    public ArrayList<Card> sortProHighToLow() {
-//        ArrayList<Card> lst = new ArrayList<>(this.currItem.getCards());
-//        lst.sort(new ProficiencyComparator().reversed());
-//        return lst;
-//    }
-//
-//    /**
-//     * Return a card list sorted in random order.
-//     *
-//     * @param sortOutputBoundary a sort output boundary for getting the sorted output.
-//     * @return an arraylist of randomly sorted cards
-//     */
-//    public ArrayList<Card> sortRandom(SortCardOutputBoundary<Card> sortOutputBoundary) {
-//        ArrayList<Card> lst = new ArrayList<>(this.currItem.getCards());
-//        Collections.shuffle(lst);
-//        sortOutputBoundary.setSearchResult(lst);
-//        return lst;
-//    }
-//
-//
-//    private static class AlphabetComparator implements Comparator<Card> {
-//        /**
-//         * Compare 2 cards according to their terms' alphabetical order (ignore case).
-//         * <p>
-//         * Return a negative integer if c1 < c2,
-//         * zero if c1 == c2,
-//         * a positive integer if c1 > c2
-//         * in terms of alphabetical order (ignore cases) of their terms.
-//         *
-//         * @param c1 the first card
-//         * @param c2 the second card
-//         * @return a negative integer, zero, or a positive integer if
-//         * if c1 < c2, c1 == c2, or c1 > c2 in terms of alphabetical order of terms.
-//         */
-//        @Override
-//        public int compare(Card c1, Card c2) {
-//            return c1.getTerm().compareToIgnoreCase(c2.getTerm());
-//        }
-//    }
-//
-//    private static class ProficiencyComparator implements Comparator<Card> {
-//        /**
-//         * Compare 2 cards according to their terms' proficiency.
-//         * <p>
-//         * Return a negative integer if c1 < c2,
-//         * zero if c1 == c2,
-//         * a positive integer if c1 > c2
-//         * in terms of proficiency.
-//         *
-//         * @param c1 the first card
-//         * @param c2 the second card
-//         * @return a negative integer, zero, or a positive integer
-//         * if c1 < c2, c1 == c2, or c1 > c2 in terms of proficiency.
-//         */
-//        @Override
-//        public int compare(Card c1, Card c2) {
-//            return c1.getProficiency() - c2.getProficiency();
-//        }
-//    }
+
+    /**
+     * Sort a pack by alphabetic order: A to Z.
+     *
+     * @param sortPackOutputBoundary a sort output boundary for getting the sorted output.
+     */
+    @Override
+    public void sortAToZ(SortPackOutputBoundary sortPackOutputBoundary) {
+        ArrayList<String> packNameList = new ArrayList<>(this.items.keySet());
+        packNameList.sort(String::compareToIgnoreCase);
+        sortPackOutputBoundary.setSortResult(packNameList);
+    }
 
 
 }

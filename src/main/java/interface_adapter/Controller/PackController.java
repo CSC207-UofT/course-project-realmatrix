@@ -37,6 +37,16 @@ public class PackController {
         }
     }
 
+    /**
+     * Search packs with specified pack name (ignore case).
+     * All packs that contain (not necessarily equal) packName would be searched.
+     * @param str the text to be searched
+     * @param searchPackOutputBoundary an output boundary that gets the searched result
+     */
+    public void searchPack(String str, SearchPackOutputBoundary searchPackOutputBoundary) {
+        this.packIB.searchPack(str, searchPackOutputBoundary);
+    }
+
     public void deletePack(String packName) {
         if (this.packIB.deletePack(packName)) {
             this.packIB.delete(databaseErrorOutputBoundary);
@@ -50,20 +60,12 @@ public class PackController {
     public void sortOldToNew(SortPackOutputBoundary sortPackOutputBoundary) {
         this.packIB.sortOldToNew(sortPackOutputBoundary);
     }
-//    /**
-//     * Getter for the current pack the user is in.
-//     *
-//     * @return the current pack.
-//     */
-//    public Pack getCurrPack() {
-//        return this.packIB.getCurrPack();
-//    }
-//
-//    /**
-//     * Change to the current pack the user is in.
-//     */
-//    public void setCurrPack(Pack pack) {
-//        this.packIB.setCurrPack(pack);
-//    }
 
+    /**
+     * Sort packs by pack names, in alphabetic order: A - Z.
+     * @param sortPackOutputBoundary an output boundary that gets the result of sorted packs.
+     */
+    public void sortAToZ(SortPackOutputBoundary sortPackOutputBoundary) {
+        this.packIB.sortAToZ(sortPackOutputBoundary);
+    }
 }
