@@ -80,6 +80,6 @@ public class LogInOutManager implements LogInOutInputBoundary {
     public void signOffUser(LogInOutOutputBoundary logInOutOB) {
         this.currUser = null;
         programStateInputBoundary.setCurrUser(null);
-        logInOutOB.setLogInOutResult(false);
+        logInOutOB.setLogInOutResult(true);
     }
 }
