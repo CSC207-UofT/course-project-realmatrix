@@ -19,11 +19,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
+/**
+ * A frame for adding pack.
+ */
 public class AddPackFrame extends BasicFrame implements ActionListener {
     private final JTextField packText;
     private final JButton addButton;
-    private final JLabel success;
     private final JButton backButton;
 
 
@@ -51,12 +52,6 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
         backButton.addActionListener(this);
         panel.add(backButton);
 
-        success = new JLabel("");
-        success.setBounds(40, 400, 300, 50);
-        success.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 18));
-        success.setForeground(Color.red);
-        panel.add(success);
-
         add(panel);
         setVisible(true);
 
@@ -66,8 +61,6 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
             if (check()) {  // add succeeds
-                success.setText("Add pack successful!");
-                packText.setText(packText.getText());
                 setVisible(false);
                 new PackFrame(programStateInputBoundary);
             } else {    // add fails: pack already exists

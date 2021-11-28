@@ -1,10 +1,12 @@
 package framework.GUI;
 
 import use_case.input_boundaries.ProgramStateInputBoundary;
-import use_case.manager.ProgramStateManager;
 
 import javax.swing.*;
 
+/**
+ * A basic frame that all other frames can extend to.
+ */
 public class BasicFrame extends JFrame {
     protected final ProgramStateInputBoundary programStateInputBoundary;
 

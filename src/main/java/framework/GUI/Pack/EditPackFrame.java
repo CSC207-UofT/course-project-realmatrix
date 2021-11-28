@@ -1,8 +1,5 @@
 package framework.GUI.Pack;
 
-import javax.swing.*;
-
-import entity.Pack;
 import framework.GUI.BasicFrame;
 import interface_adapter.Controller.PackController;
 import interface_adapter.gateway.DataInOut;
@@ -12,16 +9,17 @@ import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.PackManager;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
-import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
+/**
+ * A frame for editing pack.
+ */
 public class EditPackFrame extends BasicFrame implements ActionListener {
     private final JTextField packText = new JTextField(100);
     private final JButton editButton;

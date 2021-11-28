@@ -15,7 +15,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * A frame for editing card.
+ */
 public class EditCardFrame extends BasicFrame implements ActionListener {
     private final JTextField termText;
     private final JTextArea defText;
@@ -70,6 +72,10 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
 
     }
 
+    /**
+     * Actions for edit/back.
+     * @param e an action event.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editButton) {
@@ -108,12 +114,6 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         ChangeOutputBoundary changePresenter = new ChangePresenter();
         cardController.changeCardTerm(oldTerm, newTerm, changePresenter);
         return changePresenter.getChangeResult();
-    }
-
-    // Test
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new EditCardFrame(ps);
     }
 }
 

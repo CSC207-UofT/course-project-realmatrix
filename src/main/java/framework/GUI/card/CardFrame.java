@@ -17,16 +17,16 @@ import use_case.output_boundaries.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * A card frame class. User can interact with all cards in current pack.
+ */
 public class CardFrame extends BasicFrame implements ActionListener {
     private final CardController cardController;
 
@@ -69,7 +69,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
         cardJTable = new JTable(cardTableModel);    // Construct table with model
         cardJTable.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); // User can only select one card at a time
 
-        // A scrollable panel that stores a JList of card
+        // A scrollable panel that stores a JTable of card
         JScrollPane cardTablePanel = new JScrollPane(cardJTable);
         cardTablePanel.setSize(250, 600);
         panel.add(cardTablePanel);
@@ -195,21 +195,18 @@ public class CardFrame extends BasicFrame implements ActionListener {
      * Add sort box listener and sort card according to user's choice.
      */
     private void addSortBoxListener() {
-        sortBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String filter = (String) sortBox.getSelectedItem();
-                switch (Objects.requireNonNull(filter)) {
-                    case "A - Z":   //TODO: constant
-                        sortAToZ();
-                        break;
-                    case "Old - New":
-                        setCardTableModel();
-                        break;
-                    case "Least - Most Managed":
-                        sortProfLowToHigh();
-                        break;
-                }
+        sortBox.addActionListener(e -> {
+            String filter = (String) sortBox.getSelectedItem();
+            switch (Objects.requireNonNull(filter)) {
+                case "A - Z":   //TODO: constant
+                    sortAToZ();
+                    break;
+                case "Old - New":
+                    setCardTableModel();
+                    break;
+                case "Least - Most Managed":
+                    sortProfLowToHigh();
+                    break;
             }
         });
     }
@@ -324,7 +321,8 @@ public class CardFrame extends BasicFrame implements ActionListener {
     private void setSelectedCardTerm() {
         if (cardJTable.getSelectedRow() != -1) {
             selectedCardTerm = cardJTable.getValueAt(cardJTable.getSelectedRow(), 0).toString();
-            programStateInputBoundary.setCurrCard(selectedCardTerm);
+            ProgramStateController psController = new ProgramStateController(programStateInputBoundary);
+            psController.setCurrCard(selectedCardTerm);
         }
     }
 

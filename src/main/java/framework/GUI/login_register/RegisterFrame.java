@@ -1,9 +1,6 @@
 package framework.GUI.login_register;
 
-import entity.User;
 import framework.GUI.start.StartFrame;
-//import framework.GUI.user.UserFrame;
-import interface_adapter.Controller.ProgramStateController;
 import interface_adapter.Controller.RegisterController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -18,8 +15,10 @@ import use_case.output_boundaries.RegisterOutputBoundary;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.Objects;
 
+/**
+ * A register frame which allows users to register.
+ */
 public class RegisterFrame extends LogRegFrame {
     private final JLabel pw2Label;          // Confirming password JLabel
     private final JPasswordField pw2;       // Confirmation password text field
