@@ -2,6 +2,7 @@ package framework.GUI.Pack;
 
 import entity.User;
 import framework.GUI.BasicFrame;
+import framework.GUI.card.CardFrame;
 import framework.GUI.user.UserFrame;
 import interface_adapter.Controller.PackController;
 import interface_adapter.gateway.DataInOut;
@@ -19,16 +20,19 @@ import use_case.output_boundaries.SearchPackOutputBoundary;
 import use_case.output_boundaries.SortPackOutputBoundary;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class PackFrame extends BasicFrame implements ActionListener {
-    private final JPanel panel = new JPanel(null); // The whole panel in the frame
     // Pack name list
     private final JScrollPane packListPanel;  // A scrollable panel that stores a JList of pack names
     private ArrayList<String> packList;     // Data for packListModel
@@ -58,16 +62,13 @@ public class PackFrame extends BasicFrame implements ActionListener {
 
         packJList = new JList<>(packListModel);
         packJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); // User can only select one pack at a time
-        packJList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                selectedPackName = packJList.getSelectedValue();
-                programStateInputBoundary.setCurrPack(selectedPackName);
-            }
-        });
+        addJListListener();
 
         packListPanel = new JScrollPane(packJList);
         packListPanel.setSize(250, 600);
+
+        // The whole panel in the frame
+        JPanel panel = new JPanel(null);
         panel.add(packListPanel);
 
         // Search
@@ -77,7 +78,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
 
         searchText = new JTextField("");
         searchText.setBounds(335, 20, 140, 30);
-        searchText.addActionListener(this);
+        addSearchTextListener();
         panel.add(searchText);
 
         // Sort
@@ -94,13 +95,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
         // Add pack
         addButton = new JButton("Add pack");
         addButton.setBounds(280, 120, 200, 50);
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddPackFrame(programStateInputBoundary);
-                setVisible(false);
-            }
-        });
+        addButton.addActionListener(this);
         panel.add(addButton);
 
         // Edit pack
@@ -118,13 +113,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
         // Back button
         backButton = new JButton("Back to Home Page");
         backButton.setBounds(280, 430, 200, 50);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new UserFrame(programStateInputBoundary.getCurrUserName(), programStateInputBoundary);
-                setVisible(false);
-            }
-        });
+        backButton.addActionListener(this);
         panel.add(backButton);
 
         add(panel);
@@ -141,10 +130,8 @@ public class PackFrame extends BasicFrame implements ActionListener {
         SortPackOutputBoundary sortPackPresenter = new SortPackPresenter();
         packController.sortOldToNew(sortPackPresenter);
         packList = sortPackPresenter.getSortResult();
-
-        for (String packName : packList) {
-            packListModel.addElement(packName);
-        }
+        // Add the pack names into model
+        packList.forEach(packListModel::addElement);
     }
 
     /**
@@ -154,27 +141,53 @@ public class PackFrame extends BasicFrame implements ActionListener {
     private void setPackListModel(ArrayList<String> packNameList) {
         // Get arraylist of pack names
         packListModel.removeAllElements();
-        for (String packName : packNameList) {
-            packListModel.addElement(packName);
-        }
+        // Add the pack names into model
+        packNameList.forEach(packListModel::addElement);
     }
 
     /**
-     * Search functionality.
+     * Constructing JList Listener (selection & mouse listener)
      */
-    private void search() {
-        SearchPackOutputBoundary searchPackOutputBoundary = new SearchPackPresenter();
-        packController.searchPack(searchText.getText(), searchPackOutputBoundary);
-        setPackListModel(searchPackOutputBoundary.getSearchResult());
+    private void addJListListener() {
+        // When select packs, set programStateInputBoundary to this pack
+        packJList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                selectedPackName = packJList.getSelectedValue();
+                programStateInputBoundary.setCurrPack(selectedPackName);
+            }
+        });
+        // When user double-click the pack, go into CardFrame that shows all cards in this pack
+        packJList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    new CardFrame(programStateInputBoundary);
+                }
+            }
+        });
     }
 
     /**
-     * Sort packs by pack names: A - Z order.
+     * Constructing search text field Document Listener
      */
-    private void sortAToZ() {
-        SortPackOutputBoundary sortPackPresenter = new SortPackPresenter();
-        packController.sortAToZ(sortPackPresenter);
-        setPackListModel(sortPackPresenter.getSortResult());
+    private void addSearchTextListener() {
+        searchText.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search();
+            }
+        });
     }
 
     /**
@@ -184,9 +197,9 @@ public class PackFrame extends BasicFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == searchText) {
-            search();
-        }
+//        if (e.getSource() == searchText) {
+//            search();
+//        }
 
         if (e.getSource() == sortBox) {
             String filter = (String) sortBox.getSelectedItem();
@@ -197,6 +210,11 @@ public class PackFrame extends BasicFrame implements ActionListener {
                 case "Old - New":
                     setPackListModel();
             }
+        }
+
+        if (e.getSource() == addButton) {
+            new AddPackFrame(programStateInputBoundary);
+            setVisible(false);
         }
 
         if (e.getSource() == editButton) {
@@ -223,6 +241,29 @@ public class PackFrame extends BasicFrame implements ActionListener {
             }
         }
 
+        if (e.getSource() == deleteButton) {
+            new UserFrame(programStateInputBoundary.getCurrUserName(), programStateInputBoundary);
+            setVisible(false);
+        }
+
+    }
+
+    /**
+     * Search functionality.
+     */
+    private void search() {
+        SearchPackOutputBoundary searchPackOutputBoundary = new SearchPackPresenter();
+        packController.searchPack(searchText.getText(), searchPackOutputBoundary);
+        setPackListModel(searchPackOutputBoundary.getSearchResult());
+    }
+
+    /**
+     * Sort packs by pack names: A - Z order.
+     */
+    private void sortAToZ() {
+        SortPackOutputBoundary sortPackPresenter = new SortPackPresenter();
+        packController.sortAToZ(sortPackPresenter);
+        setPackListModel(sortPackPresenter.getSortResult());
     }
 
     //Test
