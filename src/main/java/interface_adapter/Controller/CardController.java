@@ -65,45 +65,45 @@ public class CardController {
     /**
      * Search card with specified keyword.
      * @param keyword the keyword entered by user
-     * @param searchCardOutputBoundary a search output boundary that gets the result of qualified cards
+     * @param sortSearchCardOutputBoundary a search/sort output boundary that gets the result of qualified cards
      */
-    public void searchCard(String keyword, SearchCardOutputBoundary searchCardOutputBoundary) {
-        this.cardInputBoundary.searchCard(keyword, searchCardOutputBoundary);
+    public void searchCard(String keyword, SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
+        this.cardInputBoundary.searchCard(keyword, sortSearchCardOutputBoundary);
     }
 
     /**
      * Old-to-new is the order of cards shown to the user by default.
-     * @param sortCardOutputBoundary an output boundary that gets the result of sorted cards.
+     * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards.
      */
-    public void sortOldToNew(SortCardOutputBoundary sortCardOutputBoundary) {
-        this.cardInputBoundary.sortOldToNew(sortCardOutputBoundary);
+    public void sortOldToNew(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
+        this.cardInputBoundary.sortOldToNew(sortSearchCardOutputBoundary);
     }
 
     /**
      * Sort cards by alphabetic order (A-Z).
-     * @param sortCardOutputBoundary an output boundary that gets the result of sorted cards.
+     * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards.
      */
-    public void sortAToZ(SortCardOutputBoundary sortCardOutputBoundary) {
-        this.cardInputBoundary.sortAtoZ(sortCardOutputBoundary);
+    public void sortAToZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
+        this.cardInputBoundary.sortAtoZ(sortSearchCardOutputBoundary);
     }
 
     /**
      * This is the order of cards shown to the user by default.
-     * @param sortCardOutputBoundary an output boundary that gets the result of sorted cards.
+     * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards.
      */
-    public void sortRandom(SortCardOutputBoundary sortCardOutputBoundary) {
-        this.cardInputBoundary.sortRandom(sortCardOutputBoundary);
+    public void sortRandom(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
+        this.cardInputBoundary.sortRandom(sortSearchCardOutputBoundary);
     }
 
     /**
      * This is the order of cards shown to the user by default.
-     * @param sortCardOutputBoundary an output boundary that gets the result of sorted cards.
+     * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards.
      */
-    public void sortProLowToHigh(SortCardOutputBoundary sortCardOutputBoundary) {
-        this.cardInputBoundary.sortProLowToHigh(sortCardOutputBoundary);
+    public void sortProLowToHigh(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
+        this.cardInputBoundary.sortProLowToHigh(sortSearchCardOutputBoundary);
     }
 
-//    public void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary) {
+//    public void sortZtoA(SortSearchCardOutputBoundary sortCardOutputBoundary) {
 //        this.cardInputBoundary.sortZtoA(sortCardOutputBoundary);
 //    }
 

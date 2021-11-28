@@ -103,8 +103,6 @@ public class UserFrame extends BasicFrame implements ActionListener {
         if (logPresenter.getLogInOutResult()) {    // log out success
             new StartFrame(programStateInputBoundary);
         }
-
-
     }
 
     public static void main(String[] args) {

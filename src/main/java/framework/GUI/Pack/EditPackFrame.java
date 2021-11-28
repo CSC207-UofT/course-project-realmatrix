@@ -25,13 +25,12 @@ import java.awt.event.ActionListener;
 public class EditPackFrame extends BasicFrame implements ActionListener {
     private final JTextField packText = new JTextField(100);
     private final JButton editButton;
-    private final JLabel success;
     private final JButton backButton;
     private final String old_name;  // the original pack name
 
-    public EditPackFrame(String oldName, ProgramStateInputBoundary programStateInputBoundary) {
+    public EditPackFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Edit Pack", programStateInputBoundary);
-        old_name = oldName;
+        old_name = programStateInputBoundary.getCurrPackName();
         packText.setText(old_name);
         JPanel panel = new JPanel();
 
@@ -56,12 +55,6 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
         backButton.addActionListener(this);
         panel.add(backButton);
 
-        success = new JLabel("");
-        success.setBounds(40, 400, 300, 50);
-        success.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 18));
-        success.setForeground(Color.red);
-        panel.add(success);
-
         add(panel);
         setVisible(true);
 
@@ -70,9 +63,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editButton) {
-            if (check()) {  // Edit succeeds
-                success.setText("Edit pack successful!");
-                packText.setText(packText.getText());
+            if (check() || packText.getText().equals(old_name)) {  // Edit succeeds
                 new PackFrame(programStateInputBoundary);
                 setVisible(false);
             } else {    // add fails: pack already exists
