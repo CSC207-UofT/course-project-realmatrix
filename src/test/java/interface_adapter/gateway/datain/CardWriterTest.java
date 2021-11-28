@@ -50,19 +50,19 @@ public class CardWriterTest {
         cw.delete();
     }
 
-    //Todo: test failed.
-//    @Test
-//    public void testWriteNewTerm() throws IOException {
-//        cw.write();
-//        Path path1 = Paths.get("user_data/users/" + testUsername1 + "/packages/" + testPackname1 + "/cards/" + oldTerm + ".txt");
-//        assertTrue(Files.exists(path1));
-//        testCard1.setTerm(newTerm);
-//        cw.write(oldTerm, testCard1);
-//        Path path2 = Paths.get("user_data/users/" + testUsername1 + "/packages/" + testPackname1 + "/cards/" + newTerm + ".txt");
-//        assertFalse(Files.exists(path1));
-//        assertSame(path2, path1.resolveSibling(newTerm));
-//        cw.delete();
-//    }
+
+    @Test
+    public void testWriteNewTerm() throws IOException {
+        cw.write();
+        Path path1 = Paths.get("user_data/users/" + testUsername1 + "/packages/" + testPackname1 + "/cards/" + oldTerm + ".txt");
+        assertTrue(Files.exists(path1));
+        testCard1.setTerm(newTerm);
+        cw.write(oldTerm, testCard1);
+        Path path2 = Paths.get("user_data/users/" + testUsername1 + "/packages/" + testPackname1 + "/cards/" + newTerm + ".txt");
+        assertFalse(Files.exists(path1));
+        assertTrue(Files.exists(path2));
+        cw.delete();
+    }
 
     @After
     public void deleteFiles() {
