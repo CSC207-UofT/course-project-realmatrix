@@ -1,18 +1,16 @@
 package interface_adapter.presenters;
 
-import use_case.output_boundaries.SortCardOutputBoundary;
+import use_case.output_boundaries.SortSearchCardOutputBoundary;
 
-import java.util.ArrayList;
-
-public class SortCardPresenter implements SortCardOutputBoundary {
-    private ArrayList<String[]> sortResult;
+public class SortSearchCardPresenter implements SortSearchCardOutputBoundary {
+    private String[][] sortResult;
 
     /**
      * setter of sortResult
      * @param result the set value of result.
      */
     @Override
-    public void setSortResult(ArrayList<String[]> result) {
+    public void setSortSearchResult(String[][] result) {
         this.sortResult = result;
     }
 
@@ -21,7 +19,7 @@ public class SortCardPresenter implements SortCardOutputBoundary {
      * @return the arraylist of card term and definition.
      */
     @Override
-    public ArrayList<String[]> getSortResult(){
+    public String[][] getSortSearchResult(){
         return this.sortResult;
     }
 

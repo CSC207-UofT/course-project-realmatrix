@@ -2,7 +2,6 @@ package framework.GUI.card;
 
 import javax.swing.*;
 import framework.GUI.BasicFrame;
-import framework.GUI.Pack.PackFrame;
 import interface_adapter.Controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -15,17 +14,17 @@ import use_case.manager.CardManager;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
+/**
+ * A frame for adding card.
+ */
 public class AddCardFrame extends BasicFrame implements ActionListener {
     private final JTextField termText;
     private final JTextArea defText;
     private final JButton addButton;
-    private final JLabel success;
     private final JButton backButton;
 
 
@@ -62,23 +61,19 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         backButton.addActionListener(this);
         panel.add(backButton);
 
-        success = new JLabel("");
-        success.setBounds(40,400,300,50);
-        success.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 18));
-        success.setForeground(Color.red);
-        panel.add(success);
-
         add(panel);
         setVisible(true);
 
     }
 
+    /**
+     * Actions for clicking add/back button.
+     * @param e an action event triggered by user.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
             if (check()) {  // add succeeds
-                termText.setText(termText.getText());
-                defText.setText(defText.getText());
                 setVisible(false);
                 new CardFrame(programStateInputBoundary);
             } else {    // add fails: card already exists
@@ -89,7 +84,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == backButton) {
+        else if (e.getSource() == backButton) {
             new CardFrame(programStateInputBoundary);
             setVisible(false);
         }

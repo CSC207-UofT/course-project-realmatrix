@@ -19,6 +19,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A user frame where users can choose to
+ *      - checkout packages
+ *      - logout
+ *      - change username
+ *      - change password
+ */
 public class UserFrame extends BasicFrame implements ActionListener {
     final String username;
     final JPanel userPanel;
@@ -61,6 +68,9 @@ public class UserFrame extends BasicFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Add all components into panel.
+     */
     private void addComp() {
         userPanel.add(message);
         userPanel.add(checkOutPackagesButton);
@@ -103,8 +113,6 @@ public class UserFrame extends BasicFrame implements ActionListener {
         if (logPresenter.getLogInOutResult()) {    // log out success
             new StartFrame(programStateInputBoundary);
         }
-
-
     }
 
     public static void main(String[] args) {
