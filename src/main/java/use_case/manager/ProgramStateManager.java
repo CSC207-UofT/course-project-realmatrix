@@ -51,6 +51,22 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
     }
 
     @Override
+    public String getCurrCardTerm() {
+        if (ps.getCurrCard() != null) {
+            return ps.getCurrCard().getTerm();
+        }
+        return null;
+    }
+
+    @Override
+    public String getCurrCardDefinition() {
+        if (ps.getCurrCard() != null) {
+            return ps.getCurrCard().getDefinition();
+        }
+        return null;
+    }
+
+    @Override
     public void setCurrUser(User user) {
         ps.setCurrUser(user);
     }

@@ -14,6 +14,8 @@ import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.*;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -25,25 +27,19 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class CardFrame extends BasicFrame implements ActionListener {
+    private final CardController cardController;
 
-    private final JPanel panel = new JPanel(null); // The whole panel in the frame
-
-    /** Construct Card Table */
-    private final JScrollPane cardTablePanel;  // A scrollable panel that stores a JList of card
+    // Card Table
     private final String[] colNames = new String[]{"Term", "Definition"};
     private final DefaultTableModel cardTableModel;   // Model for JTable
     private final JTable cardJTable;  // A JTable that contains card terms & definition
-    private final String selectedCardTerm = "";
+    private String selectedCardTerm;
 
-    /** Construct Search */
-    private final JLabel searchLabel;
     private final JTextField searchText;    // A text field for user to enter term for sesarch
 
-    /**Construct Sort */
-    private final JLabel sortLabel;
     private final JComboBox<String> sortBox;
 
-    /** Buttons */
+    // Buttons
     private final JButton addButton; // Add card button
     private final JButton editButton; // Edit card button
     private final JButton deleteButton; // Delete card button
@@ -51,47 +47,51 @@ public class CardFrame extends BasicFrame implements ActionListener {
     private final JButton learnButton; // Learn card button
     private final JButton backButton; // Back button
 
-    private final CardInputBoundary cardManager = new CardManager(new DataInOut(), programStateInputBoundary);
-    private final CardController cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
 
     public CardFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("[" + programStateInputBoundary.getCurrPackName()+ "] Card List", programStateInputBoundary);
-        // Construct cardStrListPanel
-        cardTableModel = new DefaultTableModel() {
+        // Card Controller
+        CardInputBoundary cardManager = new CardManager(new DataInOut(), programStateInputBoundary);
+        cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
+
+        // The whole panel in the frame
+        JPanel panel = new JPanel(null);
+
+        // Construct CardTable
+        cardTableModel = new DefaultTableModel() {  // Construct model that stores data
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         setCardTableModel(); // By default, the model contains Card by old-to-new order
-
-        cardJTable = new JTable(cardTableModel);
+        cardJTable = new JTable(cardTableModel);    // Construct table with model
         cardJTable.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); // User can only select one card at a time
-        addTableListener();
 
-        cardTablePanel = new JScrollPane(cardJTable);
+        // A scrollable panel that stores a JList of card
+        JScrollPane cardTablePanel = new JScrollPane(cardJTable);
         cardTablePanel.setSize(250, 600);
         panel.add(cardTablePanel);
 
         // Search
-        searchLabel = new JLabel("Search:");
+        JLabel searchLabel = new JLabel("Search:");
         searchLabel.setBounds(280, 20, 50, 30);
         panel.add(searchLabel);
 
         searchText = new JTextField("");
         searchText.setBounds(335, 20, 140, 30);
-        searchText.addActionListener(this);
+        addSearchTextListener();
         panel.add(searchText);
 
         // Sort
-        sortLabel = new JLabel("Sort by: ");
+        JLabel sortLabel = new JLabel("Sort by: ");
         sortLabel.setBounds(280, 60, 60, 30);
         panel.add(sortLabel);
 
-        String[] sortOptions = new String[] {"Old - New", "A - Z"};
+        String[] sortOptions = new String[] {"Old - New", "A - Z", "Least - Most Managed"}; // TODO: constant
         sortBox = new JComboBox<>(sortOptions);
         sortBox.setBounds(335, 60, 150, 30);
-        sortBox.addActionListener(this);
+        addSortBoxListener();
         panel.add(sortBox);
 
         // Add Card
@@ -137,11 +137,11 @@ public class CardFrame extends BasicFrame implements ActionListener {
     }
 
     /**
-     * Helper method for construct cardStrListModel of JList.
+     * Helper method for construct cardTableModel.
      * Set this model to a list of Cards (in old-to-new order) this current pack has.
      */
     private void setCardTableModel() {
-        // Get arraylist of Cards
+        // Get array of Cards
         SortSearchCardOutputBoundary sortSearchCardPresenter = new SortSearchCardPresenter();
         cardController.sortOldToNew(sortSearchCardPresenter);
         String[][] cardStrList = sortSearchCardPresenter.getSortSearchResult();
@@ -150,27 +150,32 @@ public class CardFrame extends BasicFrame implements ActionListener {
     }
 
     /**
-     * Set cardStrListModel with a specified cardStrList, used when search/sort.
-     * @param cardStrList An arraylist that contains Cards in specific order.
+     * Set cardTableModel with a specified cardStrList, used when search/sort.
+     * @param cardStrList An array that contains Cards in specific order.
      */
     private void setCardTableModel(String[][] cardStrList) {
         // Get arraylist of Card
-        cardTableModel.setRowCount(0);
         cardTableModel.setDataVector(cardStrList, colNames);
-        cardTableModel.setRowCount(cardStrList.length);
     }
 
-
     /**
-     * Listener for selecting table row.
-     * This helps set currCard in program state to the selected card.
+     * Constructing search text field Document Listener
      */
-    private void addTableListener() {
-        cardJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+    private void addSearchTextListener() {
+        searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-                String cardTerm = cardJTable.getValueAt(cardJTable.getSelectedRow(), 0).toString();
-                programStateInputBoundary.setCurrCard(cardTerm);
+            public void insertUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search();
             }
         });
     }
@@ -186,11 +191,43 @@ public class CardFrame extends BasicFrame implements ActionListener {
     }
 
     /**
+     * Add sort box listener and sort card according to user's choice.
+     */
+    private void addSortBoxListener() {
+        sortBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String filter = (String) sortBox.getSelectedItem();
+                switch (Objects.requireNonNull(filter)) {
+                    case "A - Z":   //TODO: constant
+                        sortAToZ();
+                        break;
+                    case "Old - New":
+                        setCardTableModel();
+                        break;
+                    case "Least - Most Managed":
+                        sortProfLowToHigh();
+                        break;
+                }
+            }
+        });
+    }
+
+    /**
      * Sort Card by A - Z order.
      */
     private void sortAToZ() {
         SortSearchCardOutputBoundary sortCardPresenter = new SortSearchCardPresenter();
         cardController.sortAToZ(sortCardPresenter);
+        setCardTableModel(sortCardPresenter.getSortSearchResult());
+    }
+
+    /**
+     * Sort Card by proficiency: low - high.
+     */
+    private void sortProfLowToHigh() {
+        SortSearchCardOutputBoundary sortCardPresenter = new SortSearchCardPresenter();
+        cardController.sortProLowToHigh(sortCardPresenter);
         setCardTableModel(sortCardPresenter.getSortSearchResult());
     }
 
@@ -201,11 +238,13 @@ public class CardFrame extends BasicFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        setSelectedCardTerm();
+
         if (e.getSource() == searchText) {
             search();
         }
 
-        if (e.getSource() == sortBox) {
+        else if (e.getSource() == sortBox) {
             String filter = (String) sortBox.getSelectedItem();
             switch (Objects.requireNonNull(filter)) {
                 case "A - Z":
@@ -216,12 +255,12 @@ public class CardFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == addButton) {
+        else if (e.getSource() == addButton) {
             new AddCardFrame(programStateInputBoundary);
             setVisible(false);
         }
 
-        if (e.getSource() == editButton) {
+        else if (e.getSource() == editButton) {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a Card first.", // TODO: constant
@@ -275,6 +314,16 @@ public class CardFrame extends BasicFrame implements ActionListener {
             setVisible(false);
         }
 
+    }
+
+    /**
+     * Get the card term that the user is currently selecting.
+     */
+    private void setSelectedCardTerm() {
+        if (cardJTable.getSelectedRow() != -1) {
+            selectedCardTerm = cardJTable.getValueAt(cardJTable.getSelectedRow(), 0).toString();
+            programStateInputBoundary.setCurrCard(selectedCardTerm);
+        }
     }
 
     //Test

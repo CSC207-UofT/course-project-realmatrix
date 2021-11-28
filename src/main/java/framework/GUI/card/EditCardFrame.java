@@ -1,35 +1,28 @@
 package framework.GUI.card;
 
-import javax.swing.*;
 import framework.GUI.BasicFrame;
-import framework.GUI.Pack.PackFrame;
 import interface_adapter.Controller.CardController;
 import interface_adapter.gateway.DataInOut;
-import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
-import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.CardInputBoundary;
-import use_case.manager.ProgramStateManager;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
+import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.ChangeOutputBoundary;
-import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
-import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
 public class EditCardFrame extends BasicFrame implements ActionListener {
-    private final JTextField termText = new JTextField(100);
-    private final JTextArea defText = new JTextArea();
+    private final JTextField termText;
+    private final JTextArea defText;
     private final JButton editButton;
-    private final JLabel success;
     private final JButton backButton;
 
-    /** get original term in the card */
-    private String old_term = termText.getText();
+    private final CardController cardController;
 
     public EditCardFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Edit Card", programStateInputBoundary);
@@ -42,6 +35,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         panel.add(termLabel);
 
         // set termText
+        termText = new JTextField(programStateInputBoundary.getCurrCardTerm(), 100);
         termText.setBounds(100, 20, 300, 25);
         panel.add(termText);
         termText.setEditable(true);
@@ -51,6 +45,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         panel.add(defLabel);
 
         // set defText
+        defText = new JTextArea(programStateInputBoundary.getCurrCardDefinition());
         defText.setBounds(100, 50, 390, 100);
         defText.setLineWrap(true);
         panel.add(defText);
@@ -66,11 +61,9 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         backButton.addActionListener(this);
         panel.add(backButton);
 
-        success = new JLabel("");
-        success.setBounds(40, 400, 300, 50);
-        success.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 18));
-        success.setForeground(Color.red);
-        panel.add(success);
+        // Construct cardController
+        CardInputBoundary cardManager = new CardManager(new DataInOut(), programStateInputBoundary);
+        cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
 
         add(panel);
         setVisible(true);
@@ -80,13 +73,17 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editButton) {
-            if (check()) {  // Edit succeeds
-                success.setText("Edit card successful!");
-                termText.setText(termText.getText());
-                defText.setText(defText.getText());
+            // if the user changed definition, always succeeds.
+            if (termText.getText().equals(programStateInputBoundary.getCurrCardTerm())) {
+                cardController.changeCardDefinition(defText.getText());
+                programStateInputBoundary.setCurrCard(null);
                 new CardFrame(programStateInputBoundary);
                 setVisible(false);
-            } else {    // add fails: card already exists
+            } else if (check()){ // edit card term succeeds
+                programStateInputBoundary.setCurrCard(null);
+                new CardFrame(programStateInputBoundary);
+                setVisible(false);
+            } else {    // edit fails: card term already exists
                 JOptionPane.showMessageDialog(this,
                         "This Card term has existed. Edit another one please~", // TODO: constant
                         "Edit Fails",
@@ -100,20 +97,16 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         }
     }
 
-    protected boolean check() {
-        // get new term and def edited by users
-        String new_term = termText.getText();
-        String new_def = defText.getText();
-        // Construct CardManager
-        IDataInOut dataInOut = new DataInOut();
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
-        CardInputBoundary cardManager = new CardManager(dataInOut, programStateInputBoundary);
-        // Construct CardController
-        CardController cdController = new CardController(cardManager, dbPresenter);
+    /**
+     * Check if edit card term is successful.
+     * @return if edit is successful. If card term already exist, fails. Otherwise, success.
+     */
+    private boolean check() {
+        String oldTerm = programStateInputBoundary.getCurrCardTerm();
+        String newTerm = termText.getText();
         // check edit
         ChangeOutputBoundary changePresenter = new ChangePresenter();
-        cdController.changeCardTerm(old_term, new_term, changePresenter);
-        cdController.changeCardDefinition(new_def);
+        cardController.changeCardTerm(oldTerm, newTerm, changePresenter);
         return changePresenter.getChangeResult();
     }
 
