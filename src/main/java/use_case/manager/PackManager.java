@@ -10,6 +10,7 @@ import use_case.output_boundaries.SearchPackOutputBoundary;
 import use_case.output_boundaries.SortPackOutputBoundary;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * A pack manager manages the current user's packs.
@@ -85,17 +86,18 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
     }
 
     /**
-     * Search packs with specified pack name.
+     * Search packs with specified pack name (Ignore case).
      * All packs that contain (not necessarily equal) packName would be searched.
      * @param packName the packName to be searched
      * @param searchPackOutputBoundary an output boundary that gets the searched result
      */
     @Override
     public void searchPack(String packName, SearchPackOutputBoundary searchPackOutputBoundary) {
+        ArrayList<Pack> packList = programStateInputBoundary.getCurrUser().getPackageList();
         ArrayList<String> result = new ArrayList<>();
-        for (String name : this.items.keySet()) {
-            if (name.contains(packName)) {
-                result.add(name);
+        for (Pack p : packList) {
+            if (p.getName().toLowerCase().contains(packName.toLowerCase())) {
+                result.add(p.getName());
             }
         }
         searchPackOutputBoundary.setSearchResult(result);

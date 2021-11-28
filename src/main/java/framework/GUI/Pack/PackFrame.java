@@ -30,6 +30,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class PackFrame extends BasicFrame implements ActionListener {
@@ -99,7 +100,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
         panel.add(addButton);
 
         // Edit pack
-        editButton = new JButton("Edit pack");
+        editButton = new JButton("Change pack name");
         editButton.setBounds(280, 200, 200, 50);
         editButton.addActionListener(this);
         panel.add(editButton);
@@ -162,6 +163,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
+                    setVisible(false);
                     new CardFrame(programStateInputBoundary);
                 }
             }
