@@ -92,7 +92,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
         sortBox.setBounds(335, 60, 150, 30);
         sortBox.addActionListener(this);
         panel.add(sortBox);
-        
+
         // Add pack
         addButton = new JButton("Add pack");
         addButton.setBounds(280, 120, 200, 50);

@@ -289,7 +289,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
                         "No Card for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-            // TODO: go review frame.
+                // TODO: go review frame.
                 setVisible(false);
             }
         }
@@ -301,7 +301,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
                         "No Card for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-             // TODO: go learn frame.
+                // TODO: go learn frame.
                 setVisible(false);
             }
         }
@@ -337,4 +337,3 @@ public class CardFrame extends BasicFrame implements ActionListener {
         new CardFrame(ps);
     }
 }
-

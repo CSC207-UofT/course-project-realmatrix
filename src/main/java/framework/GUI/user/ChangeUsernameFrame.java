@@ -1,13 +1,12 @@
 package framework.GUI.user;
 
-import entity.Pack;
-import entity.User;
 import framework.GUI.BasicFrame;
 import interface_adapter.Controller.UserController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.manager.UserManager;
@@ -18,7 +17,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 /**
  * A frame for changing username.
@@ -35,19 +33,19 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
      * Build a StartFrame.
      */
     public ChangeUsernameFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
-        super("Recaller", programStateInputBoundary);
+        super(Constants.RECALLER_BTN, programStateInputBoundary);
         this.username = username;
         // 1. Create components shown on the frame
         changeNamePanel = new JPanel(new GridLayout(3, 1));
 
-        message = new JLabel("Change username", SwingConstants.CENTER);
+        message = new JLabel(Constants.CHANGE_USERNAME, SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        newName = new JTextField(20);
-        newNameLabel = new JLabel("new username: ", JLabel.TRAILING); // TODO: label doesn't show up. fix this
+        newName = new JTextField(Constants.COLUMNS1);
+        newNameLabel = new JLabel(Constants.NEW_USERNAME_MSG, JLabel.TRAILING); // TODO: label doesn't show up. fix this
         newName.add(newNameLabel);
 
-        finishButton = new JButton("done");
+        finishButton = new JButton(Constants.DONE_BTN);
         finishButton.addActionListener(this);
 
         // 2. Add components to the panel
@@ -91,14 +89,14 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
         // Check if successfully changed
         boolean result = presenter.getChangeResult();
         if (result) {
-            JOptionPane.showMessageDialog(this, "Username changed successfully");
+            JOptionPane.showMessageDialog(this, Constants.USERNAME_CHANGED_SUCCEED);
             new UserFrame(newName.getText(), programStateInputBoundary);
             setVisible(false);
         } else {
             // Pop up a window showing failing message
             JOptionPane.showMessageDialog(this,
-                    "This username is taken. Please choose another one~", // TODO: constant
-                    "Changing username fails",
+                    Constants.USER_NAME_TAKEN,
+                    Constants.USERNAME_CHANGED_FAILED,
                     JOptionPane.WARNING_MESSAGE);
         }
     }
