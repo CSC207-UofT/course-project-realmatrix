@@ -7,5 +7,4 @@ public interface SortCardOutputBoundary {
 
     ArrayList<String[]> getSortResult();
 
-//    void presentSortResult();
 }
