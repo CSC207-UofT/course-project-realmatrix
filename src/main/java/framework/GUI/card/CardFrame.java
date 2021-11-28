@@ -183,7 +183,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
     private void search() {
         SearchCardOutputBoundary searchCardOutputBoundary = new SearchCardPresenter();
         cardController.searchCard(searchText.getText(), searchCardOutputBoundary);
-        ArrayList result = new ArrayList(searchCardOutputBoundary.getSearchResult().keySet());
+        ArrayList result = new ArrayList(searchCardOutputBoundary.getSearchResult());
         setCardListModel(result);
     }
 

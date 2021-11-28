@@ -32,12 +32,27 @@ public class LearnFrame extends BasicFrame implements ActionListener {
 
     public LearnFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Learning", programStateInputBoundary);
-        this.learnPanel = new JPanel(new GridLayout(3, 1));
-        this.card = new JLabel("Click Next to start learning");
-        this.nextButton = new JButton("Next");
-        this.backToPack = new JButton("<<<" + programStateInputBoundary.getCurrPackName());
+        this.setSize(600,400);
+        this.learnPanel = new JPanel(new GridLayout(3,1));
 
-        this.addComp();
+        this.card = new JLabel("<html><p>Click Next to start learning</p><html>", SwingConstants.CENTER);
+        this.card.setBounds(10, 100, 300, 400);
+        this.card.setFont(new Font("verdana", Font.BOLD , 30));
+
+
+        this.nextButton = new JButton("Next");
+        this.nextButton.setBounds(150,500,200,50);
+        this.setFont(new Font("arial", Font.PLAIN,10));
+        this.nextButton.addActionListener(this);
+
+        this.backToPack = new JButton("Back to pack: " + programStateInputBoundary.getCurrPackName());
+        this.setFont(new Font("arial", Font.PLAIN,10));
+        this.backToPack.setBounds(10, 10, 200, 50);
+        this.nextButton.addActionListener(this);
+
+        addComp();
+        add(learnPanel);
+        setVisible(true);
     }
     private void addComp(){
         this.learnPanel.add(backToPack);
@@ -51,7 +66,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
             if(check()){
                 this.card.setText(programStateInputBoundary.getCurrCard().toString());
             }else{
-                this.card.setText("you have already completed learning of this pack");
+                this.card.setText("<html><p>you have already completed learning of this pack</p><html>");
             }
         }else if(e.getSource() == this.backToPack){
             new PackFrame(programStateInputBoundary);
