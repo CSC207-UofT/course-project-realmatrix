@@ -4,6 +4,7 @@ import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.Pack.PackFrame;
 import framework.GUI.start.StartFrame;
+import use_case.constants.Constants;
 import interface_adapter.Controller.LogInOutController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -40,16 +41,16 @@ public class UserFrame extends BasicFrame implements ActionListener {
         message = new JLabel(username + "'s Home Page", SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        checkOutPackagesButton = new JButton("Checkout my packages");
+        checkOutPackagesButton = new JButton(Constants.CHECK_OUT_PACKAGE);
         checkOutPackagesButton.addActionListener(this);
 
-        signOutButton = new JButton("Sign off");
+        signOutButton = new JButton(Constants.SIGN_OUT_BTN);
         signOutButton.addActionListener(this);
 
-        changeNameButton = new JButton("change name");
+        changeNameButton = new JButton(Constants.CHANGE_NAME_BTN);
         changeNameButton.addActionListener(this);
 
-        changePasswordButton = new JButton("change password");
+        changePasswordButton = new JButton(Constants.CHANGE_PW_BTN);
         changePasswordButton.addActionListener(this);
 
         // 2. Add components to the panel
