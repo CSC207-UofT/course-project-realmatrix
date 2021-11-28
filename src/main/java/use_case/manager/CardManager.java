@@ -9,6 +9,7 @@ import use_case.output_boundaries.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * A CardManager manages all cards in current pack.
@@ -117,7 +118,8 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         ArrayList<Card> cardList = programStateInputBoundary.getCurrPack().getCardList();
         ArrayList<Card> result = new ArrayList<>();
         for (Card c : cardList) {
-            if (c.getTerm().toLowerCase().contains(keyword.toLowerCase())) {
+            if (c.getTerm().toLowerCase().contains(keyword.toLowerCase())
+                    || c.getDefinition().toLowerCase().contains(keyword.toLowerCase())) {
                 result.add(c);
             }
         }
