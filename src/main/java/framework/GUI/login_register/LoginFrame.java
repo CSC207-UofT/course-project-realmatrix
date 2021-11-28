@@ -1,8 +1,5 @@
 package framework.GUI.login_register;
 
-import entity.Card;
-import entity.User;
-import framework.GUI.BasicFrame;
 import framework.GUI.start.StartFrame;
 import framework.GUI.user.UserFrame;
 import interface_adapter.Controller.LogInOutController;
@@ -10,22 +7,16 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.LogInOutPresenter;
-import use_case.constants.Constants;
 import use_case.input_boundaries.LogInOutInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
-import use_case.input_boundaries.UserInputBoundary;
 import use_case.manager.LogInOutManager;
 import use_case.manager.ProgramStateManager;
-import use_case.manager.UserManager;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.LogInOutOutputBoundary;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * A login frame which allows users to login.
@@ -34,10 +25,10 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
     private final JButton lgButton;       // Button that confirms login
 
     public LoginFrame(ProgramStateInputBoundary programStateInputBoundary) {
-        super(Constants.LOGIN_BTN, programStateInputBoundary);
+        super("Login", programStateInputBoundary);
 
         // Create component: login button
-        lgButton = new JButton(Constants.LOGIN_BTN);
+        lgButton = new JButton("Login");
         lgButton.addActionListener(this);
 
         // Layout Components
@@ -51,7 +42,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
      */
     @Override
     protected void layoutRestComp() {
-        lgButton.setBounds(backButton.getX() + Constants.EXTRA_X, backButton.getY(),
+        lgButton.setBounds(backButton.getX() + 150, backButton.getY(),
                 backButton.getWidth(), backButton.getHeight());
         add(lgButton);
     }
@@ -75,8 +66,8 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
                 new UserFrame(username.getText(), this.programStateInputBoundary);
             } else {    // login fails
                 JOptionPane.showMessageDialog(this,
-                        Constants.LOGIN_FAIL_MSG,
-                        Constants.LOGIN_FAIL,
+                        "Wrong password  OR  the username doesn't exist", // TODO: constant
+                        "Login Fails",
                         JOptionPane.WARNING_MESSAGE);
             }
         }

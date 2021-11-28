@@ -18,6 +18,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A frame for changing username.
+ */
 public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
     final String username;
     final JPanel changeNamePanel;
@@ -54,6 +57,9 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Add all components into panel.
+     */
     private void addComp() {
         changeNamePanel.add(message);
         changeNamePanel.add(newName);

@@ -1,7 +1,6 @@
 package use_case.manager;
 
 import entity.Card;
-import entity.Pack;
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
@@ -10,6 +9,7 @@ import use_case.output_boundaries.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * A CardManager manages all cards in current pack.
@@ -112,37 +112,38 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
     /**
      * Users can search cards by card's term and definition (not necessarily equal to) keyword.
      *  @param keyword              the term that the user searches
-     * @param searchCardOutputBoundary a search output boundary for getting the search result.
+     * @param sortSearchCardOutputBoundary a search output boundary for getting the search result.
      */
-    public void searchCard(String keyword, SearchCardOutputBoundary searchCardOutputBoundary) {
+    public void searchCard(String keyword, SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
         ArrayList<Card> cardList = programStateInputBoundary.getCurrPack().getCardList();
-        ArrayList<String[]> result = new ArrayList<>();
+        ArrayList<Card> result = new ArrayList<>();
         for (Card c : cardList) {
-            if (c.getTerm().toLowerCase().contains(keyword.toLowerCase())) {
-                result.add(new String[]{c.getTerm(), c.getDefinition()});
+            if (c.getTerm().toLowerCase().contains(keyword.toLowerCase())
+                    || c.getDefinition().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(c);
             }
         }
-        searchCardOutputBoundary.setSearchResult(result);
+        presentSortSearchResult(result, sortSearchCardOutputBoundary);
     }
 
     /**
      * Sort a card list by date added: oldest to newest.
      *
-     * @param sortOutputBoundary a sort output boundary for getting the sorted output.
+     * @param sortSearchCardOutputBoundary a sort output boundary for getting the sorted output.
      */
-    public void sortOldToNew(SortCardOutputBoundary sortOutputBoundary) {
-        presentSortResult(programStateInputBoundary.getCurrPack().getCardList(), sortOutputBoundary);
+    public void sortOldToNew(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
+        presentSortSearchResult(programStateInputBoundary.getCurrPack().getCardList(), sortSearchCardOutputBoundary);
     }
 
     /**
      * Sort cards by cards' terms' alphabetical order: a - z.
      *
-     * @param sortCardOutputBoundary a sort output boundary for getting the sorted output.
+     * @param sortSearchCardOutputBoundary a sort output boundary for getting the sorted output.
      */
-    public void sortAtoZ(SortCardOutputBoundary sortCardOutputBoundary) {
+    public void sortAtoZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
         ArrayList<Card> sorted = new ArrayList<>(this.items.values());
         sorted.sort(new AlphabetComparator());
-        presentSortResult(sorted, sortCardOutputBoundary);
+        presentSortSearchResult(sorted, sortSearchCardOutputBoundary);
     }
 
 //    /**
@@ -150,7 +151,7 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
 //     *
 //     * @param sortCardOutputBoundary a sort output boundary for getting the sorted output.
 //     */
-//    public void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary) {
+//    public void sortZtoA(SortSearchCardOutputBoundary sortCardOutputBoundary) {
 //        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
 //        sorted.sort(new AlphabetComparator().reversed());
 //        presentSortResult(sorted, sortCardOutputBoundary);
@@ -160,12 +161,12 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
     /**
      * Sort a card list by cards' proficiency: low to high.
      *
-     * @param sortCardOutputBoundary an output boundary that gets the result of sorted cards
+     * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards
      */
-    public void sortProLowToHigh(SortCardOutputBoundary sortCardOutputBoundary) {
+    public void sortProLowToHigh(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
         ArrayList<Card> sorted = new ArrayList<>(this.items.values());
         sorted.sort(new ProficiencyComparator());
-        presentSortResult(sorted, sortCardOutputBoundary);
+        presentSortSearchResult(sorted, sortSearchCardOutputBoundary);
     }
 //
 //    /**
@@ -182,26 +183,27 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
     /**
      * Return a card list sorted in random order.
      *
-     * @param sortCardOutputBoundary a sort output boundary for getting the sorted output.
+     * @param sortSearchCardOutputBoundary a sort output boundary for getting the sorted output.
      */
-    public void sortRandom(SortCardOutputBoundary sortCardOutputBoundary) {
+    public void sortRandom(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
         ArrayList<Card> sorted = new ArrayList<>(this.items.values());
         Collections.shuffle(sorted);
-        presentSortResult(sorted, sortCardOutputBoundary);
+        presentSortSearchResult(sorted, sortSearchCardOutputBoundary);
     }
 
     /**
      * Helper method for present sorted cards.
      * @param sorted An arraylist of cards that are sorted according to some algorithm.
-     * @param sortCardOutputBoundary a sort output boundary that receives the result of sorted cards.
+     * @param sortSearchCardOutputBoundary a sort output boundary that receives the result of sorted cards.
      */
-    private void presentSortResult(ArrayList<Card> sorted, SortCardOutputBoundary sortCardOutputBoundary) {
-        ArrayList<String[]> presentResult = new ArrayList<>();
-        for (Card c : sorted) {
-            String[] termDefList = new String[]{c.getTerm(), c.getDefinition()};
-            presentResult.add(termDefList);
+    private void presentSortSearchResult(ArrayList<Card> sorted, SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
+        String[][] presentResult = new String[sorted.size()][2];
+        for (int i = 0; i < sorted.size(); i++) {
+            String term = sorted.get(i).getTerm();
+            String def = sorted.get(i).getDefinition();
+            presentResult[i] = new String[]{term, def};
         }
-        sortCardOutputBoundary.setSortResult(presentResult);
+        sortSearchCardOutputBoundary.setSortSearchResult(presentResult);
     }
 
 

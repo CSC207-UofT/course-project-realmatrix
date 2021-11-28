@@ -16,6 +16,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A frame for changing password.
+ */
 public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     final String username;
     final JPanel changePasswordPanel;
@@ -52,6 +55,9 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Add all components into panel.
+     */
     private void addComp() {
         changePasswordPanel.add(message);
         changePasswordPanel.add(newPassword);

@@ -12,6 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The first frame shown to users when they launch the program.
+ */
 public class StartFrame extends BasicFrame implements ActionListener {
     final JPanel startPanel;      // The panel shown on the start frame
     final JLabel helloMessage;    // Greet the user
@@ -70,7 +73,7 @@ public class StartFrame extends BasicFrame implements ActionListener {
     // Test
     public static void main(String[] args) {
         ProgramStateInputBoundary ps = new ProgramStateManager();
-        JFrame f = new StartFrame(ps);
+        new StartFrame(ps);
     }
 
 }
