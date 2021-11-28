@@ -4,6 +4,7 @@ import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.Pack.PackFrame;
 import interface_adapter.Controller.CardController;
+import interface_adapter.Controller.ProgramStateController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.*;
@@ -272,7 +273,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == deleteButton) {
+        else if (e.getSource() == deleteButton) {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a card first.", // TODO: constant
@@ -284,7 +285,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == reviewButton) {
+        else if (e.getSource() == reviewButton) {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a card first.", // TODO: constant
@@ -296,7 +297,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == learnButton) {
+        else if (e.getSource() == learnButton) {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a card first.", // TODO: constant
@@ -308,8 +309,9 @@ public class CardFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == backButton) {
-            programStateInputBoundary.setCurrPack(null);
+        else if (e.getSource() == backButton) {
+            ProgramStateController psController = new ProgramStateController(programStateInputBoundary);
+            psController.setCurrPack(null);
             new PackFrame(programStateInputBoundary);
             setVisible(false);
         }
