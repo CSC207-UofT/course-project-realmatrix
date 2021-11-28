@@ -3,7 +3,6 @@ package framework.GUI.card;
 import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.Pack.PackFrame;
-import framework.GUI.user.UserFrame;
 import interface_adapter.Controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
@@ -17,25 +16,24 @@ import use_case.output_boundaries.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class CardFrame extends BasicFrame implements ActionListener {
 
     private final JPanel panel = new JPanel(null); // The whole panel in the frame
 
-    /** Construct Card List */
-    private final JScrollPane cardListPanel;  // A scrollable panel that stores a JList of card
-    private ArrayList<String[]> cardList;     // Data for cardListModel
-    private final DefaultListModel<String[]> cardListModel;   // Model for JList
-    private final JList<String> cardJList;  // A JList that contains card names
-    private String selectedCardName; // The term in cards that the user selects
+    /** Construct Card Table */
+    private final JScrollPane cardTablePanel;  // A scrollable panel that stores a JList of card
+    private final String[] colNames = new String[]{"Term", "Definition"};
+    private final DefaultTableModel cardTableModel;   // Model for JTable
+    private final JTable cardJTable;  // A JTable that contains card terms & definition
+    private final String selectedCardTerm = "";
 
     /** Construct Search */
     private final JLabel searchLabel;
@@ -57,24 +55,23 @@ public class CardFrame extends BasicFrame implements ActionListener {
     private final CardController cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
 
     public CardFrame(ProgramStateInputBoundary programStateInputBoundary) {
-        super("Card List", programStateInputBoundary);
-        // Construct cardListPanel
-        cardListModel = new DefaultListModel<>();
-        setCardListModel(); // By default, the model contains Card by old-to-new order
-
-        cardJList = new JList(cardListModel);
-        cardJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); // User can only select one card at a time
-        cardJList.addListSelectionListener(new ListSelectionListener() {
+        super("[" + programStateInputBoundary.getCurrPackName()+ "] Card List", programStateInputBoundary);
+        // Construct cardStrListPanel
+        cardTableModel = new DefaultTableModel() {
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-                selectedCardName = cardJList.getSelectedValue();
-                programStateInputBoundary.setCurrCard(selectedCardName);
+            public boolean isCellEditable(int row, int column) {
+                return false;
             }
-        });
+        };
+        setCardTableModel(); // By default, the model contains Card by old-to-new order
 
-        cardListPanel = new JScrollPane(cardJList);
-        cardListPanel.setSize(250, 600);
-        panel.add(cardListPanel);
+        cardJTable = new JTable(cardTableModel);
+        cardJTable.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); // User can only select one card at a time
+        addTableListener();
+
+        cardTablePanel = new JScrollPane(cardJTable);
+        cardTablePanel.setSize(250, 600);
+        panel.add(cardTablePanel);
 
         // Search
         searchLabel = new JLabel("Search:");
@@ -100,13 +97,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
         // Add Card
         addButton = new JButton("Add Card");
         addButton.setBounds(280, 120, 200, 50);
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddCardFrame(programStateInputBoundary);
-                setVisible(false);
-            }
-        });
+        addButton.addActionListener(this);
         panel.add(addButton);
 
         // Edit Card
@@ -121,28 +112,24 @@ public class CardFrame extends BasicFrame implements ActionListener {
         deleteButton.addActionListener(this);
         panel.add(deleteButton);
 
-        // Review Card
-        reviewButton = new JButton("Review Card");
-        reviewButton.setBounds(280, 280, 200, 50);
+        // Review Cards
+        reviewButton = new JButton("Review Cards");
+        reviewButton.setBounds(280, 360, 200, 50);
+        reviewButton.setForeground(Color.red);
         reviewButton.addActionListener(this);
         panel.add(reviewButton);
 
-        //Learn Card
-        learnButton = new JButton("Learn Card");
-        learnButton.setBounds(280, 280, 200, 50);
+        //Learn Cards
+        learnButton = new JButton("Learn Cards");
+        learnButton.setBounds(280, 440, 200, 50);
+        learnButton.setForeground(Color.red);
         learnButton.addActionListener(this);
         panel.add(learnButton);
 
         // Back button
-        backButton = new JButton("Back to Pack Page");
-        backButton.setBounds(280, 430, 200, 50);
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new PackFrame(programStateInputBoundary);
-                setVisible(false);
-            }
-        });
+        backButton = new JButton("Back to PackList Page");
+        backButton.setBounds(280, 520, 200, 50);
+        backButton.addActionListener(this);
         panel.add(backButton);
 
         add(panel);
@@ -150,50 +137,61 @@ public class CardFrame extends BasicFrame implements ActionListener {
     }
 
     /**
-     * Helper method for construct cardListModel of JList.
+     * Helper method for construct cardStrListModel of JList.
      * Set this model to a list of Cards (in old-to-new order) this current pack has.
      */
-    private void setCardListModel() {
-        cardListModel.removeAllElements();
+    private void setCardTableModel() {
         // Get arraylist of Cards
-        SortCardOutputBoundary sortCardPresenter = new SortCardPresenter();
-        cardController.sortOldToNew(sortCardPresenter);
-        cardList = sortCardPresenter.getSortResult();
+        SortSearchCardOutputBoundary sortSearchCardPresenter = new SortSearchCardPresenter();
+        cardController.sortOldToNew(sortSearchCardPresenter);
+        String[][] cardStrList = sortSearchCardPresenter.getSortSearchResult();
 
-        for (String[] cardName : cardList) {
-            cardListModel.addElement(cardName);
-        }
+        cardTableModel.setDataVector(cardStrList, colNames);
     }
 
     /**
-     * Set cardListModel with a specified cardNameList, used when search/sort.
-     * @param cardNameList An arraylist that contains Cards in specific order.
+     * Set cardStrListModel with a specified cardStrList, used when search/sort.
+     * @param cardStrList An arraylist that contains Cards in specific order.
      */
-    private void setCardListModel(ArrayList<String[]> cardNameList) {
+    private void setCardTableModel(String[][] cardStrList) {
         // Get arraylist of Card
-        cardListModel.removeAllElements();
-        for (String[] cardName : cardNameList) {
-            cardListModel.addElement(cardName);
-        }
+        cardTableModel.setRowCount(0);
+        cardTableModel.setDataVector(cardStrList, colNames);
+        cardTableModel.setRowCount(cardStrList.length);
+    }
+
+
+    /**
+     * Listener for selecting table row.
+     * This helps set currCard in program state to the selected card.
+     */
+    private void addTableListener() {
+        cardJTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String cardTerm = cardJTable.getValueAt(cardJTable.getSelectedRow(), 0).toString();
+                programStateInputBoundary.setCurrCard(cardTerm);
+            }
+        });
     }
 
     /**
      * Search functionality.
      */
     private void search() {
-        SearchCardOutputBoundary searchCardOutputBoundary = new SearchCardPresenter();
-        cardController.searchCard(searchText.getText(), searchCardOutputBoundary);
-        ArrayList result = new ArrayList(searchCardOutputBoundary.getSearchResult().keySet());
-        setCardListModel(result);
+        SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
+        cardController.searchCard(searchText.getText(), sortSearchCardOutputBoundary);
+        String[][] result = sortSearchCardOutputBoundary.getSortSearchResult();
+        setCardTableModel(result);
     }
 
     /**
      * Sort Card by A - Z order.
      */
     private void sortAToZ() {
-        SortCardOutputBoundary sortCardPresenter = new SortCardPresenter();
+        SortSearchCardOutputBoundary sortCardPresenter = new SortSearchCardPresenter();
         cardController.sortAToZ(sortCardPresenter);
-        setCardListModel(sortCardPresenter.getSortResult());
+        setCardTableModel(sortCardPresenter.getSortSearchResult());
     }
 
     /**
@@ -214,12 +212,17 @@ public class CardFrame extends BasicFrame implements ActionListener {
                     sortAToZ();
                     break;
                 case "Old - New":
-                    setCardListModel();
+                    setCardTableModel();
             }
         }
 
+        if (e.getSource() == addButton) {
+            new AddCardFrame(programStateInputBoundary);
+            setVisible(false);
+        }
+
         if (e.getSource() == editButton) {
-            if (selectedCardName == null) {
+            if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a Card first.", // TODO: constant
                         "No Card for editting",
@@ -231,19 +234,19 @@ public class CardFrame extends BasicFrame implements ActionListener {
         }
 
         if (e.getSource() == deleteButton) {
-            if (selectedCardName == null) {
+            if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a card first.", // TODO: constant
                         "No Card for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                cardController.deleteCard(selectedCardName);
-                setCardListModel();
+                cardController.deleteCard(selectedCardTerm);
+                setCardTableModel();
             }
         }
 
         if (e.getSource() == reviewButton) {
-            if (selectedCardName == null) {
+            if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a card first.", // TODO: constant
                         "No Card for deletion",
@@ -255,7 +258,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
         }
 
         if (e.getSource() == learnButton) {
-            if (selectedCardName == null) {
+            if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a card first.", // TODO: constant
                         "No Card for deletion",
@@ -266,6 +269,11 @@ public class CardFrame extends BasicFrame implements ActionListener {
             }
         }
 
+        if (e.getSource() == backButton) {
+            programStateInputBoundary.setCurrPack(null);
+            new PackFrame(programStateInputBoundary);
+            setVisible(false);
+        }
 
     }
 
@@ -276,6 +284,7 @@ public class CardFrame extends BasicFrame implements ActionListener {
         Loader loader = new Loader();
         loader.userLoad(user);
         ps.setCurrUser(user);
+        ps.setCurrPack("vocabulary");
         new CardFrame(ps);
     }
 }
