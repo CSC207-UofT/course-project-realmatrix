@@ -1,5 +1,6 @@
 package framework.GUI.learn_review;
 
+import entity.Card;
 import entity.Pack;
 import entity.User;
 import framework.GUI.BasicFrame;
@@ -62,9 +63,14 @@ public class LearnFrame extends BasicFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        LearnOutputBoundary learnOutputBoundary = new LearnPresenter();
+        LearnInputBoundary learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(), learnOutputBoundary);
+        LearnController learnController = new LearnController(learnInputBoundary);
+        learnController.next();
+
         if(e.getSource() == this.nextButton){
-            if(check()){
-                this.card.setText(programStateInputBoundary.getCurrCard().toString());
+            if(!learnOutputBoundary.getLearnCompleted()){
+                this.card.setText("<html><p>"+learnOutputBoundary.getCurrCardStrRep() + "</p><html>");
             }else{
                 this.card.setText("<html><p>you have already completed learning of this pack</p><html>");
             }
@@ -74,19 +80,14 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         }
     }
 
-    private boolean check(){
-        LearnOutputBoundary learnOutputBoundary = new LearnPresenter();
-        LearnInputBoundary learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(), learnOutputBoundary);
-        LearnController learnController = new LearnController(learnInputBoundary);
-
-        learnController.next();
-        return !learnOutputBoundary.getLearnCompleted();
-    }
 
     public static void main(String[] args) throws IOException {
         ProgramStateInputBoundary ps = new ProgramStateManager();
         User user = new User("Yifan", "password");
         Pack vocab = new Pack("vocab");
+        vocab.addCard(new Card("apple","fruit"));
+        vocab.addCard(new Card("banana","fruit"));
+        vocab.addCard(new Card("bee","animal"));
         user.addPackage(vocab);
         Loader loader = new Loader();
         loader.userLoad(user);
