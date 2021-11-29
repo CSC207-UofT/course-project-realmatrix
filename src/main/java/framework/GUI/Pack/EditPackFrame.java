@@ -62,7 +62,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editButton) {
             if (check() || packText.getText().equals(old_name)) {  // Edit succeeds
-                new PackFrame(programStateInputBoundary);
+                new PackListFrame(programStateInputBoundary);
                 setVisible(false);
             } else {    // add fails: pack already exists
                 JOptionPane.showMessageDialog(this,
@@ -73,7 +73,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
         }
 
         if (e.getSource() == backButton) {
-            new PackFrame(programStateInputBoundary);
+            new PackListFrame(programStateInputBoundary);
             setVisible(false);
         }
 

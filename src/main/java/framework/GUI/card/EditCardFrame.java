@@ -8,7 +8,6 @@ import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.ChangeOutputBoundary;
 
 import javax.swing.*;
@@ -83,11 +82,11 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
             if (termText.getText().equals(programStateInputBoundary.getCurrCardTerm())) {
                 cardController.changeCardDefinition(defText.getText());
                 programStateInputBoundary.setCurrCard(null);
-                new CardFrame(programStateInputBoundary);
+                new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             } else if (check()){ // edit card term succeeds
                 programStateInputBoundary.setCurrCard(null);
-                new CardFrame(programStateInputBoundary);
+                new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             } else {    // edit fails: card term already exists
                 JOptionPane.showMessageDialog(this,
@@ -98,7 +97,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         }
         if (e.getSource() == backButton) {
             programStateInputBoundary.setCurrCard(null);
-            new CardFrame(programStateInputBoundary);
+            new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
     }

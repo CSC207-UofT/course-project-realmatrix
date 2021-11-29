@@ -75,7 +75,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         if (e.getSource() == addButton) {
             if (check()) {  // add succeeds
                 setVisible(false);
-                new CardFrame(programStateInputBoundary);
+                new CardListFrame(programStateInputBoundary);
             } else {    // add fails: card already exists
                 JOptionPane.showMessageDialog(this,
                         "This Card term has existed. Add another one please~", // TODO: constant
@@ -85,7 +85,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         }
 
         else if (e.getSource() == backButton) {
-            new CardFrame(programStateInputBoundary);
+            new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
 
