@@ -15,6 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * A frame for changing password.
@@ -23,7 +24,8 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     final String username;
     final JPanel changePasswordPanel;
     final JLabel message;
-    final JTextField newPassword;
+    final JPasswordField newPassword1;
+    final JPasswordField newPassword2;
     final JLabel newPasswordLabel;
     final JButton finishButton;
 
@@ -34,14 +36,16 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         super(Constants.CHANGE_PW, programStateInputBoundary);
         this.username = username;
         // 1. Create components shown on the frame
-        changePasswordPanel = new JPanel(new GridLayout(3, 1));
+        changePasswordPanel = new JPanel(new GridLayout(4, 1));
 
         message = new JLabel(Constants.CHANGE_PW, SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        newPassword = new JTextField(Constants.COLUMNS1);
+        newPassword1 = new JPasswordField(Constants.COLUMNS1);
         newPasswordLabel = new JLabel(Constants.NEW_PW_MSG, JLabel.TRAILING); // TODO: label doesn't show up. fix this
-        newPassword.add(newPasswordLabel);
+        newPassword1.add(newPasswordLabel);
+
+        newPassword2 = new JPasswordField(Constants.COLUMNS1);
 
         finishButton = new JButton(Constants.DONE_BTN);
         finishButton.addActionListener(this);
@@ -60,7 +64,8 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
      */
     private void addComp() {
         changePasswordPanel.add(message);
-        changePasswordPanel.add(newPassword);
+        changePasswordPanel.add(newPassword1);
+        changePasswordPanel.add(newPassword2);
         changePasswordPanel.add(finishButton);
     }
 
@@ -71,6 +76,32 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) { // user finishes entering new password
+        String password1 = String.valueOf(newPassword1.getPassword());
+        String password2 = String.valueOf(newPassword2.getPassword());
+        // Check if passwords are equal
+        if (!password1.equals(password2)) {
+            JOptionPane.showMessageDialog(this,
+                    "Passwords don't match",
+                    "Change fails",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (password1.length() == 0) {   // check if password is null
+                JOptionPane.showMessageDialog(this,
+                        "Passwords can't be empty",
+                        "Change fails",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        else {  // The password is valid for change
+            changePassword();
+            JOptionPane.showMessageDialog(this, Constants.PW_CHANGED_SUCCEED);
+            new UserFrame(username, programStateInputBoundary);
+            setVisible(false);
+        }
+    }
+
+    /**
+     * Change the user's password
+     */
+    private void changePassword() {
         // Constructs a userManager
         IDataInOut dataInOut = new DataInOut();
         DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
@@ -81,12 +112,6 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         UserController userController = new UserController(manager, databaseErrorOutputBoundary);
 
         // Call change password method
-        userController.changePassword(newPassword.getText());
-        manager.changePassword(newPassword.getText());
-
-        // Check if successfully changed
-        JOptionPane.showMessageDialog(this, Constants.PW_CHANGED_SUCCEED);
-        new UserFrame(username, programStateInputBoundary);
-        setVisible(false);
+        userController.changePassword(String.valueOf(newPassword1.getPassword()));
     }
 }
