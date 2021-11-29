@@ -2,10 +2,9 @@ package framework.GUI.Pack;
 
 import entity.User;
 import framework.GUI.BasicFrame;
-import framework.GUI.card.CardFrame;
+import framework.GUI.card.CardListFrame;
 import framework.GUI.user.UserFrame;
 import interface_adapter.Controller.PackController;
-import interface_adapter.Controller.ProgramStateController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
@@ -32,10 +31,10 @@ import java.util.Objects;
 /**
  * A pack frame where users can interact with all packs they've created.
  */
-public class PackFrame extends BasicFrame implements ActionListener {
+public class PackListFrame extends BasicFrame implements ActionListener {
     // Pack name list
-    private final DefaultListModel<String> packListModel;   // Model for JList
-    private final JList<String> packJList;  // A JList that contains pack names
+    private DefaultListModel<String> packListModel;   // Model for JList
+    private JList<String> packJList;  // A JList that contains pack names
     // Search
     private final JTextField searchText;    // A text field for user to enter pack name for sesarch
     // Sort
@@ -47,30 +46,19 @@ public class PackFrame extends BasicFrame implements ActionListener {
     private final JButton backButton; // Back button
 
     private final PackController packController;
-    private final ProgramStateController psController;
+    private final JPanel panel;
 
-    public PackFrame(ProgramStateInputBoundary programStateInputBoundary) {
+    public PackListFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Pack List", programStateInputBoundary);
         // Pack & programState controller
         PackInputBoundary packManager = new PackManager(new DataInOut(), programStateInputBoundary);
         packController = new PackController(packManager, new DatabaseErrMsgPresenter());
-        psController = new ProgramStateController(programStateInputBoundary);
 
         // The whole panel in the frame
-        JPanel panel = new JPanel(null);
+        panel = new JPanel(null);
 
-        // Construct packListPanel
-        packListModel = new DefaultListModel<>();
-        setPackListModel(); // By default, the model contains pack names by old-to-new order
-
-        packJList = new JList<>(packListModel);
-        packJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); // User can only select one pack at a time
-        addJListListener();
-
-        // A scrollable panel that stores a JList of pack names
-        JScrollPane packListPanel = new JScrollPane(packJList);
-        packListPanel.setSize(250, 600);
-        panel.add(packListPanel);
+        // Construct Pack JList
+        constructPackList();
 
         // Search
         JLabel searchLabel = new JLabel("Search:");
@@ -121,6 +109,21 @@ public class PackFrame extends BasicFrame implements ActionListener {
         setVisible(true);
     }
 
+    private void constructPackList() {
+        // Construct packListPanel
+        packListModel = new DefaultListModel<>();
+        setPackListModel(); // By default, the model contains pack names by old-to-new order
+
+        packJList = new JList<>(packListModel);
+        packJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION); // User can only select one pack at a time
+        addJListListener();
+
+        // A scrollable panel that stores a JList of pack names
+        JScrollPane packListPanel = new JScrollPane(packJList);
+        packListPanel.setSize(250, 600);
+        panel.add(packListPanel);
+    }
+
     /**
      * Helper method for construct packListModel of JList.
      * Set this model to a list of pack names (in old-to-new order) this current user has.
@@ -158,7 +161,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
                 if (e.getClickCount() == 2) {
                     psController.setCurrPack(packJList.getSelectedValue());
                     setVisible(false);
-                    new CardFrame(programStateInputBoundary);
+                    new CardListFrame(programStateInputBoundary);
                 }
             }
         });
@@ -271,6 +274,6 @@ public class PackFrame extends BasicFrame implements ActionListener {
         Loader loader = new Loader();
         loader.userLoad(user);
         ps.setCurrUser(user);
-        new PackFrame(ps);
+        new PackListFrame(ps);
     }
 }

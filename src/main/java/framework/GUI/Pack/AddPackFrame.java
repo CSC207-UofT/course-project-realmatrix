@@ -14,7 +14,6 @@ import use_case.manager.PackManager;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -62,7 +61,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
         if (e.getSource() == addButton) {
             if (check()) {  // add succeeds
                 setVisible(false);
-                new PackFrame(programStateInputBoundary);
+                new PackListFrame(programStateInputBoundary);
             } else {    // add fails: pack already exists
                 JOptionPane.showMessageDialog(this,
                         "This Pack has existed. Add another one please~", // TODO: constant
@@ -72,7 +71,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
         }
 
         if (e.getSource() == backButton) {
-            new PackFrame(programStateInputBoundary);
+            new PackListFrame(programStateInputBoundary);
             setVisible(false);
         }
 

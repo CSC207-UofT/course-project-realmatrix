@@ -1,5 +1,6 @@
 package framework.GUI;
 
+import interface_adapter.Controller.ProgramStateController;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import javax.swing.*;
  */
 public class BasicFrame extends JFrame {
     protected final ProgramStateInputBoundary programStateInputBoundary;
+    protected final ProgramStateController psController;
 
     public BasicFrame(String title, ProgramStateInputBoundary programStateInputBoundary) {
         super(title);
@@ -16,5 +18,6 @@ public class BasicFrame extends JFrame {
         setSize(500, 600);
         setLocationRelativeTo(null);
         this.programStateInputBoundary = programStateInputBoundary;
+        psController = new ProgramStateController(programStateInputBoundary);
     }
 }

@@ -1,6 +1,7 @@
 package framework.GUI.login_register;
 
 import framework.GUI.start.StartFrame;
+import framework.GUI.user.UserFrame;
 import interface_adapter.Controller.RegisterController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -79,11 +80,14 @@ public class RegisterFrame extends LogRegFrame {
                         "Passwords didn't match. Try again.", // TODO: constant
                         "Registration Fails",
                         JOptionPane.WARNING_MESSAGE);
-            }
-
-            if (check()) {  // Registration succeeds
+            } else if (pw2.getPassword().length == 0) {   // check if password is empty
+                JOptionPane.showMessageDialog(this,
+                        "Passwords can't be empty",
+                        "Change fails",
+                        JOptionPane.WARNING_MESSAGE);
+            } else if (check()) {  // Registration succeeds
                 setVisible(false);
-                //TODO: go to UserFrame.
+                new UserFrame(username.getText(), programStateInputBoundary);
             } else {    // Registration fails: username already exists
                 JOptionPane.showMessageDialog(this,
                         "This username is taken. Choose another one please~", // TODO: constant
@@ -92,7 +96,7 @@ public class RegisterFrame extends LogRegFrame {
             }
         }
 
-        if (source == backButton) {
+        else if (source == backButton) {
             new StartFrame(new ProgramStateManager());
             setVisible(false);
         }

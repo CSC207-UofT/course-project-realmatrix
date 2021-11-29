@@ -1,8 +1,7 @@
 package framework.GUI.user;
 
-import entity.User;
 import framework.GUI.BasicFrame;
-import framework.GUI.Pack.PackFrame;
+import framework.GUI.Pack.PackListFrame;
 import framework.GUI.start.StartFrame;
 import use_case.constants.Constants;
 import interface_adapter.Controller.LogInOutController;
@@ -94,7 +93,7 @@ public class UserFrame extends BasicFrame implements ActionListener {
         } else if (e.getSource() == changePasswordButton) {
             new ChangePasswordFrame(username, this.programStateInputBoundary);
         } else if (e.getSource() == checkOutPackagesButton) {
-            new PackFrame(programStateInputBoundary);
+            new PackListFrame(programStateInputBoundary);
         }
         setVisible(false);
     }
