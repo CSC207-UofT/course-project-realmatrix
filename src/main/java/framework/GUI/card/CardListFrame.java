@@ -53,7 +53,8 @@ public class CardListFrame extends BasicFrame implements ActionListener {
 
 
     public CardListFrame(ProgramStateInputBoundary programStateInputBoundary) {
-        super("[" + programStateInputBoundary.getCurrPackName()+ "] Card List", programStateInputBoundary);
+        super("Card List", programStateInputBoundary);
+        setTitle("[" + psController.getCurrPackName() + "] Card List");
         // Card Controller
         CardInputBoundary cardManager = new CardManager(new DataInOut(), programStateInputBoundary);
         cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());

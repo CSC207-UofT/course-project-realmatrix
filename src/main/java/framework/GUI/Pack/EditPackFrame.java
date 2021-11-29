@@ -28,7 +28,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
 
     public EditPackFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Edit Pack", programStateInputBoundary);
-        old_name = programStateInputBoundary.getCurrPackName();
+        old_name = psController.getCurrPackName();
         packText.setText(old_name);
         JPanel panel = new JPanel();
 
