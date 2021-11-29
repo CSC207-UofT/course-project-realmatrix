@@ -51,6 +51,22 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
     }
 
     @Override
+    public String getCurrCardTerm() {
+        if (ps.getCurrCard() != null) {
+            return ps.getCurrCard().getTerm();
+        }
+        return null;
+    }
+
+    @Override
+    public String getCurrCardDefinition() {
+        if (ps.getCurrCard() != null) {
+            return ps.getCurrCard().getDefinition();
+        }
+        return null;
+    }
+
+    @Override
     public void setCurrUser(User user) {
         ps.setCurrUser(user);
     }
@@ -58,14 +74,22 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
     @Override
     public void setCurrPack(String packname) {
         // Know: ps.currUser is not null
-        HashMap<String, Pack> packMap = ps.getCurrUser().getPackageMap();
-        ps.setCurrPack(packMap.get(packname));
+        if (packname != null) {
+            HashMap<String, Pack> packMap = ps.getCurrUser().getPackageMap();
+            ps.setCurrPack(packMap.get(packname));
+        } else {
+            ps.setCurrPack(null);
+        }
     }
 
     @Override
     public void setCurrCard(String cardTerm) {
         // Know: ps.currPack is not null
-        HashMap<String, Card> cardMap = ps.getCurrPack().getCardMap();
-        ps.setCurrCard(cardMap.get(cardTerm));
+        if (cardTerm != null) {
+            HashMap<String, Card> cardMap = ps.getCurrPack().getCardMap();
+            ps.setCurrCard(cardMap.get(cardTerm));
+        } else {
+            ps.setCurrCard(null);
+        }
     }
 }

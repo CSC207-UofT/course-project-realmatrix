@@ -3,6 +3,7 @@ package framework.GUI.start;
 import framework.GUI.BasicFrame;
 import framework.GUI.login_register.LoginFrame;
 import framework.GUI.login_register.RegisterFrame;
+import use_case.constants.Constants;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.ProgramStateManager;
 
@@ -11,6 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The first frame shown to users when they launch the program.
+ */
 public class StartFrame extends BasicFrame implements ActionListener {
     final JPanel startPanel;      // The panel shown on the start frame
     final JLabel helloMessage;    // Greet the user
@@ -21,17 +25,17 @@ public class StartFrame extends BasicFrame implements ActionListener {
      * Build a StartFrame.
      */
     public StartFrame(ProgramStateInputBoundary programStateInputBoundary) {
-        super("Recaller", programStateInputBoundary);
+        super(Constants.RECALLER_BTN, programStateInputBoundary);
         // 1. Create components shown on the frame
         startPanel = new JPanel(new GridLayout(3, 1));
 
-        helloMessage = new JLabel("Welcome to Recaller!", SwingConstants.CENTER);
+        helloMessage = new JLabel(Constants.WELLCOME_MSG, SwingConstants.CENTER);
         helloMessage.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        lgButton = new StartButton("Login");
+        lgButton = new StartButton(Constants.LOGIN_BTN);
         lgButton.addActionListener(this);
 
-        rgButton = new StartButton("Register");
+        rgButton = new StartButton(Constants.REG_BTN);
         rgButton.addActionListener(this);
 
         // 2. Add components to the panel
@@ -69,7 +73,7 @@ public class StartFrame extends BasicFrame implements ActionListener {
     // Test
     public static void main(String[] args) {
         ProgramStateInputBoundary ps = new ProgramStateManager();
-        JFrame f = new StartFrame(ps);
+        new StartFrame(ps);
     }
 
 }

@@ -1,7 +1,6 @@
 package framework.GUI.login_register;
 
 import framework.GUI.BasicFrame;
-import interface_adapter.Controller.ProgramStateController;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 
 import javax.swing.*;
@@ -82,7 +81,7 @@ public abstract class LogRegFrame extends BasicFrame implements ActionListener {
     /**
      * Method for checking whether registration/login is valid.
      */
-    protected abstract boolean check() throws Exception;
+    protected abstract boolean check();
 
     @Override
     public abstract void actionPerformed(ActionEvent e);

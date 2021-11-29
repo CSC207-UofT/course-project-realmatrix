@@ -8,7 +8,7 @@ public class Card {
     private String term;
     private String definition;
     private boolean definitionHidden; // If true, hide definition so that users cannot see
-    private int proficiency; // proficiency represents to what extent the user has mastered this card, ranges from 0-5
+    private int proficiency; // proficiency represents to what extent the user has mastered this card, ranges from 0-3
 
     /**
      * Construct a Card with given id, term, and definition.
@@ -53,6 +53,14 @@ public class Card {
     public void setProficiency(int pro) {
         this.proficiency = pro;
     }
+
+//    public void setProficiencyToMax(){
+//        this.proficiency = Constants.PROFICIENCY_MAX;
+//    }
+//
+//    public void setProficiencyToMin(){
+//        this.proficiency = Constants.PROFICIENCY_MIN;
+//    }
 
     /**
      * Change the term on this card to a new term.

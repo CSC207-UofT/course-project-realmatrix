@@ -1,11 +1,11 @@
 //import entity.Card;
 //import entity.Pack;
-//import interface_adapter.presenters.SortCardPresenter;
+//import interface_adapter.presenters.SortSearchCardPresenter;
 //import org.junit.Before;
 //import org.junit.Test;
 //import use_case.output_boundaries.AddOutputBoundary;
 //import use_case.output_boundaries.SearchCardOutputBoundary;
-//import use_case.output_boundaries.SortCardOutputBoundary;
+//import use_case.output_boundaries.SortSearchCardOutputBoundary;
 //import interface_adapter.presenters.AddPresenter;
 //import interface_adapter.presenters.SearchCardPresenter;
 //import use_case.manager.CardManager;
@@ -29,7 +29,7 @@
 //    Card c1;
 //    Card c2;
 //    final AddOutputBoundary AddOutputBoundary = new AddPresenter();
-//    final SortCardOutputBoundary sortCardOutputBoundary = new SortCardPresenter<>();
+//    final SortSearchCardOutputBoundary sortCardOutputBoundary = new SortSearchCardPresenter<>();
 //    final SearchCardOutputBoundary<Card> searchCardOutputBoundary = new SearchCardPresenter<>();
 //
 //    @Before

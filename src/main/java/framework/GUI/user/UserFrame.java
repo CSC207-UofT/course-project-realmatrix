@@ -4,6 +4,7 @@ import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.Pack.PackFrame;
 import framework.GUI.start.StartFrame;
+import use_case.constants.Constants;
 import interface_adapter.Controller.LogInOutController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -19,6 +20,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A user frame where users can choose to
+ *      - checkout packages
+ *      - logout
+ *      - change username
+ *      - change password
+ */
 public class UserFrame extends BasicFrame implements ActionListener {
     final String username;
     final JPanel userPanel;
@@ -40,16 +48,16 @@ public class UserFrame extends BasicFrame implements ActionListener {
         message = new JLabel(username + "'s Home Page", SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        checkOutPackagesButton = new JButton("Checkout my packages");
+        checkOutPackagesButton = new JButton(Constants.CHECK_OUT_PACKAGE);
         checkOutPackagesButton.addActionListener(this);
 
-        signOutButton = new JButton("Sign off");
+        signOutButton = new JButton(Constants.SIGN_OUT_BTN);
         signOutButton.addActionListener(this);
 
-        changeNameButton = new JButton("change name");
+        changeNameButton = new JButton(Constants.CHANGE_NAME_BTN);
         changeNameButton.addActionListener(this);
 
-        changePasswordButton = new JButton("change password");
+        changePasswordButton = new JButton(Constants.CHANGE_PW_BTN);
         changePasswordButton.addActionListener(this);
 
         // 2. Add components to the panel
@@ -61,6 +69,9 @@ public class UserFrame extends BasicFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Add all components into panel.
+     */
     private void addComp() {
         userPanel.add(message);
         userPanel.add(checkOutPackagesButton);
@@ -103,8 +114,6 @@ public class UserFrame extends BasicFrame implements ActionListener {
         if (logPresenter.getLogInOutResult()) {    // log out success
             new StartFrame(programStateInputBoundary);
         }
-
-
     }
 
     public static void main(String[] args) {

@@ -2,8 +2,7 @@ package use_case.input_boundaries;
 
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
-import use_case.output_boundaries.SearchCardOutputBoundary;
-import use_case.output_boundaries.SortCardOutputBoundary;
+import use_case.output_boundaries.SortSearchCardOutputBoundary;
 
 /**
  * An input boundary that connects CardManager and CardController.
@@ -18,17 +17,13 @@ public interface CardInputBoundary extends ManagerInputBoundary {
 
     void changeCardDefinition(String newDefinition);
 
-    void searchCard(String keyword, SearchCardOutputBoundary searchCardOutputBoundary);
+    void searchCard(String keyword, SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
 
-    void sortOldToNew(SortCardOutputBoundary sortOutputBoundary);
+    void sortOldToNew(SortSearchCardOutputBoundary sortOutputBoundary);
 
-    void sortAtoZ(SortCardOutputBoundary sortCardOutputBoundary);
+    void sortAtoZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
 
-//    void sortZtoA(SortCardOutputBoundary sortCardOutputBoundary);
+    void sortProLowToHigh(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
 
-    void sortProLowToHigh(SortCardOutputBoundary sortCardOutputBoundary);
-//
-//    ArrayList<Card> sortProHighToLow();
-
-    void sortRandom(SortCardOutputBoundary sortCardOutputBoundary);
+    void sortRandom(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
 }
