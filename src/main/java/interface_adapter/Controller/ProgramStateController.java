@@ -28,4 +28,28 @@ public class ProgramStateController {
     public void setCurrCard(String cardTerm) {
         programStateInputBoundary.setCurrCard(cardTerm);
     }
+
+    /**
+     * Getter for current pack name
+     * @return a pack name
+     */
+    public String getCurrPackName() {
+        return programStateInputBoundary.getCurrPackName();
+    }
+
+    /**
+     * Getter for current card term
+     * @return a card term
+     */
+    public String getCurrCardTerm() {
+        return programStateInputBoundary.getCurrCardTerm();
+    }
+
+    /**
+     * Getter for current card definition
+     * @return a card definition
+     */
+    public String getCurrCardDef() {
+        return programStateInputBoundary.getCurrCardDefinition();
+    }
 }

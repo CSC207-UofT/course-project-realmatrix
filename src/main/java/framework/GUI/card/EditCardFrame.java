@@ -8,7 +8,6 @@ import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.ChangeOutputBoundary;
 
 import javax.swing.*;
@@ -37,7 +36,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         panel.add(termLabel);
 
         // set termText
-        termText = new JTextField(programStateInputBoundary.getCurrCardTerm(), 100);
+        termText = new JTextField(psController.getCurrCardTerm(), 100);
         termText.setBounds(100, 20, 300, 25);
         panel.add(termText);
         termText.setEditable(true);
@@ -47,7 +46,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         panel.add(defLabel);
 
         // set defText
-        defText = new JTextArea(programStateInputBoundary.getCurrCardDefinition());
+        defText = new JTextArea(psController.getCurrCardDef());
         defText.setBounds(100, 50, 390, 100);
         defText.setLineWrap(true);
         panel.add(defText);
@@ -80,14 +79,14 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editButton) {
             // if the user changed definition, always succeeds.
-            if (termText.getText().equals(programStateInputBoundary.getCurrCardTerm())) {
+            if (termText.getText().equals(psController.getCurrCardTerm())) {
                 cardController.changeCardDefinition(defText.getText());
                 programStateInputBoundary.setCurrCard(null);
-                new CardFrame(programStateInputBoundary);
+                new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             } else if (check()){ // edit card term succeeds
                 programStateInputBoundary.setCurrCard(null);
-                new CardFrame(programStateInputBoundary);
+                new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             } else {    // edit fails: card term already exists
                 JOptionPane.showMessageDialog(this,
@@ -98,7 +97,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         }
         if (e.getSource() == backButton) {
             programStateInputBoundary.setCurrCard(null);
-            new CardFrame(programStateInputBoundary);
+            new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
     }
