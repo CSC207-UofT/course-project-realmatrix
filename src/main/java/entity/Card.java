@@ -86,8 +86,9 @@ public class Card {
         if (this.definitionHidden) {
             return String.format("Term: %s", this.term);
         } else {
-            return String.format("Term: %1$s\nDefinition: %2$s",
+            return String.format("Term: %1$s \n Definition: %2$s",
                     this.term, this.definition);
+//            return "Term: " + this.term + "\n" + "Definition: " + this.definition;
         }
     }
 

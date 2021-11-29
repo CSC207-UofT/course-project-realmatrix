@@ -91,7 +91,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
 
     }
 
-    protected  boolean check(){
+    protected boolean check(){
         String term = termText.getText();
         String def = defText.getText();
 
