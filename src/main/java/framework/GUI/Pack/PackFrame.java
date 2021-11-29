@@ -156,6 +156,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
+                    psController.setCurrPack(packJList.getSelectedValue());
                     setVisible(false);
                     new CardFrame(programStateInputBoundary);
                 }
@@ -234,6 +235,7 @@ public class PackFrame extends BasicFrame implements ActionListener {
             } else {
                 packController.deletePack(selectedPackName);
                 setPackListModel();
+                psController.setCurrPack(null);
             }
         }
 
