@@ -29,16 +29,4 @@ public class UserController {
         this.userIB.changePassword(newPassword);
         this.userIB.write(databaseErrorOutputBoundary);
     }
-
-    /**
-     * User register method.
-     *
-     * @param username user's username
-     * @param password user's password
-     */
-    public void register(String username, String password, RegisterOutputBoundary registerOB) {
-        if (userIB.createNewUser(username, password, registerOB)) {
-            this.userIB.write(databaseErrorOutputBoundary);
-        }
-    }
 }

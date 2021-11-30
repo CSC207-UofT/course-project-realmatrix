@@ -59,7 +59,7 @@ public class DataInOut implements IDataInOut {
     /**
      * Initial load for checking registration/login.
      * @return a hash map that maps username to user password.
-     * @throws IOException fails to laod
+     * @throws IOException fails to load
      */
     @Override
     public HashMap<String, String> initialLoad() throws IOException {

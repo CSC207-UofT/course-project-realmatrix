@@ -103,15 +103,4 @@ public class CardController {
         this.cardInputBoundary.sortProLowToHigh(sortSearchCardOutputBoundary);
     }
 
-//    public void sortZtoA(SortSearchCardOutputBoundary sortCardOutputBoundary) {
-//        this.cardInputBoundary.sortZtoA(sortCardOutputBoundary);
-//    }
-
-//    public void increaseProficiency() {
-//        this.cardInputBoundary.increaseProficiency();
-//    }
-//
-//    public void decreaseProficiency() {
-//        this.cardInputBoundary.decreaseProficiency();
-//    }
 }

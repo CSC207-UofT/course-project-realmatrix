@@ -45,7 +45,7 @@ public class Constants {
     public static final String PW_AGAIN = "Password Again: ";
 
     //GUI.start
-    public static final String WELLCOME_MSG = "Welcome to Recaller!";
+    public static final String WELCOME_MSG = "Welcome to Recaller!";
 
     //GUI.user
     public static final String CHANGE_PW = "Change password";
@@ -69,6 +69,6 @@ public class Constants {
     public static final String CHECK_OUT_PACKAGE = "Checkout my packages";
 
     //Presenter
-    public static final String NANM_EXISTS = "Name already exists. Try a new name.";
+    public static final String NAME_EXISTS = "Name already exists. Try a new name.";
     public static final String SUC_VIEW = "Successfully added.";
 }

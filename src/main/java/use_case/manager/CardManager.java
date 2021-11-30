@@ -95,20 +95,6 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         this.currItem.setDefinition(newDefinition);
     }
 
-//    /**
-//     * Increase the proficiency of the card by 1.
-//     */
-//    public void increaseProficiency() {
-//        this.currItem.setProficiency(Math.min(this.currItem.getProficiency() + 1, 5));
-//    }
-//
-//    /**
-//     * Decrease the proficiency of the card by 1.
-//     */
-//    public void decreaseProficiency() {
-//        this.currItem.setProficiency(Math.max(this.currItem.getProficiency() - 1, 1));
-//    }
-
     /**
      * Users can search cards by card's term and definition (not necessarily equal to) keyword.
      *  @param keyword              the term that the user searches
@@ -146,17 +132,6 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         presentSortSearchResult(sorted, sortSearchCardOutputBoundary);
     }
 
-//    /**
-//     * Return a card list sorted by cards' terms' alphabetical order: z - a.
-//     *
-//     * @param sortCardOutputBoundary a sort output boundary for getting the sorted output.
-//     */
-//    public void sortZtoA(SortSearchCardOutputBoundary sortCardOutputBoundary) {
-//        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
-//        sorted.sort(new AlphabetComparator().reversed());
-//        presentSortResult(sorted, sortCardOutputBoundary);
-//    }
-
 
     /**
      * Sort a card list by cards' proficiency: low to high.
@@ -168,17 +143,6 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         sorted.sort(new ProficiencyComparator());
         presentSortSearchResult(sorted, sortSearchCardOutputBoundary);
     }
-//
-//    /**
-//     * Return a card list sorted by cards' proficiency: high to low.
-//     *
-//     * @return an arraylist of sorted cards
-//     */
-//    public ArrayList<Card> sortProHighToLow() {
-//        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
-//        sorted.sort(new ProficiencyComparator().reversed());
-//        return sorted;
-//    }
 
     /**
      * Return a card list sorted in random order.

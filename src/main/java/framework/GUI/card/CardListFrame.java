@@ -39,7 +39,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
     private JTable cardJTable;  // A JTable that contains card terms & definition
     private String selectedCardTerm;
 
-    private final JTextField searchText;    // A text field for user to enter term for sesarch
+    private final JTextField searchText;    // A text field for user to enter term for search
 
     private final JComboBox<String> sortBox;
 
@@ -261,7 +261,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a Card first.", // TODO: constant
-                        "No Card for editting",
+                        "No Card for editing",
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 new EditCardFrame(programStateInputBoundary);

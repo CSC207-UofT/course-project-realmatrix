@@ -1,10 +1,8 @@
 package use_case.input_boundaries;
 
-import interface_adapter.presenters.SearchPackPresenter;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
-import use_case.output_boundaries.SearchPackOutputBoundary;
-import use_case.output_boundaries.SortPackOutputBoundary;
+import use_case.output_boundaries.SortSearchPackOutputBoundary;
 
 public interface PackInputBoundary extends ManagerInputBoundary {
     boolean addNewPack(String packName, AddOutputBoundary addOutputBoundary);
@@ -13,11 +11,11 @@ public interface PackInputBoundary extends ManagerInputBoundary {
 
     boolean changePackName(String newPackName, ChangeOutputBoundary changePackNameOB);
 
-    void searchPack(String packName, SearchPackOutputBoundary searchPackOutputBoundary);
+    void searchPack(String packName, SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
 
-    void sortOldToNew(SortPackOutputBoundary sortPackOutputBoundary);
+    void sortOldToNew(SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
 
-    void sortAToZ(SortPackOutputBoundary sortPackOutputBoundary);
+    void sortAToZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
 
     // These two may not be needed if we have observer for tracking program state
 }

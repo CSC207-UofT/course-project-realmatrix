@@ -6,11 +6,9 @@ import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
-import use_case.output_boundaries.SearchPackOutputBoundary;
-import use_case.output_boundaries.SortPackOutputBoundary;
+import use_case.output_boundaries.SortSearchPackOutputBoundary;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * A pack manager manages the current user's packs.
@@ -89,10 +87,10 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
      * Search packs with specified pack name (Ignore case).
      * All packs that contain (not necessarily equal) packName would be searched.
      * @param packName the packName to be searched
-     * @param searchPackOutputBoundary an output boundary that gets the searched result
+     * @param sortSearchPackOutputBoundary an output boundary that gets the searched result
      */
     @Override
-    public void searchPack(String packName, SearchPackOutputBoundary searchPackOutputBoundary) {
+    public void searchPack(String packName, SortSearchPackOutputBoundary sortSearchPackOutputBoundary) {
         ArrayList<Pack> packList = programStateInputBoundary.getCurrUser().getPackageList();
         ArrayList<String> result = new ArrayList<>();
         for (Pack p : packList) {
@@ -100,34 +98,34 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
                 result.add(p.getName());
             }
         }
-        searchPackOutputBoundary.setSearchResult(result);
+        sortSearchPackOutputBoundary.setSortSearchResult(result);
     }
 
     /**
      * Sort a pack by date added: oldest to newest.
      *
-     * @param sortPackOutputBoundary a sort output boundary for getting the sorted output.
+     * @param sortSearchPackOutputBoundary a sort output boundary for getting the sorted output.
      */
     @Override
-    public void sortOldToNew(SortPackOutputBoundary sortPackOutputBoundary) {
+    public void sortOldToNew(SortSearchPackOutputBoundary sortSearchPackOutputBoundary) {
         ArrayList<Pack> packList = programStateInputBoundary.getCurrUser().getPackageList();
         ArrayList<String> packNameList = new ArrayList<>();
         for (Pack p : packList) {
             packNameList.add(p.getName());
         }
-        sortPackOutputBoundary.setSortResult(packNameList);
+        sortSearchPackOutputBoundary.setSortSearchResult(packNameList);
     }
 
     /**
      * Sort a pack by alphabetic order: A to Z.
      *
-     * @param sortPackOutputBoundary a sort output boundary for getting the sorted output.
+     * @param sortSearchPackOutputBoundary a sort output boundary for getting the sorted output.
      */
     @Override
-    public void sortAToZ(SortPackOutputBoundary sortPackOutputBoundary) {
+    public void sortAToZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary) {
         ArrayList<String> packNameList = new ArrayList<>(this.items.keySet());
         packNameList.sort(String::compareToIgnoreCase);
-        sortPackOutputBoundary.setSortResult(packNameList);
+        sortSearchPackOutputBoundary.setSortSearchResult(packNameList);
     }
 
 
