@@ -77,7 +77,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
                 this.card.setText("<html><p>"+ currCardStrRep + "</p><html>");
             } else {
                 JOptionPane.showMessageDialog(this, "You have finished learning all the cards.",
-                        "Good job!", JOptionPane.WARNING_MESSAGE);
+                        "Good job!", JOptionPane.INFORMATION_MESSAGE);
                 new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             }
