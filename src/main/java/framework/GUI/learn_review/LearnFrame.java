@@ -52,7 +52,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         this.setFont(new Font("arial", Font.PLAIN,10));
         this.nextButton.addActionListener(this);
 
-        this.backToPack = new JButton("Back to pack: " + programStateInputBoundary.getCurrPackName());
+        this.backToPack = new JButton("Back to pack: " + psController.getCurrPackName());
         this.setFont(new Font("arial", Font.PLAIN,10));
         this.backToPack.setBounds(10, 10, 200, 50);
         this.backToPack.addActionListener(this);

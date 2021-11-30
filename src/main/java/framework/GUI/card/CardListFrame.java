@@ -284,27 +284,15 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         }
 
         else if (e.getSource() == reviewButton) {
-            if (selectedCardTerm == null) {
-                JOptionPane.showMessageDialog(this,
-                        "Please select a card first.", // TODO: constant
-                        "No Card for deletion",
-                        JOptionPane.WARNING_MESSAGE);
-            } else {
-                new ReviewFrame(programStateInputBoundary);
-                setVisible(false);
-            }
+            psController.setCurrCard(null);
+            new ReviewFrame(programStateInputBoundary);
+            setVisible(false);
         }
 
         else if (e.getSource() == learnButton) {
-            if (selectedCardTerm == null) {
-                JOptionPane.showMessageDialog(this,
-                        "Please select a card first.", // TODO: constant
-                        "No Card for deletion",
-                        JOptionPane.WARNING_MESSAGE);
-            } else {
-                new LearnFrame(programStateInputBoundary);
-                setVisible(false);
-            }
+            psController.setCurrCard(null);
+            new LearnFrame(programStateInputBoundary);
+            setVisible(false);
         }
 
         else if (e.getSource() == backButton) {
