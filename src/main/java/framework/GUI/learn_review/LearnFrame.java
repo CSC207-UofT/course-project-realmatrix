@@ -26,15 +26,26 @@ public class LearnFrame extends BasicFrame implements ActionListener {
     private final JButton backToPack;
     private final JButton nextButton;
 
+    LearnOutputBoundary learnOutputBoundary;
+    LearnInputBoundary learnInputBoundary;
+    LearnController learnController;
+
     public LearnFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Learning", programStateInputBoundary);
+
+        learnOutputBoundary = new LearnPresenter();
+        learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(),
+                learnOutputBoundary);
+        learnController = new LearnController(learnInputBoundary);
+
         this.setSize(500,800);
         this.learnPanel = new JPanel(new GridLayout(3,1));
 
-        this.card = new JLabel("<html><p>Click Next to start learning</p><html>", SwingConstants.CENTER);
+        learnController.next();
+        String currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
+        this.card = new JLabel("<html><p>"+ currCardStrRep + "</p><html>", SwingConstants.CENTER);
         this.card.setBounds(10, 100, 300, 400);
         this.card.setFont(new Font("verdana", Font.BOLD , 30));
-
 
         this.nextButton = new JButton("Next");
         this.nextButton.setBounds(150,500,200,50);
@@ -44,13 +55,14 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         this.backToPack = new JButton("Back to pack: " + programStateInputBoundary.getCurrPackName());
         this.setFont(new Font("arial", Font.PLAIN,10));
         this.backToPack.setBounds(10, 10, 200, 50);
-        this.nextButton.addActionListener(this);
+        this.backToPack.addActionListener(this);
 
         addComp();
         add(learnPanel);
         setVisible(true);
     }
-    private void addComp(){
+
+    private void addComp() {
         this.learnPanel.add(backToPack);
         this.learnPanel.add(card);
         this.learnPanel.add(nextButton);
@@ -58,23 +70,22 @@ public class LearnFrame extends BasicFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        LearnOutputBoundary learnOutputBoundary = new LearnPresenter();
-        LearnInputBoundary learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(), learnOutputBoundary);
-        LearnController learnController = new LearnController(learnInputBoundary);
-        learnController.next();
-
-        if(e.getSource() == this.nextButton){
-            if(!learnOutputBoundary.getLearnCompleted()){
-                this.card.setText("<html><p>"+learnOutputBoundary.getCurrCardStrRep() + "</p><html>");
-            }else{
-                this.card.setText("<html><p>you have already completed learning of this pack</p><html>");
+        if (e.getSource() == this.nextButton) {
+            learnController.next();
+            String currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
+            if (!learnOutputBoundary.getLearnCompleted()) {
+                this.card.setText("<html><p>"+ currCardStrRep + "</p><html>");
+            } else {
+                JOptionPane.showMessageDialog(this, "You have finished learning all the cards.",
+                        "Good job!", JOptionPane.WARNING_MESSAGE);
+                new CardListFrame(programStateInputBoundary);
+                setVisible(false);
             }
-        }else if(e.getSource() == this.backToPack){
+        } else if (e.getSource() == this.backToPack) {
             new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
     }
-
 
     public static void main(String[] args) throws IOException {
         ProgramStateInputBoundary ps = new ProgramStateManager();
@@ -83,6 +94,8 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         vocab.addCard(new Card("apple","fruit"));
         vocab.addCard(new Card("banana","fruit"));
         vocab.addCard(new Card("bee","animal"));
+        vocab.addCard(new Card("new", "something you haven't seen before"));
+        vocab.addCard(new Card("debugging", "something I hate"));
         user.addPackage(vocab);
         Loader loader = new Loader();
         loader.userLoad(user);

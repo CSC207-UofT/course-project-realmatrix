@@ -29,6 +29,9 @@ public class LearnPresenter implements LearnOutputBoundary {
     }
 
     public String getCurrCardStrRep() {
-        return this.currCardStrRep.replace("\n","<br>");
+        if (currCardStrRep != null) {
+            return this.currCardStrRep.replace("\n","<br>");
+        }
+        return null;
     }
 }
