@@ -1,4 +1,4 @@
-package interface_adapter.Controller;
+package interface_adapter.controller;
 
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
@@ -36,7 +36,7 @@ public class UserController {
      * @param username user's username
      * @param password user's password
      */
-    public void register(String username, String password, RegisterOutputBoundary registerOB) throws IOException {
+    public void register(String username, String password, RegisterOutputBoundary registerOB) {
         if (userIB.createNewUser(username, password, registerOB)) {
             this.userIB.write(databaseErrorOutputBoundary);
         }

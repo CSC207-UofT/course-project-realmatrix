@@ -1,10 +1,10 @@
-package framework.GUI.Pack;
+package framework.GUI.pack;
 
 import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.card.CardListFrame;
 import framework.GUI.user.UserFrame;
-import interface_adapter.Controller.PackController;
+import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;

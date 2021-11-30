@@ -1,7 +1,7 @@
 package framework.GUI.user;
 
 import framework.GUI.BasicFrame;
-import interface_adapter.Controller.UserController;
+import interface_adapter.controller.UserController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
@@ -15,7 +15,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 /**
  * A frame for changing password.

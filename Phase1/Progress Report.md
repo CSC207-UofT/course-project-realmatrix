@@ -12,7 +12,7 @@ Later, we will consummate our project, implementing framework.command_line_inter
 
 ## Division of work summary
 - Xing Ling worked on the database, readers and writers, polishing good design of these classes.
-- Ziqi Shu worked on the all tests for entity classes , Manager Classes, UseCase Classes and interface_adapter.Controller classes.
+- Ziqi Shu worked on the all tests for entity classes , Manager Classes, UseCase Classes and interface_adapter.controller classes.
 - Runshi Yang worked on the `LearnGenerator`, `LearningSystem`, `LearnController` and `LearnAndReviewDisplay` of the CLI.
 - Yifan Zhao worked on all input boundaries of every usecase; wrote all controllers of each usecase, most of the command line interface display class, and implemented `reviewGenerator`; fixed some bugs in the usecase, currently working on writing Exceptions for different scenarios.
 - Chloe Huang implemented `PackManager`, all Presenter and OutputBoudnary; modified all usecase classes and controllers to fit in presenter; implemented factory design pattern & data access interface in `gateway` and all of `GUI` with login/register page; wrote descriptions of design patterns. She will work on more of `GUI` in phase 2.

@@ -2,7 +2,7 @@ package framework.GUI.card;
 
 import javax.swing.*;
 import framework.GUI.BasicFrame;
-import interface_adapter.Controller.CardController;
+import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;

@@ -1,13 +1,8 @@
-package interface_adapter.Controller;
+package interface_adapter.controller;
 
-import entity.User;
-import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.LogInOutInputBoundary;
-import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.LogInOutOutputBoundary;
-
-import java.util.HashMap;
 
 /**
  * This controller manages log-in and log-out tasks for users.

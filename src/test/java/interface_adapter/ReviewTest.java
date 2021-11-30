@@ -2,9 +2,8 @@ package interface_adapter;
 
 import entity.Card;
 import entity.Pack;
-import entity.ProgramState;
 import entity.User;
-import interface_adapter.Controller.ReviewController;
+import interface_adapter.controller.ReviewController;
 import interface_adapter.presenters.ReviewPresenter;
 import org.junit.Before;
 import org.junit.Test;

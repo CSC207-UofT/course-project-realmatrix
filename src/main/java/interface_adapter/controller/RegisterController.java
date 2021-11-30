@@ -1,4 +1,4 @@
-package interface_adapter.Controller;
+package interface_adapter.controller;
 
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
