@@ -2,9 +2,9 @@ package framework.GUI.card;
 
 import entity.User;
 import framework.GUI.BasicFrame;
-import framework.GUI.Pack.PackListFrame;
-import interface_adapter.Controller.CardController;
-import interface_adapter.Controller.ProgramStateController;
+import framework.GUI.pack.PackListFrame;
+import interface_adapter.controller.CardController;
+import interface_adapter.controller.ProgramStateController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.*;

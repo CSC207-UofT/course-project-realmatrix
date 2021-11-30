@@ -1,7 +1,6 @@
-package interface_adapter.Controller;
+package interface_adapter.controller;
 
 import entity.Card;
-import entity.ProgramState;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.ProgramStateInputBoundary;

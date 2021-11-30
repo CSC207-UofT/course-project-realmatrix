@@ -4,19 +4,14 @@ import entity.Card;
 import entity.Pack;
 import entity.User;
 import framework.GUI.BasicFrame;
-import framework.GUI.Pack.AddPackFrame;
-import framework.GUI.Pack.PackFrame;
-import interface_adapter.Controller.LearnController;
-import interface_adapter.gateway.DataInOut;
-import interface_adapter.gateway.IDataInOut;
+import framework.GUI.card.CardListFrame;
+import interface_adapter.controller.LearnController;
 import interface_adapter.gateway.dataout.Loader;
-import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.LearnPresenter;
 import use_case.generator.LearnGenerator;
 import use_case.input_boundaries.LearnInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.ProgramStateManager;
-import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.LearnOutputBoundary;
 
 import javax.swing.*;
@@ -33,7 +28,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
 
     public LearnFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Learning", programStateInputBoundary);
-        this.setSize(600,400);
+        this.setSize(500,800);
         this.learnPanel = new JPanel(new GridLayout(3,1));
 
         this.card = new JLabel("<html><p>Click Next to start learning</p><html>", SwingConstants.CENTER);
@@ -75,7 +70,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
                 this.card.setText("<html><p>you have already completed learning of this pack</p><html>");
             }
         }else if(e.getSource() == this.backToPack){
-            new PackFrame(programStateInputBoundary);
+            new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
     }

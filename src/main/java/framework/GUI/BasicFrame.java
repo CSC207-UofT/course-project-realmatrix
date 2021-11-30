@@ -1,6 +1,6 @@
 package framework.GUI;
 
-import interface_adapter.Controller.ProgramStateController;
+import interface_adapter.controller.ProgramStateController;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 
 import javax.swing.*;

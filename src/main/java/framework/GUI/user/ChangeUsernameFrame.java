@@ -1,7 +1,7 @@
 package framework.GUI.user;
 
 import framework.GUI.BasicFrame;
-import interface_adapter.Controller.UserController;
+import interface_adapter.controller.UserController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;

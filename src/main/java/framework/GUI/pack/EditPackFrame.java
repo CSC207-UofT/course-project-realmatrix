@@ -1,7 +1,7 @@
-package framework.GUI.Pack;
+package framework.GUI.pack;
 
 import framework.GUI.BasicFrame;
-import interface_adapter.Controller.PackController;
+import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;

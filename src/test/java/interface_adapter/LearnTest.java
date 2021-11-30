@@ -2,7 +2,7 @@ package interface_adapter;
 
 import entity.Card;
 import entity.Pack;
-import interface_adapter.Controller.LearnController;
+import interface_adapter.controller.LearnController;
 import interface_adapter.presenters.LearnPresenter;
 import org.junit.Before;
 import org.junit.Test;

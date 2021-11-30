@@ -2,7 +2,7 @@ package framework.GUI.login_register;
 
 import framework.GUI.start.StartFrame;
 import framework.GUI.user.UserFrame;
-import interface_adapter.Controller.RegisterController;
+import interface_adapter.controller.RegisterController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
