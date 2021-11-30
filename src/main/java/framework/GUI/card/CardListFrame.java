@@ -2,6 +2,8 @@ package framework.GUI.card;
 
 import entity.User;
 import framework.GUI.BasicFrame;
+import framework.GUI.learn_review.LearnFrame;
+import framework.GUI.learn_review.ReviewFrame;
 import framework.GUI.pack.PackListFrame;
 import interface_adapter.controller.CardController;
 import interface_adapter.controller.ProgramStateController;
@@ -288,7 +290,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
                         "No Card for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                // TODO: go review frame.
+                new ReviewFrame(programStateInputBoundary);
                 setVisible(false);
             }
         }
@@ -300,7 +302,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
                         "No Card for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                // TODO: go learn frame.
+                new LearnFrame(programStateInputBoundary);
                 setVisible(false);
             }
         }
