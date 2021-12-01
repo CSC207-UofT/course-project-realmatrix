@@ -13,13 +13,11 @@ import java.util.HashMap;
 public abstract class Manager<T> {
     // Maps entity's name to entity, e.g. items in UserManager maps cardTerm to Card.
     protected HashMap<String,T> items;
-    protected IDataInOut dataInOut;
     protected ProgramStateInputBoundary programStateInputBoundary;
     protected T currItem;
 
-    public Manager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
+    public Manager(ProgramStateInputBoundary programStateInputBoundary) {
         this.items = new HashMap<>();
-        this.dataInOut = dataInOut;
         this.programStateInputBoundary = programStateInputBoundary;
     }
 
@@ -35,7 +33,7 @@ public abstract class Manager<T> {
     /**
      * Write the required object into database.
      */
-    public void write(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void write(IDataInOut dataInOut, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), currItem);
         } catch (IOException e) {
@@ -46,7 +44,7 @@ public abstract class Manager<T> {
     /**
      * Write the object (with its name changed) into database.
      */
-    public void write(String oldName, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void write(String oldName, IDataInOut dataInOut, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), oldName, currItem);
         } catch (IOException e) {
@@ -58,7 +56,7 @@ public abstract class Manager<T> {
      * Archive (delete and store) the required object into database.
      * @param databaseErrorOutputBoundary an output boundary that gets the error message if fails connect to database.
      */
-    public void delete(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void delete(IDataInOut dataInOut, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.delete(findPartialDataPath(), currItem);
         } catch (IOException e) {

@@ -160,6 +160,6 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         UserController userController = new UserController(manager, databaseErrorOutputBoundary);
 
         // Call change password method
-        userController.changePassword(String.valueOf(newPassword1.getPassword()));
+        userController.changePassword(String.valueOf(newPassword1.getPassword()), new DataInOut());
     }
 }

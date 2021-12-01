@@ -1,7 +1,6 @@
 package use_case.manager;
 
 import entity.Pack;
-import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.AddOutputBoundary;
@@ -15,8 +14,8 @@ import java.util.ArrayList;
  */
 public class PackManager extends Manager<Pack> implements Sort<SortSearchPackOutputBoundary>, PackInputBoundary {
 
-    public PackManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
-        super(dataInOut, programStateInputBoundary);
+    public PackManager(ProgramStateInputBoundary programStateInputBoundary) {
+        super(programStateInputBoundary);
         this.currItem = this.programStateInputBoundary.getCurrPack();   // current pack the user is working on
         this.items = this.programStateInputBoundary.getCurrUser().getPackageMap(); // a map <packName: Pack>
     }

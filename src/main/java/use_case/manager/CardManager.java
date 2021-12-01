@@ -1,7 +1,6 @@
 package use_case.manager;
 
 import entity.Card;
-import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.*;
@@ -16,8 +15,8 @@ import java.util.Comparator;
 public class CardManager extends Manager<Card> implements Sort<SortSearchCardOutputBoundary>, CardInputBoundary {
     // Note items for this manager is a map <cardTerm: Card>
 
-    public CardManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
-        super(dataInOut, programStateInputBoundary);
+    public CardManager(ProgramStateInputBoundary programStateInputBoundary) {
+        super(programStateInputBoundary);
         this.currItem = this.programStateInputBoundary.getCurrCard();
         this.items = this.programStateInputBoundary.getCurrPack().getCardMap();
     }

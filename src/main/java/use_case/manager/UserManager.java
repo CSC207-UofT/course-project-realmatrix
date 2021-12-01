@@ -20,9 +20,11 @@ import java.util.HashMap;
 public class UserManager extends Manager<User> implements UserInputBoundary {
     private HashMap<String, String> items;    // items for this manager is a map <username: password>
     private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
+    private final IDataInOut dataInOut;
 
     public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
-        super(dataInOut, programStateInputBoundary);
+        super(programStateInputBoundary);
+        this.dataInOut = dataInOut;
         this.currItem = programStateInputBoundary.getCurrUser();
         this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
         initialLoad(databaseErrorOutputBoundary);

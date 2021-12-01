@@ -1,5 +1,6 @@
 package interface_adapter.controller;
 
+import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.output_boundaries.*;
 
@@ -20,20 +21,20 @@ public class PackController {
      *
      * @param packName The name of the pack
      */
-    public void addNewPack(String packName, AddOutputBoundary addOutputBoundary) {
+    public void addNewPack(String packName, AddOutputBoundary addOutputBoundary, IDataInOut dataInOut) {
         if (this.packIB.addNewPack(packName, addOutputBoundary)) {
-            this.packIB.write(databaseErrorOutputBoundary);
+            this.packIB.write(dataInOut, databaseErrorOutputBoundary);
         }
     }
 
     /**
      * Change a pack's name with specified pack name.
-     *
-     * @param newPackName The name of the pack
+     *  @param newPackName The name of the pack
+     * @param dataInOut the data access interface
      */
-    public void changePackName(String oldPackName, String newPackName, ChangeOutputBoundary changeOutputBoundary) {
+    public void changePackName(String oldPackName, String newPackName, IDataInOut dataInOut, ChangeOutputBoundary changeOutputBoundary) {
         if (this.packIB.changePackName(newPackName, changeOutputBoundary)) {
-            this.packIB.write(oldPackName, databaseErrorOutputBoundary);
+            this.packIB.write(oldPackName, dataInOut, databaseErrorOutputBoundary);
         }
     }
 
@@ -47,9 +48,9 @@ public class PackController {
         this.packIB.searchPack(str, searchPackOutputBoundary);
     }
 
-    public void deletePack(String packName) {
+    public void deletePack(String packName, IDataInOut dataInOut) {
         if (this.packIB.deletePack(packName)) {
-            this.packIB.delete(databaseErrorOutputBoundary);
+            this.packIB.delete(dataInOut, databaseErrorOutputBoundary);
         }
     }
 

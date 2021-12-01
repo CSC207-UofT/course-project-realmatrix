@@ -1,7 +1,6 @@
 import entity.Card;
 import entity.Pack;
 import entity.User;
-import interface_adapter.gateway.DataInOut;
 import interface_adapter.presenters.AddPresenter;
 import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.SortSearchCardPresenter;
@@ -16,7 +15,6 @@ import use_case.output_boundaries.SortSearchCardOutputBoundary;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 
 public class CardManagerTest {
     CardManager cm;
@@ -40,7 +38,7 @@ public class CardManagerTest {
         def = "Assuming a mental fallacy";
 
         cp = new ChangePresenter();
-        cm = new CardManager(new DataInOut(), programStateInputBoundary);
+        cm = new CardManager(programStateInputBoundary);
         cm.addNewCard(term, def, new AddPresenter());
         c = programStateInputBoundary.getCurrPack().getCardMap().get(term);
     }

@@ -85,14 +85,14 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
         String new_name = packText.getText();
 
         // Construct PackManager
-        IDataInOut dataInOut = new DataInOut();
         DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
-        PackInputBoundary packManager = new PackManager(dataInOut, programStateInputBoundary);
+        PackInputBoundary packManager = new PackManager(programStateInputBoundary);
         // Construct PackController
         PackController pkController = new PackController(packManager, dbPresenter);
         // check edit
+        IDataInOut dataInOut = new DataInOut();
         ChangeOutputBoundary changePresenter = new ChangePresenter();
-        pkController.changePackName(old_name, new_name, changePresenter);
+        pkController.changePackName(old_name, new_name, dataInOut, changePresenter);
         return changePresenter.getChangeResult();
     }
 }

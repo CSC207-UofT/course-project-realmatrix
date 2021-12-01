@@ -139,7 +139,7 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
 
         // Call change name method
         ChangeOutputBoundary presenter = new ChangePresenter();
-        userController.changeUserName(this.username, newName.getText(), presenter);
+        userController.changeUserName(this.username, newName.getText(), dataInOut, presenter);
 
         // Check if successfully changed
         boolean result = presenter.getChangeResult();
