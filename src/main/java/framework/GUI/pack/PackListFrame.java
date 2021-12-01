@@ -211,7 +211,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         }
 
         else if (e.getSource() == addButton) {
-            new AddPackFrame(programStateInputBoundary);
+            new framework.GUI.pack.AddPackFrame(programStateInputBoundary);
             setVisible(false);
         }
 
@@ -222,7 +222,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
                         "No pack for editing",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                new EditPackFrame(programStateInputBoundary);
+                new framework.GUI.pack.EditPackFrame(programStateInputBoundary);
                 setVisible(false);
             }
         }

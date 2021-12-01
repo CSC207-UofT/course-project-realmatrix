@@ -2,6 +2,7 @@ package framework.GUI.pack;
 
 import javax.swing.*;
 import framework.GUI.BasicFrame;
+import framework.GUI.pack.PackListFrame;
 import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
