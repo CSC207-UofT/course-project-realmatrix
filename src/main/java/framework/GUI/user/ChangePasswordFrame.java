@@ -43,11 +43,11 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
         newPasswordLabel1 = new JLabel(Constants.NEW_PW_MSG, JLabel.TRAILING);
-        newPasswordLabel1.setBounds(20, 20, 140, 25);
+        newPasswordLabel1.setBounds(20, 20, 155, 25);
         changePasswordPanel.add(newPasswordLabel1);
 
         newPasswordLabel2 = new JLabel(Constants.REPEAT_PW_MSG, JLabel.TRAILING);
-        newPasswordLabel2.setBounds(20, 60, 140, 25);
+        newPasswordLabel2.setBounds(20, 60, 155, 25);
         changePasswordPanel.add(newPasswordLabel2);
 
         finishButton = new JButton(Constants.DONE_BTN);
@@ -61,9 +61,9 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         changePasswordPanel.add(backButton);
 
         //Set Password1 text
-        newPassword1.setBounds(160, 20, 300, 25);
+        newPassword1.setBounds(180, 20, 300, 25);
         newPassword1.setEditable(true);
-        newPassword2.setBounds(160, 60, 300, 25);
+        newPassword2.setBounds(180, 60, 300, 25);
         newPassword2.setEditable(true);
 
         // 1. Create components shown on the frame

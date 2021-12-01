@@ -1,7 +1,11 @@
 package use_case.manager;
 
 import entity.User;
+import interface_adapter.controller.UserController;
+import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
+import interface_adapter.presenters.ChangePresenter;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
@@ -17,7 +21,6 @@ import java.util.HashMap;
  *      - changing username
  *      - changing password
  */
-//TODO: implement <sort> interface
 public class UserManager extends Manager<User> implements UserInputBoundary {
     private HashMap<String, String> items;    // items for this manager is a map <username: password>
     private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
@@ -67,8 +70,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @return true if user successfully changed name; false otherwise
      */
     public boolean changeName(String newName, ChangeOutputBoundary changeOutputBoundary) {
-        Object item = searchItem(newName);
-        if (item == null) { // No user of such username, valid for change
+        if (!this.items.containsKey(newName)) { // No user of such username, valid for change
             this.items.remove(currItem.getName()); // Remove user with old name
             this.items.put(newName, currItem.getPassword());     // Add user with new name
             currItem.changeName(newName);
@@ -101,28 +103,4 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
             databaseErrorOutputBoundary.presentLoadErrMsg();
         }
     }
-
-//    /**
-//     * Add pack into the user's arraylist of packs.
-//     *
-//     * @param pack the pack to be added
-//     * @return true if successfully added; false otherwise
-//     */
-//    @Override
-//    public boolean addPack(Pack pack, AddOutputBoundary AddOutputBoundary) {
-//        try {
-//            programStateInputBoundary.getCurrUser().addPackage(pack);
-//            AddOutputBoundary.presentAddSuccessView();
-//
-//            return true;
-//        } catch (Exception e) {
-//            AddOutputBoundary.presentAddFailView();
-//            return false;
-//        }
-//    }
-//
-//    @Override
-//    public void deletePack(Pack pack) {
-//        currItem.deletePackage(pack);
-//    }
 }
