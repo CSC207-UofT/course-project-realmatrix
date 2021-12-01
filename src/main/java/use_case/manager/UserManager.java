@@ -1,11 +1,7 @@
 package use_case.manager;
 
 import entity.User;
-import interface_adapter.controller.UserController;
-import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
-import interface_adapter.presenters.ChangePresenter;
-import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
@@ -36,7 +32,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * Helper method for constructor
      * @param databaseErrorOutputBoundary an output boundary that may show database connecting error messages
      */
-    private void initialLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void initialLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             this.items = dataInOut.initialLoad();
         } catch (IOException e) {
@@ -71,7 +67,8 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      */
     public boolean changeName(String newName, ChangeOutputBoundary changeOutputBoundary) {
         if (!this.items.containsKey(newName)) { // No user of such username, valid for change
-            this.items.remove(currItem.getName()); // Remove user with old name
+            String oldName = currItem.getName();
+            this.items.remove(oldName); // Remove user with old name
             this.items.put(newName, currItem.getPassword());     // Add user with new name
             currItem.changeName(newName);
             changeOutputBoundary.setChangeResult(true);

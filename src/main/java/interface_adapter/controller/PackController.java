@@ -66,6 +66,6 @@ public class PackController {
      * @param sortSearchPackOutputBoundary an output boundary that gets the result of sorted packs.
      */
     public void sortAToZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary) {
-        this.packIB.sortAToZ(sortSearchPackOutputBoundary);
+        this.packIB.sortAtoZ(sortSearchPackOutputBoundary);
     }
 }

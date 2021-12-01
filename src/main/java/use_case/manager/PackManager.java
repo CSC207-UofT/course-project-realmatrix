@@ -13,13 +13,12 @@ import java.util.ArrayList;
 /**
  * A pack manager manages the current user's packs.
  */
-public class PackManager extends Manager<Pack> implements PackInputBoundary {
-    // Note items for this manager is a map <packName: Pack>
+public class PackManager extends Manager<Pack> implements Sort<SortSearchPackOutputBoundary>, PackInputBoundary {
 
     public PackManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
         super(dataInOut, programStateInputBoundary);
-        this.currItem = this.programStateInputBoundary.getCurrPack();
-        this.items = this.programStateInputBoundary.getCurrUser().getPackageMap();
+        this.currItem = this.programStateInputBoundary.getCurrPack();   // current pack the user is working on
+        this.items = this.programStateInputBoundary.getCurrUser().getPackageMap(); // a map <packName: Pack>
     }
 
     /**
@@ -35,7 +34,7 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
             Pack p = new Pack(packName);
             this.items.put(packName, p);
             this.currItem = p;
-            programStateInputBoundary.getCurrUser().addPackage(p);
+            programStateInputBoundary.getCurrUser().addPackage(p);  // add this pack into user
             addOutputBoundary.setAddResult(true);
             return true;
         }
@@ -122,7 +121,7 @@ public class PackManager extends Manager<Pack> implements PackInputBoundary {
      * @param sortSearchPackOutputBoundary a sort output boundary for getting the sorted output.
      */
     @Override
-    public void sortAToZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary) {
+    public void sortAtoZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary) {
         ArrayList<String> packNameList = new ArrayList<>(this.items.keySet());
         packNameList.sort(String::compareToIgnoreCase);
         sortSearchPackOutputBoundary.setSortSearchResult(packNameList);

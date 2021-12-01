@@ -47,7 +47,7 @@ public class Loader {
      * Load a given user's packages and cards.
      *
      * @param user the given user
-     * @throws IOException
+     * @throws IOException fail to load
      */
     public void userLoad(User user) throws IOException {
         Reader reader = new Reader();
