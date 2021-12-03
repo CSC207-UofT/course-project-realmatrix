@@ -27,7 +27,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * A pack frame where users can interact with all packs they've created.
+ * A pack frame where users can interact with all packs they've created, such as
+ *      - creating packs
+ *      - deleting packs
+ *      - sorting/searching packs
+ *      - editing packs (name)
  */
 public class PackListFrame extends BasicFrame implements ActionListener {
     // Pack name list
@@ -241,7 +245,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         }
 
         else if (e.getSource() == backButton) {
-            new UserFrame(programStateInputBoundary.getCurrUserName(), programStateInputBoundary);
+            new UserFrame(psController.getCurrUserName(), programStateInputBoundary);
             setVisible(false);
         }
 

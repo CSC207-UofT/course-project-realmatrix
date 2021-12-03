@@ -22,7 +22,7 @@ import java.awt.event.ActionListener;
  * A frame for adding card.
  */
 public class AddCardFrame extends BasicFrame implements ActionListener {
-    private final JTextField termText;
+    private final JTextArea termText;
     private final JTextArea defText;
     private final JButton addButton;
     private final JButton backButton;
@@ -38,18 +38,21 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         termLabel.setBounds(20,20,80,25);
         panel.add(termLabel);
 
-        termText = new JTextField(100);
-        termText.setBounds(100,20,300,25);
-        panel.add(termText);
+        termText = new JTextArea();
+        termText.setLineWrap(true);
+        JScrollPane termTextScroll = new JScrollPane(termText);
+        termTextScroll.setBounds(100, 20, 390, 70);
+        panel.add(termTextScroll);
 
         JLabel defLabel = new JLabel("Definition");
-        defLabel.setBounds(20,50,80,25);
+        defLabel.setBounds(20,100,80,25);
         panel.add(defLabel);
 
         defText = new JTextArea();
-        defText.setBounds(100,50,390,100);
         defText.setLineWrap(true);
-        panel.add(defText);
+        JScrollPane defTextScroll = new JScrollPane(defText);
+        defTextScroll.setBounds(100, 100, 390, 100);
+        panel.add(defTextScroll);
 
         addButton = new JButton("Add");
         addButton.setBounds(400,200,80,40);
@@ -73,7 +76,13 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
-            if (check()) {  // add succeeds
+            if (checkEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Term and definition can't be empty",
+                        "Add fails",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+            else if (check()) {  // add succeeds
                 setVisible(false);
                 new CardListFrame(programStateInputBoundary);
             } else {    // add fails: card already exists
@@ -89,6 +98,14 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
             setVisible(false);
         }
 
+    }
+
+    /**
+     * Check if the user's input (term/definition) is empty.
+     * @return true if it's empty; false otherwise
+     */
+    private boolean checkEmpty() {
+        return (termText.getText().length() == 0 || defText.getText().length() == 0);
     }
 
     protected boolean check(){

@@ -30,6 +30,14 @@ public class ProgramStateController {
     }
 
     /**
+     * Getter for current user's username.
+     * @return a string of current username.
+     */
+    public String getCurrUserName() {
+        return programStateInputBoundary.getCurrUserName();
+    }
+
+    /**
      * Getter for current pack name
      * @return a pack name
      */

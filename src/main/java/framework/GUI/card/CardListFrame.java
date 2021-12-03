@@ -29,7 +29,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * A card frame class where users can interact with all cards in current pack.
+ * A card frame class where users can interact with all cards in current pack, such as
+ *      - adding card
+ *      - editing card
+ *      - deleting card
+ *      - sorting/searching cards
+ *      - reviewing/learning all cards.
  */
 public class CardListFrame extends BasicFrame implements ActionListener {
     private final CardController cardController;
