@@ -42,14 +42,6 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
     }
 
     @Override
-    public boolean taskCompleted() {
-        if (cards.peek() == null) {
-            learnOB.setLearnCompleted();
-        }
-        return cards.peek() == null;
-    }
-
-    @Override
     public Card getCurrCard() {
         return currCard;
     }

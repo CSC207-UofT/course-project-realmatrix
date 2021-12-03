@@ -125,8 +125,6 @@ public class LearnFrame extends BasicFrame implements ActionListener {
                 "long definition"));
 
         user.addPackage(vocab);
-        Loader loader = new Loader();
-        loader.userLoad(user);
         ps.setCurrUser(user);
         ps.setCurrPack("vocab");
         new LearnFrame(ps);

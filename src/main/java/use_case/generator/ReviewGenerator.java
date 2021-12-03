@@ -78,12 +78,6 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
     }
 
     @Override
-    public boolean taskCompleted() {
-        reviewOB.setReviewCompleted();
-        return cards.peek() == null;
-    }
-
-    @Override
     public Card getCurrCard() {
         return currCard;
     }
