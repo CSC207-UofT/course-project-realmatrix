@@ -26,50 +26,64 @@ public class LearnFrame extends BasicFrame implements ActionListener {
     private final JButton backToPack;
     private final JButton nextButton;
 
+    LearnOutputBoundary learnOutputBoundary;
+    LearnInputBoundary learnInputBoundary;
+    LearnController learnController;
+
     public LearnFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Learning", programStateInputBoundary);
-        this.setSize(500,800);
-        this.learnPanel = new JPanel(new GridLayout(3,1));
+        learnOutputBoundary = new LearnPresenter();
+        learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(), learnOutputBoundary);
+        learnController = new LearnController(learnInputBoundary);
+
+        this.setSize(600,400);
+        this.learnPanel = new JPanel();
 
         this.card = new JLabel("<html><p>Click Next to start learning</p><html>", SwingConstants.CENTER);
-        this.card.setBounds(10, 100, 300, 400);
+
         this.card.setFont(new Font("verdana", Font.BOLD , 30));
 
 
         this.nextButton = new JButton("Next");
-        this.nextButton.setBounds(150,500,200,50);
-        this.setFont(new Font("arial", Font.PLAIN,10));
+        this.nextButton.setFont(new Font("arial", Font.PLAIN,25));
         this.nextButton.addActionListener(this);
 
         this.backToPack = new JButton("Back to pack: " + programStateInputBoundary.getCurrPackName());
-        this.setFont(new Font("arial", Font.PLAIN,10));
-        this.backToPack.setBounds(10, 10, 200, 50);
-        this.nextButton.addActionListener(this);
+        this.backToPack.setFont(new Font("arial", Font.PLAIN,15));
+        this.backToPack.addActionListener(this);
 
-        addComp();
+        JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        top.add(this.backToPack);
+        JPanel mid = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        mid.add(this.card);
+        JPanel low = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        low.add(this.nextButton);
+
+
+
+        learnPanel.setLayout(new BorderLayout());
+        learnPanel.add(top,BorderLayout.NORTH);
+        learnPanel.add(mid,BorderLayout.CENTER);
+        learnPanel.add(low,BorderLayout.SOUTH);
+
         add(learnPanel);
         setVisible(true);
-    }
-    private void addComp(){
-        this.learnPanel.add(backToPack);
-        this.learnPanel.add(card);
-        this.learnPanel.add(nextButton);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        LearnOutputBoundary learnOutputBoundary = new LearnPresenter();
-        LearnInputBoundary learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(), learnOutputBoundary);
-        LearnController learnController = new LearnController(learnInputBoundary);
-        learnController.next();
-
-        if(e.getSource() == this.nextButton){
-            if(!learnOutputBoundary.getLearnCompleted()){
-                this.card.setText("<html><p>"+learnOutputBoundary.getCurrCardStrRep() + "</p><html>");
-            }else{
-                this.card.setText("<html><p>you have already completed learning of this pack</p><html>");
+        if (e.getSource() == this.nextButton) {
+            learnController.next();
+            String currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
+            if (!learnOutputBoundary.getLearnCompleted()) {
+                this.card.setText("<html><p>"+ currCardStrRep + "</p><html>");
+            } else {
+                JOptionPane.showMessageDialog(this, "You have finished learning all the cards.",
+                        "Good job!", JOptionPane.INFORMATION_MESSAGE);
+                new CardListFrame(programStateInputBoundary);
+                setVisible(false);
             }
-        }else if(e.getSource() == this.backToPack){
+        } else if (e.getSource() == this.backToPack) {
             new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
