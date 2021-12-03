@@ -81,14 +81,14 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
         String pack = packText.getText();
 
         // Construct PackManager
-        IDataInOut dataInOut = new DataInOut();
         DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
-        PackInputBoundary pkManager = new PackManager(dataInOut, programStateInputBoundary);
+        PackInputBoundary pkManager = new PackManager(programStateInputBoundary);
         // Construct PackController
         PackController pkController = new PackController(pkManager, dbPresenter);
         // check add
+        IDataInOut dataInOut = new DataInOut();
         AddOutputBoundary addPresenter = new AddPresenter();
-        pkController.addNewPack(pack, addPresenter);
+        pkController.addNewPack(pack, addPresenter, dataInOut);
         return addPresenter.getAddResult();
     }
 

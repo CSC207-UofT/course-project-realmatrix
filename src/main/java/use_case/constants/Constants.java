@@ -45,11 +45,12 @@ public class Constants {
     public static final String PW_AGAIN = "Password Again: ";
 
     //GUI.start
-    public static final String WELLCOME_MSG = "Welcome to Recaller!";
+    public static final String WELCOME_MSG = "Welcome to Recaller!";
 
     //GUI.user
     public static final String CHANGE_PW = "Change password";
-    public static final String NEW_PW_MSG = "new password: ";
+    public static final String NEW_PW_MSG = "New password: ";
+    public static final String REPEAT_PW_MSG = "Repeat new password: ";
     public static final String CHANGE_USERNAME = "Change username";
     public static final String NEW_USERNAME_MSG = "new username: ";
 
@@ -69,6 +70,6 @@ public class Constants {
     public static final String CHECK_OUT_PACKAGE = "Checkout my packages";
 
     //Presenter
-    public static final String NANM_EXISTS = "Name already exists. Try a new name.";
+    public static final String NAME_EXISTS = "Name already exists. Try a new name.";
     public static final String SUC_VIEW = "Successfully added.";
 }

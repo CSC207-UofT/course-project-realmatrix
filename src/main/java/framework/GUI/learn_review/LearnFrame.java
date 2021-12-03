@@ -36,6 +36,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
 
     public LearnFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Learning", programStateInputBoundary);
+
         learnOutputBoundary = new LearnPresenter();
         learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(), learnOutputBoundary);
         learnController = new LearnController(learnInputBoundary);
@@ -49,9 +50,11 @@ public class LearnFrame extends BasicFrame implements ActionListener {
 
         this.card.setForeground(Color.blue);
 
+
         this.nextButton = new JButton("Next");
         this.nextButton.setFont(new Font("arial", Font.PLAIN,25));
         this.nextButton.addActionListener(this);
+
 
         this.backToPack = new JButton("Back to pack: " + programStateInputBoundary.getCurrPackName());
         this.backToPack.setFont(new Font("arial", Font.PLAIN,15));
@@ -73,9 +76,11 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         learnPanel.add(scroller,BorderLayout.CENTER);
         learnPanel.add(low,BorderLayout.SOUTH);
 
+
         add(learnPanel);
         setVisible(true);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -95,12 +100,13 @@ public class LearnFrame extends BasicFrame implements ActionListener {
                 new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             }
+
         } else if (e.getSource() == this.backToPack) {
             new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
     }
-        
+
 
     public static void main(String[] args) throws IOException {
         ProgramStateInputBoundary ps = new ProgramStateManager();
@@ -115,6 +121,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
                 "long long long long long long long long long long long long long long long long long long long long " +
                 "long long long long long long long long long long long long long long long long long long long long " +
                 "long definition"));
+
         user.addPackage(vocab);
         Loader loader = new Loader();
         loader.userLoad(user);

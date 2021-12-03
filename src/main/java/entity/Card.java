@@ -54,14 +54,6 @@ public class Card {
         this.proficiency = pro;
     }
 
-//    public void setProficiencyToMax(){
-//        this.proficiency = Constants.PROFICIENCY_MAX;
-//    }
-//
-//    public void setProficiencyToMin(){
-//        this.proficiency = Constants.PROFICIENCY_MIN;
-//    }
-
     /**
      * Change the term on this card to a new term.
      *
@@ -93,9 +85,4 @@ public class Card {
     }
 
 //    Simple test
-//    public static void main(String[] args) {
-//        Card c = new Card("1231", "card", "卡");
-//        c.changeHideDefinition();
-//        System.out.println(c);
-//    }
 }

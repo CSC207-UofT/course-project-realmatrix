@@ -1,17 +1,12 @@
 package use_case.manager;
 
-import use_case.output_boundaries.SortSearchCardOutputBoundary;
-
-public interface Sort {
+/**
+ * A sort Interface which is shared between Card/Pack Manager.
+ */
+public interface Sort<T> {
     // Sort according to date added, from oldest to newest.
-    void sortOldToNew(SortSearchCardOutputBoundary sortOutputBoundary);
+    void sortOldToNew(T sortOutputBoundary);
 
     // Sort in alphabetical order (a-z), ignore case difference.
-    void sortAtoZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
-
-    // Sort in alphabetical order (z-a), ignore case difference.
-//    void sortZtoA(SortSearchCardOutputBoundary sortCardOutputBoundary);
-
-    // Sort according to date added, from newest to oldest.
-//    void sortNewToOld(SortSearchCardOutputBoundary<T> sortOutputBoundary);
+    void sortAtoZ(T sortOutputBoundary);
 }

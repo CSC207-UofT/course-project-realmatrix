@@ -2,6 +2,8 @@ package framework.GUI.card;
 
 import entity.User;
 import framework.GUI.BasicFrame;
+import framework.GUI.learn_review.LearnFrame;
+import framework.GUI.learn_review.ReviewFrame;
 import framework.GUI.pack.PackListFrame;
 import interface_adapter.controller.CardController;
 import interface_adapter.controller.ProgramStateController;
@@ -39,7 +41,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
     private JTable cardJTable;  // A JTable that contains card terms & definition
     private String selectedCardTerm;
 
-    private final JTextField searchText;    // A text field for user to enter term for sesarch
+    private final JTextField searchText;    // A text field for user to enter term for search
 
     private final JComboBox<String> sortBox;
 
@@ -56,7 +58,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         super("Card List", programStateInputBoundary);
         setTitle("[" + psController.getCurrPackName() + "] Card List");
         // Card Controller
-        CardInputBoundary cardManager = new CardManager(new DataInOut(), programStateInputBoundary);
+        CardInputBoundary cardManager = new CardManager(programStateInputBoundary);
         cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
 
         // The whole panel in the frame
@@ -261,7 +263,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a Card first.", // TODO: constant
-                        "No Card for editting",
+                        "No Card for editing",
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 new EditCardFrame(programStateInputBoundary);
@@ -276,33 +278,21 @@ public class CardListFrame extends BasicFrame implements ActionListener {
                         "No Card for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                cardController.deleteCard(selectedCardTerm);
+                cardController.deleteCard(selectedCardTerm, new DataInOut());
                 setCardTableModel();
             }
         }
 
         else if (e.getSource() == reviewButton) {
-            if (selectedCardTerm == null) {
-                JOptionPane.showMessageDialog(this,
-                        "Please select a card first.", // TODO: constant
-                        "No Card for deletion",
-                        JOptionPane.WARNING_MESSAGE);
-            } else {
-                // TODO: go review frame.
-                setVisible(false);
-            }
+            psController.setCurrCard(null);
+            new ReviewFrame(programStateInputBoundary);
+            setVisible(false);
         }
 
         else if (e.getSource() == learnButton) {
-            if (selectedCardTerm == null) {
-                JOptionPane.showMessageDialog(this,
-                        "Please select a card first.", // TODO: constant
-                        "No Card for deletion",
-                        JOptionPane.WARNING_MESSAGE);
-            } else {
-                // TODO: go learn frame.
-                setVisible(false);
-            }
+            psController.setCurrCard(null);
+            new LearnFrame(programStateInputBoundary);
+            setVisible(false);
         }
 
         else if (e.getSource() == backButton) {

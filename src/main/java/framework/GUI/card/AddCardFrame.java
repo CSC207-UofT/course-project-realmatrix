@@ -96,14 +96,14 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         String def = defText.getText();
 
         // Construct CardManager
-        IDataInOut dataInOut = new DataInOut();
         DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
-        CardInputBoundary cardManager = new CardManager(dataInOut, programStateInputBoundary);
+        CardInputBoundary cardManager = new CardManager(programStateInputBoundary);
         // Construct CardController
         CardController cdController = new CardController(cardManager, dbPresenter);
         // check add
         AddOutputBoundary addPresenter = new AddPresenter();
-        cdController.addNewCard(term, def, addPresenter);
+        IDataInOut dataInOut = new DataInOut();
+        cdController.addNewCard(term, def, dataInOut, addPresenter);
         return addPresenter.getAddResult();
     }
     // Test

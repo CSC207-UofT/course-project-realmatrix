@@ -1,68 +1,98 @@
-//import entity.Card;
-//import entity.Pack;
-//import interface_adapter.presenters.SortSearchCardPresenter;
-//import org.junit.Before;
-//import org.junit.Test;
-//import use_case.output_boundaries.AddOutputBoundary;
-//import use_case.output_boundaries.SearchCardOutputBoundary;
-//import use_case.output_boundaries.SortSearchCardOutputBoundary;
-//import interface_adapter.presenters.AddPresenter;
-//import interface_adapter.presenters.SearchCardPresenter;
-//import use_case.manager.CardManager;
-//import use_case.manager.PackManager;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import static org.junit.Assert.assertEquals;
-//
-//public class PackManagerTest {
-//    PackManager pm;
-//    final String pName = "COG250";
-//    Pack p;
-//    final String c1Term = "Equivocation";
-//    final String c1Definition = "Explaining something by assuming itself.";
-//    final String c2Term = "Fragmentation";
-//    final String c2Definition = "Don't feel himself as a unit.";
-//    CardManager cm1;
-//    CardManager cm2;
-//    Card c1;
-//    Card c2;
-//    final AddOutputBoundary AddOutputBoundary = new AddPresenter();
-//    final SortSearchCardOutputBoundary sortCardOutputBoundary = new SortSearchCardPresenter<>();
-//    final SearchCardOutputBoundary<Card> searchCardOutputBoundary = new SearchCardPresenter<>();
-//
-//    @Before
-//    public void createPackManager() {
-//        pm = new PackManager();
-//        p = pm.addNewPack(pName, );
-//        pm.setCurrPack(p);
-//        cm1 = new CardManager();
-//        c1 = cm1.addNewCard(c1Term, c1Definition, );
-//        cm1.setCurrCard(c1);
-//        cm2 = new CardManager();
-//        c2 = cm2.addNewCard(c2Term, c2Definition, );
-//        cm2.setCurrCard(c2);
-//        pm.addCard(c1, AddOutputBoundary);
-//    }
-//
-//    @Test
-//    public void TestCreateNewPack() {
-//        assertEquals(pName, p.getName());
-//    }
-//
-//    @Test
-//    public void TestAddCard() {
-//        List<Card> cardList = pm.sortZtoA(sortCardOutputBoundary);
-//        assertEquals(c1, cardList.get(0));
-//    }
-//
-//    @Test
-//    public void TestDeleteCard() {
-//        pm.deleteCard(c1);
-//        List<Card> cardList = pm.sortZtoA(sortCardOutputBoundary);
-//        assertEquals(0, cardList.size());
-//    }
+import entity.Pack;
+import entity.User;
+import interface_adapter.presenters.ChangePresenter;
+import interface_adapter.presenters.SortSearchPackPresenter;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.manager.ProgramStateManager;
+import use_case.output_boundaries.AddOutputBoundary;
+import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.SortSearchPackOutputBoundary;
+import interface_adapter.presenters.AddPresenter;
+import use_case.manager.PackManager;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
+public class PackManagerTest {
+    PackManager pm;
+    final String pName1 = "COG250";
+    final String pName2 = "CSC207";
+    Pack p1;
+    Pack p2;
+    final AddOutputBoundary addOutputBoundary = new AddPresenter();
+    final SortSearchPackOutputBoundary sortSearchPackOutputBoundary = new SortSearchPackPresenter();
+    final ProgramStateInputBoundary programStateInputBoundary = new ProgramStateManager();
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final PrintStream originalErr = System.err;
+
+    @Before
+    public void createPackManager() {
+        User user = new User("test_user", "test");
+        programStateInputBoundary.setCurrUser(user);
+        pm = new PackManager(programStateInputBoundary);
+        pm.addNewPack(pName1, addOutputBoundary);
+        pm.addNewPack(pName2, addOutputBoundary);
+        p1 = programStateInputBoundary.getCurrUser().getPackageMap().get(pName1);
+        p2 = programStateInputBoundary.getCurrUser().getPackageMap().get(pName2);
+    }
+
+    @Test(timeout = 50)
+    public void testAddNewPack() {
+        assertEquals(pName1, p1.getName());
+        assertEquals(pName2, p2.getName());
+    }
+
+    @Test
+    public void testDeletePack() {
+        pm.deletePack(pName2);
+        assertNull(programStateInputBoundary.getCurrUser().getPackageMap().get(pName2));
+    }
+
+    @Test
+    public void testChangePackName(){
+        ChangePresenter changeP = new ChangePresenter();
+        String pName2New = "pName2New";
+        assertTrue(pm.changePackName(pName2New, changeP));
+        assertEquals(pName2New, p2.getName());
+        assertFalse(pm.changePackName(pName1, changeP));
+        assertEquals(pName2New, p2.getName());
+    }
+
+
+
+    @Test
+    public void testSearchPack(){
+        pm.searchPack(pName1, sortSearchPackOutputBoundary);
+        ArrayList<String> expect = new ArrayList<>();
+        expect.add(pName1);
+        assertEquals(expect, sortSearchPackOutputBoundary.getSortSearchResult());
+    }
+
+    @Test
+    public void testSortOldToNew(){
+        pm.sortOldToNew(sortSearchPackOutputBoundary);
+        ArrayList<String> expect = new ArrayList<>();
+        expect.add(pName1);
+        expect.add(pName2);
+        assertEquals(expect, sortSearchPackOutputBoundary.getSortSearchResult());
+    }
+
+    @Test
+    public void testSortAToZ(){
+        pm.sortAtoZ(sortSearchPackOutputBoundary);
+        ArrayList<String> expect = new ArrayList<>();
+        expect.add(pName1);
+        expect.add(pName2);
+        assertEquals(expect, sortSearchPackOutputBoundary.getSortSearchResult());
+    }
 //
 //    @Test
 //    public void TestSearchCardTerm() {
@@ -145,18 +175,5 @@
 //        assertEquals(actual2, cardList2);
 //
 //    }
-//
-////    @Test
-////    public void TestAlphabetComparator(){
-////
-////    }
-////
-////    @Test
-////    public void TestProficiencyComparator(){}
-////
-////    @Test
-////    public void TestGetCurrPack(){}
-////
-////    @Test
-////    public void TestSetCurrPack(){}
-//}
+
+}

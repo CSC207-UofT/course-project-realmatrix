@@ -29,7 +29,7 @@ public class StartFrame extends BasicFrame implements ActionListener {
         // 1. Create components shown on the frame
         startPanel = new JPanel(new GridLayout(3, 1));
 
-        helloMessage = new JLabel(Constants.WELLCOME_MSG, SwingConstants.CENTER);
+        helloMessage = new JLabel(Constants.WELCOME_MSG, SwingConstants.CENTER);
         helloMessage.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
         lgButton = new StartButton(Constants.LOGIN_BTN);

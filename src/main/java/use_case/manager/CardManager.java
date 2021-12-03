@@ -1,7 +1,6 @@
 package use_case.manager;
 
 import entity.Card;
-import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.*;
@@ -9,16 +8,15 @@ import use_case.output_boundaries.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Locale;
 
 /**
  * A CardManager manages all cards in current pack.
  */
-public class CardManager extends Manager<Card> implements Sort, CardInputBoundary {
+public class CardManager extends Manager<Card> implements Sort<SortSearchCardOutputBoundary>, CardInputBoundary {
     // Note items for this manager is a map <cardTerm: Card>
 
-    public CardManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
-        super(dataInOut, programStateInputBoundary);
+    public CardManager(ProgramStateInputBoundary programStateInputBoundary) {
+        super(programStateInputBoundary);
         this.currItem = this.programStateInputBoundary.getCurrCard();
         this.items = this.programStateInputBoundary.getCurrPack().getCardMap();
     }
@@ -95,20 +93,6 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         this.currItem.setDefinition(newDefinition);
     }
 
-//    /**
-//     * Increase the proficiency of the card by 1.
-//     */
-//    public void increaseProficiency() {
-//        this.currItem.setProficiency(Math.min(this.currItem.getProficiency() + 1, 5));
-//    }
-//
-//    /**
-//     * Decrease the proficiency of the card by 1.
-//     */
-//    public void decreaseProficiency() {
-//        this.currItem.setProficiency(Math.max(this.currItem.getProficiency() - 1, 1));
-//    }
-
     /**
      * Users can search cards by card's term and definition (not necessarily equal to) keyword.
      *  @param keyword              the term that the user searches
@@ -141,21 +125,14 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
      * @param sortSearchCardOutputBoundary a sort output boundary for getting the sorted output.
      */
     public void sortAtoZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
-        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
-        sorted.sort(new AlphabetComparator());
+        ArrayList<String> cardTermList = new ArrayList<>(this.items.keySet());
+        cardTermList.sort(String::compareToIgnoreCase);
+        ArrayList<Card> sorted = new ArrayList<>();
+        for (String term : cardTermList) {
+            sorted.add(this.items.get(term));
+        }
         presentSortSearchResult(sorted, sortSearchCardOutputBoundary);
     }
-
-//    /**
-//     * Return a card list sorted by cards' terms' alphabetical order: z - a.
-//     *
-//     * @param sortCardOutputBoundary a sort output boundary for getting the sorted output.
-//     */
-//    public void sortZtoA(SortSearchCardOutputBoundary sortCardOutputBoundary) {
-//        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
-//        sorted.sort(new AlphabetComparator().reversed());
-//        presentSortResult(sorted, sortCardOutputBoundary);
-//    }
 
 
     /**
@@ -168,17 +145,6 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
         sorted.sort(new ProficiencyComparator());
         presentSortSearchResult(sorted, sortSearchCardOutputBoundary);
     }
-//
-//    /**
-//     * Return a card list sorted by cards' proficiency: high to low.
-//     *
-//     * @return an arraylist of sorted cards
-//     */
-//    public ArrayList<Card> sortProHighToLow() {
-//        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
-//        sorted.sort(new ProficiencyComparator().reversed());
-//        return sorted;
-//    }
 
     /**
      * Return a card list sorted in random order.
@@ -204,27 +170,6 @@ public class CardManager extends Manager<Card> implements Sort, CardInputBoundar
             presentResult[i] = new String[]{term, def};
         }
         sortSearchCardOutputBoundary.setSortSearchResult(presentResult);
-    }
-
-
-    private static class AlphabetComparator implements Comparator<Card> {
-        /**
-         * Compare 2 cards according to their terms' alphabetical order (ignore case).
-         * <p>
-         * Return a negative integer if c1 < c2,
-         * zero if c1 == c2,
-         * a positive integer if c1 > c2
-         * in terms of alphabetical order (ignore cases) of their terms.
-         *
-         * @param c1 the first card
-         * @param c2 the second card
-         * @return a negative integer, zero, or a positive integer if
-         * if c1 < c2, c1 == c2, or c1 > c2 in terms of alphabetical order of terms.
-         */
-        @Override
-        public int compare(Card c1, Card c2) {
-            return c1.getTerm().compareToIgnoreCase(c2.getTerm());
-        }
     }
 
     private static class ProficiencyComparator implements Comparator<Card> {

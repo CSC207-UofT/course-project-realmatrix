@@ -107,6 +107,6 @@ public class LearnTest {
     }
 
     private boolean representThisCard(String strRep, Card card) {
-        return Objects.equals(strRep, card.toString());
+        return Objects.equals(strRep, card.toString().replace("\n","<br>"));
     }
 }

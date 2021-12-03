@@ -8,14 +8,12 @@ import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
-import interface_adapter.presenters.SearchPackPresenter;
-import interface_adapter.presenters.SortPackPresenter;
+import interface_adapter.presenters.SortSearchPackPresenter;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.PackManager;
 import use_case.manager.ProgramStateManager;
-import use_case.output_boundaries.SearchPackOutputBoundary;
-import use_case.output_boundaries.SortPackOutputBoundary;
+import use_case.output_boundaries.SortSearchPackOutputBoundary;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -36,7 +34,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
     private DefaultListModel<String> packListModel;   // Model for JList
     private JList<String> packJList;  // A JList that contains pack names
     // Search
-    private final JTextField searchText;    // A text field for user to enter pack name for sesarch
+    private final JTextField searchText;    // A text field for user to enter pack name for search
     // Sort
     private final JComboBox<String> sortBox;
 
@@ -51,7 +49,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
     public PackListFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Pack List", programStateInputBoundary);
         // Pack & programState controller
-        PackInputBoundary packManager = new PackManager(new DataInOut(), programStateInputBoundary);
+        PackInputBoundary packManager = new PackManager(programStateInputBoundary);
         packController = new PackController(packManager, new DatabaseErrMsgPresenter());
 
         // The whole panel in the frame
@@ -131,10 +129,10 @@ public class PackListFrame extends BasicFrame implements ActionListener {
     private void setPackListModel() {
         packListModel.removeAllElements();
         // Get arraylist of pack names
-        SortPackOutputBoundary sortPackPresenter = new SortPackPresenter();
+        SortSearchPackOutputBoundary sortPackPresenter = new SortSearchPackPresenter();
         packController.sortOldToNew(sortPackPresenter);
         // Data for packListModel
-        ArrayList<String> packList = sortPackPresenter.getSortResult();
+        ArrayList<String> packList = sortPackPresenter.getSortSearchResult();
         // Add the pack names into model
         packList.forEach(packListModel::addElement);
     }
@@ -212,37 +210,37 @@ public class PackListFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == addButton) {
-            new AddPackFrame(programStateInputBoundary);
+        else if (e.getSource() == addButton) {
+            new framework.GUI.pack.AddPackFrame(programStateInputBoundary);
             setVisible(false);
         }
 
-        if (e.getSource() == editButton) {
+        else if (e.getSource() == editButton) {
             if (selectedPackName == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a pack first.", // TODO: constant
-                        "No pack for editting",
+                        "No pack for editing",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                new EditPackFrame(programStateInputBoundary);
+                new framework.GUI.pack.EditPackFrame(programStateInputBoundary);
                 setVisible(false);
             }
         }
 
-        if (e.getSource() == deleteButton) {
+        else if (e.getSource() == deleteButton) {
             if (selectedPackName == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a pack first.", // TODO: constant
                         "No pack for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                packController.deletePack(selectedPackName);
+                packController.deletePack(selectedPackName, new DataInOut());
                 setPackListModel();
                 psController.setCurrPack(null);
             }
         }
 
-        if (e.getSource() == backButton) {
+        else if (e.getSource() == backButton) {
             new UserFrame(programStateInputBoundary.getCurrUserName(), programStateInputBoundary);
             setVisible(false);
         }
@@ -253,18 +251,18 @@ public class PackListFrame extends BasicFrame implements ActionListener {
      * Search functionality.
      */
     private void search() {
-        SearchPackOutputBoundary searchPackOutputBoundary = new SearchPackPresenter();
-        packController.searchPack(searchText.getText(), searchPackOutputBoundary);
-        setPackListModel(searchPackOutputBoundary.getSearchResult());
+        SortSearchPackOutputBoundary sortSearchPackOutputBoundary = new SortSearchPackPresenter();
+        packController.searchPack(searchText.getText(), sortSearchPackOutputBoundary);
+        setPackListModel(sortSearchPackOutputBoundary.getSortSearchResult());
     }
 
     /**
      * Sort packs by pack names: A - Z order.
      */
     private void sortAToZ() {
-        SortPackOutputBoundary sortPackPresenter = new SortPackPresenter();
+        SortSearchPackOutputBoundary sortPackPresenter = new SortSearchPackPresenter();
         packController.sortAToZ(sortPackPresenter);
-        setPackListModel(sortPackPresenter.getSortResult());
+        setPackListModel(sortPackPresenter.getSortSearchResult());
     }
 
     //Test

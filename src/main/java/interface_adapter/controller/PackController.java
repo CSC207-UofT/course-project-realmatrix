@@ -1,5 +1,6 @@
 package interface_adapter.controller;
 
+import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.output_boundaries.*;
 
@@ -20,20 +21,20 @@ public class PackController {
      *
      * @param packName The name of the pack
      */
-    public void addNewPack(String packName, AddOutputBoundary addOutputBoundary) {
+    public void addNewPack(String packName, AddOutputBoundary addOutputBoundary, IDataInOut dataInOut) {
         if (this.packIB.addNewPack(packName, addOutputBoundary)) {
-            this.packIB.write(databaseErrorOutputBoundary);
+            this.packIB.write(dataInOut, databaseErrorOutputBoundary);
         }
     }
 
     /**
      * Change a pack's name with specified pack name.
-     *
-     * @param newPackName The name of the pack
+     *  @param newPackName The name of the pack
+     * @param dataInOut the data access interface
      */
-    public void changePackName(String oldPackName, String newPackName, ChangeOutputBoundary changeOutputBoudary) {
-        if (this.packIB.changePackName(newPackName, changeOutputBoudary)) {
-            this.packIB.write(oldPackName, databaseErrorOutputBoundary);
+    public void changePackName(String oldPackName, String newPackName, IDataInOut dataInOut, ChangeOutputBoundary changeOutputBoundary) {
+        if (this.packIB.changePackName(newPackName, changeOutputBoundary)) {
+            this.packIB.write(oldPackName, dataInOut, databaseErrorOutputBoundary);
         }
     }
 
@@ -43,29 +44,29 @@ public class PackController {
      * @param str the text to be searched
      * @param searchPackOutputBoundary an output boundary that gets the searched result
      */
-    public void searchPack(String str, SearchPackOutputBoundary searchPackOutputBoundary) {
+    public void searchPack(String str, SortSearchPackOutputBoundary searchPackOutputBoundary) {
         this.packIB.searchPack(str, searchPackOutputBoundary);
     }
 
-    public void deletePack(String packName) {
+    public void deletePack(String packName, IDataInOut dataInOut) {
         if (this.packIB.deletePack(packName)) {
-            this.packIB.delete(databaseErrorOutputBoundary);
+            this.packIB.delete(dataInOut, databaseErrorOutputBoundary);
         }
     }
 
     /**
      * Old-to-new is the order of packs shown to the user by default.
-     * @param sortPackOutputBoundary an output boundary that gets the result of sorted packs.
+     * @param sortSearchPackOutputBoundary an output boundary that gets the result of sorted packs.
      */
-    public void sortOldToNew(SortPackOutputBoundary sortPackOutputBoundary) {
-        this.packIB.sortOldToNew(sortPackOutputBoundary);
+    public void sortOldToNew(SortSearchPackOutputBoundary sortSearchPackOutputBoundary) {
+        this.packIB.sortOldToNew(sortSearchPackOutputBoundary);
     }
 
     /**
      * Sort packs by pack names, in alphabetic order: A - Z.
-     * @param sortPackOutputBoundary an output boundary that gets the result of sorted packs.
+     * @param sortSearchPackOutputBoundary an output boundary that gets the result of sorted packs.
      */
-    public void sortAToZ(SortPackOutputBoundary sortPackOutputBoundary) {
-        this.packIB.sortAToZ(sortPackOutputBoundary);
+    public void sortAToZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary) {
+        this.packIB.sortAtoZ(sortSearchPackOutputBoundary);
     }
 }
