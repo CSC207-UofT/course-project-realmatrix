@@ -6,7 +6,6 @@ import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.card.CardListFrame;
 import interface_adapter.controller.ReviewController;
-import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.ReviewPresenter;
 import use_case.generator.ReviewGenerator;
 import use_case.input_boundaries.ReviewInputBoundary;
@@ -40,8 +39,10 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         reviewInputBoundary = new ReviewGenerator(programStateInputBoundary.getCurrPack(), reviewOutputBoundary);
         reviewController = new ReviewController(reviewInputBoundary, programStateInputBoundary);
 
-        this.setSize(500, 800);
-        this.reviewPanel = new JPanel(new GridLayout(3, 1));
+        this.setSize(500, 500);
+        this.reviewPanel = new JPanel();
+        this.reviewPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
         try {
             reviewController.next();
@@ -50,8 +51,8 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         }
         this.card = new JLabel("<html><p>" + reviewOutputBoundary.getCurrCardStrRep() + "</p><html>",
                 SwingConstants.CENTER);
-        this.card.setBounds(10, 100, 300, 400);
-        this.card.setFont(new Font("verdana", Font.BOLD, 10));
+        this.card.setBounds(100, 100, 300, 400);
+        this.card.setFont(new Font("verdana", Font.BOLD, 20));
 
         this.showDefButton = new JButton("Show Definition");
         this.showDefButton.setBounds(150, 500, 200, 50);
@@ -73,17 +74,33 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         this.backButton.setBounds(10, 10, 200, 50);
         this.backButton.addActionListener(this);
 
-        addComp();
+        // Put constraints on different buttons
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        this.reviewPanel.add(remWrgButton, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        this.reviewPanel.add(remCrtButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        this.reviewPanel.add(showDefButton, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        this.reviewPanel.add(backButton, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth = 2;
+        this.reviewPanel.add(card, gbc);
+
         add(reviewPanel);
         setVisible(true);
-    }
-
-    private void addComp() {
-        this.reviewPanel.add(card);
-        this.reviewPanel.add(showDefButton);
-        this.reviewPanel.add(remWrgButton);
-        this.reviewPanel.add(remCrtButton);
-        this.reviewPanel.add(backButton);
     }
 
     @Override
