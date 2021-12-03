@@ -77,8 +77,13 @@ public class LearnFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.nextButton) {
+            String currCardStrRep = null;
             learnController.next();
-            String currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
+            try {
+                currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
+            }catch(NullPointerException ex){
+                learnOutputBoundary.setLearnCompleted();
+            }
             if (!learnOutputBoundary.getLearnCompleted()) {
                 this.card.setText("<html><p>"+ currCardStrRep + "</p><html>");
             } else {
