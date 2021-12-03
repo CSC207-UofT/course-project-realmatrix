@@ -15,6 +15,10 @@ import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.LearnOutputBoundary;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,58 +38,75 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         super("Learning", programStateInputBoundary);
 
         learnOutputBoundary = new LearnPresenter();
-        learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(),
-                learnOutputBoundary);
+        learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(), learnOutputBoundary);
         learnController = new LearnController(learnInputBoundary);
 
-        this.setSize(500,800);
-        this.learnPanel = new JPanel(new GridLayout(3,1));
+        this.setSize(600,400);
+        this.learnPanel = new JPanel();
 
-        learnController.next();
-        String currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
-        this.card = new JLabel("<html><p>"+ currCardStrRep + "</p><html>", SwingConstants.CENTER);
-        this.card.setBounds(10, 100, 300, 400);
+        this.card = new JLabel("<html><div style=\"width: 500\">Click Next to start learning</div><html>", SwingConstants.LEFT);
+
         this.card.setFont(new Font("verdana", Font.BOLD , 30));
 
+        this.card.setForeground(Color.blue);
+
+
         this.nextButton = new JButton("Next");
-        this.nextButton.setBounds(150,500,200,50);
-        this.setFont(new Font("arial", Font.PLAIN,10));
+        this.nextButton.setFont(new Font("arial", Font.PLAIN,25));
         this.nextButton.addActionListener(this);
 
-        this.backToPack = new JButton("Back to pack: " + psController.getCurrPackName());
-        this.setFont(new Font("arial", Font.PLAIN,10));
-        this.backToPack.setBounds(10, 10, 200, 50);
+
+        this.backToPack = new JButton("Back to pack: " + programStateInputBoundary.getCurrPackName());
+        this.backToPack.setFont(new Font("arial", Font.PLAIN,15));
         this.backToPack.addActionListener(this);
 
-        addComp();
+        JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        top.add(this.backToPack);
+        JPanel mid = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        mid.setBounds(0,100,600,500);
+        mid.add(this.card);
+        JScrollPane scroller = new JScrollPane(mid,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JPanel low = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        low.add(this.nextButton);
+
+        mid.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+
+        learnPanel.setLayout(new BorderLayout());
+        learnPanel.add(top,BorderLayout.NORTH);
+        learnPanel.add(scroller,BorderLayout.CENTER);
+        learnPanel.add(low,BorderLayout.SOUTH);
+
+
         add(learnPanel);
         setVisible(true);
     }
 
-    private void addComp() {
-        this.learnPanel.add(backToPack);
-        this.learnPanel.add(card);
-        this.learnPanel.add(nextButton);
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.nextButton) {
+            String currCardStrRep = null;
             learnController.next();
-            String currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
+            try {
+                currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
+            }catch(NullPointerException ex){
+                learnOutputBoundary.setLearnCompleted();
+            }
             if (!learnOutputBoundary.getLearnCompleted()) {
-                this.card.setText("<html><p>"+ currCardStrRep + "</p><html>");
+                this.card.setText("<html><div style=\"width: 500\">"+ currCardStrRep + "</div><html>");
             } else {
                 JOptionPane.showMessageDialog(this, "You have finished learning all the cards.",
                         "Good job!", JOptionPane.INFORMATION_MESSAGE);
                 new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             }
+
         } else if (e.getSource() == this.backToPack) {
             new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
     }
+
 
     public static void main(String[] args) throws IOException {
         ProgramStateInputBoundary ps = new ProgramStateManager();
@@ -94,8 +115,13 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         vocab.addCard(new Card("apple","fruit"));
         vocab.addCard(new Card("banana","fruit"));
         vocab.addCard(new Card("bee","animal"));
-        vocab.addCard(new Card("new", "something you haven't seen before"));
-        vocab.addCard(new Card("debugging", "something I hate"));
+        vocab.addCard(new Card("bee","This is a long long long long long long long long long long long " +
+                "long long long long long long long long long long long long long long long long long long long long " +
+                "long long long long long long long long long long long long long long long long long long long long " +
+                "long long long long long long long long long long long long long long long long long long long long " +
+                "long long long long long long long long long long long long long long long long long long long long " +
+                "long definition"));
+
         user.addPackage(vocab);
         Loader loader = new Loader();
         loader.userLoad(user);
