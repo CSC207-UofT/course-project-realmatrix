@@ -4,6 +4,9 @@ import use_case.output_boundaries.SortSearchPackOutputBoundary;
 
 import java.util.ArrayList;
 
+/**
+ * A presenter for presenting the result of sorting/searching packs.
+ */
 public class SortSearchPackPresenter implements SortSearchPackOutputBoundary {
     private ArrayList<String> sortSearchResult;
 

@@ -1,7 +1,7 @@
 # major design decision
 
 ## 1. Program State
-Our major design decision is that we use `ProgramState` to store current user/pack/card, and `ProgramStateManager` (concrete class for `ProgramStateInputBoundary`) to update the current entity.
+We use `ProgramState` to store current user/pack/card, and `ProgramStateManager` (concrete class for `ProgramStateInputBoundary`) to update the current entity.
 
 In this way, while we are implementing our user interface, we can use setter and getter to display the correct element to user.
 

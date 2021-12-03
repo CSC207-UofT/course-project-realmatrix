@@ -10,7 +10,7 @@ This emerged in several packages, which promotes the use of interfaces to enable
 In order to achieve this principle, we are supposed to confirm that objects of a superclass shall be replaceable with objects of its subclasses without breaking the application. That requires the objects of our subclasses to behave in the same way as the objects of our superclass. We have followed this principle as all of our subclasses, with an "is a" relationship between `CardManager` /`PackManager` /`UserManager` and their parent classes `Manager`. And in interface_adapter.gateway, all of `CardWriter`, `PackWriter`, and `UserWriter` "is a" `Writer`.
 
 ## 4. Interface Segregation Principle
-We kept every input boundary small so that it doesn't contain methods that controller doesn't need.
+We kept every input boundary small so that it doesn't contain methods that controller doesn't need. For example, `Sort` interface only contains method that sort by alphabetic order and date added order. These two methods can be shared when sorting packs and cards.
 
 ## 5. Dependency Inversion Principle
 As we said in `clean architecture` file, we implemented `DataInOut` and its interface `IDataInOut` for dependency inversion, so that usecases who want to write objects into database will use `IDataInOut` instead of depending on interface_adapter.gateway directly.

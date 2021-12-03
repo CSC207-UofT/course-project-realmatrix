@@ -10,6 +10,9 @@ import use_case.output_boundaries.LogInOutOutputBoundary;
 import java.io.IOException;
 import java.util.HashMap;
 
+/**
+ * A manager that manages login / log out actions.
+ */
 public class LogInOutManager implements LogInOutInputBoundary {
     private User currUser; // by default, no current user who is logged in
     private final ProgramStateInputBoundary programStateInputBoundary;

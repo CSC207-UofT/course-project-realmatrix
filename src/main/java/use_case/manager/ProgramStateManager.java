@@ -19,11 +19,19 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
         ps = new ProgramState();
     }
 
+    /**
+     * Getter for current user.
+     * @return a User object, representing current user.
+     */
     @Override
     public User getCurrUser() {
         return ps.getCurrUser();
     }
 
+    /**
+     * Getter for current username.
+     * @return a string of current user's username.
+     */
     @Override
     public String getCurrUserName() {
         if (ps.getCurrUser() != null) {
@@ -32,11 +40,19 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
         return null;
     }
 
+    /**
+     * Getter for current pack.
+     * @return a Pack object, representing current pack.
+     */
     @Override
     public Pack getCurrPack() {
         return ps.getCurrPack();
     }
 
+    /**
+     * Getter for current pack name.
+     * @return a string of current pack's name.
+     */
     @Override
     public String getCurrPackName() {
         if (ps.getCurrPack() != null) {
@@ -45,11 +61,19 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
         return null;
     }
 
+    /**
+     * Getter for current card.
+     * @return a Card object, representing current card.
+     */
     @Override
     public Card getCurrCard() {
         return ps.getCurrCard();
     }
 
+    /**
+     * Getter for current card's term.
+     * @return a string of current card's term.
+     */
     @Override
     public String getCurrCardTerm() {
         if (ps.getCurrCard() != null) {
@@ -58,6 +82,10 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
         return null;
     }
 
+    /**
+     * Getter for current card's definition.
+     * @return a string of current card's definition.
+     */
     @Override
     public String getCurrCardDefinition() {
         if (ps.getCurrCard() != null) {
@@ -66,11 +94,19 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
         return null;
     }
 
+    /**
+     * Setter for current user.
+     * @param user the current user
+     */
     @Override
     public void setCurrUser(User user) {
         ps.setCurrUser(user);
     }
 
+    /**
+     * Setter for current pack.
+     * @param packname the current pack's pack name.
+     */
     @Override
     public void setCurrPack(String packname) {
         // Know: ps.currUser is not null
@@ -82,6 +118,10 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
         }
     }
 
+    /**
+     * Setter for current card.
+     * @param cardTerm the current card's term.
+     */
     @Override
     public void setCurrCard(String cardTerm) {
         // Know: ps.currPack is not null

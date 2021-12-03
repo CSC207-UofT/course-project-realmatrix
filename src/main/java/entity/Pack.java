@@ -40,6 +40,7 @@ public class Pack {
         this.cardList.remove(card);
     }
 
+    // A bunch of getters.
     public String getName() {
         return name;
     }

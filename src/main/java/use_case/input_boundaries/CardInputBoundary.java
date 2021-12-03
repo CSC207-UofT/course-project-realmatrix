@@ -24,6 +24,4 @@ public interface CardInputBoundary extends ManagerInputBoundary {
     void sortAtoZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
 
     void sortProLowToHigh(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
-
-    void sortRandom(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
 }

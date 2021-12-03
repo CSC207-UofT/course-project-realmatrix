@@ -8,20 +8,21 @@ import use_case.output_boundaries.AddOutputBoundary;
 public class AddPresenter implements AddOutputBoundary {
     private boolean addResult;
 
-    @Override
     /**
      * Setter of addResult
      * @param addResult set value of add result.
      */
+    @Override
     public void setAddResult(boolean addResult) {
         this.addResult = addResult;
     }
 
-    @Override
+
     /**
      * Getter of addResult
      * @return true if added successfully
      */
+    @Override
     public boolean getAddResult() {
         return this.addResult;
     }

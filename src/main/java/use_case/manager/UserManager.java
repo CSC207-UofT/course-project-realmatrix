@@ -49,15 +49,13 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @param password   the password of this user
      * @param registerOB the output boundary (abstract interface for presenter)
      */
-    public boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
+    public void createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
         if (!this.items.containsKey(name)) { // No user of such username, valid for registration
             this.currItem = new User(name, password);
             programStateInputBoundary.setCurrUser(this.currItem);
             registerOB.setRegisterResult(true);
-            return true;
         } else {
             registerOB.setRegisterResult(false);
-            return false;
         }
     }
 

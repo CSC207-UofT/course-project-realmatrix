@@ -42,7 +42,7 @@ public class DataInOut implements IDataInOut {
      *                        necessary for determining the path for writing.
      * @param oldName the object's old name
      * @param newO the new object to be written into database.
-     * @throws IOException
+     * @throws IOException fail to write
      */
     @Override
     public void write(String[] partialDataPath, String oldName, Object newO) throws IOException {
@@ -50,6 +50,13 @@ public class DataInOut implements IDataInOut {
         writer.write(oldName, newO);
     }
 
+    /**
+     * Delete an object.
+     * @param partialDataPath a partial datapath contains username and packname (may be null),
+     *                        necessary for determining the path for writing.
+     * @param o the object to be deleted
+     * @throws IOException fail to write
+     */
     @Override
     public void delete(String[] partialDataPath, Object o) throws IOException{
         Writer writer = this.factory.getWriter(partialDataPath, o);

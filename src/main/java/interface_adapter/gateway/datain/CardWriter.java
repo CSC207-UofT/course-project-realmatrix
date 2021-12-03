@@ -10,6 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * A writer class the Card.
+ */
 public class CardWriter extends Writer {
     private final Card card;        // New card to be written
 
@@ -26,7 +29,7 @@ public class CardWriter extends Writer {
 
     /**
      * Write a new card
-     *
+     * @throws IOException fails to write
      */
     @Override
     public void write() throws IOException {
@@ -55,20 +58,11 @@ public class CardWriter extends Writer {
 
     /**
      * Delete a card.
-     *
+     * @throws IOException fails to write
      */
     @Override
     public void delete() throws IOException {
         new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
                 this.card.getTerm() + ".txt").delete();
-    }
-
-    //Test
-    public static void main(String[] args) throws IOException {
-        String[] path = new String[]{"test_user_1", "packA1"};
-        CardWriter cw = new CardWriter(path, new Card("Card1", "card1definition"));
-        cw.write();
-        Card c = new Card("Card2", "card1definition");
-        cw.write("Card1", c);
     }
 }

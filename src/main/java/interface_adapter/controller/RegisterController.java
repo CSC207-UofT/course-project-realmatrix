@@ -5,7 +5,7 @@ import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
 
 /**
- * A register interface_adapter.Controller that allow user to register.
+ * A register controller that allow user to register.
  */
 public class RegisterController {
     final UserInputBoundary userIB;

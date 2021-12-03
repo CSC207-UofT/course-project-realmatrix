@@ -17,6 +17,7 @@ public class User {
         this.packageList = new ArrayList<>();
     }
 
+    // A bunch of getters.
     public String getName() {
         return this.name;
     }
@@ -25,18 +26,34 @@ public class User {
         return this.password;
     }
 
+    /**
+     * Change the user's username to newName.
+     * @param newName the user's new username.
+     */
     public void changeName(String newName) {
         this.name = newName;
     }
 
+    /**
+     * Change the user's password to newPassword.
+     * @param newPassword the user's new password.
+     */
     public void changePassword(String newPassword) {
         this.password = newPassword;
     }
 
+    /**
+     * Add the pack into user's packageList.
+     * @param pack the pack to be added into user's packageList.
+     */
     public void addPackage(Pack pack) {
         this.packageList.add(pack);
     }
 
+    /**
+     * Getter for PackageList.
+     * @return a PackageList.
+     */
     public ArrayList<Pack> getPackageList() {
         return this.packageList;
     }

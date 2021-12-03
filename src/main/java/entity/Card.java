@@ -26,14 +26,21 @@ public class Card {
 
     }
 
+    /**
+     * Hide a card's definition.
+     */
     public void hideDefinition() {
         this.definitionHidden = true;
     }
 
+    /**
+     * Unhide a card's definition.
+     */
     public void unhideDefinition() {
         this.definitionHidden = false;
     }
 
+    // A set of getters.
     public String getTerm() {
         return this.term;
     }
@@ -72,7 +79,11 @@ public class Card {
         this.definition = newDefinition;
     }
 
-
+    /**
+     * Return a string that represents card's term and definition if definition is unhidden;
+     * or a string that represents card's term if definition is hidden.
+     * @return a string
+     */
     @Override
     public String toString() {
         if (this.definitionHidden) {
@@ -80,9 +91,7 @@ public class Card {
         } else {
             return String.format("Term: %1$s \n Definition: %2$s",
                     this.term, this.definition);
-//            return "Term: " + this.term + "\n" + "Definition: " + this.definition;
         }
     }
 
-//    Simple test
 }

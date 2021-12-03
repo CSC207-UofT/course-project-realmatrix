@@ -2,6 +2,9 @@ package interface_adapter.presenters;
 
 import use_case.output_boundaries.LogInOutOutputBoundary;
 
+/**
+ * A presenter to show whether login/out succeeds or not.
+ */
 public class LogInOutPresenter implements LogInOutOutputBoundary {
     private boolean loginOutResult; // A boolean value representing login/out succeeds or fails
 
