@@ -2,7 +2,9 @@ package interface_adapter.presenters;
 
 import use_case.output_boundaries.LearnOutputBoundary;
 
-// TODO: before you change anything in this file, consult with Xing. Learn and review components work fine currently.
+/**
+ * Concrete implementation of LearnOutputBoundary. Present output data to user
+ */
 public class LearnPresenter implements LearnOutputBoundary {
     private boolean learnCompleted = false;
     private String currCardStrRep = null;

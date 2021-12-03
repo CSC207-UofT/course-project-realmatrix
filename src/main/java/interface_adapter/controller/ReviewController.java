@@ -8,7 +8,9 @@ import use_case.input_boundaries.ReviewInputBoundary;
 
 import java.io.IOException;
 
-// TODO: before you change anything in this file, consult with Xing. Learn and review components work fine currently.
+/**
+ * Controller that fetches user input and sends it to ReviewGenerator.
+ */
 public class ReviewController {
     private final ReviewInputBoundary reviewIB;
     private final IDataInOut dataInOut = new DataInOut();
@@ -19,6 +21,10 @@ public class ReviewController {
         this.programStateInputBoundary = programStateInputBoundary;
     }
 
+    /**
+     * user wants to go to next card
+     * @throws IOException
+     */
     public void next() throws IOException {
         // before going to the next card, update current card's proficiency in database
         Card currCard = reviewIB.getCurrCard();
@@ -30,12 +36,15 @@ public class ReviewController {
     }
 
     /**
-     * This method sets can't recall to true.
+     * user remember the current card's definition wrong
      */
     public void setCantRecall() {
         reviewIB.setCantRecall();
     }
 
+    /**
+     * user wants to reveal current card's definition
+     */
     public void setShowDefinition() {
         reviewIB.setShowDefinition();
     }

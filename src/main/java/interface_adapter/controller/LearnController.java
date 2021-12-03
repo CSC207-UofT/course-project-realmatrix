@@ -2,7 +2,9 @@ package interface_adapter.controller;
 
 import use_case.input_boundaries.LearnInputBoundary;
 
-// TODO: before you change anything in this file, consult with Xing. Learn and review components work fine currently.
+/**
+ * Controller that fetches user input and sends it to LearnGenerator.
+ */
 public class LearnController {
     private final LearnInputBoundary learnIB;
 
@@ -10,6 +12,9 @@ public class LearnController {
         this.learnIB = learnIB;
     }
 
+    /**
+     * User wants to go to next card.
+     */
     public void next() {
         learnIB.next();
     }
