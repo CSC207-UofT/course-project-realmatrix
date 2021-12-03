@@ -15,6 +15,10 @@ import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.LearnOutputBoundary;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,7 +63,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         JPanel low = new JPanel(new FlowLayout(FlowLayout.CENTER));
         low.add(this.nextButton);
 
-
+        mid.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
 
         learnPanel.setLayout(new BorderLayout());
         learnPanel.add(top,BorderLayout.NORTH);
@@ -88,7 +92,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
             setVisible(false);
         }
     }
-
+        
 
     public static void main(String[] args) throws IOException {
         ProgramStateInputBoundary ps = new ProgramStateManager();
