@@ -23,10 +23,12 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     final String username;
     final JPanel changePasswordPanel;
     final JLabel message;
-    final JPasswordField newPassword1;
-    final JPasswordField newPassword2;
-    final JLabel newPasswordLabel;
+    final JPasswordField newPassword1 = new JPasswordField(100);
+    final JPasswordField newPassword2 = new JPasswordField(100);
+    final JLabel newPasswordLabel1;
+    final JLabel newPasswordLabel2;
     final JButton finishButton;
+    final JButton backButton;
 
     /**
      * Build a StartFrame.
@@ -34,20 +36,58 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     public ChangePasswordFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
         super(Constants.CHANGE_PW, programStateInputBoundary);
         this.username = username;
-        // 1. Create components shown on the frame
-        changePasswordPanel = new JPanel(new GridLayout(4, 1));
+        changePasswordPanel = new JPanel();
+        changePasswordPanel.setLayout(null);
 
         message = new JLabel(Constants.CHANGE_PW, SwingConstants.CENTER);
         message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
 
-        newPassword1 = new JPasswordField(Constants.COLUMNS1);
-        newPasswordLabel = new JLabel(Constants.NEW_PW_MSG, JLabel.TRAILING); // TODO: label doesn't show up. fix this
-        newPassword1.add(newPasswordLabel);
+        newPasswordLabel1 = new JLabel(Constants.NEW_PW_MSG, JLabel.TRAILING);
+        newPasswordLabel1.setBounds(20, 20, 155, 25);
+        changePasswordPanel.add(newPasswordLabel1);
 
-        newPassword2 = new JPasswordField(Constants.COLUMNS1);
+        newPasswordLabel2 = new JLabel(Constants.REPEAT_PW_MSG, JLabel.TRAILING);
+        newPasswordLabel2.setBounds(20, 60, 155, 25);
+        changePasswordPanel.add(newPasswordLabel2);
 
         finishButton = new JButton(Constants.DONE_BTN);
+        finishButton.setBounds(400, 200, 80, 40);
         finishButton.addActionListener(this);
+        changePasswordPanel.add(finishButton);
+
+        backButton = new JButton("Back");
+        backButton.setBounds(10, 200, 80, 40);
+        backButton.addActionListener(this);
+        changePasswordPanel.add(backButton);
+
+        //Set Password1 text
+        newPassword1.setBounds(180, 20, 300, 25);
+        newPassword1.setEditable(true);
+        newPassword2.setBounds(180, 60, 300, 25);
+        newPassword2.setEditable(true);
+
+        // 1. Create components shown on the frame
+//        changePasswordPanel = new JPanel(new GridLayout(4, 2));
+//
+//        message = new JLabel(Constants.CHANGE_PW, SwingConstants.CENTER);
+//        message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
+//
+//        newPassword1 = new JPasswordField(Constants.COLUMNS1);
+//        newPasswordLabel = new JLabel(Constants.NEW_PW_MSG, JLabel.TRAILING); // TODO: label doesn't show up. fix this
+//        newPassword1.add(newPasswordLabel);
+//
+//        newPassword2 = new JPasswordField(Constants.COLUMNS1);
+//
+//        finishButton = new JButton(Constants.DONE_BTN);
+//        finishButton.addActionListener(this);
+//
+//        backButton = new JButton("Back");
+//        backButton.addActionListener(this);
+//
+////        backButton = new JButton("Back");
+////        backButton.setBounds(10, 200, 80, 40);
+////        backButton.addActionListener(this);
+////        changePasswordPanel.add(backButton);
 
         // 2. Add components to the panel
         addComp();
@@ -66,6 +106,7 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         changePasswordPanel.add(newPassword1);
         changePasswordPanel.add(newPassword2);
         changePasswordPanel.add(finishButton);
+        changePasswordPanel.add(backButton);
     }
 
     /**
@@ -75,8 +116,16 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) { // user finishes entering new password
+        // if user press back
+        if (e.getSource() == backButton) {
+            programStateInputBoundary.setCurrCard(null);
+            new UserFrame(username, programStateInputBoundary);
+            setVisible(false);
+            return;}
+
         String password1 = String.valueOf(newPassword1.getPassword());
         String password2 = String.valueOf(newPassword2.getPassword());
+
         // Check if passwords are equal
         if (!password1.equals(password2)) {
             JOptionPane.showMessageDialog(this,
@@ -111,6 +160,6 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         UserController userController = new UserController(manager, databaseErrorOutputBoundary);
 
         // Call change password method
-        userController.changePassword(String.valueOf(newPassword1.getPassword()));
+        userController.changePassword(String.valueOf(newPassword1.getPassword()), new DataInOut());
     }
 }

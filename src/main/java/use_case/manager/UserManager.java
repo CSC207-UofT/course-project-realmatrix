@@ -17,13 +17,14 @@ import java.util.HashMap;
  *      - changing username
  *      - changing password
  */
-//TODO: implement <sort> interface
 public class UserManager extends Manager<User> implements UserInputBoundary {
     private HashMap<String, String> items;    // items for this manager is a map <username: password>
     private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
+    private final IDataInOut dataInOut;
 
     public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
-        super(dataInOut, programStateInputBoundary);
+        super(programStateInputBoundary);
+        this.dataInOut = dataInOut;
         this.currItem = programStateInputBoundary.getCurrUser();
         this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
         initialLoad(databaseErrorOutputBoundary);
@@ -33,7 +34,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * Helper method for constructor
      * @param databaseErrorOutputBoundary an output boundary that may show database connecting error messages
      */
-    private void initialLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void initialLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             this.items = dataInOut.initialLoad();
         } catch (IOException e) {
@@ -67,9 +68,9 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @return true if user successfully changed name; false otherwise
      */
     public boolean changeName(String newName, ChangeOutputBoundary changeOutputBoundary) {
-        Object item = searchItem(newName);
-        if (item == null) { // No user of such username, valid for change
-            this.items.remove(currItem.getName()); // Remove user with old name
+        if (!this.items.containsKey(newName)) { // No user of such username, valid for change
+            String oldName = currItem.getName();
+            this.items.remove(oldName); // Remove user with old name
             this.items.put(newName, currItem.getPassword());     // Add user with new name
             currItem.changeName(newName);
             changeOutputBoundary.setChangeResult(true);
@@ -101,28 +102,4 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
             databaseErrorOutputBoundary.presentLoadErrMsg();
         }
     }
-
-//    /**
-//     * Add pack into the user's arraylist of packs.
-//     *
-//     * @param pack the pack to be added
-//     * @return true if successfully added; false otherwise
-//     */
-//    @Override
-//    public boolean addPack(Pack pack, AddOutputBoundary AddOutputBoundary) {
-//        try {
-//            programStateInputBoundary.getCurrUser().addPackage(pack);
-//            AddOutputBoundary.presentAddSuccessView();
-//
-//            return true;
-//        } catch (Exception e) {
-//            AddOutputBoundary.presentAddFailView();
-//            return false;
-//        }
-//    }
-//
-//    @Override
-//    public void deletePack(Pack pack) {
-//        currItem.deletePackage(pack);
-//    }
 }

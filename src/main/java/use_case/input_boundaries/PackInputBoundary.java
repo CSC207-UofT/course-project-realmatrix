@@ -15,7 +15,7 @@ public interface PackInputBoundary extends ManagerInputBoundary {
 
     void sortOldToNew(SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
 
-    void sortAToZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
+    void sortAtoZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
 
     // These two may not be needed if we have observer for tracking program state
 }

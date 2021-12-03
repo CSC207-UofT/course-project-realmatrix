@@ -24,9 +24,6 @@ public class RegisterController {
      */
     public void register(String username, String password,
                          RegisterOutputBoundary registerOB) {
-        if (userIB.createNewUser(username, password, registerOB)) {
-            userIB.userLoad();
-            userIB.write(databaseErrorOutputBoundary);
-        }
+        userIB.createNewUser(username, password, registerOB);
     }
 }

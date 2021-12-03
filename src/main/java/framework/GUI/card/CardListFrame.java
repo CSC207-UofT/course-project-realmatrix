@@ -58,7 +58,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         super("Card List", programStateInputBoundary);
         setTitle("[" + psController.getCurrPackName() + "] Card List");
         // Card Controller
-        CardInputBoundary cardManager = new CardManager(new DataInOut(), programStateInputBoundary);
+        CardInputBoundary cardManager = new CardManager(programStateInputBoundary);
         cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
 
         // The whole panel in the frame
@@ -278,7 +278,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
                         "No Card for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                cardController.deleteCard(selectedCardTerm);
+                cardController.deleteCard(selectedCardTerm, new DataInOut());
                 setCardTableModel();
             }
         }

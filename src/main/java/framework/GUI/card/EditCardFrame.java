@@ -63,7 +63,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         panel.add(backButton);
 
         // Construct cardController
-        CardInputBoundary cardManager = new CardManager(new DataInOut(), programStateInputBoundary);
+        CardInputBoundary cardManager = new CardManager(programStateInputBoundary);
         cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
 
         add(panel);
@@ -80,7 +80,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         if (e.getSource() == editButton) {
             // if the user changed definition, always succeeds.
             if (termText.getText().equals(psController.getCurrCardTerm())) {
-                cardController.changeCardDefinition(defText.getText());
+                cardController.changeCardDefinition(defText.getText(), new DataInOut());
                 programStateInputBoundary.setCurrCard(null);
                 new CardListFrame(programStateInputBoundary);
                 setVisible(false);
@@ -111,7 +111,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         String newTerm = termText.getText();
         // check edit
         ChangeOutputBoundary changePresenter = new ChangePresenter();
-        cardController.changeCardTerm(oldTerm, newTerm, changePresenter);
+        cardController.changeCardTerm(oldTerm, newTerm, new DataInOut(), changePresenter);
         return changePresenter.getChangeResult();
     }
 }

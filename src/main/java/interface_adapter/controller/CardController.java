@@ -1,5 +1,6 @@
 package interface_adapter.controller;
 
+import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.output_boundaries.*;
 
@@ -23,9 +24,9 @@ public class CardController {
      * @param definition the new card's definition.
      * @param addOutputBoundary an output boundary that gets the result of adding: fail or success.
      */
-    public void addNewCard(String term, String definition, AddOutputBoundary addOutputBoundary) {
+    public void addNewCard(String term, String definition, IDataInOut dataInOut, AddOutputBoundary addOutputBoundary) {
         if (this.cardInputBoundary.addNewCard(term, definition, addOutputBoundary)) {
-            this.cardInputBoundary.write(databaseErrorOutputBoundary);
+            this.cardInputBoundary.write(dataInOut, databaseErrorOutputBoundary);
         }
     }
 
@@ -36,9 +37,9 @@ public class CardController {
      * @param newTerm the new term
      * @param changeOutputBoundary an output boundary that gets the result of changing: fail or success.
      */
-    public void changeCardTerm(String oldTerm, String newTerm, ChangeOutputBoundary changeOutputBoundary) {
+    public void changeCardTerm(String oldTerm, String newTerm, IDataInOut dataInOut,  ChangeOutputBoundary changeOutputBoundary) {
         if (this.cardInputBoundary.changeCardTerm(newTerm, changeOutputBoundary)) {
-            this.cardInputBoundary.write(oldTerm, databaseErrorOutputBoundary);
+            this.cardInputBoundary.write(oldTerm, dataInOut, databaseErrorOutputBoundary);
         }
     }
 
@@ -47,18 +48,18 @@ public class CardController {
      * Write the updated card into database.
      * @param newDefinition the new definition of term
      */
-    public void changeCardDefinition(String newDefinition) {
+    public void changeCardDefinition(String newDefinition, IDataInOut dataInOut) {
         this.cardInputBoundary.changeCardDefinition(newDefinition);
-        this.cardInputBoundary.write(databaseErrorOutputBoundary);
+        this.cardInputBoundary.write(dataInOut, databaseErrorOutputBoundary);
     }
 
     /**
-     * Delete a specific card in the current pack.
+     * Delete a specific card in the current pack and save it into database.
      * If success, delete the card in database
      */
-    public void deleteCard(String cardTerm) {
+    public void deleteCard(String cardTerm, IDataInOut dataInOut) {
         if (this.cardInputBoundary.deleteCard(cardTerm)) {
-            this.cardInputBoundary.delete(databaseErrorOutputBoundary);
+            this.cardInputBoundary.delete(dataInOut, databaseErrorOutputBoundary);
         }
     }
 
@@ -85,14 +86,6 @@ public class CardController {
      */
     public void sortAToZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
         this.cardInputBoundary.sortAtoZ(sortSearchCardOutputBoundary);
-    }
-
-    /**
-     * This is the order of cards shown to the user by default.
-     * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards.
-     */
-    public void sortRandom(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
-        this.cardInputBoundary.sortRandom(sortSearchCardOutputBoundary);
     }
 
     /**

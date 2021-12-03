@@ -49,7 +49,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
     public PackListFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Pack List", programStateInputBoundary);
         // Pack & programState controller
-        PackInputBoundary packManager = new PackManager(new DataInOut(), programStateInputBoundary);
+        PackInputBoundary packManager = new PackManager(programStateInputBoundary);
         packController = new PackController(packManager, new DatabaseErrMsgPresenter());
 
         // The whole panel in the frame
@@ -211,7 +211,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         }
 
         else if (e.getSource() == addButton) {
-            new AddPackFrame(programStateInputBoundary);
+            new framework.GUI.pack.AddPackFrame(programStateInputBoundary);
             setVisible(false);
         }
 
@@ -222,7 +222,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
                         "No pack for editing",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                new EditPackFrame(programStateInputBoundary);
+                new framework.GUI.pack.EditPackFrame(programStateInputBoundary);
                 setVisible(false);
             }
         }
@@ -234,7 +234,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
                         "No pack for deletion",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                packController.deletePack(selectedPackName);
+                packController.deletePack(selectedPackName, new DataInOut());
                 setPackListModel();
                 psController.setCurrPack(null);
             }

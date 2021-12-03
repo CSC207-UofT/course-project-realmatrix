@@ -11,48 +11,15 @@ import java.util.HashMap;
  * An abstract manager.
  */
 public abstract class Manager<T> {
-    // Maps entity's name to entity, e.g. items in UserManager maps username to User.
-    protected IDataInOut dataInOut;
+    // Maps entity's name to entity, e.g. items in UserManager maps cardTerm to Card.
     protected HashMap<String,T> items;
     protected ProgramStateInputBoundary programStateInputBoundary;
     protected T currItem;
 
-    public Manager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
+    public Manager(ProgramStateInputBoundary programStateInputBoundary) {
         this.items = new HashMap<>();
-        this.dataInOut = dataInOut;
         this.programStateInputBoundary = programStateInputBoundary;
     }
-
-    public HashMap<String,T> getItems() {
-        return this.items;
-    }
-
-    public void setItems(HashMap<String,T> items) {
-        this.items = items;
-    }
-
-//    /**
-//     * to add a new item, we call this method without pass existing name in items.
-//     * @param name: unique name
-//     *
-//     * @return true iff we successfully add a new item
-//     */
-//    public abstract boolean addItem(String name);
-
-//    /**
-//     * change an existing item in items
-//     * @param name item name we want to change
-//     * @param newItem new item
-//     * @return true iff we successfully changed to new item
-//     */
-//    public boolean updateItem(String name, T newItem){
-//        if(this.items.containsKey(name)){
-//            this.items.put(name,newItem);
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
 
     /**
      * search item entity by item name
@@ -66,7 +33,7 @@ public abstract class Manager<T> {
     /**
      * Write the required object into database.
      */
-    public void write(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void write(IDataInOut dataInOut, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), currItem);
         } catch (IOException e) {
@@ -77,7 +44,7 @@ public abstract class Manager<T> {
     /**
      * Write the object (with its name changed) into database.
      */
-    public void write(String oldName, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void write(String oldName, IDataInOut dataInOut, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.write(findPartialDataPath(), oldName, currItem);
         } catch (IOException e) {
@@ -89,7 +56,7 @@ public abstract class Manager<T> {
      * Archive (delete and store) the required object into database.
      * @param databaseErrorOutputBoundary an output boundary that gets the error message if fails connect to database.
      */
-    public void delete(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public void delete(IDataInOut dataInOut, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         try {
             dataInOut.delete(findPartialDataPath(), currItem);
         } catch (IOException e) {
@@ -109,9 +76,5 @@ public abstract class Manager<T> {
         }
 
         return new String[]{userPath, packPath};
-    }
-
-    public void setCurrItem(T item) {
-        this.currItem = item;
     }
 }

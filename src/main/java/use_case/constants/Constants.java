@@ -49,7 +49,8 @@ public class Constants {
 
     //GUI.user
     public static final String CHANGE_PW = "Change password";
-    public static final String NEW_PW_MSG = "new password: ";
+    public static final String NEW_PW_MSG = "New password: ";
+    public static final String REPEAT_PW_MSG = "Repeat new password: ";
     public static final String CHANGE_USERNAME = "Change username";
     public static final String NEW_USERNAME_MSG = "new username: ";
 
