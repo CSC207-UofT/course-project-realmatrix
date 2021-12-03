@@ -44,7 +44,9 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         this.setSize(600,400);
         this.learnPanel = new JPanel();
 
-        this.card = new JLabel("<html><div style=\"width: 500\">Click Next to start learning</div><html>", SwingConstants.LEFT);
+        learnController.next();
+        this.card = new JLabel("<html><div style=\"width: 500\">" + learnOutputBoundary.getCurrCardStrRep()
+                +"</div><html>", SwingConstants.LEFT);
 
         this.card.setFont(new Font("verdana", Font.BOLD , 30));
 

@@ -42,7 +42,13 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
 
         this.setSize(500, 800);
         this.reviewPanel = new JPanel(new GridLayout(3, 1));
-        this.card = new JLabel("<html><p>Click Remember Correct or Wrong to start reviewing</p><html>",
+
+        try {
+            reviewController.next();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        this.card = new JLabel("<html><p>" + reviewOutputBoundary.getCurrCardStrRep() + "</p><html>",
                 SwingConstants.CENTER);
         this.card.setBounds(10, 100, 300, 400);
         this.card.setFont(new Font("verdana", Font.BOLD, 10));
@@ -123,6 +129,9 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         // a card will appear again if you press "remember wrong" button (that's why "at least")
         // example: c4 will appear 3-1+1=3 times. If you press "remember wrong" on that card twice (in two occurrences),
         // c4 will appear a total of 5 times
+        // if you clicked on remember wrong/correctly and the text field doesn't change, that's not an error.
+        // that's simply because that card appears again right after (remember some cards will appear more than once)
+        // and yes we could improve this but right now it works
         // TODO: consult with Xing if you are confused. better ask than make changes not knowing what's happening!
         Card c1 = new Card("apple", "fruit");
         c1.setProficiency(2);
