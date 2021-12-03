@@ -67,8 +67,10 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
     }
 
     public void setShowDefinition() {
-        currCard.unhideDefinition();
-        reviewOB.setCurrCardStrRep(currCard.toString());
+        if (currCard != null) {
+            currCard.unhideDefinition();
+            reviewOB.setCurrCardStrRep(currCard.toString());
+        }
     }
 
     public void setCantRecall() {
