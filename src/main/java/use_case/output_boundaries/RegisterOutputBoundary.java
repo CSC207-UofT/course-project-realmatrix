@@ -4,6 +4,4 @@ public interface RegisterOutputBoundary {
     void setRegisterResult(boolean result);
 
     boolean getRegisterResult();
-
-    String presentRegisterResult();
 }

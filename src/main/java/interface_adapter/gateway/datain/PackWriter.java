@@ -1,6 +1,5 @@
 package interface_adapter.gateway.datain;
 
-import entity.Card;
 import entity.Pack;
 
 import java.io.File;
@@ -9,6 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * A writer class for Pack.
+ */
 public class PackWriter extends Writer {
     private final Pack pack;
 
@@ -25,7 +27,7 @@ public class PackWriter extends Writer {
     /**
      * Write a new package
      *
-     * @throws IOException
+     * @throws IOException fail to write
      */
     @Override
     public void write() throws IOException {
@@ -61,11 +63,4 @@ public class PackWriter extends Writer {
         }
         packFolder.delete();
     }
-
-    //Test
-//    public static void main(String[] args) throws IOException {
-//        String[] path = new String[]{"Xing", "mat137"};
-//        PackWriter pw = new PackWriter(path, new Pack("mat137"));
-//        pw.write("mat137", new Pack("mat136"));
-//    }
 }

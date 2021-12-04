@@ -2,6 +2,9 @@ package interface_adapter.gateway.datain;
 
 import java.io.IOException;
 
+/**
+ * An abstract writer.
+ */
 public abstract class Writer {
     protected final String username;
     protected String packname;
@@ -33,7 +36,7 @@ public abstract class Writer {
 
     /**
      * Delete the object in database.
-     *
+     * @throws IOException fails to write
      */
     public abstract void delete() throws IOException;
 }

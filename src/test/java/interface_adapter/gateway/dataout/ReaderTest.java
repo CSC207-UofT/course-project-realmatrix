@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -70,8 +71,8 @@ public class ReaderTest {
         uw1.write();
         uw2.write();
         ArrayList<String> actualResult = r.readUsers();
-        assertTrue(actualResult.contains("user_data\\users\\" + testUser1Name));
-        assertTrue(actualResult.contains("user_data\\users\\" + testUser2Name));
+        assertTrue(actualResult.contains("user_data" + File.separator + "users" + File.separator + testUser1Name));
+        assertTrue(actualResult.contains("user_data" + File.separator + "users" + File.separator + testUser2Name));
         uw1.delete();
         uw2.delete();
     }
@@ -82,12 +83,12 @@ public class ReaderTest {
         pw1.write();
         ArrayList<String> result1 = r.readPacks(testUser1Name);
         assertEquals(1, result1.size());
-        assertTrue(result1.contains("user_data\\users\\"  + testUser1Name + "\\packages\\" + p1Name));
+        assertTrue(result1.contains("user_data" + File.separator + "users" + File.separator + testUser1Name + File.separator + "packages" + File.separator + p1Name));
         pw2.write();
         ArrayList<String> result2 = r.readPacks(testUser1Name);
         assertEquals(2, result2.size());
-        assertTrue(result2.contains("user_data\\users\\"  + testUser1Name + "\\packages\\" + p1Name));
-        assertTrue(result2.contains("user_data\\users\\"  + testUser1Name + "\\packages\\" + p2Name));
+        assertTrue(result2.contains("user_data" + File.separator + "users" + File.separator  + testUser1Name + File.separator + "packages" + File.separator + p1Name));
+        assertTrue(result2.contains("user_data" + File.separator + "users" + File.separator  + testUser1Name + File.separator + "packages" + File.separator + p2Name));
         pw2.delete();
         pw1.delete();
         uw1.delete();
@@ -102,14 +103,17 @@ public class ReaderTest {
         ArrayList<String> result2 = r.readCards(testUser1Name, p2Name);
         assertEquals(1, result1.size());
         assertEquals(0, result2.size());
-        assertTrue(result1.contains("user_data\\users\\"  + testUser1Name + "\\packages\\" + p1Name + "\\cards\\"
+        assertTrue(result1.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
+                + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
                 + card1Term + ".txt"));
         cw2.write();
         ArrayList<String> result3 = r.readCards(testUser1Name, p1Name);
         assertEquals(2, result3.size());
-        assertTrue(result3.contains("user_data\\users\\"  + testUser1Name + "\\packages\\" + p1Name + "\\cards\\"
+        assertTrue(result3.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
+                + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
                 + card1Term + ".txt"));
-        assertTrue(result3.contains("user_data\\users\\"  + testUser1Name + "\\packages\\" + p1Name + "\\cards\\"
+        assertTrue(result3.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
+                + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
                 + card2Term + ".txt"));
         cw2.delete();
         cw1.delete();

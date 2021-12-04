@@ -14,6 +14,7 @@ import java.io.IOException;
 public class DataInFactory {
 
     /**
+     * Construct a specific writer.
      * @param partialDataPath the current state the program is in
      * @param o     the object needs to write/archive
      * @return a Writer according to objects we need to write/archive.

@@ -13,20 +13,37 @@ public class CardFrame extends BasicFrame {
 
     public CardFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Card", programStateInputBoundary);
-        JPanel panel = new JPanel(new GridLayout(2, 1));
+        JPanel panel = new JPanel(null);
 
-        // Add card term
-        JLabel term = new JLabel(psController.getCurrCardTerm(), SwingConstants.CENTER);
-        panel.add(term);
+        // Term label
+        JLabel termLabel = new JLabel("Term: ");
+        termLabel.setBounds(10, 10, 80, 20);
+        panel.add(termLabel);
 
-        // Add card definition
+        // Term text area
+        JTextArea term = new JTextArea(psController.getCurrCardTerm());
+        term.setLineWrap(true);
+        term.setEditable(false);
+        JScrollPane termScrollable = new JScrollPane(term);
+        termScrollable.setBounds(100, 10, 400, 100);
+        panel.add(termScrollable);
+
+        // Definition Label
+        JLabel defLabel = new JLabel("Definition: ");
+        defLabel.setBounds(10, 130, 80, 20);
+        panel.add(defLabel);
+
+        // Definition Text area
         JTextArea def = new JTextArea(psController.getCurrCardDef());
+        def.setLineWrap(true);
         def.setEditable(false);
-        panel.add(def);
+        JScrollPane defScrollable = new JScrollPane(def);
+        defScrollable.setBounds(100, 130, 400, 150);
+        panel.add(defScrollable);
 
         add(panel);
 
-        setSize(400, 200);
+        setSize(550, 350);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
     }

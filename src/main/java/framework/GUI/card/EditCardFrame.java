@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
  * A frame for editing card.
  */
 public class EditCardFrame extends BasicFrame implements ActionListener {
-    private final JTextField termText;
+    private final JTextArea termText;
     private final JTextArea defText;
     private final JButton editButton;
     private final JButton backButton;
@@ -36,21 +36,23 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
         panel.add(termLabel);
 
         // set termText
-        termText = new JTextField(psController.getCurrCardTerm(), 100);
-        termText.setBounds(100, 20, 300, 25);
-        panel.add(termText);
-        termText.setEditable(true);
+        termText = new JTextArea(psController.getCurrCardTerm());
+        termText.setLineWrap(true);
+        JScrollPane termTextScroll = new JScrollPane(termText);
+        termTextScroll.setBounds(100, 20, 390, 70);
+        panel.add(termTextScroll);
 
         JLabel defLabel = new JLabel("Definition");
-        defLabel.setBounds(20, 50, 80, 25);
+        defLabel.setBounds(20, 100, 80, 25);
         panel.add(defLabel);
 
         // set defText
         defText = new JTextArea(psController.getCurrCardDef());
-        defText.setBounds(100, 50, 390, 100);
         defText.setLineWrap(true);
-        panel.add(defText);
         defText.setEditable(true);
+        JScrollPane defTextScroll = new JScrollPane(defText);
+        defTextScroll.setBounds(100, 100, 390, 100);
+        panel.add(defTextScroll);
 
         editButton = new JButton("Edit");
         editButton.setBounds(400, 200, 80, 40);
@@ -78,14 +80,20 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editButton) {
+            if (checkEmpty()) { // check if user's input is empty.
+                JOptionPane.showMessageDialog(this,
+                        "Term and definition can't be empty",
+                        "Edit fails",
+                        JOptionPane.WARNING_MESSAGE);
+            }
             // if the user changed definition, always succeeds.
-            if (termText.getText().equals(psController.getCurrCardTerm())) {
+            else if (termText.getText().equals(psController.getCurrCardTerm())) {
                 cardController.changeCardDefinition(defText.getText(), new DataInOut());
-                programStateInputBoundary.setCurrCard(null);
+                psController.setCurrCard(null);
                 new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             } else if (check()){ // edit card term succeeds
-                programStateInputBoundary.setCurrCard(null);
+                psController.setCurrCard(null);
                 new CardListFrame(programStateInputBoundary);
                 setVisible(false);
             } else {    // edit fails: card term already exists
@@ -95,11 +103,19 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
                         JOptionPane.WARNING_MESSAGE);
             }
         }
-        if (e.getSource() == backButton) {
-            programStateInputBoundary.setCurrCard(null);
+        else if (e.getSource() == backButton) {
+            psController.setCurrCard(null);
             new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
+    }
+
+    /**
+     * Check if the user's input (term/definition) is empty.
+     * @return true if it's empty; false otherwise
+     */
+    private boolean checkEmpty() {
+        return (termText.getText().length() == 0 || defText.getText().length() == 0);
     }
 
     /**
@@ -107,7 +123,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
      * @return if edit is successful. If card term already exist, fails. Otherwise, success.
      */
     private boolean check() {
-        String oldTerm = programStateInputBoundary.getCurrCardTerm();
+        String oldTerm = psController.getCurrCardTerm();
         String newTerm = termText.getText();
         // check edit
         ChangeOutputBoundary changePresenter = new ChangePresenter();

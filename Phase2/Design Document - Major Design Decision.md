@@ -1,16 +1,16 @@
 # major design decision
 
 ## 1. Program State
-Our major design decision is that we use `ProgramState` to store current user/pack/card, and `ProgramStateManager` (concrete class for `ProgramStateInputBoundary`) to update the current entity. 
+We use `ProgramState` to store current user/pack/card, and `ProgramStateManager` (concrete class for `ProgramStateInputBoundary`) to update the current entity.
 
 In this way, while we are implementing our user interface, we can use setter and getter to display the correct element to user.
 
 ### 1.1 Why we didn't use _Observer Design Pattern_:
-Initially, we decide to use `Observer` design pattern for changing current entity, like when a user signs in, `ProgramStateManager` will be triggered to update current user. 
+Initially, we decide to use `Observer` design pattern for changing current entity, like when a user signs in, `ProgramStateManager` will be triggered to update current user.
 
-However, when we are implementing GUI, we realize we need to update current pack when a user goes into a pack, or update current card when a user edits a card. Therefore, it's the user action (which is from the UI layer) that triggers updates in program state. If we implement `Observer`, `ProgramStateManager` will observe behavior in GUI layer (user input), which violates clean architecture principle. 
+However, when we are implementing GUI, we realize we need to update current pack when a user goes into a pack, or update current card when a user edits a card. Therefore, it's the user action (which is from the UI layer) that triggers updates in program state. If we implement `Observer`, `ProgramStateManager` will observe behavior in GUI layer (user input), which violates clean architecture principle.
 
-Therefore, instead of implementing `Observer` design pattern, we simply use `ProgramStateController` to get inputs from user and calls `ProgramStateManager` to update program state. 
+Therefore, instead of implementing `Observer` design pattern, we simply use `ProgramStateController` to get inputs from user and calls `ProgramStateManager` to update program state.
 
 ### 1.2 Why we didn't use _Singleton Design Pattern_:
 Initially, we decide to apply this design pattern on `ProgramState`. However, after talking to professor Jonathan and searching about criticism of this design pattern, we decide to pass around a `ProgramStateManager` instead of using singleton design pattern to create a global instance that can be accessed anywhere.

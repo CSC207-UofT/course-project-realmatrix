@@ -5,7 +5,7 @@ import use_case.input_boundaries.PackInputBoundary;
 import use_case.output_boundaries.*;
 
 /**
- * A package interface_adapter.Controller that can create/change packname   and   add/delete/search/sort card in a pack.
+ * A controller that can create/change packname   and   add/delete/search/sort packs.
  */
 public class PackController {
     private final PackInputBoundary packIB;

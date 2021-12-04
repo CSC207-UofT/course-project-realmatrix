@@ -59,7 +59,13 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addButton) {
-            if (check()) {  // add succeeds
+            if (checkEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "Pack name can't be empty",
+                        "Add fails",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+            else if (check()) {  // add succeeds
                 setVisible(false);
                 new PackListFrame(programStateInputBoundary);
             } else {    // add fails: pack already exists
@@ -70,13 +76,25 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
             }
         }
 
-        if (e.getSource() == backButton) {
+        else if (e.getSource() == backButton) {
             new PackListFrame(programStateInputBoundary);
             setVisible(false);
         }
 
     }
 
+    /**
+     * Check if the user's input (pack name) is empty.
+     * @return true if it's empty; false otherwise
+     */
+    private boolean checkEmpty() {
+        return (packText.getText().length() == 0);
+    }
+
+    /**
+     * Check if this pack name has already existed.
+     * @return true if this pack name hasn't existed yet (can be added); false otherwise.
+     */
     protected boolean check() {
         String pack = packText.getText();
 

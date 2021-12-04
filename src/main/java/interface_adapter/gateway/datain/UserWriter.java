@@ -10,6 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * A writer class for user.
+ */
 public class UserWriter extends Writer {
     private final User user;
 
@@ -25,7 +28,7 @@ public class UserWriter extends Writer {
 
     /**
      * Write a new user into database.
-     * @throws IOException
+     * @throws IOException fail to write
      */
     @Override
     public void write() throws IOException {

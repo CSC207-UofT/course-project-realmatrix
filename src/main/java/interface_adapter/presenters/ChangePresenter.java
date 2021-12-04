@@ -2,6 +2,9 @@ package interface_adapter.presenters;
 
 import use_case.output_boundaries.ChangeOutputBoundary;
 
+/**
+ * A presenter for changing things (such as packs/cards/username/user password).
+ */
 public class ChangePresenter implements ChangeOutputBoundary {
     private boolean changeResult;
 
