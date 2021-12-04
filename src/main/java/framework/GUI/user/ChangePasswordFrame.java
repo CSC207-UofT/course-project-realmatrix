@@ -1,6 +1,7 @@
 package framework.GUI.user;
 
 import framework.GUI.BasicFrame;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.UserController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -152,11 +153,10 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     private void changePassword() {
         // Constructs a userManager
         IDataInOut dataInOut = new DataInOut();
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
         UserInputBoundary manager = new UserManager(dataInOut, programStateInputBoundary);
 
         // Construct a UserController
-        DatabaseErrorOutputBoundary databaseErrorOutputBoundary = new DatabaseErrMsgPresenter();
+        DatabaseErrorOutputBoundary databaseErrorOutputBoundary = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
         UserController userController = new UserController(manager, databaseErrorOutputBoundary);
 
         // Call change password method

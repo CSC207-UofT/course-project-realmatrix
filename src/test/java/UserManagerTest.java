@@ -1,5 +1,6 @@
 import entity.Pack;
 import entity.User;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.datain.PackWriter;
 import interface_adapter.gateway.datain.UserWriter;
@@ -30,7 +31,7 @@ public class UserManagerTest {
     final RegisterOutputBoundary registerOB = new RegisterPresenter();
     final DataInOut data = new DataInOut();
     final ProgramStateInputBoundary programStateInputBoundary = new ProgramStateManager();
-    final DatabaseErrMsgPresenter dataBaseP = new DatabaseErrMsgPresenter();
+    final DatabaseErrMsgPresenter dataBaseP = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
 
     @Before
     public void createUserManager() {

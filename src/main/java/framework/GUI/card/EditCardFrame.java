@@ -1,6 +1,7 @@
 package framework.GUI.card;
 
 import framework.GUI.BasicFrame;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.presenters.ChangePresenter;
@@ -66,7 +67,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
 
         // Construct cardController
         CardInputBoundary cardManager = new CardManager(programStateInputBoundary);
-        cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
+        cardController = new CardController(cardManager, new DatabaseErrMsgPresenter(new DatabaseErrorWindow()));
 
         add(panel);
         setVisible(true);

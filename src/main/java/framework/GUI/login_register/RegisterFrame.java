@@ -1,5 +1,6 @@
 package framework.GUI.login_register;
 
+import framework.GUI.database_error.DatabaseErrorWindow;
 import framework.GUI.start.StartFrame;
 import framework.GUI.user.UserFrame;
 import interface_adapter.controller.RegisterController;
@@ -75,7 +76,12 @@ public class RegisterFrame extends LogRegFrame {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == rgButton) {
-            if (!checkPasswordEqual()) {
+            if (checkEmpty()) { //username or password is empty
+                JOptionPane.showMessageDialog(this,
+                        "Username and password cannot be empty. Try again.", // TODO: constant
+                        "Registration Fails",
+                        JOptionPane.WARNING_MESSAGE);
+            } else if (!checkPasswordEqual()) {
                 JOptionPane.showMessageDialog(this,
                         "Passwords didn't match. Try again.", // TODO: constant
                         "Registration Fails",
@@ -104,6 +110,15 @@ public class RegisterFrame extends LogRegFrame {
 
     /**
      * Helper for actionPerformed.
+     * Checks if the user enters empty username or password.
+     * @return true iff both username and password not empty
+     */
+    private boolean checkEmpty() {
+        return username.getText().length() == 0 || String.valueOf(pw.getPassword()).length() == 0;
+    }
+
+    /**
+     * Helper for actionPerformed.
      * Checks if the user enters same password twice for registration.
      * @return true iff passwords are equal
      */
@@ -124,7 +139,7 @@ public class RegisterFrame extends LogRegFrame {
 
         // Construct UserManager
         IDataInOut dataInOut = new DataInOut();
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
         UserInputBoundary userManager = new UserManager(dataInOut, programStateInputBoundary);
 
         // Construct RegisterController

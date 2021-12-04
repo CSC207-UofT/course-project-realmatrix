@@ -1,6 +1,7 @@
 package framework.GUI.pack;
 
 import framework.GUI.BasicFrame;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -103,7 +104,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
         String new_name = packText.getText();
 
         // Construct PackManager
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
         PackInputBoundary packManager = new PackManager(programStateInputBoundary);
         // Construct PackController
         PackController pkController = new PackController(packManager, dbPresenter);

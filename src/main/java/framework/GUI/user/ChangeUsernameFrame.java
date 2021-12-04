@@ -1,6 +1,7 @@
 package framework.GUI.user;
 
 import framework.GUI.BasicFrame;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.UserController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -36,8 +37,6 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
     public ChangeUsernameFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
         super(Constants.RECALLER_BTN, programStateInputBoundary);
         this.username = username;
-//        String old_name = username;
-//        newName.setText(old_name);
         changeNamePanel = new JPanel();
 
         changeNamePanel.setLayout(null);
@@ -65,34 +64,6 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
 
         add(changeNamePanel);
         setVisible(true);
-
-//        changeNamePanel = new JPanel();
-//        changeNamePanel.setLayout(null);
-//        // 1. Create components shown on the frame
-//        changeNamePanel = new JPanel(new GridLayout(3, 2));
-//
-//        message = new JLabel(Constants.CHANGE_USERNAME, SwingConstants.CENTER);
-//        message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
-//
-//        newName = new JTextField(Constants.COLUMNS1);
-//        newNameLabel = new JLabel(Constants.NEW_USERNAME_MSG, JLabel.TRAILING); // TODO: label doesn't show up. fix this
-//        newName.add(newNameLabel);
-//
-//        finishButton = new JButton(Constants.DONE_BTN);
-//        finishButton.addActionListener(this);
-//
-//        backButton = new JButton("Back");
-//        backButton.addActionListener(this);
-//        backButton.setBounds(280, 430, 200, 50);
-//        changeNamePanel.add(backButton);
-//
-//        // 2. Add components to the panel
-//        addComp();
-//
-//        // 3. Add the panel to the frame
-//        add(changeNamePanel);
-//
-//        setVisible(true);
     }
 
     /**
@@ -130,11 +101,10 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
 
         // Constructs a userManager
         IDataInOut dataInOut = new DataInOut();
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
         UserInputBoundary manager = new UserManager(dataInOut, programStateInputBoundary);
 
         // Construct a UserController
-        DatabaseErrorOutputBoundary databaseErrorOutputBoundary = new DatabaseErrMsgPresenter();
+        DatabaseErrorOutputBoundary databaseErrorOutputBoundary = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
         UserController userController = new UserController(manager, databaseErrorOutputBoundary);
 
         // Call change name method
