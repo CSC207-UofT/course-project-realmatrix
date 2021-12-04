@@ -4,7 +4,9 @@ import entity.Card;
 
 import java.util.ArrayList;
 
-// TODO: before you change anything in this file, consult with Xing. Learn and review components work fine currently.
+/**
+ * input boundary. fetch input data and send it to ReviewGenerator
+ */
 public interface ReviewInputBoundary {
     void next();
 

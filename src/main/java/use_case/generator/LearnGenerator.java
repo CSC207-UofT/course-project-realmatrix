@@ -8,7 +8,6 @@ import use_case.output_boundaries.LearnOutputBoundary;
 import java.util.Collections;
 import java.util.List;
 
-// TODO: before you change anything in this file, consult with Xing
 /**
  * Learn a pack by going over all the cards once, showing both term and definition.
  */
@@ -39,14 +38,6 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
             currCard = null;
             learnOB.setCurrCardStrRep(null);
         }
-    }
-
-    @Override
-    public boolean taskCompleted() {
-        if (cards.peek() == null) {
-            learnOB.setLearnCompleted();
-        }
-        return cards.peek() == null;
     }
 
     @Override

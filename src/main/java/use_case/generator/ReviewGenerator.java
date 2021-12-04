@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// TODO: before you change anything in this file, consult with Xing
 /**
  * Review a pack by going over all the cards in the pack, marking the unfamiliar ones, and reviewing those cards over
  * and over. Update cards' proficiency along the way. Only the term part is shown but user can choose to reveal the
@@ -67,18 +66,14 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
     }
 
     public void setShowDefinition() {
-        currCard.unhideDefinition();
-        reviewOB.setCurrCardStrRep(currCard.toString());
+        if (currCard != null) {
+            currCard.unhideDefinition();
+            reviewOB.setCurrCardStrRep(currCard.toString());
+        }
     }
 
     public void setCantRecall() {
         cantRecall = true;
-    }
-
-    @Override
-    public boolean taskCompleted() {
-        reviewOB.setReviewCompleted();
-        return cards.peek() == null;
     }
 
     @Override

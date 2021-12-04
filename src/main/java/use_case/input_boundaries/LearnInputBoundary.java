@@ -1,6 +1,8 @@
 package use_case.input_boundaries;
 
-// TODO: before you change anything in this file, consult with Xing. Learn and review components work fine currently.
+/**
+ * Input boundary. fetch user data and send it to LearnGenerator
+ */
 public interface LearnInputBoundary {
     void next();
 }
