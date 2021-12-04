@@ -1,19 +1,25 @@
 package interface_adapter.presenters;
 
+import framework.GUI.database_error.IDatabaseErrorWindow;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
 /**
  * This presenter is responsible for showing database error message (fails to load/save)
- * in the console.
+ * This class uses dependency inversion to pop up a GUI window.
  */
 public class DatabaseErrMsgPresenter implements DatabaseErrorOutputBoundary {
+    private final IDatabaseErrorWindow databaseErrorWindow;
 
+    public DatabaseErrMsgPresenter(IDatabaseErrorWindow databaseErrorWindow) {
+        this.databaseErrorWindow = databaseErrorWindow;
+    }
+    
     /**
      * Present error messages when saving things into database.
      */
     @Override
     public void presentWriteErrMsg() {
-        System.out.println("Cannot save to database. Please try again.");
+        databaseErrorWindow.presentWriteErrMsg();
     }
 
     /**
@@ -21,6 +27,6 @@ public class DatabaseErrMsgPresenter implements DatabaseErrorOutputBoundary {
      */
     @Override
     public void presentLoadErrMsg() {
-        System.out.println("Cannot load database. Please try again.");
+        databaseErrorWindow.presentLoadErrMsg();
     }
 }

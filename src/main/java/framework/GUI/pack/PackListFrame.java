@@ -3,6 +3,7 @@ package framework.GUI.pack;
 import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.card.CardListFrame;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import framework.GUI.user.UserFrame;
 import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
@@ -54,7 +55,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         super("Pack List", programStateInputBoundary);
         // Pack & programState controller
         PackInputBoundary packManager = new PackManager(programStateInputBoundary);
-        packController = new PackController(packManager, new DatabaseErrMsgPresenter());
+        packController = new PackController(packManager, new DatabaseErrMsgPresenter(new DatabaseErrorWindow()));
 
         // The whole panel in the frame
         panel = new JPanel(null);

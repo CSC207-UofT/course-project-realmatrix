@@ -1,5 +1,6 @@
 package framework.GUI.login_register;
 
+import framework.GUI.database_error.DatabaseErrorWindow;
 import framework.GUI.start.StartFrame;
 import framework.GUI.user.UserFrame;
 import interface_adapter.controller.RegisterController;
@@ -138,7 +139,7 @@ public class RegisterFrame extends LogRegFrame {
 
         // Construct UserManager
         IDataInOut dataInOut = new DataInOut();
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
         UserInputBoundary userManager = new UserManager(dataInOut, programStateInputBoundary);
 
         // Construct RegisterController
