@@ -3,6 +3,7 @@ package interface_adapter;
 import entity.Card;
 import entity.Pack;
 import entity.User;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -36,7 +37,7 @@ public class CardControllerTest {
     ChangePresenter cp;
     IDataInOut dataInOut = new DataInOut();
     ProgramStateManager programStateInputBoundary = new ProgramStateManager();
-    DatabaseErrMsgPresenter databaseErrorOutputBoundary = new DatabaseErrMsgPresenter();
+    DatabaseErrMsgPresenter databaseErrorOutputBoundary = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
     AddPresenter addOutputBoundary = new AddPresenter();
     ChangePresenter changeOutputBoundary = new ChangePresenter();
     String user1Name = "user1Name";

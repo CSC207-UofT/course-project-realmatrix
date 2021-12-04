@@ -2,6 +2,7 @@ package framework.GUI.card;
 
 import javax.swing.*;
 import framework.GUI.BasicFrame;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -113,7 +114,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         String def = defText.getText();
 
         // Construct CardManager
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
         CardInputBoundary cardManager = new CardManager(programStateInputBoundary);
         // Construct CardController
         CardController cdController = new CardController(cardManager, dbPresenter);

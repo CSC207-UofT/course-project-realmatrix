@@ -1,5 +1,6 @@
 package framework.GUI.login_register;
 
+import framework.GUI.database_error.DatabaseErrorWindow;
 import framework.GUI.start.StartFrame;
 import framework.GUI.user.UserFrame;
 import interface_adapter.controller.LogInOutController;
@@ -98,7 +99,7 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
 
         // parameters for login method
         LogInOutOutputBoundary logPresenter = new LogInOutPresenter();
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
 
         controller.login(name, password, logPresenter, dbPresenter);
         return logPresenter.getLogInOutResult();

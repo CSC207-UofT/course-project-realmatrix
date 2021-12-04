@@ -1,3 +1,4 @@
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import org.junit.Before;
@@ -29,7 +30,7 @@ public class LogInOutManagerTest {
 
     @Test(timeout = 200)
     public void testLoggedInUser() {
-        lm.initialLoad(new DatabaseErrMsgPresenter());
+        lm.initialLoad(new DatabaseErrMsgPresenter(new DatabaseErrorWindow()));
         lm.logInUser(user1Name, user1Password, lp);
         assertEquals(programStateInputBoundary.getCurrUserName(), user1Name);
     }

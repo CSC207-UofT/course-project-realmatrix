@@ -2,6 +2,7 @@ package framework.GUI.pack;
 
 import javax.swing.*;
 import framework.GUI.BasicFrame;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -99,7 +100,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
         String pack = packText.getText();
 
         // Construct PackManager
-        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
+        DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
         PackInputBoundary pkManager = new PackManager(programStateInputBoundary);
         // Construct PackController
         PackController pkController = new PackController(pkManager, dbPresenter);

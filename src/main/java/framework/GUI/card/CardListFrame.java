@@ -2,6 +2,7 @@ package framework.GUI.card;
 
 import entity.User;
 import framework.GUI.BasicFrame;
+import framework.GUI.database_error.DatabaseErrorWindow;
 import framework.GUI.learn_review.LearnFrame;
 import framework.GUI.learn_review.ReviewFrame;
 import framework.GUI.pack.PackListFrame;
@@ -64,7 +65,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         setTitle("[" + psController.getCurrPackName() + "] Card List");
         // Card Controller
         CardInputBoundary cardManager = new CardManager(programStateInputBoundary);
-        cardController = new CardController(cardManager, new DatabaseErrMsgPresenter());
+        cardController = new CardController(cardManager, new DatabaseErrMsgPresenter(new DatabaseErrorWindow()));
 
         // The whole panel in the frame
         panel = new JPanel(null);
