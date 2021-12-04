@@ -125,14 +125,14 @@ public class RegisterFrame extends LogRegFrame {
         // Construct UserManager
         IDataInOut dataInOut = new DataInOut();
         DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
-        UserInputBoundary userManager = new UserManager(dataInOut, programStateInputBoundary, dbPresenter);
+        UserInputBoundary userManager = new UserManager(dataInOut, programStateInputBoundary);
 
         // Construct RegisterController
         RegisterController rgController = new RegisterController(userManager, dbPresenter);
 
         // Check registration
         RegisterOutputBoundary rgPresenter = new RegisterPresenter();
-        rgController.register(name, password, rgPresenter);
+        rgController.register(name, password, rgPresenter, new DataInOut());
         return rgPresenter.getRegisterResult();
     }
 

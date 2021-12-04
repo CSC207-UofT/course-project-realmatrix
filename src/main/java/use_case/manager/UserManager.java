@@ -19,15 +19,12 @@ import java.util.HashMap;
  */
 public class UserManager extends Manager<User> implements UserInputBoundary {
     private HashMap<String, String> items;    // items for this manager is a map <username: password>
-    private final DatabaseErrorOutputBoundary databaseErrorOutputBoundary;
     private final IDataInOut dataInOut;
 
-    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
+    public UserManager(IDataInOut dataInOut, ProgramStateInputBoundary programStateInputBoundary) {
         super(programStateInputBoundary);
         this.dataInOut = dataInOut;
         this.currItem = programStateInputBoundary.getCurrUser();
-        this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
-        initialLoad(databaseErrorOutputBoundary);
     }
 
     /**
@@ -48,14 +45,17 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
      * @param name       the username of this user
      * @param password   the password of this user
      * @param registerOB the output boundary (abstract interface for presenter)
+     * @return true if successfully registers; false otherwise
      */
-    public void createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
+    public boolean createNewUser(String name, String password, RegisterOutputBoundary registerOB) {
         if (!this.items.containsKey(name)) { // No user of such username, valid for registration
             this.currItem = new User(name, password);
             programStateInputBoundary.setCurrUser(this.currItem);
             registerOB.setRegisterResult(true);
+            return true;
         } else {
             registerOB.setRegisterResult(false);
+            return false;
         }
     }
 
@@ -87,17 +87,5 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     public void changePassword(String newPassword) {
         this.currItem.changePassword(newPassword);
         this.items.put(this.currItem.getName(), newPassword);
-    }
-
-    /**
-     * Load all packs/cards for current user who just logs in.
-     */
-    @Override
-    public void userLoad() {
-        try {
-            dataInOut.userLoad(currItem);
-        } catch (IOException e) {
-            databaseErrorOutputBoundary.presentLoadErrMsg();
-        }
     }
 }

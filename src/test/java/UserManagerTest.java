@@ -34,9 +34,11 @@ public class UserManagerTest {
 
     @Before
     public void createUserManager() {
-        um = new UserManager(data, programStateInputBoundary, dataBaseP);
+        um = new UserManager(data, programStateInputBoundary);
+        um.initialLoad(dataBaseP);
         um.createNewUser(user1Name, user1Password, registerOB);
         user2 = new User(user2Name, user2Password);
+
     }
 
     /**
@@ -61,24 +63,6 @@ public class UserManagerTest {
         assertEquals(newName, programStateInputBoundary.getCurrUser().getName());
         um.changePassword(newPassword);
         assertEquals(newPassword, programStateInputBoundary.getCurrUser().getPassword());
-    }
-
-    @Test
-    public void testUserLoad() throws IOException {
-        String testPackname = "testPack1Old";
-        String[] testPartialPathOld = new String[]{user1Name, testPackname};
-        Pack pack1 = new Pack(testPackname);
-        UserWriter uw = new UserWriter(testPartialPathOld, programStateInputBoundary.getCurrUser());
-        PackWriter pw = new PackWriter(testPartialPathOld, pack1);
-        uw.write();
-        pw.write();
-        assertEquals(0, programStateInputBoundary.getCurrUser().getPackageList().size());
-        Path path1 = Paths.get("user_data/users/" + user1Name + "/packages/" + testPackname);
-        um.userLoad();
-        assertTrue(Files.exists(path1));
-        assertEquals(1, programStateInputBoundary.getCurrUser().getPackageList().size());
-        pw.delete();
-        uw.delete();
     }
 
 }

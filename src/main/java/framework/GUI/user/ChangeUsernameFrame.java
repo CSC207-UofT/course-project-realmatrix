@@ -131,7 +131,7 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
         // Constructs a userManager
         IDataInOut dataInOut = new DataInOut();
         DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter();
-        UserInputBoundary manager = new UserManager(dataInOut, programStateInputBoundary, dbPresenter);
+        UserInputBoundary manager = new UserManager(dataInOut, programStateInputBoundary);
 
         // Construct a UserController
         DatabaseErrorOutputBoundary databaseErrorOutputBoundary = new DatabaseErrMsgPresenter();

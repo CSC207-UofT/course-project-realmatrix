@@ -1,5 +1,6 @@
 package interface_adapter.controller;
 
+import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
@@ -18,12 +19,15 @@ public class RegisterController {
 
     /**
      * User register method
-     *
-     * @param username user's username
+     *  @param username user's username
      * @param password user's password
+     * @param dataInOut the data access interface
      */
     public void register(String username, String password,
-                         RegisterOutputBoundary registerOB) {
-        userIB.createNewUser(username, password, registerOB);
+                         RegisterOutputBoundary registerOB, IDataInOut dataInOut) {
+        userIB.initialLoad(databaseErrorOutputBoundary);
+        if (userIB.createNewUser(username, password, registerOB)) {
+            userIB.write(dataInOut, databaseErrorOutputBoundary);
+        }
     }
 }
