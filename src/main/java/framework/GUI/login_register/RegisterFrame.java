@@ -75,7 +75,12 @@ public class RegisterFrame extends LogRegFrame {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == rgButton) {
-            if (!checkPasswordEqual()) {
+            if (checkEmpty()) { //username or password is empty
+                JOptionPane.showMessageDialog(this,
+                        "Username and password cannot be empty. Try again.", // TODO: constant
+                        "Registration Fails",
+                        JOptionPane.WARNING_MESSAGE);
+            } else if (!checkPasswordEqual()) {
                 JOptionPane.showMessageDialog(this,
                         "Passwords didn't match. Try again.", // TODO: constant
                         "Registration Fails",
@@ -100,6 +105,15 @@ public class RegisterFrame extends LogRegFrame {
             new StartFrame(new ProgramStateManager());
             setVisible(false);
         }
+    }
+
+    /**
+     * Helper for actionPerformed.
+     * Checks if the user enters empty username or password.
+     * @return true iff both username and password not empty
+     */
+    private boolean checkEmpty() {
+        return username.getText().length() == 0 || String.valueOf(pw.getPassword()).length() == 0;
     }
 
     /**
