@@ -58,6 +58,7 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
             currCard = nextCard;
             cantRecall = false;
             reviewOB.setCurrCardStrRep(currCard.toString());
+            nextCard.unhideDefinition();
         } else {
             reviewOB.setReviewCompleted();
             currCard = null;
