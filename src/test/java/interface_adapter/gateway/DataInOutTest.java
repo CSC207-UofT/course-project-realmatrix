@@ -6,7 +6,6 @@ import entity.User;
 import interface_adapter.gateway.datain.CardWriter;
 import interface_adapter.gateway.datain.PackWriter;
 import interface_adapter.gateway.datain.UserWriter;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.constants.Exceptions;
@@ -18,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
+
 public class DataInOutTest {
     DataInOut data;
     String oldTerm = "TestTerm1old";
@@ -32,7 +32,6 @@ public class DataInOutTest {
     CardWriter cw;
     User testUser1;
     UserWriter uw1;
-    UserWriter uw2;
     PackWriter pw;
     Pack testPack1;
     Path path1;

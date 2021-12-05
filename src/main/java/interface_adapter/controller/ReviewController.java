@@ -23,7 +23,7 @@ public class ReviewController {
 
     /**
      * user wants to go to next card
-     * @throws IOException
+     * @throws IOException fails to update card's proficiency in database
      */
     public void next() throws IOException {
         // before going to the next card, update current card's proficiency in database

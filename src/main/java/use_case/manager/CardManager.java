@@ -147,17 +147,6 @@ public class CardManager extends Manager<Card> implements Sort<SortSearchCardOut
     }
 
     /**
-     * Return a card list sorted in random order.
-     *
-     * @param sortSearchCardOutputBoundary a sort output boundary for getting the sorted output.
-     */
-    public void sortRandom(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
-        ArrayList<Card> sorted = new ArrayList<>(this.items.values());
-        Collections.shuffle(sorted);
-        presentSortSearchResult(sorted, sortSearchCardOutputBoundary);
-    }
-
-    /**
      * Helper method for present sorted cards.
      * @param sorted An arraylist of cards that are sorted according to some algorithm.
      * @param sortSearchCardOutputBoundary a sort output boundary that receives the result of sorted cards.

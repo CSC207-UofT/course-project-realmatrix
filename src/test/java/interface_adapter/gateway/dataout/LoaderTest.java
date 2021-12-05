@@ -54,8 +54,6 @@ public class LoaderTest {
         testUser2 = new User(testUser2Name, testUser2Pw);
         p1.addCard(c1);
         p1.addCard(c2);
-//        testUser1.addPackage(p1);
-//        testUser1.addPackage(p2);
         partialPath1 = new String[]{testUser1Name, p1Name};
         partialPath2 = new String[]{testUser1Name, p2Name};
         uw1 = new UserWriter(partialPath1, testUser1);

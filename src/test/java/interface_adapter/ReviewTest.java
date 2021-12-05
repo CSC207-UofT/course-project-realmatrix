@@ -36,10 +36,9 @@ public class ReviewTest {
     /**
      * Create a pack for reviewing. In GUI pack should come from ProgramState. I didn't use ProgramState (to get pack)
      * here because this test only tests the correctness of review components (unit test), not their dependencies.
-     * @throws Exception
      */
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         Pack pack = new Pack("vocabulary");
         card1 = new Card("big", "large in size");
         card1.setProficiency(3);
@@ -69,7 +68,7 @@ public class ReviewTest {
     /**
      * Simulate when user doesn't click on show definition button or can't recall button, and goes straight through the
      * cards, in reviewing a package.
-     * @throws IOException
+     * @throws IOException fails to update card's proficiency in database
      */
     @Test
     public void testReviewNoShowDefinitionNoCantRecall() throws IOException {
@@ -134,7 +133,7 @@ public class ReviewTest {
 
     /**
      * Simulate when user clicks on the show definition button.
-     * @throws IOException
+     * @throws IOException fails to update card's proficiency in database
      */
     @Test
     public void testReviewShowDefinition() throws IOException {
@@ -152,7 +151,7 @@ public class ReviewTest {
 
     /**
      * Simulate when user clicks on the can't recall button.
-     * @throws IOException
+     * @throws IOException fails to update card's proficiency in database
      */
     @Test
     public void testReviewCantRecall() throws IOException {

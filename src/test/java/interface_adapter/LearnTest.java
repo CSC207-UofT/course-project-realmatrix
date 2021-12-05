@@ -29,7 +29,7 @@ public class LearnTest {
     private Card card6;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         // Create a pack for learning. In GUI pack should come from ProgramState. I didn't use ProgramState here
         // because this test only tests the correctness of learn components (unit test), not their dependencies.
         Pack pack = new Pack("vocabulary");

@@ -1,24 +1,18 @@
-import entity.Pack;
 import entity.User;
 import framework.GUI.database_error.DatabaseErrorWindow;
 import interface_adapter.gateway.DataInOut;
-import interface_adapter.gateway.datain.PackWriter;
-import interface_adapter.gateway.datain.UserWriter;
-import interface_adapter.presenters.*;
+import interface_adapter.presenters.ChangePresenter;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import interface_adapter.presenters.RegisterPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.ProgramStateManager;
+import use_case.manager.UserManager;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.RegisterOutputBoundary;
-import use_case.manager.UserManager;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserManagerTest {
     UserManager um;

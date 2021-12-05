@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
 public class UserTest {
     final String password = "001";
     final String name = "Ziqi";
-    final String id = "UserId";
     User u;
     Pack pack1;
     Pack pack2;

@@ -2,8 +2,6 @@ package use_case.input_boundaries;
 
 import entity.Card;
 
-import java.util.ArrayList;
-
 /**
  * input boundary. fetch input data and send it to ReviewGenerator
  */

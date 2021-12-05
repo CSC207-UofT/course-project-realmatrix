@@ -6,7 +6,6 @@ import entity.User;
 import framework.GUI.BasicFrame;
 import framework.GUI.card.CardListFrame;
 import interface_adapter.controller.LearnController;
-import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.LearnPresenter;
 import use_case.generator.LearnGenerator;
 import use_case.input_boundaries.LearnInputBoundary;
@@ -15,10 +14,6 @@ import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.LearnOutputBoundary;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

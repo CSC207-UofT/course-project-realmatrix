@@ -3,18 +3,14 @@ import entity.User;
 import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.SortSearchPackPresenter;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.AddOutputBoundary;
-import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.SortSearchPackOutputBoundary;
 import interface_adapter.presenters.AddPresenter;
 import use_case.manager.PackManager;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -28,10 +24,6 @@ public class PackManagerTest {
     final AddOutputBoundary addOutputBoundary = new AddPresenter();
     final SortSearchPackOutputBoundary sortSearchPackOutputBoundary = new SortSearchPackPresenter();
     final ProgramStateInputBoundary programStateInputBoundary = new ProgramStateManager();
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
 
     @Before
     public void createPackManager() {
@@ -93,87 +85,5 @@ public class PackManagerTest {
         expect.add(pName2);
         assertEquals(expect, sortSearchPackOutputBoundary.getSortSearchResult());
     }
-//
-//    @Test
-//    public void TestSearchCardTerm() {
-//        pm.addCard(c2, AddOutputBoundary);
-//        List<Card> cardList = pm.searchCard(c2Term, searchCardOutputBoundary);
-//        assertEquals(c2, cardList.get(0));
-//        assertEquals(1, cardList.size());
-//        List<Card> cardList2 = pm.searchCard("tion", searchCardOutputBoundary);
-//        assertEquals(2, cardList2.size());
-//    }
-//
-//    @Test
-//    public void TestSearchCardByDefinition() {
-//        pm.addCard(c2, AddOutputBoundary);
-//        List<Card> cardList = pm.searchCard(c2Definition, searchCardOutputBoundary);
-//        assertEquals(c2, cardList.get(0));
-//        assertEquals(1, cardList.size());
-//        List<Card> cardList2 = pm.searchCard("self", searchCardOutputBoundary);
-//        assertEquals(2, cardList2.size());
-//
-//    }
-//
-//    @Test
-//    public void TestSortOldToNew() {
-//        pm.addCard(c2, AddOutputBoundary);
-//        List<Card> cardList = pm.sortOldToNew(sortCardOutputBoundary);
-//        List<Card> actual = new ArrayList<>();
-//        actual.add(c1);
-//        actual.add(c2);
-//        assertEquals(actual, cardList);
-//
-//    }
-//
-//    @Test
-//    public void TestSortAToZ() {
-//        pm.addCard(c2, AddOutputBoundary);
-//        List<Card> cardList = pm.sortAtoZ(sortCardOutputBoundary);
-//        List<Card> actual = new ArrayList<>();
-//        actual.add(c1);
-//        actual.add(c2);
-//        assertEquals(actual, cardList);
-//    }
-//
-//    @Test
-//    public void TestSortZToA() {
-//        pm.addCard(c2, AddOutputBoundary);
-//        List<Card> cardList = pm.sortZtoA(sortCardOutputBoundary);
-//        List<Card> actual = new ArrayList<>();
-//        actual.add(c2);
-//        actual.add(c1);
-//        assertEquals(actual, cardList);
-//    }
-//
-//    @Test
-//    public void TestSorProLowToHigh() {
-//        cm2.increaseProficiency();
-//        pm.addCard(c2, AddOutputBoundary);
-//        List<Card> cardList = pm.sortProLowToHigh();
-//        List<Card> actual = new ArrayList<>();
-//        actual.add(c1);
-//        actual.add(c2);
-//        assertEquals(actual, cardList);
-//    }
-//
-//    @Test
-//    public void TestSortProHighToLow() {
-//        cm2.increaseProficiency();
-//        pm.addCard(c2, AddOutputBoundary);
-//        List<Card> cardList = pm.sortProHighToLow();
-//        List<Card> actual = new ArrayList<>();
-//        actual.add(c2);
-//        actual.add(c1);
-//        assertEquals(actual, cardList);
-//        cm1.increaseProficiency();
-//        cm1.increaseProficiency();
-//        List<Card> cardList2 = pm.sortProHighToLow();
-//        List<Card> actual2 = new ArrayList<>();
-//        actual2.add(c1);
-//        actual2.add(c2);
-//        assertEquals(actual2, cardList2);
-//
-//    }
 
 }
