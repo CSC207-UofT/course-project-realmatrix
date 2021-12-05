@@ -1,35 +1,36 @@
-package framework.GUI.pack;
+package framework.gui.pack;
 
-import javax.swing.*;
-import framework.GUI.BasicFrame;
-import framework.GUI.database_error.DatabaseErrorWindow;
+import framework.gui.BasicFrame;
+import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
+import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
-import interface_adapter.presenters.AddPresenter;
-import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.PackInputBoundary;
-import use_case.manager.ProgramStateManager;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.PackManager;
-import use_case.output_boundaries.AddOutputBoundary;
+import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 /**
- * A frame for adding pack.
+ * A frame for editing pack.
  */
-public class AddPackFrame extends BasicFrame implements ActionListener {
-    private final JTextField packText;
-    private final JButton addButton;
+public class EditPackFrame extends BasicFrame implements ActionListener {
+    private final JTextField packText = new JTextField(100);
+    private final JButton editButton;
     private final JButton backButton;
+    private final String old_name;  // the original pack name
 
-
-    public AddPackFrame(ProgramStateInputBoundary programStateInputBoundary) {
-        super("Add Pack", programStateInputBoundary);
+    public EditPackFrame(ProgramStateInputBoundary programStateInputBoundary) {
+        super("Edit Pack", programStateInputBoundary);
+        old_name = psController.getCurrPackName();
+        packText.setText(old_name);
         JPanel panel = new JPanel();
 
         panel.setLayout(null);
@@ -38,14 +39,15 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
         termLabel.setBounds(20, 20, 80, 25);
         panel.add(termLabel);
 
-        packText = new JTextField(100);
+        //set pack text
         packText.setBounds(100, 20, 300, 25);
         panel.add(packText);
+        packText.setEditable(true);
 
-        addButton = new JButton("Add");
-        addButton.setBounds(400, 200, 80, 40);
-        addButton.addActionListener(this);
-        panel.add(addButton);
+        editButton = new JButton("Edit");
+        editButton.setBounds(400, 200, 80, 40);
+        editButton.addActionListener(this);
+        panel.add(editButton);
 
         backButton = new JButton("Back");
         backButton.setBounds(10, 200, 80, 40);
@@ -59,20 +61,20 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == addButton) {
+        if (e.getSource() == editButton) {
             if (checkEmpty()) {
                 JOptionPane.showMessageDialog(this,
                         "Pack name can't be empty",
-                        "Add fails",
+                        "Edit fails",
                         JOptionPane.WARNING_MESSAGE);
             }
-            else if (check()) {  // add succeeds
-                setVisible(false);
+            else if (check() || packText.getText().equals(old_name)) {  // Edit succeeds
                 new PackListFrame(programStateInputBoundary);
+                setVisible(false);
             } else {    // add fails: pack already exists
                 JOptionPane.showMessageDialog(this,
-                        "This Pack has existed. Add another one please~", // TODO: constant
-                        "Add Fails",
+                        "This Pack has existed. Edit another one please~", // TODO: constant
+                        "Edit Fails",
                         JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -93,28 +95,23 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
     }
 
     /**
-     * Check if this pack name has already existed.
-     * @return true if this pack name hasn't existed yet (can be added); false otherwise.
+     * Check if this pack name is valid for change.
+     * @return true if it's valid; false otherwise.
      */
     protected boolean check() {
-        String pack = packText.getText();
+
+        // get new term and def edited by users
+        String new_name = packText.getText();
 
         // Construct PackManager
         DatabaseErrorOutputBoundary dbPresenter = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
-        PackInputBoundary pkManager = new PackManager(programStateInputBoundary);
+        PackInputBoundary packManager = new PackManager(programStateInputBoundary);
         // Construct PackController
-        PackController pkController = new PackController(pkManager, dbPresenter);
-        // check add
+        PackController pkController = new PackController(packManager, dbPresenter);
+        // check edit
         IDataInOut dataInOut = new DataInOut();
-        AddOutputBoundary addPresenter = new AddPresenter();
-        pkController.addNewPack(pack, addPresenter, dataInOut);
-        return addPresenter.getAddResult();
-    }
-
-    // Test
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new AddPackFrame(ps);
+        ChangeOutputBoundary changePresenter = new ChangePresenter();
+        pkController.changePackName(old_name, new_name, dataInOut, changePresenter);
+        return changePresenter.getChangeResult();
     }
 }
-

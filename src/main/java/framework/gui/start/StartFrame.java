@@ -1,8 +1,8 @@
-package framework.GUI.start;
+package framework.gui.start;
 
-import framework.GUI.BasicFrame;
-import framework.GUI.login_register.LoginFrame;
-import framework.GUI.login_register.RegisterFrame;
+import framework.gui.BasicFrame;
+import framework.gui.login_register.LoginFrame;
+import framework.gui.login_register.RegisterFrame;
 import use_case.constants.Constants;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.ProgramStateManager;

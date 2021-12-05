@@ -1,8 +1,8 @@
-package framework.GUI.login_register;
+package framework.gui.login_register;
 
-import framework.GUI.database_error.DatabaseErrorWindow;
-import framework.GUI.start.StartFrame;
-import framework.GUI.user.UserFrame;
+import framework.gui.database_error.DatabaseErrorWindow;
+import framework.gui.start.StartFrame;
+import framework.gui.user.UserFrame;
 import interface_adapter.controller.RegisterController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;

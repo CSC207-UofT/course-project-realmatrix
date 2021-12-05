@@ -1,6 +1,6 @@
-package framework.GUI.card;
+package framework.gui.card;
 
-import framework.GUI.BasicFrame;
+import framework.gui.BasicFrame;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 
 import javax.swing.*;

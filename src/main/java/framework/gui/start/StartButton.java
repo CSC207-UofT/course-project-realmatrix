@@ -1,4 +1,4 @@
-package framework.GUI.start;
+package framework.gui.start;
 
 import javax.swing.*;
 import java.awt.*;

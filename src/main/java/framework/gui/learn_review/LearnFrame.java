@@ -1,10 +1,10 @@
-package framework.GUI.learn_review;
+package framework.gui.learn_review;
 
 import entity.Card;
 import entity.Pack;
 import entity.User;
-import framework.GUI.BasicFrame;
-import framework.GUI.card.CardListFrame;
+import framework.gui.BasicFrame;
+import framework.gui.card.CardListFrame;
 import interface_adapter.controller.LearnController;
 import interface_adapter.presenters.LearnPresenter;
 import use_case.generator.LearnGenerator;

@@ -1,8 +1,8 @@
-package framework.GUI.user;
+package framework.gui.user;
 
-import framework.GUI.BasicFrame;
-import framework.GUI.pack.PackListFrame;
-import framework.GUI.start.StartFrame;
+import framework.gui.BasicFrame;
+import framework.gui.pack.PackListFrame;
+import framework.gui.start.StartFrame;
 import use_case.constants.Constants;
 import interface_adapter.controller.LogInOutController;
 import interface_adapter.gateway.DataInOut;

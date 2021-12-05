@@ -1,6 +1,6 @@
-package framework.GUI.login_register;
+package framework.gui.login_register;
 
-import framework.GUI.BasicFrame;
+import framework.gui.BasicFrame;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-import framework.GUI.database_error.DatabaseErrorWindow;
+import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import org.junit.Before;

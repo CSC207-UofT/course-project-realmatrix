@@ -3,7 +3,7 @@ package interface_adapter;
 import entity.Card;
 import entity.Pack;
 import entity.User;
-import framework.GUI.database_error.DatabaseErrorWindow;
+import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -21,7 +21,6 @@ import use_case.manager.CardManager;
 import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.SortSearchCardOutputBoundary;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;

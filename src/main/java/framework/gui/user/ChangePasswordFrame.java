@@ -1,7 +1,7 @@
-package framework.GUI.user;
+package framework.gui.user;
 
-import framework.GUI.BasicFrame;
-import framework.GUI.database_error.DatabaseErrorWindow;
+import framework.gui.BasicFrame;
+import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.UserController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;

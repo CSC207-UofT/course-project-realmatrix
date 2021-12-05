@@ -1,4 +1,4 @@
-package framework.GUI;
+package framework.gui;
 
 import interface_adapter.controller.ProgramStateController;
 import use_case.input_boundaries.ProgramStateInputBoundary;

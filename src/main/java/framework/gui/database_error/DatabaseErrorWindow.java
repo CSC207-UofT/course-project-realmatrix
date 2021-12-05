@@ -1,4 +1,4 @@
-package framework.GUI.database_error;
+package framework.gui.database_error;
 
 import javax.swing.*;
 

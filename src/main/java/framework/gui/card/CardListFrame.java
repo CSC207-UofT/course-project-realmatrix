@@ -1,11 +1,11 @@
-package framework.GUI.card;
+package framework.gui.card;
 
 import entity.User;
-import framework.GUI.BasicFrame;
-import framework.GUI.database_error.DatabaseErrorWindow;
-import framework.GUI.learn_review.LearnFrame;
-import framework.GUI.learn_review.ReviewFrame;
-import framework.GUI.pack.PackListFrame;
+import framework.gui.BasicFrame;
+import framework.gui.database_error.DatabaseErrorWindow;
+import framework.gui.learn_review.LearnFrame;
+import framework.gui.learn_review.ReviewFrame;
+import framework.gui.pack.PackListFrame;
 import interface_adapter.controller.CardController;
 import interface_adapter.controller.ProgramStateController;
 import interface_adapter.gateway.DataInOut;

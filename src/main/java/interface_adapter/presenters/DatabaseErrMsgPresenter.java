@@ -1,6 +1,6 @@
 package interface_adapter.presenters;
 
-import framework.GUI.database_error.IDatabaseErrorWindow;
+import framework.gui.database_error.IDatabaseErrorWindow;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
 /**

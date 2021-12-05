@@ -1,7 +1,7 @@
-package framework.GUI.card;
+package framework.gui.card;
 
-import framework.GUI.BasicFrame;
-import framework.GUI.database_error.DatabaseErrorWindow;
+import framework.gui.BasicFrame;
+import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.presenters.ChangePresenter;

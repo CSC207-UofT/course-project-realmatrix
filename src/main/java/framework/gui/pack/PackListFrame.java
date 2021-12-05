@@ -1,10 +1,10 @@
-package framework.GUI.pack;
+package framework.gui.pack;
 
 import entity.User;
-import framework.GUI.BasicFrame;
-import framework.GUI.card.CardListFrame;
-import framework.GUI.database_error.DatabaseErrorWindow;
-import framework.GUI.user.UserFrame;
+import framework.gui.BasicFrame;
+import framework.gui.card.CardListFrame;
+import framework.gui.database_error.DatabaseErrorWindow;
+import framework.gui.user.UserFrame;
 import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
@@ -216,7 +216,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         }
 
         else if (e.getSource() == addButton) {
-            new framework.GUI.pack.AddPackFrame(programStateInputBoundary);
+            new framework.gui.pack.AddPackFrame(programStateInputBoundary);
             setVisible(false);
         }
 
@@ -227,7 +227,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
                         "No pack for editing",
                         JOptionPane.WARNING_MESSAGE);
             } else {
-                new framework.GUI.pack.EditPackFrame(programStateInputBoundary);
+                new framework.gui.pack.EditPackFrame(programStateInputBoundary);
                 setVisible(false);
             }
         }

@@ -1,4 +1,4 @@
-package framework.GUI.database_error;
+package framework.gui.database_error;
 
 /**
  * This interface is used for dependency inversion:

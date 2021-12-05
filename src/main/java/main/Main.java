@@ -1,7 +1,7 @@
 package main;
 
 
-import framework.GUI.start.StartFrame;
+import framework.gui.start.StartFrame;
 import use_case.manager.ProgramStateManager;
 
 public class Main {

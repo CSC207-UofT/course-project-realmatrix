@@ -1,5 +1,5 @@
 import entity.User;
-import framework.GUI.database_error.DatabaseErrorWindow;
+import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
