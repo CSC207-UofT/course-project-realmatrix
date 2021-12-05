@@ -2,6 +2,7 @@
 .idea
 *.iml
 out
+src/main/java/META-INF
 # Gradle .gitignore (https://github.com/github/gitignore/blob/master/Gradle.gitignore)
 .gradle
 **/build/
