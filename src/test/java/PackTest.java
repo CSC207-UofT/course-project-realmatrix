@@ -35,7 +35,7 @@ public class PackTest {
     }
 
     @Test
-    public void testDeleteCard(){
+    public void testDeleteCard() {
         Card c = new Card("fragmentation", "don't feel himself as a unit");
         p.addCard(c);
         List<Card> expected = new ArrayList<>();
@@ -57,7 +57,7 @@ public class PackTest {
     }
 
     @Test
-    public void testGetCardMap(){
+    public void testGetCardMap() {
         Card c = new Card("fragmentation", "don't feel himself as a unit");
         p.addCard(c);
         HashMap<String, Card> expect = new HashMap<>();

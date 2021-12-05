@@ -28,7 +28,7 @@ public class UserWriterTest {
     public void setUp() {
         testUser = new User(testUsername, testUserPw);
         partialPath = new String[]{testUsername, testPackName};
-        uw =  new UserWriter(partialPath, testUser);
+        uw = new UserWriter(partialPath, testUser);
     }
 
     @Test

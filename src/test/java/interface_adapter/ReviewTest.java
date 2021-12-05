@@ -67,6 +67,7 @@ public class ReviewTest {
     /**
      * Simulate when user doesn't click on show definition button or can't recall button, and goes straight through the
      * cards, in reviewing a package.
+     *
      * @throws IOException fails to update card's proficiency in database
      */
     @Test
@@ -132,6 +133,7 @@ public class ReviewTest {
 
     /**
      * Simulate when user clicks on the show definition button.
+     *
      * @throws IOException fails to update card's proficiency in database
      */
     @Test
@@ -150,6 +152,7 @@ public class ReviewTest {
 
     /**
      * Simulate when user clicks on the can't recall button.
+     *
      * @throws IOException fails to update card's proficiency in database
      */
     @Test

@@ -100,7 +100,7 @@ public class UserTest {
     }
 
     @Test
-    public void testPackageMap(){
+    public void testPackageMap() {
         u.addPackage(pack1);
         u.addPackage(pack2);
         HashMap<String, Pack> actual = u.getPackageMap();

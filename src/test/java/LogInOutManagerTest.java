@@ -1,13 +1,13 @@
 import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import interface_adapter.presenters.LogInOutPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.manager.LogInOutManager;
 import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.LogInOutOutputBoundary;
-import interface_adapter.presenters.LogInOutPresenter;
-import use_case.manager.LogInOutManager;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

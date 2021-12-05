@@ -2,8 +2,8 @@ package interface_adapter;
 
 import entity.Card;
 import entity.Pack;
-import entity.User;
 import entity.ProgramState;
+import entity.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -64,7 +64,6 @@ public class ProgramStateTest {
     public void testGetCurrPack() {
         assertNull(ps.getCurrPack());
     }
-
 
 
 }

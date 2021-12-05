@@ -77,14 +77,14 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testDeleteCard(){
+    public void testDeleteCard() {
         assertEquals(1, pack1.getCardList().size());
         cc.deleteCard(c1Term, dataInOut);
         assertEquals(0, pack1.getCardList().size());
     }
 
     @Test
-    public void testSearchCard(){
+    public void testSearchCard() {
         SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
         cc.searchCard(c1Term, sortSearchCardOutputBoundary);
         String[][] actual = sortSearchCardOutputBoundary.getSortSearchResult();
@@ -93,7 +93,7 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testSortOldToNew(){
+    public void testSortOldToNew() {
         SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
         String c2Term = "c2Term";
         String c2Def = "c2Def";
@@ -106,7 +106,7 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testSortAToZ(){
+    public void testSortAToZ() {
         SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
         String c2Term = "c2Term";
         String c2Def = "c2Def";
@@ -119,7 +119,7 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testSortProLowToHigh(){
+    public void testSortProLowToHigh() {
         SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
         String c2Term = "c2Term";
         String c2Def = "c2Def";
@@ -136,7 +136,7 @@ public class CardControllerTest {
     public void tearDone() {
         String[] partialPath;
         partialPath = new String[]{user1Name, pack1Name};
-        for (Card c: programStateInputBoundary.getCurrPack().getCardList()){
+        for (Card c : programStateInputBoundary.getCurrPack().getCardList()) {
             CardWriter cw = new CardWriter(partialPath, c);
             cw.delete();
         }

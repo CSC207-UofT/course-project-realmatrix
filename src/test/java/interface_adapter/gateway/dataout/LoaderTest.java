@@ -14,7 +14,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LoaderTest {
     Loader loader;
@@ -44,7 +45,7 @@ public class LoaderTest {
     String[] partialPath2;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         loader = new Loader();
         c1 = new Card(card1Term, card1Def);
         c2 = new Card(card2Term, card2Def);
@@ -97,7 +98,7 @@ public class LoaderTest {
                 Objects.equals(testUser1.getPackageList().get(0).getName(), p2Name));
         assertTrue(Objects.equals(testUser1.getPackageList().get(1).getName(), p1Name) ||
                 Objects.equals(testUser1.getPackageList().get(1).getName(), p2Name));
-        if(testUser1.getPackageList().get(0).getCardList().size() == 1) {
+        if (testUser1.getPackageList().get(0).getCardList().size() == 1) {
             assertTrue(Objects.equals(testUser1.getPackageList().get(0).getCardList().get(0).getTerm(), card1Term)
                     || Objects.equals(testUser1.getPackageList().get(0).getCardList().get(0).getTerm(), card2Term));
             assertTrue(Objects.equals(testUser1.getPackageList().get(0).getCardList().get(1).getTerm(), card1Term)

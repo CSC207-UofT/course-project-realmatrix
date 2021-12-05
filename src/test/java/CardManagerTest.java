@@ -32,6 +32,7 @@ public class CardManagerTest {
         programStateInputBoundary.setCurrUser(user);
         programStateInputBoundary.setCurrPack("test");
     }
+
     @Before
     public void createCardManager() {
         term = "Homoncular Fallacy";

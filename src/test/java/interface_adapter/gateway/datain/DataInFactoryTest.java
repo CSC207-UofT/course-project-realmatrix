@@ -9,7 +9,8 @@ import use_case.constants.Exceptions;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class DataInFactoryTest {
     final String username = "username";
@@ -22,9 +23,8 @@ public class DataInFactoryTest {
     final String string = "will throw exception";
 
 
-
     @Before
-    public void createDataInFactory(){
+    public void createDataInFactory() {
         datainF = new DataInFactory();
         partialPath = new String[]{username, packname};
         card = new Card("term", "definition");

@@ -8,9 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CardWriterTest {
     final String oldTerm = "TestTerm1old";
@@ -36,7 +39,6 @@ public class CardWriterTest {
         pw.write();
         uw = new UserWriter(testPartialPathOld, testUser1);
         uw.write();
-
 
 
     }

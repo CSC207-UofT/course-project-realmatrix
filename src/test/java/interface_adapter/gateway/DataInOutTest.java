@@ -82,7 +82,7 @@ public class DataInOutTest {
     }
 
     @Test
-    public void testWriteNewObjectWithException(){
+    public void testWriteNewObjectWithException() {
         String string = "string";
         Exception e = assertThrows(Exception.class, () -> data.write(testPartialPathOld, string));
         String expectedMsg = Exceptions.InvalidObject;
