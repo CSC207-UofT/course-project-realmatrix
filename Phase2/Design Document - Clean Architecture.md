@@ -3,11 +3,11 @@
 
 In order to render our project to comply with Clean Architecture, we organize our code in
 - 4 entity classes;
-- 8 use case classes (5 Managers and 2 learn/review generator classes);
+- 8 use case classes (5 Managers and 3 learn/review generator classes);
 - 8 controllers (each manages a specific functionality);
-- 1 gateway package that contains loader/writer classes as well as data access interface
-- 9 specific `Presenter` class
-- 1 GUI
+- 1 gateway package that contains loader/writer classes as well as data access interface;
+- 9 specific `Presenter` classes;
+- 1 GUI.
 
 ### What makes our code clean
 #### Two main aspects：
