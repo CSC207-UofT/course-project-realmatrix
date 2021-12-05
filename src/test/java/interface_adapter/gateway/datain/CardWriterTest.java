@@ -77,23 +77,7 @@ public class CardWriterTest {
         pw.delete();
         uw.delete();
 
-//        Path path1 = FileSystems.getDefault().getPath("./user_data/users/testUser1/cards/TestTerm1");
-//        try {
-//            Files.deleteIfExists(path1);
-//        } catch (IOException x) {
-//            System.err.println(x);
-//        }
-//
-//        Path path = FileSystems.getDefault().getPath("./user_data/users/testUser1/cards");
-//        try {
-//            Files.deleteIfExists(path);
-//        } catch (NoSuchFileException x) {
-//            System.err.format("%s: no such" + " file or directory%n", path);
-//        } catch (DirectoryNotEmptyException x) {
-//            System.err.format("%s not empty%n", path);
-//        } catch (IOException x) {
-//            System.err.println(x);
-//        }
+
     }
 }
 

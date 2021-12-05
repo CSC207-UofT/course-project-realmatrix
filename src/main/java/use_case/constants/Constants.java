@@ -5,8 +5,6 @@ public class Constants {
     public static final int REVIEW_PROFICIENCY_MIN = 0;
     public static final int REVIEW_FAIL_NEG = -2;
     public static final int REVIEW_SUCCEED_POS = 1;
-//    public static final int PROFICIENCY_MAX = 3;
-//    public static final int PROFICIENCY_MIN = 0;
 
     public static final int CLEAR = 1;
     public static final int BLUR = -1;

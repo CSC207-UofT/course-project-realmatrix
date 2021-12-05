@@ -14,18 +14,4 @@ public class Exceptions{
     public static final String WritePathExist = "Write path exists";
     public static final String InvalidPath = "Path is invalid";
 
-//    public static ArrayList<String> getErrors() {
-//        ArrayList<String> errorMessages = new ArrayList<String>();
-//        Field[] fields = Exceptions.class.getFields();
-//        for (Field field : fields) {
-//            try {
-//                String errorMessage = (String) field.get(Exceptions.class);
-//                errorMessages.add(errorMessage);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return errorMessages;
-//    }
-
 }
