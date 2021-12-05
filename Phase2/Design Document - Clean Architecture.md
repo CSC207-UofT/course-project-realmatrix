@@ -7,7 +7,7 @@ In order to render our project to comply with Clean Architecture, we organize ou
 - 8 controllers (each manages a specific functionality);
 - 1 gateway package that contains loader/writer classes as well as data access interface;
 - 9 specific `Presenter` classes;
-- 1 GUI.
+- 1 GUI + 1 Database.
 
 ### What makes our code clean
 #### Two main aspects：
