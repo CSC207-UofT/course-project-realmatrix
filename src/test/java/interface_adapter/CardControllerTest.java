@@ -134,7 +134,7 @@ public class CardControllerTest {
     }
 
     @After
-    public void tearDone() throws IOException {
+    public void tearDone() {
         String[] partialPath;
         partialPath = new String[]{user1Name, pack1Name};
         for (Card c: programStateInputBoundary.getCurrPack().getCardList()){

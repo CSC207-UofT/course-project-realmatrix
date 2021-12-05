@@ -17,7 +17,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class LearnFrame extends BasicFrame implements ActionListener {
     private final JLabel card;
@@ -104,7 +103,7 @@ public class LearnFrame extends BasicFrame implements ActionListener {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ProgramStateInputBoundary ps = new ProgramStateManager();
         User user = new User("Yifan", "password");
         Pack vocab = new Pack("vocab");

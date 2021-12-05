@@ -58,10 +58,9 @@ public class CardWriter extends Writer {
 
     /**
      * Delete a card.
-     * @throws IOException fails to write
      */
     @Override
-    public void delete() throws IOException {
+    public void delete() {
         new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
                 this.card.getTerm() + ".txt").delete();
     }

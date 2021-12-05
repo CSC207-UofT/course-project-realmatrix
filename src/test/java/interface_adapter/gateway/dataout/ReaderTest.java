@@ -102,15 +102,14 @@ public class ReaderTest {
         ArrayList<String> result2 = r.readCards(testUser1Name, p2Name);
         assertEquals(1, result1.size());
         assertEquals(0, result2.size());
-        assertTrue(result1.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
+        String userData = "user_data" + File.separator + "users" + File.separator + testUser1Name
                 + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
-                + card1Term + ".txt"));
+                + card1Term + ".txt";
+        assertTrue(result1.contains(userData));
         cw2.write();
         ArrayList<String> result3 = r.readCards(testUser1Name, p1Name);
         assertEquals(2, result3.size());
-        assertTrue(result3.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
-                + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
-                + card1Term + ".txt"));
+        assertTrue(result3.contains(userData));
         assertTrue(result3.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
                 + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
                 + card2Term + ".txt"));
@@ -121,7 +120,7 @@ public class ReaderTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         cw1.delete();
         cw2.delete();
         pw1.delete();

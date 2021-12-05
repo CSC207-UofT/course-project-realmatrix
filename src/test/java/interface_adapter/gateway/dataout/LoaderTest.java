@@ -120,7 +120,7 @@ public class LoaderTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         cw2.delete();
         cw1.delete();
         pw2.delete();

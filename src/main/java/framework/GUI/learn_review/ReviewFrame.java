@@ -137,7 +137,7 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ProgramStateInputBoundary ps = new ProgramStateManager();
         User user = new User("Runshi", "password");
         Pack vocab = new Pack("vocab_new");

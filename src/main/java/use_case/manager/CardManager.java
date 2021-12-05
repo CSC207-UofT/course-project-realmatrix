@@ -6,7 +6,6 @@ import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.output_boundaries.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**

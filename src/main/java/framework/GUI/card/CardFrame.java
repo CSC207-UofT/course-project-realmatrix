@@ -4,7 +4,6 @@ import framework.GUI.BasicFrame;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * A CardFrame shows a card's term and definition.

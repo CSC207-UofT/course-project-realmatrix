@@ -27,10 +27,9 @@ public class PackWriter extends Writer {
     /**
      * Write a new package
      *
-     * @throws IOException fail to write
      */
     @Override
-    public void write() throws IOException {
+    public void write() {
         String packPath = "user_data/users/" + this.username + "/packages/" + this.pack.getName();
         new File(packPath).mkdirs();
     }

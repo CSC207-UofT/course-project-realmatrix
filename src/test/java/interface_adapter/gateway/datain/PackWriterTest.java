@@ -37,7 +37,7 @@ public class PackWriterTest {
     }
 
     @Test
-    public void testWriteNewPack() throws IOException {
+    public void testWriteNewPack() {
         pw.write();
         path1 = Paths.get("user_data/users/" + testUsername + "/packages/" + testPackName);
         assertTrue(Files.exists(path1));
@@ -45,7 +45,7 @@ public class PackWriterTest {
     }
 
     @Test
-    public void testDeletePack() throws IOException {
+    public void testDeletePack() {
         pw.write();
         path1 = Paths.get("user_data/users/" + testUsername + "/packages/" + testPackName);
         pw.delete();
