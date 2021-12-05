@@ -34,42 +34,42 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         learnInputBoundary = new LearnGenerator(programStateInputBoundary.getCurrPack(), learnOutputBoundary);
         learnController = new LearnController(learnInputBoundary);
 
-        this.setSize(600,400);
+        this.setSize(600, 400);
         JPanel learnPanel = new JPanel();
 
         learnController.next();
         this.card = new JLabel("<html><div style=\"width: 500\">" + learnOutputBoundary.getCurrCardStrRep()
-                +"</div><html>", SwingConstants.LEFT);
+                + "</div><html>", SwingConstants.LEFT);
 
-        this.card.setFont(new Font("verdana", Font.BOLD , 18));
+        this.card.setFont(new Font("verdana", Font.BOLD, 18));
 
         this.card.setForeground(Color.blue);
 
 
         this.nextButton = new JButton("Next");
-        this.nextButton.setFont(new Font("arial", Font.PLAIN,20));
+        this.nextButton.setFont(new Font("arial", Font.PLAIN, 20));
         this.nextButton.addActionListener(this);
 
 
         this.backToPack = new JButton("Back to pack: " + programStateInputBoundary.getCurrPackName());
-        this.backToPack.setFont(new Font("arial", Font.PLAIN,15));
+        this.backToPack.setFont(new Font("arial", Font.PLAIN, 15));
         this.backToPack.addActionListener(this);
 
         JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
         top.add(this.backToPack);
         JPanel mid = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        mid.setBounds(0,100,600,500);
+        mid.setBounds(0, 100, 600, 500);
         mid.add(this.card);
-        JScrollPane scroller = new JScrollPane(mid,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scroller = new JScrollPane(mid, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         JPanel low = new JPanel(new FlowLayout(FlowLayout.CENTER));
         low.add(this.nextButton);
 
-        mid.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+        mid.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 
         learnPanel.setLayout(new BorderLayout());
-        learnPanel.add(top,BorderLayout.NORTH);
-        learnPanel.add(scroller,BorderLayout.CENTER);
-        learnPanel.add(low,BorderLayout.SOUTH);
+        learnPanel.add(top, BorderLayout.NORTH);
+        learnPanel.add(scroller, BorderLayout.CENTER);
+        learnPanel.add(low, BorderLayout.SOUTH);
 
 
         add(learnPanel);
@@ -84,11 +84,11 @@ public class LearnFrame extends BasicFrame implements ActionListener {
             learnController.next();
             try {
                 currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
-            }catch(NullPointerException ex){
+            } catch (NullPointerException ex) {
                 learnOutputBoundary.setLearnCompleted();
             }
             if (!learnOutputBoundary.getLearnCompleted()) {
-                this.card.setText("<html><div style=\"width: 500\">"+ currCardStrRep + "</div><html>");
+                this.card.setText("<html><div style=\"width: 500\">" + currCardStrRep + "</div><html>");
             } else {
                 JOptionPane.showMessageDialog(this, "You have finished learning all the cards.",
                         "Good job!", JOptionPane.INFORMATION_MESSAGE);
@@ -107,10 +107,10 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         ProgramStateInputBoundary ps = new ProgramStateManager();
         User user = new User("Yifan", "password");
         Pack vocab = new Pack("vocab");
-        vocab.addCard(new Card("apple","fruit"));
-        vocab.addCard(new Card("banana","fruit"));
-        vocab.addCard(new Card("bee","animal"));
-        vocab.addCard(new Card("bee","This is a long long long long long long long long long long long " +
+        vocab.addCard(new Card("apple", "fruit"));
+        vocab.addCard(new Card("banana", "fruit"));
+        vocab.addCard(new Card("bee", "animal"));
+        vocab.addCard(new Card("bee", "This is a long long long long long long long long long long long " +
                 "long long long long long long long long long long long long long long long long long long long long " +
                 "long long long long long long long long long long long long long long long long long long long long " +
                 "long long long long long long long long long long long long long long long long long long long long " +

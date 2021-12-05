@@ -67,8 +67,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
                         "Pack name can't be empty",
                         "Edit fails",
                         JOptionPane.WARNING_MESSAGE);
-            }
-            else if (check() || packText.getText().equals(old_name)) {  // Edit succeeds
+            } else if (check() || packText.getText().equals(old_name)) {  // Edit succeeds
                 new PackListFrame(programStateInputBoundary);
                 setVisible(false);
             } else {    // add fails: pack already exists
@@ -77,9 +76,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
                         "Edit Fails",
                         JOptionPane.WARNING_MESSAGE);
             }
-        }
-
-        else if (e.getSource() == backButton) {
+        } else if (e.getSource() == backButton) {
             new PackListFrame(programStateInputBoundary);
             setVisible(false);
         }
@@ -88,6 +85,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
 
     /**
      * Check if the user's input (pack name) is empty.
+     *
      * @return true if it's empty; false otherwise
      */
     private boolean checkEmpty() {
@@ -96,6 +94,7 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
 
     /**
      * Check if this pack name is valid for change.
+     *
      * @return true if it's valid; false otherwise.
      */
     protected boolean check() {

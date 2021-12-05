@@ -10,6 +10,7 @@ public class SortSearchCardPresenter implements SortSearchCardOutputBoundary {
 
     /**
      * setter of sortResult
+     *
      * @param result the set value of result.
      */
     @Override
@@ -19,10 +20,11 @@ public class SortSearchCardPresenter implements SortSearchCardOutputBoundary {
 
     /**
      * getter of sort Result
+     *
      * @return the arraylist of card term and definition.
      */
     @Override
-    public String[][] getSortSearchResult(){
+    public String[][] getSortSearchResult() {
         return this.sortResult;
     }
 }

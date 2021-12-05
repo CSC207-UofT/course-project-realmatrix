@@ -13,7 +13,7 @@ public class DatabaseErrMsgPresenter implements DatabaseErrorOutputBoundary {
     public DatabaseErrMsgPresenter(IDatabaseErrorWindow databaseErrorWindow) {
         this.databaseErrorWindow = databaseErrorWindow;
     }
-    
+
     /**
      * Present error messages when saving things into database.
      */

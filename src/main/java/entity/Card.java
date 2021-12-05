@@ -82,6 +82,7 @@ public class Card {
     /**
      * Return a string that represents card's term and definition if definition is unhidden;
      * or a string that represents card's term if definition is hidden.
+     *
      * @return a string
      */
     @Override

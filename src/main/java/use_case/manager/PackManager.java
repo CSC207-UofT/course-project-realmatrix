@@ -24,7 +24,7 @@ public class PackManager extends Manager<Pack> implements Sort<SortSearchPackOut
      * Create a new pack with specified pack name for the current user.
      * If the pack name already exists, adding fails. Otherwise, adding succeeds.
      *
-     * @param packName The name of the pack
+     * @param packName          The name of the pack
      * @param addOutputBoundary an output boundary for showing the result of adding new pack
      * @return true if the pack is successfully added; false otherwise
      */
@@ -43,17 +43,18 @@ public class PackManager extends Manager<Pack> implements Sort<SortSearchPackOut
 
     /**
      * Delete a pack with specified pack name.
+     *
      * @param packName the name of the pack to be deleted
      * @return true if successfully deleted; false otherwise
      */
     @Override
     public boolean deletePack(String packName) {
         currItem = this.items.get(packName);
-        if(currItem != null){ // We have the item to be deleted
+        if (currItem != null) { // We have the item to be deleted
             items.remove(packName);
             programStateInputBoundary.getCurrUser().deletePackage(currItem);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -62,7 +63,7 @@ public class PackManager extends Manager<Pack> implements Sort<SortSearchPackOut
      * Change a pack's name.
      * If the new name doesn't exist, change succeeds. Otherwise, change fails.
      *
-     * @param newPackName         the new pack name
+     * @param newPackName          the new pack name
      * @param changeOutputBoundary the output boundary for getting the result of change (successful or not)
      * @return true if user successfully changed the pack name; false otherwise
      */
@@ -84,7 +85,8 @@ public class PackManager extends Manager<Pack> implements Sort<SortSearchPackOut
     /**
      * Search packs with specified pack name (Ignore case).
      * All packs that contain (not necessarily equal) packName would be searched.
-     * @param packName the packName to be searched
+     *
+     * @param packName                     the packName to be searched
      * @param sortSearchPackOutputBoundary an output boundary that gets the searched result
      */
     @Override

@@ -3,11 +3,11 @@ package framework.gui.user;
 import framework.gui.BasicFrame;
 import framework.gui.pack.PackListFrame;
 import framework.gui.start.StartFrame;
-import use_case.constants.Constants;
 import interface_adapter.controller.LogInOutController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.LogInOutPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.LogInOutInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.LogInOutManager;
@@ -21,10 +21,10 @@ import java.awt.event.ActionListener;
 
 /**
  * A user frame where users can choose to
- *      - checkout packages
- *      - logout
- *      - change username
- *      - change password
+ * - checkout packages
+ * - logout
+ * - change username
+ * - change password
  */
 public class UserFrame extends BasicFrame implements ActionListener {
     final String username;

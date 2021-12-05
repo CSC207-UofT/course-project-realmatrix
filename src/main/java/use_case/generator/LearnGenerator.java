@@ -16,7 +16,8 @@ public class LearnGenerator extends TaskGenerator implements LearnInputBoundary 
 
     /**
      * Each card appears once in random order.
-     * @param pack pack where cards come from
+     *
+     * @param pack    pack where cards come from
      * @param learnOB output boundary
      */
     public LearnGenerator(Pack pack, LearnOutputBoundary learnOB) {

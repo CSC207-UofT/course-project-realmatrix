@@ -52,8 +52,8 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
     /**
      * Set actions for clicking login and back buttons.
      * Clicking login button: check login successful or not
-     *      - if successful: go to UserFrame
-     *      - if not: pop up a fail message window
+     * - if successful: go to UserFrame
+     * - if not: pop up a fail message window
      * Clicking back button: back to the start frame
      *
      * @param e An ActionEvent item

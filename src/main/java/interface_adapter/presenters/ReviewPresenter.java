@@ -35,7 +35,7 @@ public class ReviewPresenter implements ReviewOutputBoundary {
     @Override
     public String getCurrCardStrRep() {
         if (currCardStrRep != null) {
-            return currCardStrRep.replace("\n","<br>");
+            return currCardStrRep.replace("\n", "<br>");
         }
         return null;
     }

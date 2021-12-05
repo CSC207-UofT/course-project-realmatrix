@@ -122,7 +122,8 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
             programStateInputBoundary.setCurrCard(null);
             new UserFrame(username, programStateInputBoundary);
             setVisible(false);
-            return;}
+            return;
+        }
 
         String password1 = String.valueOf(newPassword1.getPassword());
         String password2 = String.valueOf(newPassword2.getPassword());
@@ -134,12 +135,11 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
                     "Change fails",
                     JOptionPane.WARNING_MESSAGE);
         } else if (password1.length() == 0) {   // check if password is null
-                JOptionPane.showMessageDialog(this,
-                        "Passwords can't be empty",
-                        "Change fails",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-        else {  // The password is valid for change
+            JOptionPane.showMessageDialog(this,
+                    "Passwords can't be empty",
+                    "Change fails",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {  // The password is valid for change
             changePassword();
             JOptionPane.showMessageDialog(this, Constants.PW_CHANGED_SUCCEED);
             new UserFrame(username, programStateInputBoundary);

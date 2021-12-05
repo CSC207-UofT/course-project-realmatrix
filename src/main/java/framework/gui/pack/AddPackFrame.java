@@ -1,20 +1,20 @@
 package framework.gui.pack;
 
-import javax.swing.*;
 import framework.gui.BasicFrame;
 import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
-import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.AddPresenter;
-import use_case.input_boundaries.ProgramStateInputBoundary;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import use_case.input_boundaries.PackInputBoundary;
-import use_case.manager.ProgramStateManager;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.PackManager;
+import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -65,8 +65,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
                         "Pack name can't be empty",
                         "Add fails",
                         JOptionPane.WARNING_MESSAGE);
-            }
-            else if (check()) {  // add succeeds
+            } else if (check()) {  // add succeeds
                 setVisible(false);
                 new PackListFrame(programStateInputBoundary);
             } else {    // add fails: pack already exists
@@ -75,9 +74,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
                         "Add Fails",
                         JOptionPane.WARNING_MESSAGE);
             }
-        }
-
-        else if (e.getSource() == backButton) {
+        } else if (e.getSource() == backButton) {
             new PackListFrame(programStateInputBoundary);
             setVisible(false);
         }
@@ -86,6 +83,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
 
     /**
      * Check if the user's input (pack name) is empty.
+     *
      * @return true if it's empty; false otherwise
      */
     private boolean checkEmpty() {
@@ -94,6 +92,7 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
 
     /**
      * Check if this pack name has already existed.
+     *
      * @return true if this pack name hasn't existed yet (can be added); false otherwise.
      */
     protected boolean check() {

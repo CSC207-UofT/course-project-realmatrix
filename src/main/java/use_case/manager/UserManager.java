@@ -13,9 +13,9 @@ import java.util.HashMap;
 
 /**
  * A manager that manages the current user's actions, including
- *      - registration
- *      - changing username
- *      - changing password
+ * - registration
+ * - changing username
+ * - changing password
  */
 public class UserManager extends Manager<User> implements UserInputBoundary {
     private HashMap<String, String> items;    // items for this manager is a map <username: password>
@@ -29,6 +29,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Helper method for constructor
+     *
      * @param databaseErrorOutputBoundary an output boundary that may show database connecting error messages
      */
     public void initialLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
@@ -42,6 +43,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     /**
      * This is the registration method for user.
      * Create a new user if the user doesn't exist in database.
+     *
      * @param name       the username of this user
      * @param password   the password of this user
      * @param registerOB the output boundary (abstract interface for presenter)
@@ -62,7 +64,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
     /**
      * Change name of current user.
      *
-     * @param newName    the new name the user wants to change to
+     * @param newName the new name the user wants to change to
      * @return true if user successfully changed name; false otherwise
      */
     public boolean changeName(String newName, ChangeOutputBoundary changeOutputBoundary) {
@@ -81,6 +83,7 @@ public class UserManager extends Manager<User> implements UserInputBoundary {
 
     /**
      * Change password of current user.
+     *
      * @param newPassword new password
      */
     @Override

@@ -64,7 +64,7 @@ public class Loader {
      * Helper to Loader.initialLoad(). Load user info.
      *
      * @param userPath directory of user_info.txt
-     * @param map  map to save the username to user password
+     * @param map      map to save the username to user password
      * @throws IOException fails to load
      */
     private void putUser(String userPath, HashMap<String, String> map) throws IOException {

@@ -15,6 +15,7 @@ public interface ReviewInputBoundary {
     /**
      * This method locates current card to update its proficiency in database in controller call.
      * GUI should use the method in review output boundary to get the string representation of curr card.
+     *
      * @return current card
      */
     Card getCurrCard();

@@ -21,7 +21,8 @@ public class ReviewGenerator extends TaskGenerator implements ReviewInputBoundar
 
     /**
      * Each card appears a number of times x. The lower the proficiency of the card, the larger the x.
-     * @param pack pack where cards come from
+     *
+     * @param pack     pack where cards come from
      * @param reviewOB output boundary
      */
     public ReviewGenerator(Pack pack, ReviewOutputBoundary reviewOB) {

@@ -8,13 +8,15 @@ import java.util.ArrayList;
 public interface SortSearchPackOutputBoundary {
     /**
      * Setter for sorting/searching result.
+     *
      * @param result An arraylist that contains the sorted/searched pack names.
      */
     void setSortSearchResult(ArrayList<String> result);
 
     /**
      * Getter for sorting/searching result.
-     * @return  an arraylist that contains the sorted/searched pack names.
+     *
+     * @return an arraylist that contains the sorted/searched pack names.
      */
     ArrayList<String> getSortSearchResult();
 }

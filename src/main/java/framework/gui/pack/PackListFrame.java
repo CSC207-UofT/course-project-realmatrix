@@ -29,10 +29,10 @@ import java.util.Objects;
 
 /**
  * A pack frame where users can interact with all packs they've created, such as
- *      - creating packs
- *      - deleting packs
- *      - sorting/searching packs
- *      - editing packs (name)
+ * - creating packs
+ * - deleting packs
+ * - sorting/searching packs
+ * - editing packs (name)
  */
 public class PackListFrame extends BasicFrame implements ActionListener {
     // Pack name list
@@ -78,7 +78,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         sortLabel.setBounds(280, 60, 60, 30);
         panel.add(sortLabel);
 
-        String[] sortOptions = new String[] {"Old - New", "A - Z"};
+        String[] sortOptions = new String[]{"Old - New", "A - Z"};
         sortBox = new JComboBox<>(sortOptions);
         sortBox.setBounds(335, 60, 150, 30);
         sortBox.addActionListener(this);
@@ -144,6 +144,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
 
     /**
      * Set packListModel with a specified packNameList, used when search/sort.
+     *
      * @param packNameList An arraylist that contains pack names in specific order.
      */
     private void setPackListModel(ArrayList<String> packNameList) {
@@ -213,14 +214,10 @@ public class PackListFrame extends BasicFrame implements ActionListener {
                     setPackListModel();
                     break;
             }
-        }
-
-        else if (e.getSource() == addButton) {
+        } else if (e.getSource() == addButton) {
             new framework.gui.pack.AddPackFrame(programStateInputBoundary);
             setVisible(false);
-        }
-
-        else if (e.getSource() == editButton) {
+        } else if (e.getSource() == editButton) {
             if (selectedPackName == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a pack first.", // TODO: constant
@@ -230,9 +227,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
                 new framework.gui.pack.EditPackFrame(programStateInputBoundary);
                 setVisible(false);
             }
-        }
-
-        else if (e.getSource() == deleteButton) {
+        } else if (e.getSource() == deleteButton) {
             if (selectedPackName == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a pack first.", // TODO: constant
@@ -243,9 +238,7 @@ public class PackListFrame extends BasicFrame implements ActionListener {
                 setPackListModel();
                 psController.setCurrPack(null);
             }
-        }
-
-        else if (e.getSource() == backButton) {
+        } else if (e.getSource() == backButton) {
             new UserFrame(psController.getCurrUserName(), programStateInputBoundary);
             setVisible(false);
         }

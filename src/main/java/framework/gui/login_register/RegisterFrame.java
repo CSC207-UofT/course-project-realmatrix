@@ -66,8 +66,8 @@ public class RegisterFrame extends LogRegFrame {
      * Set actions for clicking register and back buttons.
      * <p>
      * Clicking register button: check register successful or not
-     *      - If fails, pop up a window showing registration fails.
-     *      - If succeeds, goes to the user's UserFrame.
+     * - If fails, pop up a window showing registration fails.
+     * - If succeeds, goes to the user's UserFrame.
      * Clicking back button: back to the start frame
      *
      * @param e An ActionEvent item
@@ -100,9 +100,7 @@ public class RegisterFrame extends LogRegFrame {
                         "Registration Fails",
                         JOptionPane.WARNING_MESSAGE);
             }
-        }
-
-        else if (source == backButton) {
+        } else if (source == backButton) {
             new StartFrame(new ProgramStateManager());
             setVisible(false);
         }
@@ -111,6 +109,7 @@ public class RegisterFrame extends LogRegFrame {
     /**
      * Helper for actionPerformed.
      * Checks if the user enters empty username or password.
+     *
      * @return true iff both username and password not empty
      */
     private boolean checkEmpty() {
@@ -120,6 +119,7 @@ public class RegisterFrame extends LogRegFrame {
     /**
      * Helper for actionPerformed.
      * Checks if the user enters same password twice for registration.
+     *
      * @return true iff passwords are equal
      */
     private boolean checkPasswordEqual() {

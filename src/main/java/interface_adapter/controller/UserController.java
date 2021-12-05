@@ -20,9 +20,10 @@ public class UserController {
 
     /**
      * Change username and write into database if successfully changed.
-     * @param oldName the user's old username.
-     * @param newName the user's new username.
-     * @param dataInOut A data access interface for writing the new name into database.
+     *
+     * @param oldName              the user's old username.
+     * @param newName              the user's new username.
+     * @param dataInOut            A data access interface for writing the new name into database.
      * @param changeOutputBoundary An output boundary for getting the result of changing username.
      */
     public void changeUserName(String oldName, String newName, IDataInOut dataInOut, ChangeOutputBoundary changeOutputBoundary) {
@@ -33,8 +34,9 @@ public class UserController {
 
     /**
      * Change user's password and write into database.
+     *
      * @param newPassword the user's new password.
-     * @param dataInOut A data access interface for writing the new name into database.
+     * @param dataInOut   A data access interface for writing the new name into database.
      */
     public void changePassword(String newPassword, IDataInOut dataInOut) {
         this.userIB.changePassword(newPassword);

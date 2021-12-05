@@ -16,8 +16,9 @@ public class PackWriter extends Writer {
 
     /**
      * Construct a CardWriter object.
+     *
      * @param partialDataPath the state the program is in
-     * @param o     the object (pack) to write/update
+     * @param o               the object (pack) to write/update
      */
     public PackWriter(String[] partialDataPath, Object o) {
         super(partialDataPath);
@@ -26,7 +27,6 @@ public class PackWriter extends Writer {
 
     /**
      * Write a new package
-     *
      */
     @Override
     public void write() {
@@ -38,7 +38,7 @@ public class PackWriter extends Writer {
      * Write the pack's new name into database by renaming the pack directory.
      *
      * @param oldName the pack's old name
-     * @param newO the pack with new name
+     * @param newO    the pack with new name
      * @throws IOException fails to write
      */
     @Override
@@ -55,8 +55,8 @@ public class PackWriter extends Writer {
     public void delete() {
         File packFolder = new File("user_data/users/" + this.username + "/packages/" + this.pack.getName());
         File[] cards = packFolder.listFiles();
-        if(cards!=null) { // meaning packFolder is non-empty (contains some cards)
-            for(File c: cards) {
+        if (cards != null) { // meaning packFolder is non-empty (contains some cards)
+            for (File c : cards) {
                 c.delete();
             }
         }

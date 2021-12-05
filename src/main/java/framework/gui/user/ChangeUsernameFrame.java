@@ -91,7 +91,7 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
             return;
         }
         // Check if new username is null
-        if (newName.getText().length() == 0){
+        if (newName.getText().length() == 0) {
             JOptionPane.showMessageDialog(this,
                     "Username can't be empty",
                     "Change fails",

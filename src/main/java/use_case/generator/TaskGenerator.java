@@ -27,6 +27,7 @@ public abstract class TaskGenerator {
 
     /**
      * Show the current card in progress.
+     *
      * @return the card the user is at
      */
     public abstract Card getCurrCard();

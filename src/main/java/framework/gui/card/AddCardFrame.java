@@ -1,20 +1,20 @@
 package framework.gui.card;
 
-import javax.swing.*;
 import framework.gui.BasicFrame;
 import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
-import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.AddPresenter;
-import use_case.input_boundaries.ProgramStateInputBoundary;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import use_case.input_boundaries.CardInputBoundary;
-import use_case.manager.ProgramStateManager;
+import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
+import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,7 +36,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         panel.setLayout(null);
 
         JLabel termLabel = new JLabel("Term");
-        termLabel.setBounds(20,20,80,25);
+        termLabel.setBounds(20, 20, 80, 25);
         panel.add(termLabel);
 
         termText = new JTextArea();
@@ -46,7 +46,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         panel.add(termTextScroll);
 
         JLabel defLabel = new JLabel("Definition");
-        defLabel.setBounds(20,100,80,25);
+        defLabel.setBounds(20, 100, 80, 25);
         panel.add(defLabel);
 
         defText = new JTextArea();
@@ -56,12 +56,12 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         panel.add(defTextScroll);
 
         addButton = new JButton("Add");
-        addButton.setBounds(400,200,80,40);
+        addButton.setBounds(400, 200, 80, 40);
         addButton.addActionListener(this);
         panel.add(addButton);
 
         backButton = new JButton("Back");
-        backButton.setBounds(10,200,80,40);
+        backButton.setBounds(10, 200, 80, 40);
         backButton.addActionListener(this);
         panel.add(backButton);
 
@@ -72,6 +72,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
 
     /**
      * Actions for clicking add/back button.
+     *
      * @param e an action event triggered by user.
      */
     @Override
@@ -82,8 +83,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
                         "Term and definition can't be empty",
                         "Add fails",
                         JOptionPane.WARNING_MESSAGE);
-            }
-            else if (check()) {  // add succeeds
+            } else if (check()) {  // add succeeds
                 setVisible(false);
                 new CardListFrame(programStateInputBoundary);
             } else {    // add fails: card already exists
@@ -92,9 +92,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
                         "Add Fails",
                         JOptionPane.WARNING_MESSAGE);
             }
-        }
-
-        else if (e.getSource() == backButton) {
+        } else if (e.getSource() == backButton) {
             new CardListFrame(programStateInputBoundary);
             setVisible(false);
         }
@@ -103,13 +101,14 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
 
     /**
      * Check if the user's input (term/definition) is empty.
+     *
      * @return true if it's empty; false otherwise
      */
     private boolean checkEmpty() {
         return (termText.getText().length() == 0 || defText.getText().length() == 0);
     }
 
-    protected boolean check(){
+    protected boolean check() {
         String term = termText.getText();
         String def = defText.getText();
 
@@ -124,6 +123,7 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         cdController.addNewCard(term, def, dataInOut, addPresenter);
         return addPresenter.getAddResult();
     }
+
     // Test
     public static void main(String[] args) {
         ProgramStateInputBoundary ps = new ProgramStateManager();

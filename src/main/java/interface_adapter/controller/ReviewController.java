@@ -23,13 +23,14 @@ public class ReviewController {
 
     /**
      * user wants to go to next card
+     *
      * @throws IOException fails to update card's proficiency in database
      */
     public void next() throws IOException {
         // before going to the next card, update current card's proficiency in database
         Card currCard = reviewIB.getCurrCard();
         if (currCard != null) {
-            dataInOut.write(new String[] {programStateInputBoundary.getCurrUserName(), programStateInputBoundary.getCurrPackName()},
+            dataInOut.write(new String[]{programStateInputBoundary.getCurrUserName(), programStateInputBoundary.getCurrPackName()},
                     reviewIB.getCurrCard());
         }
         reviewIB.next();

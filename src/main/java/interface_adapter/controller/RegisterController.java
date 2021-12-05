@@ -19,8 +19,9 @@ public class RegisterController {
 
     /**
      * User register method
-     *  @param username user's username
-     * @param password user's password
+     *
+     * @param username  user's username
+     * @param password  user's password
      * @param dataInOut the data access interface
      */
     public void register(String username, String password,

@@ -10,12 +10,13 @@ import interface_adapter.controller.CardController;
 import interface_adapter.controller.ProgramStateController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
-import interface_adapter.presenters.*;
+import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import interface_adapter.presenters.SortSearchCardPresenter;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
 import use_case.manager.ProgramStateManager;
-import use_case.output_boundaries.*;
+import use_case.output_boundaries.SortSearchCardOutputBoundary;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -31,11 +32,11 @@ import java.util.Objects;
 
 /**
  * A card frame class where users can interact with all cards in current pack, such as
- *      - adding card
- *      - editing card
- *      - deleting card
- *      - sorting/searching cards
- *      - reviewing/learning all cards.
+ * - adding card
+ * - editing card
+ * - deleting card
+ * - sorting/searching cards
+ * - reviewing/learning all cards.
  */
 public class CardListFrame extends BasicFrame implements ActionListener {
     private final CardController cardController;
@@ -88,7 +89,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         sortLabel.setBounds(280, 60, 60, 30);
         panel.add(sortLabel);
 
-        String[] sortOptions = new String[] {"Old - New", "A - Z", "Least - Most Managed"}; // TODO: constant
+        String[] sortOptions = new String[]{"Old - New", "A - Z", "Least - Most Managed"}; // TODO: constant
         sortBox = new JComboBox<>(sortOptions);
         sortBox.setBounds(335, 60, 150, 30);
         addSortBoxListener();
@@ -173,6 +174,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
 
     /**
      * Set cardTableModel with a specified cardStrList, used when search/sort.
+     *
      * @param cardStrList An array that contains Cards in specific order.
      */
     private void setCardTableModel(String[][] cardStrList) {
@@ -252,7 +254,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
     }
 
     /**
-     * Invoked when user presses add/delete/edit/review/learn/back button. 
+     * Invoked when user presses add/delete/edit/review/learn/back button.
      *
      * @param e the event to be processed
      */
@@ -263,9 +265,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         if (e.getSource() == addButton) {
             new AddCardFrame(programStateInputBoundary);
             setVisible(false);
-        }
-
-        else if (e.getSource() == editButton) {
+        } else if (e.getSource() == editButton) {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a Card first.", // TODO: constant
@@ -275,9 +275,7 @@ public class CardListFrame extends BasicFrame implements ActionListener {
                 new EditCardFrame(programStateInputBoundary);
                 setVisible(false);
             }
-        }
-
-        else if (e.getSource() == deleteButton) {
+        } else if (e.getSource() == deleteButton) {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
                         "Please select a card first.", // TODO: constant
@@ -287,21 +285,15 @@ public class CardListFrame extends BasicFrame implements ActionListener {
                 cardController.deleteCard(selectedCardTerm, new DataInOut());
                 setCardTableModel();
             }
-        }
-
-        else if (e.getSource() == reviewButton) {
+        } else if (e.getSource() == reviewButton) {
             psController.setCurrCard(null);
             new ReviewFrame(programStateInputBoundary);
             setVisible(false);
-        }
-
-        else if (e.getSource() == learnButton) {
+        } else if (e.getSource() == learnButton) {
             psController.setCurrCard(null);
             new LearnFrame(programStateInputBoundary);
             setVisible(false);
-        }
-
-        else if (e.getSource() == backButton) {
+        } else if (e.getSource() == backButton) {
             psController.setCurrPack(null);
             new PackListFrame(programStateInputBoundary);
             setVisible(false);

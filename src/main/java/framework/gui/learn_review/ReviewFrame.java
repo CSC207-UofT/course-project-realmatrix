@@ -8,8 +8,8 @@ import framework.gui.card.CardListFrame;
 import interface_adapter.controller.ReviewController;
 import interface_adapter.presenters.ReviewPresenter;
 import use_case.generator.ReviewGenerator;
-import use_case.input_boundaries.ReviewInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.input_boundaries.ReviewInputBoundary;
 import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.ReviewOutputBoundary;
 

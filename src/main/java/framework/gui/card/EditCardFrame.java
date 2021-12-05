@@ -76,6 +76,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
 
     /**
      * Actions for edit/back.
+     *
      * @param e an action event.
      */
     @Override
@@ -93,7 +94,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
                 psController.setCurrCard(null);
                 new CardListFrame(programStateInputBoundary);
                 setVisible(false);
-            } else if (check()){ // edit card term succeeds
+            } else if (check()) { // edit card term succeeds
                 psController.setCurrCard(null);
                 new CardListFrame(programStateInputBoundary);
                 setVisible(false);
@@ -103,8 +104,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
                         "Edit Fails",
                         JOptionPane.WARNING_MESSAGE);
             }
-        }
-        else if (e.getSource() == backButton) {
+        } else if (e.getSource() == backButton) {
             psController.setCurrCard(null);
             new CardListFrame(programStateInputBoundary);
             setVisible(false);
@@ -113,6 +113,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
 
     /**
      * Check if the user's input (term/definition) is empty.
+     *
      * @return true if it's empty; false otherwise
      */
     private boolean checkEmpty() {
@@ -121,6 +122,7 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
 
     /**
      * Check if edit card term is successful.
+     *
      * @return if edit is successful. If card term already exist, fails. Otherwise, success.
      */
     private boolean check() {

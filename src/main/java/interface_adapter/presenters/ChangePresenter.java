@@ -10,6 +10,7 @@ public class ChangePresenter implements ChangeOutputBoundary {
 
     /**
      * Setter of change result
+     *
      * @param result set value of change result.
      */
     @Override
@@ -19,6 +20,7 @@ public class ChangePresenter implements ChangeOutputBoundary {
 
     /**
      * Getter of change result
+     *
      * @return true if changed successfully
      */
     @Override
