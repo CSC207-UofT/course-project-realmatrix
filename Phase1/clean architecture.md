@@ -7,7 +7,7 @@ In order to render our project to comply with Clean Architecture, we organize ou
 - 8 controllers (each manages a specific functionality);
 - 1 gateway package that contains loader/writer classes as well as data access interface
 - 9 specific `Presenter` classes (more will be added in phase 2)
-- 1 GUI
+- 1 GUI + 1 Data Base
 
 ### What makes our code clean
 ##### Two main aspects：
@@ -39,8 +39,12 @@ pure business logic and plain code.
    `ProgramStateManager` is a manager that manages to update current card/pack/user.
    **Throughout the program, there will only be one such manager.**
 
-    - `TaskGenerator`: `LearnGenerator` and `ReviewGenerator`. Their major goal is to generate a list of cards for learning/reviewing, and tell the learn/review presenters to present via output boundaries.
+    - `TaskGenerator`: `LearnGenerator` and `ReviewGenerator`. Their major goal is to generate a list of cards for 
+   learning/reviewing, and tell the learn/review presenters to present via output boundaries.
 
 
-5. Controllers: we set multiple controllers, **each controls a specific task** (e.g. `RegisterController` controls registration). These controllers will be getting input from user command and instructing the usecase classes (but won't depend on usecase classes directly because of input boundaries). This layer shoulders the responsibility of converting user inputs into the request model and passes to the use case, but have no access to views in the framework circle.
+5. Controllers: we set multiple controllers, **each controls a specific task** (e.g. `RegisterController` controls registration).
+These controllers will be getting input from user command and instructing the usecase classes 
+(but won't depend on usecase classes directly because of input boundaries). This layer shoulders the responsibility of 
+converting user inputs into the request model and passes to the use case, but have no access to views in the framework circle.
 
