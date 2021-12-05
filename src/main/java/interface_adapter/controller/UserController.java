@@ -15,6 +15,7 @@ public class UserController {
     public UserController(UserInputBoundary userIB, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {
         this.userIB = userIB;
         this.databaseErrorOutputBoundary = databaseErrorOutputBoundary;
+        userIB.initialLoad(databaseErrorOutputBoundary);
     }
 
     /**
