@@ -27,9 +27,9 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
     private final JButton remCrtButton;
     private final JButton backButton;
 
-    ReviewOutputBoundary reviewOutputBoundary;
-    ReviewInputBoundary reviewInputBoundary;
-    ReviewController reviewController;
+    final ReviewOutputBoundary reviewOutputBoundary;
+    final ReviewInputBoundary reviewInputBoundary;
+    final ReviewController reviewController;
 
     public ReviewFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Reviewing", programStateInputBoundary);

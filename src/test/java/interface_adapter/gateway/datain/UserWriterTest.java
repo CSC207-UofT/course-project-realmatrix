@@ -15,14 +15,14 @@ import static org.junit.Assert.assertTrue;
 
 public class UserWriterTest {
     UserWriter uw;
-    String testUsername = "testUserWriterUser1";
-    String testUserPw = "testPw";
-    String testPackName = "testPack1";
+    final String testUsername = "testUserWriterUser1";
+    final String testUserPw = "testPw";
+    final String testPackName = "testPack1";
     String[] partialPath;
     User testUser;
     Path path1;
     Path path2;
-    String testUserNewName = "testUserWriterUser1New";
+    final String testUserNewName = "testUserWriterUser1New";
 
     @Before
     public void setUp() {

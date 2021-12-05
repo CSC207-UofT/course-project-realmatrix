@@ -24,9 +24,9 @@ public class LearnFrame extends BasicFrame implements ActionListener {
     private final JButton backToPack;
     private final JButton nextButton;
 
-    LearnOutputBoundary learnOutputBoundary;
-    LearnInputBoundary learnInputBoundary;
-    LearnController learnController;
+    final LearnOutputBoundary learnOutputBoundary;
+    final LearnInputBoundary learnInputBoundary;
+    final LearnController learnController;
 
     public LearnFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Learning", programStateInputBoundary);

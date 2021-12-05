@@ -13,11 +13,11 @@ import java.nio.file.*;
 import static org.junit.Assert.*;
 
 public class CardWriterTest {
-    String oldTerm = "TestTerm1old";
-    String newTerm = "TestTerm1new";
+    final String oldTerm = "TestTerm1old";
+    final String newTerm = "TestTerm1new";
     Card testCard1;
-    String testUsername1 = "testUser1";
-    String testPackname1 = "testPack1";
+    final String testUsername1 = "testUser1";
+    final String testPackname1 = "testPack1";
     String[] testPartialPathOld;
     CardWriter cw;
     User testUser1;

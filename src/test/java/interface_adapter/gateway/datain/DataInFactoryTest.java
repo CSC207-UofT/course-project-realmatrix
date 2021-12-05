@@ -12,14 +12,14 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 public class DataInFactoryTest {
-    String username = "username";
-    String packname = "packname";
+    final String username = "username";
+    final String packname = "packname";
     String[] partialPath;
     DataInFactory datainF;
     Card card;
     Pack pack;
     User user;
-    String string = "will throw exception";
+    final String string = "will throw exception";
 
 
 

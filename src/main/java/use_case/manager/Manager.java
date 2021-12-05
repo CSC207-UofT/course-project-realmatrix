@@ -13,7 +13,7 @@ import java.util.HashMap;
 public abstract class Manager<T> {
     // Maps entity's name to entity, e.g. items in UserManager maps cardTerm to Card.
     protected HashMap<String,T> items;
-    protected ProgramStateInputBoundary programStateInputBoundary;
+    protected final ProgramStateInputBoundary programStateInputBoundary;
     protected T currItem;
 
     public Manager(ProgramStateInputBoundary programStateInputBoundary) {

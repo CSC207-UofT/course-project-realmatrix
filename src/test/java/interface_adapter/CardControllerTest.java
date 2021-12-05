@@ -29,22 +29,22 @@ import static org.junit.Assert.assertEquals;
 public class CardControllerTest {
     CardController cc;
     CardManager cm;
-    String c1Term = "closet";
-    String c1TermNew = "c1TermNew";
-    String c1Def = "a tall cupboard or wardrobe with a door, used for storage.";
-    String c1DefNew = "c1DefNew";
+    final String c1Term = "closet";
+    final String c1TermNew = "c1TermNew";
+    final String c1Def = "a tall cupboard or wardrobe with a door, used for storage.";
+    final String c1DefNew = "c1DefNew";
     final Card c1 = new Card(c1Term, c1Def);
     ChangePresenter cp;
-    IDataInOut dataInOut = new DataInOut();
-    ProgramStateManager programStateInputBoundary = new ProgramStateManager();
-    DatabaseErrMsgPresenter databaseErrorOutputBoundary = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
-    AddPresenter addOutputBoundary = new AddPresenter();
-    ChangePresenter changeOutputBoundary = new ChangePresenter();
-    String user1Name = "user1Name";
-    String user1Pw = "user1Pw";
-    String pack1Name = "pack1Name";
-    User user1 = new User(user1Name, user1Pw);
-    Pack pack1 = new Pack(pack1Name);
+    final IDataInOut dataInOut = new DataInOut();
+    final ProgramStateManager programStateInputBoundary = new ProgramStateManager();
+    final DatabaseErrMsgPresenter databaseErrorOutputBoundary = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
+    final AddPresenter addOutputBoundary = new AddPresenter();
+    final ChangePresenter changeOutputBoundary = new ChangePresenter();
+    final String user1Name = "user1Name";
+    final String user1Pw = "user1Pw";
+    final String pack1Name = "pack1Name";
+    final User user1 = new User(user1Name, user1Pw);
+    final Pack pack1 = new Pack(pack1Name);
 
     @Before
     public void createCardController() {

@@ -14,10 +14,10 @@ import java.nio.file.Paths;
 import static org.junit.Assert.*;
 
 public class PackWriterTest {
-    String testUsername = "testPackWriterUser1";
-    String testUserPw = "testPw";
-    String testPackNewName = "testPackWriterUser1new";
-    String testPackName = "testPack1";
+    final String testUsername = "testPackWriterUser1";
+    final String testUserPw = "testPw";
+    final String testPackNewName = "testPackWriterUser1new";
+    final String testPackName = "testPack1";
     String[] partialPath;
     PackWriter pw;
     UserWriter uw;
