@@ -21,7 +21,6 @@ import java.io.IOException;
 
 // TODO: make layout prettier
 public class ReviewFrame extends BasicFrame implements ActionListener {
-    private final JPanel reviewPanel;
     private final JLabel card;
     private final JButton showDefButton;
     private final JButton remWrgButton;
@@ -40,8 +39,8 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         reviewController = new ReviewController(reviewInputBoundary, programStateInputBoundary);
 
         this.setSize(500, 500);
-        this.reviewPanel = new JPanel();
-        this.reviewPanel.setLayout(new GridBagLayout());
+        JPanel reviewPanel = new JPanel();
+        reviewPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
         try {
@@ -79,25 +78,25 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        this.reviewPanel.add(remWrgButton, gbc);
+        reviewPanel.add(remWrgButton, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
-        this.reviewPanel.add(remCrtButton, gbc);
+        reviewPanel.add(remCrtButton, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        this.reviewPanel.add(showDefButton, gbc);
+        reviewPanel.add(showDefButton, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        this.reviewPanel.add(backButton, gbc);
+        reviewPanel.add(backButton, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridwidth = 2;
-        this.reviewPanel.add(card, gbc);
+        reviewPanel.add(card, gbc);
 
         add(reviewPanel);
         setVisible(true);

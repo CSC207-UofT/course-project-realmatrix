@@ -3,6 +3,8 @@ package main;
 
 import entity.ProgramState;
 import entity.User;
+import framework.GUI.start.StartFrame;
+import use_case.manager.ProgramStateManager;
 
 public class Main {
 
@@ -10,7 +12,6 @@ public class Main {
 //        CommandLineInterface cli = new CommandLineInterface();
 //        cli.display();
 
-//         Use framework.command_line_interface.GUI
-//        new StartFrame();
+        new StartFrame(new ProgramStateManager());
     }
 }

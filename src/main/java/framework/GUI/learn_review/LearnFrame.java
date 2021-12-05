@@ -20,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class LearnFrame extends BasicFrame implements ActionListener {
-    private final JPanel learnPanel;
     private final JLabel card;
     private final JButton backToPack;
     private final JButton nextButton;
@@ -37,19 +36,19 @@ public class LearnFrame extends BasicFrame implements ActionListener {
         learnController = new LearnController(learnInputBoundary);
 
         this.setSize(600,400);
-        this.learnPanel = new JPanel();
+        JPanel learnPanel = new JPanel();
 
         learnController.next();
         this.card = new JLabel("<html><div style=\"width: 500\">" + learnOutputBoundary.getCurrCardStrRep()
                 +"</div><html>", SwingConstants.LEFT);
 
-        this.card.setFont(new Font("verdana", Font.BOLD , 30));
+        this.card.setFont(new Font("verdana", Font.BOLD , 18));
 
         this.card.setForeground(Color.blue);
 
 
         this.nextButton = new JButton("Next");
-        this.nextButton.setFont(new Font("arial", Font.PLAIN,25));
+        this.nextButton.setFont(new Font("arial", Font.PLAIN,20));
         this.nextButton.addActionListener(this);
 
 
