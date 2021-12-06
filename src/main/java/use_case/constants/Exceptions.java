@@ -10,5 +10,4 @@ public class Exceptions {
     //    public static final String ArchivePathExist = "Archive path exists";
     public static final String WritePathExist = "Write path exists";
     public static final String InvalidPath = "Path is invalid";
-
 }

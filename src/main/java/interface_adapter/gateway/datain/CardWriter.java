@@ -36,7 +36,10 @@ public class CardWriter extends Writer {
     @Override
     public void write() throws IOException {
         String cardPath = "user_data/users/" + this.username + "/packages/" + this.packname + "/cards/";
-        new File(cardPath).mkdirs();
+        boolean new_dir = new File(cardPath).mkdirs();
+        if(!new_dir){
+            throw new IOException();
+        }
         BufferedWriter writer =
                 new BufferedWriter(new FileWriter(cardPath + this.card.getTerm() + ".txt"));
         writer.write(this.card.getDefinition() + "," + this.card.getProficiency());
@@ -62,8 +65,12 @@ public class CardWriter extends Writer {
      * Delete a card.
      */
     @Override
-    public void delete() {
-        new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
+    public void delete() throws IOException {
+
+        boolean deleted = new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
                 this.card.getTerm() + ".txt").delete();
+        if(!deleted){
+            throw new IOException();
+        }
     }
 }
