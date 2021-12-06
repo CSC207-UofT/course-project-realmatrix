@@ -49,12 +49,12 @@ public class CardControllerTest {
     @Before
     public void createCardController() {
         user1.addPackage(pack1);
-        pack1.addCard(c1);
         programStateInputBoundary.setCurrUser(user1);
         programStateInputBoundary.setCurrPack(pack1Name);
-        programStateInputBoundary.setCurrCard(c1Term);
         cm = new CardManager(programStateInputBoundary);
         cc = new CardController(cm, databaseErrorOutputBoundary);
+        cc.addNewCard(c1Term, c1Def, new DataInOut(), new AddPresenter());
+        programStateInputBoundary.setCurrCard(c1Term);
         cp = new ChangePresenter();
     }
 
@@ -68,13 +68,13 @@ public class CardControllerTest {
     @Test
     public void testChangeCardTerm() {
         cc.changeCardTerm(c1Term, c1TermNew, dataInOut, changeOutputBoundary);
-        assertEquals(c1TermNew, c1.getTerm());
+        assertEquals(c1TermNew, programStateInputBoundary.getCurrPack().getCardList().get(0).getTerm());
     }
 
     @Test
     public void testChangeCardDefinition() {
         cc.changeCardDefinition(c1DefNew, dataInOut);
-        assertEquals(c1DefNew, c1.getDefinition());
+        assertEquals(c1DefNew, programStateInputBoundary.getCurrPack().getCardList().get(0).getDefinition());
     }
 
     @Test
@@ -148,4 +148,3 @@ public class CardControllerTest {
 
     }
 }
-

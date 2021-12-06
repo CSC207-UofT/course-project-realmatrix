@@ -44,13 +44,6 @@ public class ProgramStateTest {
     }
 
     @Test
-    public void testToString() {
-        ps.setCurrUser(currUser);
-        assertEquals("Current User is: " + currUser.toString() +
-                "\n" + "Current Pack is: " + "NULL" + "\n" + "Current Card is: " + "NULL" + "\n", ps.toString());
-    }
-
-    @Test
     public void testGetCurrUser() {
         assertNull(ps.getCurrUser());
     }
