@@ -7,6 +7,7 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.AddPresenter;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
@@ -80,16 +81,16 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         if (e.getSource() == addButton) {
             if (checkEmpty()) {
                 JOptionPane.showMessageDialog(this,
-                        "Term and definition can't be empty",
-                        "Add fails",
+                        Constants.EMPTY_TERM_DEF,
+                        Constants.ADD_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             } else if (check()) {  // add succeeds
                 setVisible(false);
                 new CardListFrame(programStateInputBoundary);
             } else {    // add fails: card already exists
                 JOptionPane.showMessageDialog(this,
-                        "This Card term has existed. Add another one please~", // TODO: constant
-                        "Add Fails",
+                        Constants.ADD_CARD_EXISTED,
+                        Constants.ADD_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             }
         } else if (e.getSource() == backButton) {

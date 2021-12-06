@@ -12,6 +12,7 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.SortSearchCardPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
@@ -89,7 +90,8 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         sortLabel.setBounds(280, 60, 60, 30);
         panel.add(sortLabel);
 
-        String[] sortOptions = new String[]{"Old - New", "A - Z", "Least - Most Managed"}; // TODO: constant
+        String[] sortOptions = new String[]{Constants.SORT_FROM_OLD_TO_NEW, Constants.SORT_FROM_A_TO_Z,
+                Constants.SORT_BY_MANAGED};
         sortBox = new JComboBox<>(sortOptions);
         sortBox.setBounds(335, 60, 150, 30);
         addSortBoxListener();
@@ -238,14 +240,14 @@ public class CardListFrame extends BasicFrame implements ActionListener {
             String filter = (String) sortBox.getSelectedItem();
             SortSearchCardOutputBoundary sortCardPresenter = new SortSearchCardPresenter();
             switch (Objects.requireNonNull(filter)) {
-                case "A - Z":   //TODO: constant
+                case Constants.SORT_FROM_A_TO_Z:
                     cardController.sortAToZ(sortCardPresenter);
                     setCardTableModel(sortCardPresenter.getSortSearchResult());
                     break;
-                case "Old - New":
+                case Constants.SORT_FROM_OLD_TO_NEW:
                     setCardTableModel();
                     break;
-                case "Least - Most Managed":
+                case Constants.SORT_BY_MANAGED:
                     cardController.sortProLowToHigh(sortCardPresenter);
                     setCardTableModel(sortCardPresenter.getSortSearchResult());
                     break;
@@ -268,8 +270,8 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         } else if (e.getSource() == editButton) {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
-                        "Please select a Card first.", // TODO: constant
-                        "No Card for editing",
+                        Constants.NO_SELECTED_CARD_MSG,
+                        Constants.NO_CARD_FOR_EDITING,
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 new EditCardFrame(programStateInputBoundary);
@@ -278,8 +280,8 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         } else if (e.getSource() == deleteButton) {
             if (selectedCardTerm == null) {
                 JOptionPane.showMessageDialog(this,
-                        "Please select a card first.", // TODO: constant
-                        "No Card for deletion",
+                        Constants.NO_SELECTED_CARD_MSG,
+                        Constants.NO_CARD_FOR_DELETION,
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 cardController.deleteCard(selectedCardTerm, new DataInOut());

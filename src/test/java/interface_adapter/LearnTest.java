@@ -66,11 +66,11 @@ public class LearnTest {
         int card5Num = 0;
         int card6Num = 0;
 
-        // TODO: use in GUI to go to the next card
+        //Use in GUI to go to the next card
         learnController.next();
-        // TODO: use this in GUI to get curr card string representation
+        //Use this in GUI to get curr card string representation
         String currCardStrRep = learnOutputBoundary.getCurrCardStrRep();
-        // TODO: use this logic in GUI to check if learn is completed and continue creating new card frames
+        //Use this logic in GUI to check if learn is completed and continue creating new card frames
         while (!learnOutputBoundary.getLearnCompleted()) {
             if (representThisCard(currCardStrRep, card1)) {
                 card1Num += 1;

@@ -10,6 +10,7 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.SortSearchPackPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.PackManager;
@@ -220,8 +221,8 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         } else if (e.getSource() == editButton) {
             if (selectedPackName == null) {
                 JOptionPane.showMessageDialog(this,
-                        "Please select a pack first.", // TODO: constant
-                        "No pack for editing",
+                        Constants.NO_SELECTED_PACK_MSG,
+                        Constants.NO_PACK_FOR_EDITING,
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 new framework.gui.pack.EditPackFrame(programStateInputBoundary);
@@ -230,8 +231,8 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         } else if (e.getSource() == deleteButton) {
             if (selectedPackName == null) {
                 JOptionPane.showMessageDialog(this,
-                        "Please select a pack first.", // TODO: constant
-                        "No pack for deletion",
+                        Constants.NO_SELECTED_PACK_MSG,
+                        Constants.NO_PACK_FOR_DELETION,
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 packController.deletePack(selectedPackName, new DataInOut());

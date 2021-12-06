@@ -61,39 +61,15 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         backButton.addActionListener(this);
         changePasswordPanel.add(backButton);
 
-        //Set Password1 text
         newPassword1.setBounds(180, 20, 300, 25);
         newPassword1.setEditable(true);
         newPassword2.setBounds(180, 60, 300, 25);
         newPassword2.setEditable(true);
 
-        // 1. Create components shown on the frame
-//        changePasswordPanel = new JPanel(new GridLayout(4, 2));
-//
-//        message = new JLabel(Constants.CHANGE_PW, SwingConstants.CENTER);
-//        message.setFont(new Font("verdana", Font.BOLD | Font.ITALIC, 38));
-//
-//        newPassword1 = new JPasswordField(Constants.COLUMNS1);
-//        newPasswordLabel = new JLabel(Constants.NEW_PW_MSG, JLabel.TRAILING); // TODO: label doesn't show up. fix this
-//        newPassword1.add(newPasswordLabel);
-//
-//        newPassword2 = new JPasswordField(Constants.COLUMNS1);
-//
-//        finishButton = new JButton(Constants.DONE_BTN);
-//        finishButton.addActionListener(this);
-//
-//        backButton = new JButton("Back");
-//        backButton.addActionListener(this);
-//
-////        backButton = new JButton("Back");
-////        backButton.setBounds(10, 200, 80, 40);
-////        backButton.addActionListener(this);
-////        changePasswordPanel.add(backButton);
-
-        // 2. Add components to the panel
+        // Add components to the panel
         addComp();
 
-        // 3. Add the panel to the frame
+        // Add the panel to the frame
         add(changePasswordPanel);
 
         setVisible(true);
@@ -131,13 +107,13 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
         // Check if passwords are equal
         if (!password1.equals(password2)) {
             JOptionPane.showMessageDialog(this,
-                    "Passwords don't match",
-                    "Change fails",
+                    Constants.PW_NOT_MATCH,
+                    Constants.CHANGE_FAIL,
                     JOptionPane.WARNING_MESSAGE);
         } else if (password1.length() == 0) {   // check if password is null
             JOptionPane.showMessageDialog(this,
-                    "Passwords can't be empty",
-                    "Change fails",
+                    Constants.PW_NOT_MATCH,
+                    Constants.CHANGE_FAIL,
                     JOptionPane.WARNING_MESSAGE);
         } else {  // The password is valid for change
             changePassword();

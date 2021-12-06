@@ -80,11 +80,11 @@ public class ReviewTest {
         int card5Num = 0;
         int card6Num = 0;
 
-        // TODO: use in GUI to go to the next card
+        // Use in GUI to go to the next card
         reviewController.next();
-        // TODO: use this in GUI to get curr card string representation
+        // Use this in GUI to get curr card string representation
         String currCardStrRep = reviewOutputBoundary.getCurrCardStrRep();
-        // TODO: use this logic in GUI to check if review is completed and continue creating new card frames
+        // Use this logic in GUI to check if review is completed and continue creating new card frames
         while (!reviewOutputBoundary.getReviewCompleted()) {
             if (representThisCard(currCardStrRep, card1)) {
                 card1Num += 1;
@@ -139,7 +139,7 @@ public class ReviewTest {
     @Test
     public void testReviewShowDefinition() throws IOException {
         reviewController.next();
-        // TODO: use the following TWO lines in GUI to update current card's string representation (with definition)
+        // use the following TWO lines in GUI to update current card's string representation (with definition)
         reviewController.setShowDefinition();
         String currCardStrRep = reviewOutputBoundary.getCurrCardStrRep();
         // test that after user reveals the definition, the definition is indeed displayed

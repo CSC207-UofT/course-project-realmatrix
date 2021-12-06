@@ -7,6 +7,7 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.PackManager;
@@ -64,16 +65,16 @@ public class EditPackFrame extends BasicFrame implements ActionListener {
         if (e.getSource() == editButton) {
             if (checkEmpty()) {
                 JOptionPane.showMessageDialog(this,
-                        "Pack name can't be empty",
-                        "Edit fails",
+                        Constants.PACK_NAME_EMPTY,
+                        Constants.EDIT_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             } else if (check() || packText.getText().equals(old_name)) {  // Edit succeeds
                 new PackListFrame(programStateInputBoundary);
                 setVisible(false);
             } else {    // add fails: pack already exists
                 JOptionPane.showMessageDialog(this,
-                        "This Pack has existed. Edit another one please~", // TODO: constant
-                        "Edit Fails",
+                        Constants.PACK_EXISTED,
+                        Constants.EDIT_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             }
         } else if (e.getSource() == backButton) {
