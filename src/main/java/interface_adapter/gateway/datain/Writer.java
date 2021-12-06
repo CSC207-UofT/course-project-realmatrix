@@ -37,5 +37,5 @@ public abstract class Writer {
     /**
      * Delete the object in database.
      */
-    public abstract void delete() throws IOException;
+    public abstract void delete();
 }

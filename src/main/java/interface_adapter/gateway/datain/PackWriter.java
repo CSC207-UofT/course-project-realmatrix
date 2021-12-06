@@ -29,12 +29,9 @@ public class PackWriter extends Writer {
      * Write a new package
      */
     @Override
-    public void write() throws IOException {
+    public void write() {
         String packPath = "user_data/users/" + this.username + "/packages/" + this.pack.getName();
-        boolean new_dir = new File(packPath).mkdirs();
-        if(!new_dir){
-            throw new IOException();
-        }
+        new File(packPath).mkdirs();
     }
 
     /**
@@ -55,20 +52,14 @@ public class PackWriter extends Writer {
      * Delete a pack.
      */
     @Override
-    public void delete() throws IOException {
+    public void delete() {
         File packFolder = new File("user_data/users/" + this.username + "/packages/" + this.pack.getName());
         File[] cards = packFolder.listFiles();
-        if (cards != null) {
+        if (cards != null) { // meaning packFolder is non-empty (contains some cards)
             for (File c : cards) {
-                boolean card_deleted = c.delete();
-                if(!card_deleted){
-                    throw new IOException();
-                }
+                c.delete();
             }
         }
-        boolean pack_deleted = packFolder.delete();
-        if(!pack_deleted){
-            throw new IOException();
-        }
+        packFolder.delete();
     }
 }

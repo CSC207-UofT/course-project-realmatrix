@@ -35,10 +35,7 @@ public class UserWriter extends Writer {
     @Override
     public void write() throws IOException {
         String userFilePath = "user_data/users/" + user.getName();
-        boolean new_dir = new File(userFilePath).mkdirs();
-        if(!new_dir){
-            throw new IOException();
-        }
+        new File(userFilePath).mkdirs();
         BufferedWriter writer =
                 new BufferedWriter(new FileWriter(userFilePath + "/user_info.txt"));
         writer.write(user.getPassword());
@@ -63,20 +60,14 @@ public class UserWriter extends Writer {
      * Delete a user.
      */
     @Override
-    public void delete() throws IOException {
+    public void delete() {
         File userFolder = new File("user_data/users/" + user.getName());
         File[] packs = userFolder.listFiles();
-        if (!(packs == null)) { // meaning userFolder is non-empty (contains some packs)
+        if (packs != null) { // meaning userFolder is non-empty (contains some packs)
             for (File p : packs) {
-                boolean pack_deleted = p.delete();
-                if(!pack_deleted){
-                    throw new IOException();
-                }
+                p.delete();
             }
         }
-        boolean user_deleted = userFolder.delete();
-        if(!user_deleted){
-            throw new IOException();
-        }
+        userFolder.delete();
     }
 }
