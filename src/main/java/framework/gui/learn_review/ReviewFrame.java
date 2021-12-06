@@ -71,42 +71,12 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         this.backButton.setBounds(10, 10, 200, 50);
         this.backButton.addActionListener(this);
 
-//        // Put constraints on different buttons
-//        gbc.fill = GridBagConstraints.HORIZONTAL;
-//
-//        gbc.gridx = 0;
-//        gbc.gridy = 1;
-//        reviewPanel.add(remWrgButton, gbc);
-//
-//        gbc.gridx = 1;
-//        gbc.gridy = 1;
-//        reviewPanel.add(remCrtButton, gbc);
-//
-//        gbc.gridx = 0;
-//        gbc.gridy = 2;
-//        reviewPanel.add(showDefButton, gbc);
-//
-//        gbc.gridx = 1;
-//        gbc.gridy = 2;
-//        reviewPanel.add(backButton, gbc);
-//
-//        gbc.gridx = 0;
-//        gbc.gridy = 0;
-//        gbc.fill = GridBagConstraints.HORIZONTAL;
-//        gbc.gridwidth = 2;
-//        reviewPanel.add(card, gbc);
         JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
         top.add(this.backButton);
         JPanel mid = new JPanel(new FlowLayout(FlowLayout.CENTER));
         mid.setBounds(0, 100, 600, 500);
         mid.add(this.card);
         JScrollPane scroller = new JScrollPane(mid, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//        JPanel lowerLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
-//        lowerLeft.add(this.remWrgButton);
-//        JPanel lowerRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-//        lowerRight.add(this.remCrtButton);
-//        JPanel lowerMid = new JPanel(new FlowLayout(FlowLayout.CENTER));
-//        lowerMid.add(this.showDefButton);
 
         JPanel subPanel = new JPanel();
         subPanel.add(this.remWrgButton);
@@ -176,9 +146,12 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         c2.setProficiency(3);
         Card c3 = new Card("bee", "animal");
         c3.setProficiency(3);
-        Card c4 = new Card("new", "something you haven't seen before something you haven't seen before" +
-                " something you haven't seen before something you haven't seen before something you haven't seen before" +
-                " something you haven't seen before something you haven't seen before something you haven't seen before ");
+        Card c4 = new Card("long", "something very very LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG" +
+                " LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG" +
+                " LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG" +
+                " LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG " +
+                "LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG LONG" +
+                " LONG LONG LONG LONG LONG");
         c4.setProficiency(1);
         Card c5 = new Card("old", "something you have seen before");
         c5.setProficiency(0);
