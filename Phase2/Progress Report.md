@@ -37,11 +37,12 @@ due to teammate misusing github features :)
   This pull request better implements user's framework and adds significant tests for loading data in and out.
 
 ### Jiarun Cai
-- Implemented `CardFrame` and `PackFrame`.
+- Implemented `CardFrame`, `EditCardFrame` and `AddCardFrame`.
+- Revised `PackListFrame` and Implemented `EditPackFrame` and `AddPackFrame`.
 - Worked on Progress Report.
 - https://github.com/CSC207-UofT/course-project-realmatrix/pull/28
 
-  This pull request implements `CardFrame`, including edit/add and 'PackFrame', including edit/add.
+  This pull request implements `CardFrame`, including `AddCardFrame` and `EditCardFrame` and 'AddPackFrame' and `EditPackFrame`.
 
 ### Runshi Yang
 - Implemented `ReviewFrame`.
