@@ -20,16 +20,16 @@ In order to render our project to comply with Clean Architecture, we organize ou
 they won't interact with concrete data writer/loader classes.
 
 #### To talk about different layers in more details:
-3. Entity layer is completely independent.
+1. Entity layer is completely independent.
 
     - As the center of the architecture, the domain layer known as entity, consist of three package, which each are 
    `Card`, `Pack`, `User`, `ProgramState`. `User` stores a username, a password, and a list of packages the user created.
    `Pack` stores a name of pack, and a list of Cards in the pack. `Card` stores a term, a definition, and a proficiency index 
-   (how well the user masters the card) of the card. `ProgramState` stores the current user, pack, and card. Each of these
+   (how well the user masters the card). `ProgramState` stores the current user, pack, and card. Each of these
    three classes neither have any knowledge of the other layers nor dependent on other components residing in the outer layers.
 
 
-4. Usecase Layer: it contains two parts, `Manager` and `Generator`, by which present what we can do with the entity in pure
+2. Usecase Layer: it contains two parts, `Manager` and `Generator`, by which present what we can do with the entity in pure
 business logic and plain code.
     - Managers: `CardManager`, `PackManager`, and `UserManager`, take charge of `Card`, `Pack` and `User` respectively,
    including creating, editing, sorting, searching and storing into a map. Furthermore, there is an interface called `Sort`
@@ -42,8 +42,14 @@ business logic and plain code.
    and tell the learn/review presenters to present via output boundaries.
 
 
-5. Controllers: we set multiple controllers, **each controls a specific task** (e.g. `RegisterController` controls registration).
-These controllers will be getting input from user command and instructing the usecase classes 
-(but won't depend on usecase classes directly because of input boundaries). This layer shoulders the responsibility of
-converting user inputs into the request model and passes to the use case, but have no access to views in the framework circle.
+3. Interface Adapters Layer:
+   - Take Controllers for an example, we set multiple controllers, **each controls a specific task**
+   (e.g. `RegisterController` controls registration).
+   These controllers will be getting input from user command and instructing the usecase classes 
+   (but won't depend on usecase classes directly because of input boundaries). This layer shoulders the responsibility of
+   converting user inputs into the request model and passes to the use case, but have no access to views in the framework circle.
+
+4. Framework & Driver Layer:
+   - The GUI we built in phase2 only interact with the Interface Adapters Layer, and will not dependent on lower layers,
+   which satisfies the clean architecture principle
 
