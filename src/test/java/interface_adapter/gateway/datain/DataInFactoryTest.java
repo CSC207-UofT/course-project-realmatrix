@@ -9,22 +9,22 @@ import use_case.constants.Exceptions;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class DataInFactoryTest {
-    String username = "username";
-    String packname = "packname";
+    final String username = "username";
+    final String packname = "packname";
     String[] partialPath;
     DataInFactory datainF;
     Card card;
     Pack pack;
     User user;
-    String string = "will throw exception";
-
+    final String string = "will throw exception";
 
 
     @Before
-    public void createDataInFactory(){
+    public void createDataInFactory() {
         datainF = new DataInFactory();
         partialPath = new String[]{username, packname};
         card = new Card("term", "definition");

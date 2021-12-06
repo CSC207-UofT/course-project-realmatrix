@@ -1,15 +1,15 @@
 import entity.Pack;
 import entity.User;
+import interface_adapter.presenters.AddPresenter;
 import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.SortSearchPackPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.input_boundaries.ProgramStateInputBoundary;
+import use_case.manager.PackManager;
 import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.SortSearchPackOutputBoundary;
-import interface_adapter.presenters.AddPresenter;
-import use_case.manager.PackManager;
 
 import java.util.ArrayList;
 
@@ -49,7 +49,7 @@ public class PackManagerTest {
     }
 
     @Test
-    public void testChangePackName(){
+    public void testChangePackName() {
         ChangePresenter changeP = new ChangePresenter();
         String pName2New = "pName2New";
         assertTrue(pm.changePackName(pName2New, changeP));
@@ -59,9 +59,8 @@ public class PackManagerTest {
     }
 
 
-
     @Test
-    public void testSearchPack(){
+    public void testSearchPack() {
         pm.searchPack(pName1, sortSearchPackOutputBoundary);
         ArrayList<String> expect = new ArrayList<>();
         expect.add(pName1);
@@ -69,7 +68,7 @@ public class PackManagerTest {
     }
 
     @Test
-    public void testSortOldToNew(){
+    public void testSortOldToNew() {
         pm.sortOldToNew(sortSearchPackOutputBoundary);
         ArrayList<String> expect = new ArrayList<>();
         expect.add(pName1);
@@ -78,7 +77,7 @@ public class PackManagerTest {
     }
 
     @Test
-    public void testSortAToZ(){
+    public void testSortAToZ() {
         pm.sortAtoZ(sortSearchPackOutputBoundary);
         ArrayList<String> expect = new ArrayList<>();
         expect.add(pName1);

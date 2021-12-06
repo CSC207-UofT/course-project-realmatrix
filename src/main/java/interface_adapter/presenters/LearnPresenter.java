@@ -19,6 +19,7 @@ public class LearnPresenter implements LearnOutputBoundary {
 
     /**
      * getter of LearnCompleted
+     *
      * @return true if user already learned
      */
     @Override
@@ -32,7 +33,7 @@ public class LearnPresenter implements LearnOutputBoundary {
 
     public String getCurrCardStrRep() {
         if (currCardStrRep != null) {
-            return this.currCardStrRep.replace("\n","<br>");
+            return this.currCardStrRep.replace("\n", "<br>");
         }
         return null;
     }

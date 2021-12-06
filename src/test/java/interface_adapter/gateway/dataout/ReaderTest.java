@@ -18,23 +18,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ReaderTest {
+    final String testUser1Name = "testReaderUser1Name";
+    final String testUser2Name = "testReaderUser2Name";
+    final String testUser1Pw = "User1Pw";
+    final String testUser2Pw = "User2Pw";
+    final String p1Name = "testP1Name";
+    final String p2Name = "testP2Name";
+    final String card1Term = "testC1Term";
+    final String card1Def = "testC1Def";
+    final String card2Term = "testC2Term";
+    final String card2Def = "testC2Def";
     Reader r;
     User testUser1;
     User testUser2;
-    String testUser1Name = "testReaderUser1Name";
-    String testUser2Name = "testReaderUser2Name";
-    String testUser1Pw = "User1Pw";
-    String testUser2Pw = "User2Pw";
     Pack p1;
     Pack p2;
-    String p1Name = "testP1Name";
-    String p2Name = "testP2Name";
     Card c1;
     Card c2;
-    String card1Term = "testC1Term";
-    String card1Def = "testC1Def";
-    String card2Term = "testC2Term";
-    String card2Def = "testC2Def";
     UserWriter uw1;
     UserWriter uw2;
     PackWriter pw1;
@@ -86,8 +86,8 @@ public class ReaderTest {
         pw2.write();
         ArrayList<String> result2 = r.readPacks(testUser1Name);
         assertEquals(2, result2.size());
-        assertTrue(result2.contains("user_data" + File.separator + "users" + File.separator  + testUser1Name + File.separator + "packages" + File.separator + p1Name));
-        assertTrue(result2.contains("user_data" + File.separator + "users" + File.separator  + testUser1Name + File.separator + "packages" + File.separator + p2Name));
+        assertTrue(result2.contains("user_data" + File.separator + "users" + File.separator + testUser1Name + File.separator + "packages" + File.separator + p1Name));
+        assertTrue(result2.contains("user_data" + File.separator + "users" + File.separator + testUser1Name + File.separator + "packages" + File.separator + p2Name));
         pw2.delete();
         pw1.delete();
         uw1.delete();
@@ -102,15 +102,14 @@ public class ReaderTest {
         ArrayList<String> result2 = r.readCards(testUser1Name, p2Name);
         assertEquals(1, result1.size());
         assertEquals(0, result2.size());
-        assertTrue(result1.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
+        String userData = "user_data" + File.separator + "users" + File.separator + testUser1Name
                 + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
-                + card1Term + ".txt"));
+                + card1Term + ".txt";
+        assertTrue(result1.contains(userData));
         cw2.write();
         ArrayList<String> result3 = r.readCards(testUser1Name, p1Name);
         assertEquals(2, result3.size());
-        assertTrue(result3.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
-                + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
-                + card1Term + ".txt"));
+        assertTrue(result3.contains(userData));
         assertTrue(result3.contains("user_data" + File.separator + "users" + File.separator + testUser1Name
                 + File.separator + "packages" + File.separator + p1Name + File.separator + "cards" + File.separator
                 + card2Term + ".txt"));
@@ -121,7 +120,7 @@ public class ReaderTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         cw1.delete();
         cw2.delete();
         pw1.delete();

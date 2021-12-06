@@ -3,10 +3,11 @@ package use_case.manager;
 import entity.Card;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
-import use_case.output_boundaries.*;
+import use_case.output_boundaries.AddOutputBoundary;
+import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.SortSearchCardOutputBoundary;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -25,8 +26,8 @@ public class CardManager extends Manager<Card> implements Sort<SortSearchCardOut
      * Create a new card with specified term and definition.
      * If the card term already exists, adding fails. Otherwise, adding succeeds.
      *
-     * @param term       The term of the card
-     * @param definition The definition of the term
+     * @param term              The term of the card
+     * @param definition        The definition of the term
      * @param addOutputBoundary an output boundary for showing the result of adding new pack
      * @return true if the pack is successfully added; false otherwise
      */
@@ -46,16 +47,17 @@ public class CardManager extends Manager<Card> implements Sort<SortSearchCardOut
 
     /**
      * delete an existing card wit specified card term.
+     *
      * @param term: the term of the card the user wants to delete
      * @return true iff we successfully deleted an item
      */
-    public boolean deleteCard(String term){
+    public boolean deleteCard(String term) {
         currItem = this.items.get(term);
-        if(currItem != null){ // We have the item to be deleted
+        if (currItem != null) { // We have the item to be deleted
             items.remove(term);
             programStateInputBoundary.getCurrPack().deleteCard(currItem);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -95,7 +97,8 @@ public class CardManager extends Manager<Card> implements Sort<SortSearchCardOut
 
     /**
      * Users can search cards by card's term and definition (not necessarily equal to) keyword.
-     *  @param keyword              the term that the user searches
+     *
+     * @param keyword                      the term that the user searches
      * @param sortSearchCardOutputBoundary a search output boundary for getting the search result.
      */
     public void searchCard(String keyword, SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
@@ -148,7 +151,8 @@ public class CardManager extends Manager<Card> implements Sort<SortSearchCardOut
 
     /**
      * Helper method for present sorted cards.
-     * @param sorted An arraylist of cards that are sorted according to some algorithm.
+     *
+     * @param sorted                       An arraylist of cards that are sorted according to some algorithm.
      * @param sortSearchCardOutputBoundary a sort output boundary that receives the result of sorted cards.
      */
     private void presentSortSearchResult(ArrayList<Card> sorted, SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {

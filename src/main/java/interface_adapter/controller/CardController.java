@@ -2,11 +2,14 @@ package interface_adapter.controller;
 
 import interface_adapter.gateway.IDataInOut;
 import use_case.input_boundaries.CardInputBoundary;
-import use_case.output_boundaries.*;
+import use_case.output_boundaries.AddOutputBoundary;
+import use_case.output_boundaries.ChangeOutputBoundary;
+import use_case.output_boundaries.DatabaseErrorOutputBoundary;
+import use_case.output_boundaries.SortSearchCardOutputBoundary;
 
 /**
  * This class controls all basic operations with cards in a pack:
- *      add/sort/search/delete cards.
+ * add/sort/search/delete cards.
  */
 public class CardController {
     private final CardInputBoundary cardInputBoundary;
@@ -20,8 +23,9 @@ public class CardController {
     /**
      * Add a new card with specified term and definition.
      * If success, write the new card into database.
-     * @param term the new card's term
-     * @param definition the new card's definition.
+     *
+     * @param term              the new card's term
+     * @param definition        the new card's definition.
      * @param addOutputBoundary an output boundary that gets the result of adding: fail or success.
      */
     public void addNewCard(String term, String definition, IDataInOut dataInOut, AddOutputBoundary addOutputBoundary) {
@@ -33,11 +37,12 @@ public class CardController {
     /**
      * Change a new card with specified term.
      * If success, write the updated card into database.
-     * @param oldTerm the original term
-     * @param newTerm the new term
+     *
+     * @param oldTerm              the original term
+     * @param newTerm              the new term
      * @param changeOutputBoundary an output boundary that gets the result of changing: fail or success.
      */
-    public void changeCardTerm(String oldTerm, String newTerm, IDataInOut dataInOut,  ChangeOutputBoundary changeOutputBoundary) {
+    public void changeCardTerm(String oldTerm, String newTerm, IDataInOut dataInOut, ChangeOutputBoundary changeOutputBoundary) {
         if (this.cardInputBoundary.changeCardTerm(newTerm, changeOutputBoundary)) {
             this.cardInputBoundary.write(oldTerm, dataInOut, databaseErrorOutputBoundary);
         }
@@ -46,6 +51,7 @@ public class CardController {
     /**
      * Change a new card with specified definition.
      * Write the updated card into database.
+     *
      * @param newDefinition the new definition of term
      */
     public void changeCardDefinition(String newDefinition, IDataInOut dataInOut) {
@@ -65,7 +71,8 @@ public class CardController {
 
     /**
      * Search card with specified keyword.
-     * @param keyword the keyword entered by user
+     *
+     * @param keyword                      the keyword entered by user
      * @param sortSearchCardOutputBoundary a search/sort output boundary that gets the result of qualified cards
      */
     public void searchCard(String keyword, SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
@@ -74,6 +81,7 @@ public class CardController {
 
     /**
      * Old-to-new is the order of cards shown to the user by default.
+     *
      * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards.
      */
     public void sortOldToNew(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
@@ -82,6 +90,7 @@ public class CardController {
 
     /**
      * Sort cards by alphabetic order (A-Z).
+     *
      * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards.
      */
     public void sortAToZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {
@@ -90,6 +99,7 @@ public class CardController {
 
     /**
      * This is the order of cards shown to the user by default.
+     *
      * @param sortSearchCardOutputBoundary an output boundary that gets the result of sorted cards.
      */
     public void sortProLowToHigh(SortSearchCardOutputBoundary sortSearchCardOutputBoundary) {

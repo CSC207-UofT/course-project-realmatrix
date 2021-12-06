@@ -21,6 +21,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Getter for current user.
+     *
      * @return a User object, representing current user.
      */
     @Override
@@ -30,6 +31,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Getter for current username.
+     *
      * @return a string of current user's username.
      */
     @Override
@@ -42,6 +44,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Getter for current pack.
+     *
      * @return a Pack object, representing current pack.
      */
     @Override
@@ -51,6 +54,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Getter for current pack name.
+     *
      * @return a string of current pack's name.
      */
     @Override
@@ -63,6 +67,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Getter for current card.
+     *
      * @return a Card object, representing current card.
      */
     @Override
@@ -72,6 +77,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Getter for current card's term.
+     *
      * @return a string of current card's term.
      */
     @Override
@@ -84,6 +90,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Getter for current card's definition.
+     *
      * @return a string of current card's definition.
      */
     @Override
@@ -96,6 +103,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Setter for current user.
+     *
      * @param user the current user
      */
     @Override
@@ -105,6 +113,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Setter for current pack.
+     *
      * @param packname the current pack's pack name.
      */
     @Override
@@ -120,6 +129,7 @@ public class ProgramStateManager implements ProgramStateInputBoundary {
 
     /**
      * Setter for current card.
+     *
      * @param cardTerm the current card's term.
      */
     @Override

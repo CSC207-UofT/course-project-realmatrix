@@ -20,10 +20,11 @@ public class LogInOutPresenter implements LogInOutOutputBoundary {
 
     /**
      * Getter for LogInOutResult
+     *
      * @return true iff user successfully logged in.
      */
     @Override
-    public boolean getLogInOutResult(){
+    public boolean getLogInOutResult() {
         return loginOutResult;
     }
 }

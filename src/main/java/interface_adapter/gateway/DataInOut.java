@@ -21,9 +21,10 @@ public class DataInOut implements IDataInOut {
 
     /**
      * Write a new object into database.
+     *
      * @param partialDataPath a partial datapath contains username and packname (may be null),
      *                        necessary for determining the path for writing.
-     * @param o the object to be written
+     * @param o               the object to be written
      * @throws IOException fails to write
      */
     @Override
@@ -40,8 +41,8 @@ public class DataInOut implements IDataInOut {
      *
      * @param partialDataPath a partial datapath contains username and packname (may be null),
      *                        necessary for determining the path for writing.
-     * @param oldName the object's old name
-     * @param newO the new object to be written into database.
+     * @param oldName         the object's old name
+     * @param newO            the new object to be written into database.
      * @throws IOException fail to write
      */
     @Override
@@ -52,19 +53,21 @@ public class DataInOut implements IDataInOut {
 
     /**
      * Delete an object.
+     *
      * @param partialDataPath a partial datapath contains username and packname (may be null),
      *                        necessary for determining the path for writing.
-     * @param o the object to be deleted
+     * @param o               the object to be deleted
      * @throws IOException fail to write
      */
     @Override
-    public void delete(String[] partialDataPath, Object o) throws IOException{
+    public void delete(String[] partialDataPath, Object o) throws IOException {
         Writer writer = this.factory.getWriter(partialDataPath, o);
         writer.delete();
     }
 
     /**
      * Initial load for checking registration/login.
+     *
      * @return a hash map that maps username to user password.
      * @throws IOException fails to load
      */
@@ -77,6 +80,7 @@ public class DataInOut implements IDataInOut {
     /**
      * Loads all packs/cards for the current user who logs in.
      * After a user logs in, this method should be called immediately.
+     *
      * @param user the current user
      * @throws IOException fails to load
      */

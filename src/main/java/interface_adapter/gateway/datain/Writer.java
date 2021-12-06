@@ -22,21 +22,20 @@ public abstract class Writer {
 
     /**
      * Write the object into database
-     *
      */
     public abstract void write() throws IOException;
 
     /**
      * Rename the object with new name.
+     *
      * @param oldName the old object's name which should be replaced
-     * @param newO the new object
+     * @param newO    the new object
      * @throws IOException fails to write
      */
     public abstract void write(String oldName, Object newO) throws IOException;
 
     /**
      * Delete the object in database.
-     * @throws IOException fails to write
      */
-    public abstract void delete() throws IOException;
+    public abstract void delete();
 }

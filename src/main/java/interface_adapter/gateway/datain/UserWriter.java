@@ -18,8 +18,9 @@ public class UserWriter extends Writer {
 
     /**
      * Construct a CardWriter object.
+     *
      * @param partialDataPath including username and packname (if it's not null)
-     * @param o     the object (pack) to write/update
+     * @param o               the object (pack) to write/update
      */
     public UserWriter(String[] partialDataPath, Object o) {
         super(partialDataPath);
@@ -28,6 +29,7 @@ public class UserWriter extends Writer {
 
     /**
      * Write a new user into database.
+     *
      * @throws IOException fail to write
      */
     @Override
@@ -44,7 +46,7 @@ public class UserWriter extends Writer {
      * Write the user's new name into database by renaming the user directory.
      *
      * @param oldName the user's old name
-     * @param newO the user with new name
+     * @param newO    the user with new name
      * @throws IOException fails to write
      */
     @Override
@@ -61,8 +63,8 @@ public class UserWriter extends Writer {
     public void delete() {
         File userFolder = new File("user_data/users/" + user.getName());
         File[] packs = userFolder.listFiles();
-        if(packs!=null) { // meaning userFolder is non-empty (contains some packs)
-            for(File p: packs) {
+        if (packs != null) { // meaning userFolder is non-empty (contains some packs)
+            for (File p : packs) {
                 p.delete();
             }
         }

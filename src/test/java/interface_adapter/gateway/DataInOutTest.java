@@ -20,13 +20,13 @@ import static org.junit.Assert.*;
 
 public class DataInOutTest {
     DataInOut data;
-    String oldTerm = "TestTerm1old";
-    String newTerm = "TestTerm1new";
+    final String oldTerm = "TestTerm1old";
+    final String newTerm = "TestTerm1new";
     Card testCard1;
-    String testUsername1Old = "testDataInOutUser1Old";
-    String testUsername1New = "testDataInOutUser1New";
-    String testPackname1Old = "testPack1Old";
-    String testPackname1New = "testPack1New";
+    final String testUsername1Old = "testDataInOutUser1Old";
+    final String testUsername1New = "testDataInOutUser1New";
+    final String testPackname1Old = "testPack1Old";
+    final String testPackname1New = "testPack1New";
     String[] testPartialPathOld;
     String[] testPartialPathNew;
     CardWriter cw;
@@ -82,7 +82,7 @@ public class DataInOutTest {
     }
 
     @Test
-    public void testWriteNewObjectWithException(){
+    public void testWriteNewObjectWithException() {
         String string = "string";
         Exception e = assertThrows(Exception.class, () -> data.write(testPartialPathOld, string));
         String expectedMsg = Exceptions.InvalidObject;

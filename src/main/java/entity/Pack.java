@@ -51,6 +51,7 @@ public class Pack {
 
     /**
      * Return a card map that maps card term to card, allows more flexible use in other classes.
+     *
      * @return a hah map of card term to card object.
      */
     public HashMap<String, Card> getCardMap() {

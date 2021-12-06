@@ -12,6 +12,7 @@ public class SortSearchPackPresenter implements SortSearchPackOutputBoundary {
 
     /**
      * setter of sortResult
+     *
      * @param result the set value of result.
      */
     @Override
@@ -21,6 +22,7 @@ public class SortSearchPackPresenter implements SortSearchPackOutputBoundary {
 
     /**
      * getter of sort Result
+     *
      * @return the arraylist of card term and definition.
      */
     @Override

@@ -2,9 +2,9 @@ package entity;
 
 /**
  * This class stores the current state of our program, including
- *      - the current user,
- *      - the current pack the current user is in,
- *      - the current card the user is learning/reviewing.
+ * - the current user,
+ * - the current pack the current user is in,
+ * - the current card the user is learning/reviewing.
  */
 public class ProgramState {
     private User currUser = null;

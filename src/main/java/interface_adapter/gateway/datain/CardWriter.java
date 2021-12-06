@@ -19,8 +19,9 @@ public class CardWriter extends Writer {
 
     /**
      * Construct a CardWriter object.
+     *
      * @param partialDataPath the state the program is in
-     * @param o     the object (card) to write/update
+     * @param o               the object (card) to write/update
      */
     public CardWriter(String[] partialDataPath, Object o) {
         super(partialDataPath);
@@ -29,6 +30,7 @@ public class CardWriter extends Writer {
 
     /**
      * Write a new card
+     *
      * @throws IOException fails to write
      */
     @Override
@@ -45,7 +47,7 @@ public class CardWriter extends Writer {
      * Write the card's new term into database by renaming the card directory.
      *
      * @param oldName the card's old term
-     * @param newO the card with new term
+     * @param newO    the card with new term
      * @throws IOException fails to write
      */
     @Override
@@ -58,10 +60,9 @@ public class CardWriter extends Writer {
 
     /**
      * Delete a card.
-     * @throws IOException fails to write
      */
     @Override
-    public void delete() throws IOException {
+    public void delete() {
         new File("user_data/users/" + this.username + "/packages/" + this.packname + "/cards/" +
                 this.card.getTerm() + ".txt").delete();
     }

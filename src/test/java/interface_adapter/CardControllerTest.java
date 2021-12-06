@@ -3,7 +3,7 @@ package interface_adapter;
 import entity.Card;
 import entity.Pack;
 import entity.User;
-import framework.GUI.database_error.DatabaseErrorWindow;
+import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
@@ -29,22 +29,22 @@ import static org.junit.Assert.assertEquals;
 public class CardControllerTest {
     CardController cc;
     CardManager cm;
-    String c1Term = "closet";
-    String c1TermNew = "c1TermNew";
-    String c1Def = "a tall cupboard or wardrobe with a door, used for storage.";
-    String c1DefNew = "c1DefNew";
+    final String c1Term = "closet";
+    final String c1TermNew = "c1TermNew";
+    final String c1Def = "a tall cupboard or wardrobe with a door, used for storage.";
+    final String c1DefNew = "c1DefNew";
     final Card c1 = new Card(c1Term, c1Def);
     ChangePresenter cp;
-    IDataInOut dataInOut = new DataInOut();
-    ProgramStateManager programStateInputBoundary = new ProgramStateManager();
-    DatabaseErrMsgPresenter databaseErrorOutputBoundary = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
-    AddPresenter addOutputBoundary = new AddPresenter();
-    ChangePresenter changeOutputBoundary = new ChangePresenter();
-    String user1Name = "user1Name";
-    String user1Pw = "user1Pw";
-    String pack1Name = "pack1Name";
-    User user1 = new User(user1Name, user1Pw);
-    Pack pack1 = new Pack(pack1Name);
+    final IDataInOut dataInOut = new DataInOut();
+    final ProgramStateManager programStateInputBoundary = new ProgramStateManager();
+    final DatabaseErrMsgPresenter databaseErrorOutputBoundary = new DatabaseErrMsgPresenter(new DatabaseErrorWindow());
+    final AddPresenter addOutputBoundary = new AddPresenter();
+    final ChangePresenter changeOutputBoundary = new ChangePresenter();
+    final String user1Name = "user1Name";
+    final String user1Pw = "user1Pw";
+    final String pack1Name = "pack1Name";
+    final User user1 = new User(user1Name, user1Pw);
+    final Pack pack1 = new Pack(pack1Name);
 
     @Before
     public void createCardController() {
@@ -78,14 +78,14 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testDeleteCard(){
+    public void testDeleteCard() {
         assertEquals(1, pack1.getCardList().size());
         cc.deleteCard(c1Term, dataInOut);
         assertEquals(0, pack1.getCardList().size());
     }
 
     @Test
-    public void testSearchCard(){
+    public void testSearchCard() {
         SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
         cc.searchCard(c1Term, sortSearchCardOutputBoundary);
         String[][] actual = sortSearchCardOutputBoundary.getSortSearchResult();
@@ -94,7 +94,7 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testSortOldToNew(){
+    public void testSortOldToNew() {
         SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
         String c2Term = "c2Term";
         String c2Def = "c2Def";
@@ -107,7 +107,7 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testSortAToZ(){
+    public void testSortAToZ() {
         SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
         String c2Term = "c2Term";
         String c2Def = "c2Def";
@@ -120,7 +120,7 @@ public class CardControllerTest {
     }
 
     @Test
-    public void testSortProLowToHigh(){
+    public void testSortProLowToHigh() {
         SortSearchCardOutputBoundary sortSearchCardOutputBoundary = new SortSearchCardPresenter();
         String c2Term = "c2Term";
         String c2Def = "c2Def";
@@ -137,7 +137,7 @@ public class CardControllerTest {
     public void tearDone() throws IOException {
         String[] partialPath;
         partialPath = new String[]{user1Name, pack1Name};
-        for (Card c: programStateInputBoundary.getCurrPack().getCardList()){
+        for (Card c : programStateInputBoundary.getCurrPack().getCardList()) {
             CardWriter cw = new CardWriter(partialPath, c);
             cw.delete();
         }

@@ -12,8 +12,8 @@ import java.util.HashMap;
  */
 public abstract class Manager<T> {
     // Maps entity's name to entity, e.g. items in UserManager maps cardTerm to Card.
-    protected HashMap<String,T> items;
-    protected ProgramStateInputBoundary programStateInputBoundary;
+    protected HashMap<String, T> items;
+    protected final ProgramStateInputBoundary programStateInputBoundary;
     protected T currItem;
 
     public Manager(ProgramStateInputBoundary programStateInputBoundary) {
@@ -23,10 +23,11 @@ public abstract class Manager<T> {
 
     /**
      * search item entity by item name
+     *
      * @param name item name we want
      * @return the item entity
      */
-    public T searchItem(String name){
+    public T searchItem(String name) {
         return this.items.get(name);
     }
 
@@ -54,6 +55,7 @@ public abstract class Manager<T> {
 
     /**
      * Archive (delete and store) the required object into database.
+     *
      * @param databaseErrorOutputBoundary an output boundary that gets the error message if fails connect to database.
      */
     public void delete(IDataInOut dataInOut, DatabaseErrorOutputBoundary databaseErrorOutputBoundary) {

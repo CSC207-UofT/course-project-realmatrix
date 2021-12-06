@@ -76,18 +76,18 @@ public class CardTest {
     @Test(timeout = 50)
     public void TestToStringHiddenDef() {
         c.hideDefinition();
-        String expected = String.format("Term: %s", this.term);
+        String expected = String.format("Term:\n %s", this.term);
         assertEquals(expected, c.toString());
     }
 
     @Test(timeout = 50)
     public void TestToStringUnHiddenDef() {
-        assertEquals(String.format("Term: %1$s \n Definition: %2$s",
+        assertEquals(String.format("Term:\n %1$s \n\n Definition:\n %2$s",
                 this.term, this.definition), c.toString());
     }
 
     @Test(timeout = 50)
     public void TestToString() {
-        assertEquals(c.toString(), "Term: closet \n Definition: a tall cupboard or wardrobe with a door, used for storage.");
+        assertEquals(c.toString(), "Term:\n closet \n\n Definition:\n a tall cupboard or wardrobe with a door, used for storage.");
     }
 }

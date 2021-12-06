@@ -82,14 +82,15 @@ public class Card {
     /**
      * Return a string that represents card's term and definition if definition is unhidden;
      * or a string that represents card's term if definition is hidden.
+     *
      * @return a string
      */
     @Override
     public String toString() {
         if (this.definitionHidden) {
-            return String.format("Term: %s", this.term);
+            return String.format("Term:\n %s", this.term);
         } else {
-            return String.format("Term: %1$s \n Definition: %2$s",
+            return String.format("Term:\n %1$s \n\n Definition:\n %2$s",
                     this.term, this.definition);
         }
     }

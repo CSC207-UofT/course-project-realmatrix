@@ -9,7 +9,10 @@ import use_case.output_boundaries.LogInOutOutputBoundary;
  */
 public interface LogInOutInputBoundary {
     void initialLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary);
+
     boolean logInUser(String username, String password, LogInOutOutputBoundary logInOutOB);
+
     void userLoad(DatabaseErrorOutputBoundary databaseErrorOutputBoundary);
+
     void signOffUser(LogInOutOutputBoundary logInOutOB);
 }

@@ -56,6 +56,7 @@ class Reader {
 
     /**
      * Helper for reader.
+     *
      * @param lst an arraylist to put card/pack file
      * @param dir the parent file path
      * @return an arraylist that has put card/pack files

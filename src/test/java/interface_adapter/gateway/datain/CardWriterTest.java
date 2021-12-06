@@ -8,16 +8,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CardWriterTest {
-    String oldTerm = "TestTerm1old";
-    String newTerm = "TestTerm1new";
+    final String oldTerm = "TestTerm1old";
+    final String newTerm = "TestTerm1new";
     Card testCard1;
-    String testUsername1 = "testUser1";
-    String testPackname1 = "testPack1";
+    final String testUsername1 = "testUser1";
+    final String testPackname1 = "testPack1";
     String[] testPartialPathOld;
     CardWriter cw;
     User testUser1;
@@ -36,7 +39,6 @@ public class CardWriterTest {
         pw.write();
         uw = new UserWriter(testPartialPathOld, testUser1);
         uw.write();
-
 
 
     }
@@ -77,23 +79,7 @@ public class CardWriterTest {
         pw.delete();
         uw.delete();
 
-//        Path path1 = FileSystems.getDefault().getPath("./user_data/users/testUser1/cards/TestTerm1");
-//        try {
-//            Files.deleteIfExists(path1);
-//        } catch (IOException x) {
-//            System.err.println(x);
-//        }
-//
-//        Path path = FileSystems.getDefault().getPath("./user_data/users/testUser1/cards");
-//        try {
-//            Files.deleteIfExists(path);
-//        } catch (NoSuchFileException x) {
-//            System.err.format("%s: no such" + " file or directory%n", path);
-//        } catch (DirectoryNotEmptyException x) {
-//            System.err.format("%s not empty%n", path);
-//        } catch (IOException x) {
-//            System.err.println(x);
-//        }
+
     }
 }
 

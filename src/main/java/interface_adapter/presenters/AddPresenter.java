@@ -10,6 +10,7 @@ public class AddPresenter implements AddOutputBoundary {
 
     /**
      * Setter of addResult
+     *
      * @param addResult set value of add result.
      */
     @Override
@@ -20,6 +21,7 @@ public class AddPresenter implements AddOutputBoundary {
 
     /**
      * Getter of addResult
+     *
      * @return true if added successfully
      */
     @Override

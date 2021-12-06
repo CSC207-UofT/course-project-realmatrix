@@ -1,16 +1,13 @@
 package main;
 
 
-import entity.ProgramState;
-import entity.User;
+import framework.gui.start.StartFrame;
+import use_case.manager.ProgramStateManager;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-//        CommandLineInterface cli = new CommandLineInterface();
-//        cli.display();
+    public static void main(String[] args) {
 
-//         Use framework.command_line_interface.GUI
-//        new StartFrame();
+        new StartFrame(new ProgramStateManager());
     }
 }

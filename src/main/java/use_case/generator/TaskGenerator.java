@@ -11,7 +11,7 @@ import java.util.Queue;
  */
 public abstract class TaskGenerator {
     protected final Pack pack;
-    protected Queue<Card> cards;
+    protected final Queue<Card> cards;
     protected Card currCard; // current card the user is learning/reviewing
 
     public TaskGenerator(Pack pack) {
@@ -27,6 +27,7 @@ public abstract class TaskGenerator {
 
     /**
      * Show the current card in progress.
+     *
      * @return the card the user is at
      */
     public abstract Card getCurrCard();

@@ -15,8 +15,9 @@ public class DataInFactory {
 
     /**
      * Construct a specific writer.
+     *
      * @param partialDataPath the current state the program is in
-     * @param o     the object needs to write/archive
+     * @param o               the object needs to write/archive
      * @return a Writer according to objects we need to write/archive.
      * @throws IOException the object cannot be written/archived into database
      */

@@ -28,6 +28,7 @@ public class User {
 
     /**
      * Change the user's username to newName.
+     *
      * @param newName the user's new username.
      */
     public void changeName(String newName) {
@@ -36,6 +37,7 @@ public class User {
 
     /**
      * Change the user's password to newPassword.
+     *
      * @param newPassword the user's new password.
      */
     public void changePassword(String newPassword) {
@@ -44,6 +46,7 @@ public class User {
 
     /**
      * Add the pack into user's packageList.
+     *
      * @param pack the pack to be added into user's packageList.
      */
     public void addPackage(Pack pack) {
@@ -52,6 +55,7 @@ public class User {
 
     /**
      * Getter for PackageList.
+     *
      * @return a PackageList.
      */
     public ArrayList<Pack> getPackageList() {
@@ -60,6 +64,7 @@ public class User {
 
     /**
      * Return a pack map that maps pack name to pack, allows more flexible use in other classes.
+     *
      * @return a hah map of pack name to pack object.
      */
     public HashMap<String, Pack> getPackageMap() {

@@ -20,10 +20,11 @@ public class RegisterPresenter implements RegisterOutputBoundary {
 
     /**
      * Getter of registerResult
+     *
      * @return true iff user is registered.
      */
     @Override
-    public boolean getRegisterResult(){
+    public boolean getRegisterResult() {
         return this.registerResult;
     }
 }

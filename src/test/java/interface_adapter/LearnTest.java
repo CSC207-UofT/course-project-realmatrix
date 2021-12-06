@@ -6,7 +6,6 @@ import interface_adapter.controller.LearnController;
 import interface_adapter.presenters.LearnPresenter;
 import org.junit.Before;
 import org.junit.Test;
-
 import use_case.generator.LearnGenerator;
 import use_case.input_boundaries.LearnInputBoundary;
 import use_case.output_boundaries.LearnOutputBoundary;
@@ -107,6 +106,6 @@ public class LearnTest {
     }
 
     private boolean representThisCard(String strRep, Card card) {
-        return Objects.equals(strRep, card.toString().replace("\n","<br>"));
+        return Objects.equals(strRep, card.toString().replace("\n", "<br>"));
     }
 }

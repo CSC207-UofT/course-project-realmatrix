@@ -15,6 +15,7 @@ public class ProgramStateController {
 
     /**
      * Set to current pack.
+     *
      * @param packName either a pack's name or null.
      */
     public void setCurrPack(String packName) {
@@ -23,6 +24,7 @@ public class ProgramStateController {
 
     /**
      * Set to current card.
+     *
      * @param cardTerm either a card's name or null.
      */
     public void setCurrCard(String cardTerm) {
@@ -31,6 +33,7 @@ public class ProgramStateController {
 
     /**
      * Getter for current user's username.
+     *
      * @return a string of current username.
      */
     public String getCurrUserName() {
@@ -39,6 +42,7 @@ public class ProgramStateController {
 
     /**
      * Getter for current pack name
+     *
      * @return a pack name
      */
     public String getCurrPackName() {
@@ -47,6 +51,7 @@ public class ProgramStateController {
 
     /**
      * Getter for current card term
+     *
      * @return a card term
      */
     public String getCurrCardTerm() {
@@ -55,6 +60,7 @@ public class ProgramStateController {
 
     /**
      * Getter for current card definition
+     *
      * @return a card definition
      */
     public String getCurrCardDef() {

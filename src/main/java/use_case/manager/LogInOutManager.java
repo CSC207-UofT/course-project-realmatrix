@@ -28,6 +28,7 @@ public class LogInOutManager implements LogInOutInputBoundary {
 
     /**
      * Loads a map of username to user password for checking login.
+     *
      * @param databaseErrorOutputBoundary an outputBoundary that shows error messages if fail to connect to database.
      */
     @Override
@@ -41,6 +42,7 @@ public class LogInOutManager implements LogInOutInputBoundary {
 
     /**
      * Login the user with given username and password.
+     *
      * @param name       the username the client enters
      * @param password   the password the client enters
      * @param logInOutOB an outputBoundary that gets the result of login/signoff.
@@ -48,7 +50,7 @@ public class LogInOutManager implements LogInOutInputBoundary {
      */
     @Override
     public boolean logInUser(String name, String password, LogInOutOutputBoundary logInOutOB) {
-         // All username to user password in the database
+        // All username to user password in the database
         if (password.equals(nameToPassword.get(name))) { // Check if there's a user with such username and password
             this.currUser = new User(name, password);
             programStateInputBoundary.setCurrUser(this.currUser);
@@ -62,6 +64,7 @@ public class LogInOutManager implements LogInOutInputBoundary {
 
     /**
      * Load all packs/cards for current user who just logs in.
+     *
      * @param databaseErrorOutputBoundary an outputBoundary that shows error messages if fail to connect to database.
      */
     @Override

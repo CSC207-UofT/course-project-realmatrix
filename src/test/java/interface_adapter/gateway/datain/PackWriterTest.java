@@ -11,13 +11,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PackWriterTest {
-    String testUsername = "testPackWriterUser1";
-    String testUserPw = "testPw";
-    String testPackNewName = "testPackWriterUser1new";
-    String testPackName = "testPack1";
+    final String testUsername = "testPackWriterUser1";
+    final String testUserPw = "testPw";
+    final String testPackNewName = "testPackWriterUser1new";
+    final String testPackName = "testPack1";
     String[] partialPath;
     PackWriter pw;
     UserWriter uw;
@@ -37,7 +38,7 @@ public class PackWriterTest {
     }
 
     @Test
-    public void testWriteNewPack() throws IOException {
+    public void testWriteNewPack() {
         pw.write();
         path1 = Paths.get("user_data/users/" + testUsername + "/packages/" + testPackName);
         assertTrue(Files.exists(path1));
@@ -45,7 +46,7 @@ public class PackWriterTest {
     }
 
     @Test
-    public void testDeletePack() throws IOException {
+    public void testDeletePack() {
         pw.write();
         path1 = Paths.get("user_data/users/" + testUsername + "/packages/" + testPackName);
         pw.delete();
