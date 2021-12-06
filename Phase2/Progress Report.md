@@ -10,8 +10,8 @@ In general, we obeyed Clean Architecture design principle and SOLID principle by
 
 ## Division of work summary
 ### Chloe Huang
-- Implemented `PackListFrame` and `CardListFrame`; revised `gateway` to load items according to date and fixed saving bugs; implemented `ProgramState`, `ProgramStateManager` and `ProgramStateController`.
-- https://github.com/CSC207-UofT/course-project-realmatrix/pull/30 and https://github.com/CSC207-UofT/course-project-realmatrix/pull/28. These pull requests implements fully-functional`PackFrame` (now called `PackListFrame`) and `CardFrame` (now called `CardListFrame`) with add/edit/search/sort/delete card/pack functionality and present users with cards/packs in proper view.
+- Implemented `PackListFrame` and `CardListFrame`; revised `gateway` to load items according to date and fixed writing bugs; implemented `ProgramState`, `ProgramStateManager` and `ProgramStateController`.
+- https://github.com/CSC207-UofT/course-project-realmatrix/pull/30 and https://github.com/CSC207-UofT/course-project-realmatrix/pull/28. These pull requests implements fully-functional`PackFrame` (now called `PackListFrame`) and `CardFrame` (now called `CardListFrame`) with add/edit/search/sort/delete card/pack functionality, and wisely use different present methods `JList` and `JTable` for pack and card. 
 
 ### Xing Ling
 - Worked on learn and review algorithm design, GUI design and implementation, code reviews, and testing in phase 2. 
