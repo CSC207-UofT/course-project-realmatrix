@@ -37,20 +37,19 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         reviewInputBoundary = new ReviewGenerator(programStateInputBoundary.getCurrPack(), reviewOutputBoundary);
         reviewController = new ReviewController(reviewInputBoundary, programStateInputBoundary);
 
-        this.setSize(500, 500);
+        this.setSize(600, 400);
         JPanel reviewPanel = new JPanel();
-        reviewPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
 
         try {
             reviewController.next();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        this.card = new JLabel("<html><p>" + reviewOutputBoundary.getCurrCardStrRep() + "</p><html>",
-                SwingConstants.CENTER);
+        this.card = new JLabel("<html><div style=\"width: 500\">" + reviewOutputBoundary.getCurrCardStrRep()
+                + "</div><html>", SwingConstants.LEFT);
         this.card.setBounds(100, 100, 300, 400);
-        this.card.setFont(new Font("verdana", Font.BOLD, 20));
+        this.card.setFont(new Font("verdana", Font.BOLD, 18));
+        this.card.setForeground(Color.blue);
 
         this.showDefButton = new JButton("Show Definition");
         this.showDefButton.setBounds(150, 500, 200, 50);
@@ -72,30 +71,54 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         this.backButton.setBounds(10, 10, 200, 50);
         this.backButton.addActionListener(this);
 
-        // Put constraints on different buttons
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+//        // Put constraints on different buttons
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//
+//        gbc.gridx = 0;
+//        gbc.gridy = 1;
+//        reviewPanel.add(remWrgButton, gbc);
+//
+//        gbc.gridx = 1;
+//        gbc.gridy = 1;
+//        reviewPanel.add(remCrtButton, gbc);
+//
+//        gbc.gridx = 0;
+//        gbc.gridy = 2;
+//        reviewPanel.add(showDefButton, gbc);
+//
+//        gbc.gridx = 1;
+//        gbc.gridy = 2;
+//        reviewPanel.add(backButton, gbc);
+//
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//        gbc.gridwidth = 2;
+//        reviewPanel.add(card, gbc);
+        JPanel top = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        top.add(this.backButton);
+        JPanel mid = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        mid.setBounds(0, 100, 600, 500);
+        mid.add(this.card);
+        JScrollPane scroller = new JScrollPane(mid, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//        JPanel lowerLeft = new JPanel(new FlowLayout(FlowLayout.LEFT));
+//        lowerLeft.add(this.remWrgButton);
+//        JPanel lowerRight = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+//        lowerRight.add(this.remCrtButton);
+//        JPanel lowerMid = new JPanel(new FlowLayout(FlowLayout.CENTER));
+//        lowerMid.add(this.showDefButton);
 
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        reviewPanel.add(remWrgButton, gbc);
+        JPanel subPanel = new JPanel();
+        subPanel.add(this.remWrgButton);
+        subPanel.add(this.showDefButton);
+        subPanel.add(this.remCrtButton);
 
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        reviewPanel.add(remCrtButton, gbc);
+        mid.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        reviewPanel.add(showDefButton, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        reviewPanel.add(backButton, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = 2;
-        reviewPanel.add(card, gbc);
+        reviewPanel.setLayout(new BorderLayout());
+        reviewPanel.add(top, BorderLayout.NORTH);
+        reviewPanel.add(scroller, BorderLayout.CENTER);
+        reviewPanel.add(subPanel, BorderLayout.SOUTH);
 
         add(reviewPanel);
         setVisible(true);
@@ -106,7 +129,7 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         if (e.getSource() == this.showDefButton) {
             reviewController.setShowDefinition();
             if (reviewOutputBoundary.getCurrCardStrRep() != null) {
-                this.card.setText("<html><p>" + reviewOutputBoundary.getCurrCardStrRep() + "</p><html>");
+                this.card.setText("<html><div style=\"width: 500\">" + reviewOutputBoundary.getCurrCardStrRep() + "</div><html>");
             }
         } else if (e.getSource() == this.remWrgButton) {
             reviewController.setCantRecall();
@@ -115,7 +138,7 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            this.card.setText("<html><p>" + reviewOutputBoundary.getCurrCardStrRep() + "</p><html>");
+            this.card.setText("<html><div style=\"width: 500\">" + reviewOutputBoundary.getCurrCardStrRep() + "</div><html>");
         } else if (e.getSource() == this.remCrtButton) {
             try {
                 reviewController.next();
@@ -123,7 +146,7 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
                 ex.printStackTrace();
             }
             if (!reviewOutputBoundary.getReviewCompleted()) {
-                this.card.setText("<html><p>" + reviewOutputBoundary.getCurrCardStrRep() + "</p><html>");
+                this.card.setText("<html><div style=\"width: 500\">" + reviewOutputBoundary.getCurrCardStrRep() + "</div><html>");
             } else {
                 JOptionPane.showMessageDialog(this, "You have finished reviewing all the cards.",
                         "Good job!", JOptionPane.INFORMATION_MESSAGE);
@@ -153,7 +176,9 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         c2.setProficiency(3);
         Card c3 = new Card("bee", "animal");
         c3.setProficiency(3);
-        Card c4 = new Card("new", "something you haven't seen before");
+        Card c4 = new Card("new", "something you haven't seen before something you haven't seen before" +
+                " something you haven't seen before something you haven't seen before something you haven't seen before" +
+                " something you haven't seen before something you haven't seen before something you haven't seen before ");
         c4.setProficiency(1);
         Card c5 = new Card("old", "something you have seen before");
         c5.setProficiency(0);
