@@ -128,7 +128,7 @@ public class ReviewTest {
 
     private boolean representThisCard(String strRep, Card card) {
         // strRep only has the term part because by default definition is hidden
-        return Objects.equals(strRep, "Term: " + card.getTerm());
+        return Objects.equals(strRep, "Term:<br> " + card.getTerm());
     }
 
     /**
