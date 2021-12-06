@@ -21,6 +21,7 @@ import use_case.manager.CardManager;
 import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.SortSearchCardOutputBoundary;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -133,7 +134,7 @@ public class CardControllerTest {
     }
 
     @After
-    public void tearDone() {
+    public void tearDone() throws IOException {
         String[] partialPath;
         partialPath = new String[]{user1Name, pack1Name};
         for (Card c : programStateInputBoundary.getCurrPack().getCardList()) {
