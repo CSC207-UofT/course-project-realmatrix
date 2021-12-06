@@ -19,7 +19,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-// TODO: make layout prettier
 public class ReviewFrame extends BasicFrame implements ActionListener {
     private final JLabel card;
     private final JButton showDefButton;
@@ -148,7 +147,6 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
         // if you clicked on remember wrong/correctly and the text field doesn't change, that's not an error.
         // that's simply because that card appears again right after (remember some cards will appear more than once)
         // and yes we could improve this but right now it works
-        // TODO: consult with Xing if you are confused. better ask than make changes not knowing what's happening!
         Card c1 = new Card("apple", "fruit");
         c1.setProficiency(2);
         Card c2 = new Card("banana", "another fruit");

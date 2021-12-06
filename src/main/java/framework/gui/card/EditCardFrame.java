@@ -6,6 +6,7 @@ import interface_adapter.controller.CardController;
 import interface_adapter.gateway.DataInOut;
 import interface_adapter.presenters.ChangePresenter;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
@@ -100,8 +101,8 @@ public class EditCardFrame extends BasicFrame implements ActionListener {
                 setVisible(false);
             } else {    // edit fails: card term already exists
                 JOptionPane.showMessageDialog(this,
-                        "This Card term has existed. Edit another one please~", // TODO: constant
-                        "Edit Fails",
+                        Constants.EDIT_CARD_EXISTED,
+                        Constants.EDIT_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             }
         } else if (e.getSource() == backButton) {

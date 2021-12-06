@@ -8,6 +8,7 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.RegisterPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.UserInputBoundary;
 import use_case.manager.ProgramStateManager;
@@ -78,26 +79,26 @@ public class RegisterFrame extends LogRegFrame {
         if (source == rgButton) {
             if (checkEmpty()) { //username or password is empty
                 JOptionPane.showMessageDialog(this,
-                        "Username and password cannot be empty. Try again.", // TODO: constant
-                        "Registration Fails",
+                        Constants.USERNAME_PW_EMPTY_MSG,
+                        Constants.REG_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             } else if (!checkPasswordEqual()) {
                 JOptionPane.showMessageDialog(this,
-                        "Passwords didn't match. Try again.", // TODO: constant
-                        "Registration Fails",
+                        Constants.PW_NOT_MATCH,
+                        Constants.REG_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             } else if (pw2.getPassword().length == 0) {   // check if password is empty
                 JOptionPane.showMessageDialog(this,
-                        "Passwords can't be empty",
-                        "Change fails",
+                        Constants.PW_EMPTY_MSG,
+                        Constants.CHANGE_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             } else if (check()) {  // Registration succeeds
                 setVisible(false);
                 new UserFrame(username.getText(), programStateInputBoundary);
             } else {    // Registration fails: username already exists
                 JOptionPane.showMessageDialog(this,
-                        "This username is taken. Choose another one please~", // TODO: constant
-                        "Registration Fails",
+                        Constants.USERNAME_EXISTED,
+                        Constants.REG_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             }
         } else if (source == backButton) {

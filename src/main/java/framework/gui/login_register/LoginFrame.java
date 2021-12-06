@@ -8,6 +8,7 @@ import interface_adapter.gateway.DataInOut;
 import interface_adapter.gateway.IDataInOut;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.LogInOutPresenter;
+import use_case.constants.Constants;
 import use_case.input_boundaries.LogInOutInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.LogInOutManager;
@@ -67,8 +68,8 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
                 new UserFrame(username.getText(), this.programStateInputBoundary);
             } else {    // login fails
                 JOptionPane.showMessageDialog(this,
-                        "Wrong password  OR  the username doesn't exist", // TODO: constant
-                        "Login Fails",
+                        Constants.LOGIN_FAIL_MSG,
+                        Constants.LOGIN_FAIL,
                         JOptionPane.WARNING_MESSAGE);
             }
         }
