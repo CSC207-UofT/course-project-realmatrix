@@ -98,7 +98,7 @@ public class LoaderTest {
                 Objects.equals(testUser1.getPackageList().get(0).getName(), p2Name));
         assertTrue(Objects.equals(testUser1.getPackageList().get(1).getName(), p1Name) ||
                 Objects.equals(testUser1.getPackageList().get(1).getName(), p2Name));
-        if (testUser1.getPackageList().get(0).getCardList().size() == 1) {
+        if (testUser1.getPackageList().get(0).getCardList().size() == 2) {
             assertTrue(Objects.equals(testUser1.getPackageList().get(0).getCardList().get(0).getTerm(), card1Term)
                     || Objects.equals(testUser1.getPackageList().get(0).getCardList().get(0).getTerm(), card2Term));
             assertTrue(Objects.equals(testUser1.getPackageList().get(0).getCardList().get(1).getTerm(), card1Term)
