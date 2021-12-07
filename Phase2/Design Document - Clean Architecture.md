@@ -44,11 +44,12 @@ business logic and plain code.
 3. Interface Adapters Layer:
    - Take Controllers for an example, we set multiple controllers, **each controls a specific task**
    (e.g. `RegisterController` controls registration).
-   These controllers will be getting input from user command and instructing the usecase classes 
-   (but won't depend on usecase classes directly because of input boundaries). This layer shoulders the responsibility of
-   converting user inputs into the request model and passes to the use case, but have no access to views in the framework circle.
+   These controllers will be 
+   getting input from user command and
+   instructing the usecase classes 
+   (but won't depend on usecase classes directly because of input boundaries).
 
 4. Framework & Driver Layer:
-   - The GUI we built in phase2 only interact with the Interface Adapters Layer, and will not dependent on lower layers,
-   which satisfies the clean architecture principle
+   - Take GUI for an example, The GUI we built in phase2 only interact with the Interface Adapters Layer,
+   and will not dependent on lower layers, which satisfies the clean architecture principle.
 
