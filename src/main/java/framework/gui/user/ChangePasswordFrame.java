@@ -32,7 +32,7 @@ public class ChangePasswordFrame extends BasicFrame implements ActionListener {
     final JButton backButton;
 
     /**
-     * Build a StartFrame.
+     * Build a ChangePasswordFrame.
      */
     public ChangePasswordFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
         super(Constants.CHANGE_PW, programStateInputBoundary);

@@ -1,8 +1,9 @@
 package use_case.output_boundaries;
 
 /**
- * n output boundary that shows the result of changing action,
+ * An output boundary that shows the result of changing action,
  * such as changing card term/definition, changing packname.
+ * It's a layer between manager and presenter.
  */
 public interface ChangeOutputBoundary {
     /**

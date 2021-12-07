@@ -32,7 +32,7 @@ public class ChangeUsernameFrame extends BasicFrame implements ActionListener {
     final JButton backButton;
 
     /**
-     * Build a StartFrame.
+     * Build a ChangeUsernameFrame.
      */
     public ChangeUsernameFrame(String username, ProgramStateInputBoundary programStateInputBoundary) {
         super(Constants.RECALLER_BTN, programStateInputBoundary);

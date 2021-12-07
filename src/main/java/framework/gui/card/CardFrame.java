@@ -7,6 +7,7 @@ import javax.swing.*;
 
 /**
  * A CardFrame shows a card's term and definition.
+ * This frame shows up when user double-clicks a card in CardListFrame.
  */
 public class CardFrame extends BasicFrame {
 

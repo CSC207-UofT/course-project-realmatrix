@@ -1,8 +1,5 @@
 package framework.gui.learn_review;
 
-import entity.Card;
-import entity.Pack;
-import entity.User;
 import framework.gui.BasicFrame;
 import framework.gui.card.CardListFrame;
 import interface_adapter.controller.LearnController;
@@ -10,7 +7,6 @@ import interface_adapter.presenters.LearnPresenter;
 import use_case.generator.LearnGenerator;
 import use_case.input_boundaries.LearnInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.LearnOutputBoundary;
 
 import javax.swing.*;

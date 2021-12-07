@@ -10,7 +10,7 @@ Also, we followed the suggestion that TA gave in Phase 0: separate a `LogInOutMa
 
 ## 2. closed/open principle
 This emerged in several packages, which promotes the use of interfaces to enable us to adapt the functionality of application
-without changing the existing code. For example, we have a `Sort` interface that's shared among `PackManager` and `CardManager`
+without changing the existing code. For example, we have a `SortInputBoundary`, and `CardInputBoundary` and `PackInputBoudnary` extend this sort input boundary, hence, we ensure this sorting interface is shared among `PackManager` and `CardManager`
 to sort packs/ cards in date added and alphabetic order. We use interfaces instead of superclasses, closed for modifications,
 and providing new implementations to extend the functionality of our software.
 
@@ -23,8 +23,9 @@ And in interface_adapter.gateway, all of `CardWriter`, `PackWriter`, and `UserWr
 
 ## 4. Interface Segregation Principle
 We kept every input boundary as small as possible so that it doesn't contain methods that controller does not need.
-For example, `Sort` interface only contains method that sort by alphabetic order and date added order.
+For example, `SortInputBoundary` interface only contains method that sort by alphabetic order and date added order.
 These two methods can be shared when sorting packs and cards.
+And `CardManager` itself would implement another sort algorithm: sort cards by proficiency.
 
 ## 5. Dependency Inversion Principle
 As we said in `clean architecture` file, we implemented `DataInOut` and its interface `IDataInOut` for dependency inversion,

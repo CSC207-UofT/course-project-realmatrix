@@ -1,16 +1,13 @@
 package framework.gui.learn_review;
 
-import entity.Card;
-import entity.Pack;
-import entity.User;
 import framework.gui.BasicFrame;
 import framework.gui.card.CardListFrame;
+import framework.gui.database_error.DatabaseErrorWindow;
 import interface_adapter.controller.ReviewController;
 import interface_adapter.presenters.ReviewPresenter;
 import use_case.generator.ReviewGenerator;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.input_boundaries.ReviewInputBoundary;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.ReviewOutputBoundary;
 
 import javax.swing.*;
@@ -106,6 +103,7 @@ public class ReviewFrame extends BasicFrame implements ActionListener {
             try {
                 reviewController.next();
             } catch (IOException ex) {
+                new DatabaseErrorWindow().presentWriteErrMsg();
                 ex.printStackTrace();
             }
             this.card.setText("<html><div style=\"width: 500\">" + reviewOutputBoundary.getCurrCardStrRep() + "</div><html>");

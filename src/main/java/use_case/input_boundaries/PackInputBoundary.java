@@ -4,7 +4,7 @@ import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.ChangeOutputBoundary;
 import use_case.output_boundaries.SortSearchPackOutputBoundary;
 
-public interface PackInputBoundary extends ManagerInputBoundary {
+public interface PackInputBoundary extends ManagerInputBoundary, SortInputBoundary<SortSearchPackOutputBoundary> {
     boolean addNewPack(String packName, AddOutputBoundary addOutputBoundary);
 
     boolean deletePack(String packName);
@@ -12,9 +12,5 @@ public interface PackInputBoundary extends ManagerInputBoundary {
     boolean changePackName(String newPackName, ChangeOutputBoundary changePackNameOB);
 
     void searchPack(String packName, SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
-
-    void sortOldToNew(SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
-
-    void sortAtoZ(SortSearchPackOutputBoundary sortSearchPackOutputBoundary);
 
 }

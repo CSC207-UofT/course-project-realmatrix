@@ -13,7 +13,7 @@ import java.util.Comparator;
 /**
  * A CardManager manages all cards in current pack.
  */
-public class CardManager extends Manager<Card> implements Sort<SortSearchCardOutputBoundary>, CardInputBoundary {
+public class CardManager extends Manager<Card> implements CardInputBoundary {
     // Note items for this manager is a map <cardTerm: Card>
 
     public CardManager(ProgramStateInputBoundary programStateInputBoundary) {

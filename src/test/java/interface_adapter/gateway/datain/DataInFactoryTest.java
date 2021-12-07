@@ -5,7 +5,6 @@ import entity.Pack;
 import entity.User;
 import org.junit.Before;
 import org.junit.Test;
-import use_case.constants.Exceptions;
 
 import java.io.IOException;
 
@@ -50,8 +49,5 @@ public class DataInFactoryTest {
     @Test
     public void testExceptionGetWriter() {
         Exception e = assertThrows(Exception.class, () -> datainF.getWriter(partialPath, string));
-        String expectedMsg = Exceptions.InvalidObject;
-        String actualMessage = e.getMessage();
-        assertTrue(actualMessage.contains(expectedMsg));
     }
 }

@@ -1,6 +1,5 @@
 package framework.gui.card;
 
-import entity.User;
 import framework.gui.BasicFrame;
 import framework.gui.database_error.DatabaseErrorWindow;
 import framework.gui.learn_review.LearnFrame;
@@ -9,14 +8,12 @@ import framework.gui.pack.PackListFrame;
 import interface_adapter.controller.CardController;
 import interface_adapter.controller.ProgramStateController;
 import interface_adapter.gateway.DataInOut;
-import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.SortSearchCardPresenter;
 import use_case.constants.Constants;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.SortSearchCardOutputBoundary;
 
 import javax.swing.*;
@@ -28,7 +25,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.util.Objects;
 
 /**

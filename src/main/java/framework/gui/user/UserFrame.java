@@ -11,7 +11,6 @@ import use_case.constants.Constants;
 import use_case.input_boundaries.LogInOutInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.LogInOutManager;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.LogInOutOutputBoundary;
 
 import javax.swing.*;

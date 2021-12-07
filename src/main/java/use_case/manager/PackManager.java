@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * A pack manager manages the current user's packs.
  */
-public class PackManager extends Manager<Pack> implements Sort<SortSearchPackOutputBoundary>, PackInputBoundary {
+public class PackManager extends Manager<Pack> implements PackInputBoundary {
 
     public PackManager(ProgramStateInputBoundary programStateInputBoundary) {
         super(programStateInputBoundary);

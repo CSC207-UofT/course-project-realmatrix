@@ -32,8 +32,7 @@ they won't interact with concrete data writer/loader classes.
 2. Usecase Layer: it contains two parts, `Manager` and `Generator`, by which present what we can do with the entity in pure
 business logic and plain code.
     - Managers: `CardManager`, `PackManager`, and `UserManager`, take charge of `Card`, `Pack` and `User` respectively,
-   including creating, editing, sorting, searching and storing into a map. Furthermore, there is an interface called `Sort`
-   that is implemented by `CardManager` and `PackManager` to sort cards and packs in alphabetic and date added order. 
+   including creating, editing, sorting, searching and storing into a map.
    There is also an abstract called `Manager` that contains methods/attributes that are shared between specific managers.
    `ProgramStateManager` is a manager that manages to update current card/pack/user.
    **Throughout the program, there will only be one such manager.**

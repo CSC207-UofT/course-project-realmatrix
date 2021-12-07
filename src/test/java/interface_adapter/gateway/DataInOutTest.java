@@ -8,7 +8,6 @@ import interface_adapter.gateway.datain.PackWriter;
 import interface_adapter.gateway.datain.UserWriter;
 import org.junit.Before;
 import org.junit.Test;
-import use_case.constants.Exceptions;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -85,9 +84,6 @@ public class DataInOutTest {
     public void testWriteNewObjectWithException() {
         String string = "string";
         Exception e = assertThrows(Exception.class, () -> data.write(testPartialPathOld, string));
-        String expectedMsg = Exceptions.InvalidObject;
-        String actualMessage = e.getMessage();
-        assertTrue(actualMessage.contains(expectedMsg));
     }
 
     @Test

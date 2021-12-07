@@ -8,7 +8,7 @@ import use_case.output_boundaries.SortSearchCardOutputBoundary;
  * An input boundary that connects CardManager and CardController.
  * **CardManager must implement this interface**
  */
-public interface CardInputBoundary extends ManagerInputBoundary {
+public interface CardInputBoundary extends ManagerInputBoundary, SortInputBoundary<SortSearchCardOutputBoundary> {
     boolean addNewCard(String term, String definition, AddOutputBoundary addOutputBoundary);
 
     boolean deleteCard(String term);
@@ -18,10 +18,6 @@ public interface CardInputBoundary extends ManagerInputBoundary {
     void changeCardDefinition(String newDefinition);
 
     void searchCard(String keyword, SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
-
-    void sortOldToNew(SortSearchCardOutputBoundary sortOutputBoundary);
-
-    void sortAtoZ(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
 
     void sortProLowToHigh(SortSearchCardOutputBoundary sortSearchCardOutputBoundary);
 }
