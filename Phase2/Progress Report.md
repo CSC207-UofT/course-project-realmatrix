@@ -42,7 +42,7 @@ due to teammate misusing github features :)
 - Worked on Progress Report.
 - https://github.com/CSC207-UofT/course-project-realmatrix/pull/28
 
-  This pull request implements `CardFrame`, including `AddCardFrame` and `EditCardFrame` and 'AddPackFrame' and `EditPackFrame`.
+  This pull request implements `CardFrame`, including `AddCardFrame` and `EditCardFrame` and `AddPackFrame` and `EditPackFrame`.
 
 ### Runshi Yang
 - Implemented `ReviewFrame`.
