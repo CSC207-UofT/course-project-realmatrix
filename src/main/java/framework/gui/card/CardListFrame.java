@@ -314,14 +314,5 @@ public class CardListFrame extends BasicFrame implements ActionListener {
         }
     }
 
-    //Test
-    public static void main(String[] args) throws IOException {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        User user = new User("Xing", "password");
-        Loader loader = new Loader();
-        loader.userLoad(user);
-        ps.setCurrUser(user);
-        ps.setCurrPack("vocabulary");
-        new CardListFrame(ps);
-    }
+
 }

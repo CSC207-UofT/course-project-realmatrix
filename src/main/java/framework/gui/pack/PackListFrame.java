@@ -1,20 +1,17 @@
 package framework.gui.pack;
 
-import entity.User;
 import framework.gui.BasicFrame;
 import framework.gui.card.CardListFrame;
 import framework.gui.database_error.DatabaseErrorWindow;
 import framework.gui.user.UserFrame;
 import interface_adapter.controller.PackController;
 import interface_adapter.gateway.DataInOut;
-import interface_adapter.gateway.dataout.Loader;
 import interface_adapter.presenters.DatabaseErrMsgPresenter;
 import interface_adapter.presenters.SortSearchPackPresenter;
 import use_case.constants.Constants;
 import use_case.input_boundaries.PackInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.PackManager;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.SortSearchPackOutputBoundary;
 
 import javax.swing.*;
@@ -24,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -36,21 +32,19 @@ import java.util.Objects;
  * - editing packs (name)
  */
 public class PackListFrame extends BasicFrame implements ActionListener {
-    // Pack name list
-    private DefaultListModel<String> packListModel;   // Model for JList
-    private JList<String> packJList;  // A JList that contains pack names
     // Search
     private final JTextField searchText;    // A text field for user to enter pack name for search
     // Sort
     private final JComboBox<String> sortBox;
-
     private final JButton addButton; // Add pack button
     private final JButton editButton; // Edit pack button
     private final JButton deleteButton; // Delete pack button
     private final JButton backButton; // Back button
-
     private final PackController packController;
     private final JPanel panel;
+    // Pack name list
+    private DefaultListModel<String> packListModel;   // Model for JList
+    private JList<String> packJList;  // A JList that contains pack names
 
     public PackListFrame(ProgramStateInputBoundary programStateInputBoundary) {
         super("Pack List", programStateInputBoundary);
@@ -264,13 +258,5 @@ public class PackListFrame extends BasicFrame implements ActionListener {
         setPackListModel(sortPackPresenter.getSortSearchResult());
     }
 
-    //Test
-    public static void main(String[] args) throws IOException {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        User user = new User("Xing", "password");
-        Loader loader = new Loader();
-        loader.userLoad(user);
-        ps.setCurrUser(user);
-        new PackListFrame(ps);
-    }
+
 }

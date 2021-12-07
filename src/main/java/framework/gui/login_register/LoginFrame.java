@@ -106,9 +106,5 @@ public class LoginFrame extends LogRegFrame implements ActionListener {
         return logPresenter.getLogInOutResult();
     }
 
-    // Test
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new LoginFrame(ps);
-    }
+
 }

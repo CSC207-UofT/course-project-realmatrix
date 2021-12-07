@@ -1,0 +1,4 @@
+1. The user interacts with the View, but the View 
+immediately asks the Presenter to take over
+2. The Presenter manipulates the model
+3. The Presenter updates the View,1

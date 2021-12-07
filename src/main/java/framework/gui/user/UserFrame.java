@@ -115,8 +115,4 @@ public class UserFrame extends BasicFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new UserFrame("haha", ps);
-    }
 }

@@ -111,10 +111,6 @@ public class AddPackFrame extends BasicFrame implements ActionListener {
         return addPresenter.getAddResult();
     }
 
-    // Test
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new AddPackFrame(ps);
-    }
+
 }
 

@@ -1,0 +1,5 @@
+1. The user sees the View
+2. The user interacts with the View, which 
+immediately asks the Controller to take over
+3. The Controller manipulates the Model
+4. The Model updates the View,2

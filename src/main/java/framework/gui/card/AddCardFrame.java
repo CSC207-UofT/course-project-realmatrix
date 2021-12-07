@@ -11,7 +11,6 @@ import use_case.constants.Constants;
 import use_case.input_boundaries.CardInputBoundary;
 import use_case.input_boundaries.ProgramStateInputBoundary;
 import use_case.manager.CardManager;
-import use_case.manager.ProgramStateManager;
 import use_case.output_boundaries.AddOutputBoundary;
 import use_case.output_boundaries.DatabaseErrorOutputBoundary;
 
@@ -125,10 +124,5 @@ public class AddCardFrame extends BasicFrame implements ActionListener {
         return addPresenter.getAddResult();
     }
 
-    // Test
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new AddCardFrame(ps);
-    }
 
 }

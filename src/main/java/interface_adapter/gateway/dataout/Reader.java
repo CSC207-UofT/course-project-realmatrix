@@ -73,11 +73,5 @@ class Reader {
         return lst;
     }
 
-    // Testing purpose
-    public static void main(String[] args) throws IOException {
-        Reader reader = new Reader();
-        reader.readUsers();
-        Loader loader = new Loader();
-        System.out.println(loader.initialLoad());
-    }
+
 }

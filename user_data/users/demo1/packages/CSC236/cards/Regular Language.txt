@@ -1,0 +1,1 @@
+A language is called regular if and only if it is denoted by some regular expression; or, equivalently, if and only if it is accepted by a (deterministic or nondeterministic) FSA.,0

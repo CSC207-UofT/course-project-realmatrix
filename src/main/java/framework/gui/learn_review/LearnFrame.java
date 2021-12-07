@@ -103,23 +103,4 @@ public class LearnFrame extends BasicFrame implements ActionListener {
     }
 
 
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        User user = new User("Yifan", "password");
-        Pack vocab = new Pack("vocab");
-        vocab.addCard(new Card("apple", "fruit"));
-        vocab.addCard(new Card("banana", "fruit"));
-        vocab.addCard(new Card("bee", "animal"));
-        vocab.addCard(new Card("bee", "This is a long long long long long long long long long long long " +
-                "long long long long long long long long long long long long long long long long long long long long " +
-                "long long long long long long long long long long long long long long long long long long long long " +
-                "long long long long long long long long long long long long long long long long long long long long " +
-                "long long long long long long long long long long long long long long long long long long long long " +
-                "long definition"));
-
-        user.addPackage(vocab);
-        ps.setCurrUser(user);
-        ps.setCurrPack("vocab");
-        new LearnFrame(ps);
-    }
 }

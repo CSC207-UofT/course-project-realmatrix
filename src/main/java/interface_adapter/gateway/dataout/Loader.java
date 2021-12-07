@@ -94,11 +94,5 @@ public class Loader {
         pack.addCard(card);
     }
 
-    // Test
-    public static void main(String[] args) throws IOException {
-        Loader loader = new Loader();
-        User user = new User("Xing", "password");
-        loader.userLoad(user);
-        System.out.println(user.getPackageList().get(0).getCardList());
-    }
+
 }

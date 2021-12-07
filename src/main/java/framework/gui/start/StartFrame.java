@@ -70,10 +70,5 @@ public class StartFrame extends BasicFrame implements ActionListener {
         setVisible(false);
     }
 
-    // Test
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new StartFrame(ps);
-    }
 
 }

@@ -152,9 +152,5 @@ public class RegisterFrame extends LogRegFrame {
         return rgPresenter.getRegisterResult();
     }
 
-    // Test
-    public static void main(String[] args) {
-        ProgramStateInputBoundary ps = new ProgramStateManager();
-        new RegisterFrame(ps);
-    }
+
 }
